@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korean Past Tense — Complete Guide 🌸</title>
+<style>
+  :root {
+    --ink: #2a2a2a;
+    --ink-soft: #5c574f;
+    --bg: #fefcf7;
+    --paper: #ffffff;
+    --accent: #b85450;       /* warm rose */
+    --accent-deep: #8b3530;
+    --accent-soft: #f4dcd3;
+    --blue: #4a6fa5;
+    --blue-soft: #dde6f0;
+    --gold: #d4a253;
+    --gold-soft: #fdf2e3;
+    --green: #6a8e5e;
+    --green-soft: #e8eedb;
+    --purple: #7757a5;
+    --purple-soft: #ebe0f5;
+    --line: #e5dfd3;
+    --shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 50px 32px 80px;
+  }
+  /* HEADER */
+  header {
+    text-align: center;
+    padding-bottom: 32px;
+    border-bottom: 2px solid var(--line);
+    margin-bottom: 50px;
+  }
+  h1 {
+    font-size: 40px;
+    margin: 0 0 10px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  h1 .han {
+    color: var(--accent);
+    margin-left: 8px;
+  }
+  .subtitle {
+    font-size: 16px;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin: 0;
+  }
+  .tag {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+  /* SECTIONS */
+  section {
+    margin-bottom: 60px;
+  }
+  h2 {
+    font-size: 26px;
+    margin: 0 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block;
+    color: var(--ink);
+  }
+  h2 .num {
+    color: var(--accent);
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    margin-right: 12px;
+    vertical-align: 1px;
+  }
+  h3 {
+    font-size: 19px;
+    margin: 28px 0 14px;
+    color: var(--ink);
+  }
+  h3 .icon {
+    margin-right: 8px;
+  }
+  p { margin: 0 0 14px; }
+  .lead {
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+  /* BILINGUAL */
+  .bilingual {
+    background: var(--paper);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 18px 0;
+    border-left: 4px solid var(--blue);
+  }
+  .bilingual .ko {
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .bilingual .en {
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  /* RULE CARDS — Section 2 */
+  .rule-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    margin: 24px 0;
+  }
+  .rule-card {
+    background: var(--paper);
+    border-radius: 12px;
+    padding: 24px 22px;
+    box-shadow: var(--shadow);
+    border-top: 5px solid;
+    transition: transform 0.2s;
+  }
+  .rule-card:hover {
+    transform: translateY(-2px);
+  }
+  .rule-card.r1 { border-top-color: var(--accent); }
+  .rule-card.r2 { border-top-color: var(--blue); }
+  .rule-card.r3 { border-top-color: var(--gold); }
+  .rule-card .label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .rule-card .vowel {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .rule-card.r1 .vowel { color: var(--accent); }
+  .rule-card.r2 .vowel { color: var(--blue); }
+  .rule-card.r3 .vowel { color: var(--gold); }
+  .rule-card .arrow {
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin: 8px 0;
+  }
+  .rule-card .ending {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .rule-card .example {
+    background: rgba(0,0,0,0.03);
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  .rule-card .example .from { color: var(--ink-soft); }
+  .rule-card .example .arrow-small { margin: 0 6px; color: var(--accent); }
+  .rule-card .example .to { font-weight: 700; color: var(--ink); }
+  .rule-card .english {
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-top: 6px;
+  }
+  /* WORKFLOW — Section 3 */
+  .workflow {
+    background: var(--gold-soft);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin: 24px 0;
+  }
+  .workflow .step {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 16px;
+    margin-bottom: 18px;
+    align-items: start;
+  }
+  .workflow .step:last-child {
+    margin-bottom: 0;
+  }
+  .workflow .step-num {
+    background: var(--gold);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+  }
+  .workflow .step-content {
+    padding-top: 4px;
+  }
+  .workflow .step-content .title-ko {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .workflow .step-content .title-en {
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+  .workflow .step-content .example {
+    background: white;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .workflow .step-content .example b {
+    color: var(--accent);
+  }
+  /* CONTRACTION TABLE — Section 4 */
+  .contraction-table {
+    background: var(--paper);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin: 20px 0;
+  }
+  .contraction-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .contraction-table th {
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .contraction-table td {
+    padding: 14px 16px;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+    vertical-align: top;
+  }
+  .contraction-table .wrong {
+    color: #aaa;
+    text-decoration: line-through;
+    font-size: 14px;
+  }
+  .contraction-table .correct {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 17px;
+  }
+  .contraction-table .reason {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .contraction-table .reason b {
+    color: var(--ink);
+    font-style: normal;
+    background: var(--accent-soft);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+  /* ALERT BOXES */
+  .alert {
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .alert.tip {
+    background: var(--blue-soft);
+    border-left: 4px solid var(--blue);
+  }
+  .alert.warn {
+    background: var(--gold-soft);
+    border-left: 4px solid var(--gold);
+  }
+  .alert.note {
+    background: var(--green-soft);
+    border-left: 4px solid var(--green);
+  }
+  .alert .label {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .alert.tip .label { color: var(--blue); }
+  .alert.warn .label { color: var(--gold); }
+  .alert.note .label { color: var(--green); }
+  .alert p { margin: 0 0 10px; font-size: 14px; line-height: 1.6; }
+  .alert p:last-child { margin: 0; }
+  /* TIME ADVERB SECTION */
+  .time-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .time-card {
+    background: var(--paper);
+    border-radius: 10px;
+    padding: 18px 22px;
+    border-left: 4px solid var(--purple);
+  }
+  .time-card .word-ko {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--purple);
+    margin-bottom: 2px;
+  }
+  .time-card .word-en {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  .time-card .example-ko {
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .time-card .example-en {
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  /* K-POP SECTION */
+  .kpop-card {
+    background: linear-gradient(135deg, #fef0e9 0%, #fff8ec 100%);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin: 20px 0;
+    border: 1.5px solid var(--accent-soft);
+  }
+  .kpop-lyric {
+    background: white;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 14px 0;
+    border-left: 3px solid var(--accent);
+  }
+  .kpop-lyric .ko {
+    font-size: 17px;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .kpop-lyric .verb-highlight {
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+  .kpop-lyric .en {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .kpop-lyric .breakdown {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px dashed var(--accent-soft);
+  }
+  /* INTERACTIVE QUIZ */
+  .quiz {
+    background: var(--paper);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 16px 0;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--green);
+  }
+  .quiz .q-num {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .quiz .q-text {
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .quiz .q-text .blank {
+    display: inline-block;
+    min-width: 80px;
+    border-bottom: 2px solid var(--accent);
+    text-align: center;
+    font-weight: 700;
+  }
+  .quiz .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .quiz .option {
+    background: #fafafa;
+    border: 1.5px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.2s;
+  }
+  .quiz .option:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .quiz .answer-reveal {
+    background: var(--green-soft);
+    color: transparent;
+    padding: 12px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .quiz .answer-reveal.revealed {
+    color: var(--ink);
+  }
+  .quiz .answer-reveal::before {
+    content: "💡 정답 보기 (Click to reveal): ";
+    color: var(--green);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+  .quiz .answer-reveal.revealed::before {
+    content: "✅ 정답: ";
+  }
+  /* IRREGULAR TEASER */
+  .teaser {
+    background: var(--purple-soft);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-top: 30px;
+    border: 1.5px solid var(--purple);
+  }
+  .teaser h3 {
+    color: var(--purple);
+    margin-top: 0;
+  }
+  .teaser .irregular-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .teaser .irregular-item {
+    background: white;
+    padding: 14px 18px;
+    border-radius: 8px;
+  }
+  .teaser .irregular-item .type {
+    font-size: 12px;
+    color: var(--purple);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .teaser .irregular-item .example {
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .teaser .irregular-item .example b {
+    color: var(--purple);
+  }
+  /* FOOTER */
+  footer {
+    margin-top: 70px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  footer .heart {
+    font-size: 18px;
+    margin: 0 6px;
+  }
+  /* RESPONSIVE */
+  @media (max-width: 760px) {
+    .wrap { padding: 24px 16px 50px; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 22px; }
+    .rule-grid { grid-template-columns: 1fr; }
+    .time-grid { grid-template-columns: 1fr; }
+    .teaser .irregular-list { grid-template-columns: 1fr; }
+    .quiz .options { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Korean Past Tense<span class="han">— 과거형</span></h1>
+  <p class="subtitle">A complete guide by Hanim — from basics to advance 🌸</p>
+  <div class="tag">For Self-Study</div>
+</header>
+
+<!-- ============================================== -->
+<!-- 1. WHAT IS PAST TENSE? -->
+<!-- ============================================== -->
+<section>
+  <h2><span class="num">01</span>과거형이 뭐예요? — What is Past Tense?</h2>
+  <p class="lead">한국어 과거형은 영어보다 훨씬 규칙적이에요. "go → went" 같은 형태 변화가 거의 없고, 어미만 바뀌어요.</p>
+
+  <div class="bilingual">
+    <div class="ko">한국어 과거형 = 어간 + 과거 어미 (-았어요 / -었어요 / -했어요)</div>
+    <div class="en">Korean past tense = verb stem + past ending (-아ss-eo-yo / -eoss-eo-yo / -haess-eo-yo)</div>
+  </div>
+
+  <div class="alert tip">
+    <div class="label">💡 Good news</div>
+    <p>영어보다 훨씬 간단해요. <em>I went, I saw, I ate</em> 같은 불규칙 형태가 한국어에서는 99% 패턴으로 처리돼요.</p>
+    <p style="font-style: italic;">English has "go/went/gone", "eat/ate/eaten", "see/saw/seen" — Korean past tense follows just 3 simple patterns. Once you internalize them, you can transform any verb.</p>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- 2. THE THREE RULES -->
+<!-- ============================================== -->
+<section>
+  <h2><span class="num">02</span>3가지 기본 공식 — The Three Rules</h2>
+  <p class="lead">동사의 <strong>어간(stem)</strong>의 마지막 모음만 보세요. 그게 전부예요.</p>
+
+  <div class="rule-grid">
+    <div class="rule-card r1">
+      <div class="label">RULE 1</div>
+      <div class="vowel">ㅏ, ㅗ</div>
+      <div class="arrow">↓</div>
+      <div class="ending">-았어요</div>
+      <div class="example">
+        <span class="from">살다</span><span class="arrow-small">→</span><span class="to">살았어요</span>
+      </div>
+      <div class="english">If stem's last vowel is ㅏ or ㅗ, add <em>-았어요</em></div>
+    </div>
+
+    <div class="rule-card r2">
+      <div class="label">RULE 2</div>
+      <div class="vowel">기타</div>
+      <div class="arrow">↓</div>
+      <div class="ending">-었어요</div>
+      <div class="example">
+        <span class="from">먹다</span><span class="arrow-small">→</span><span class="to">먹었어요</span>
+      </div>
+      <div class="english">For all other vowels (ㅓ, ㅣ, ㅡ, ㅜ...), add <em>-었어요</em></div>
+    </div>
+
+    <div class="rule-card r3">
+      <div class="label">RULE 3</div>
+      <div class="vowel">하다</div>
+      <div class="arrow">↓</div>
+      <div class="ending">-했어요</div>
+      <div class="example">
+        <span class="from">공부하다</span><span class="arrow-small">→</span><span class="to">공부했어요</span>
+      </div>
+      <div class="english">"하다" verbs become <em>했어요</em> (special case)</div>
+    </div>
+  </div>
+
+  <div class="alert note">
+    <div class="label">📌 빠른 메모 / Quick note</div>
+    <p><strong>어간(stem) 찾기:</strong> 동사 기본형에서 "-다"를 빼면 어간이에요. 살<strong>다</strong> → 살-, 먹<strong>다</strong> → 먹-, 공부하<strong>다</strong> → 공부하-.</p>
+    <p style="font-style: italic;">To find the stem, remove "-다" from the dictionary form. The remaining part is the stem.</p>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- 3. STEP-BY-STEP WORKFLOW -->
+<!-- ============================================== -->
+<section>
+  <h2><span class="num">03</span>단계별 변환 — Step-by-Step</h2>
+  <p class="lead">처음엔 천천히 해보세요. 익숙해지면 머릿속에서 1초 안에 돼요.</p>
+
+  <div class="workflow">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="title-ko">어간 찾기</div>
+        <div class="title-en">Find the stem (remove -다)</div>
+        <div class="example">읽<b>다</b> → 어간 = <b>읽-</b></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="title-ko">마지막 모음 확인</div>
+        <div class="title-en">Check the last vowel of the stem</div>
+        <div class="example">읽- → 마지막 모음 = <b>ㅣ</b> (not ㅏ, not ㅗ)</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="title-ko">어미 결정</div>
+        <div class="title-en">Decide the ending</div>
+        <div class="example">ㅣ → <b>-었어요</b> 사용 (Rule 2 — "기타" 모음)</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="title-ko">합치기</div>
+        <div class="title-en">Combine</div>
+        <div class="example">읽- + -었어요 = <b>읽었어요</b> ✨</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert tip">
+    <div class="label">💡 Pro tip</div>
+    <p>처음에는 종이에 step-by-step으로 써보세요. 30개 정도 동사를 이렇게 처리하면, 머리가 패턴을 잡고 자동화돼요.</p>
+    <p style="font-style: italic;">Write out the steps for ~30 verbs on paper. After that, your brain catches the pattern and starts doing it automatically.</p>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- 4. CONTRACTIONS -->
+<!-- ============================================== -->
+<section>
+  <h2><span class="num">04</span>축약 패턴 — Contractions (Real Korean!)</h2>
+  <p class="lead">한국 사람이 실제로 말하는 방식! 기본 공식대로 합치면 어색한 경우들 — 자연스럽게 줄여서 말해요.</p>
+
+  <div class="contraction-table">
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 18%;">현재형</th>
+          <th style="width: 23%;">기본대로 (NOT used)</th>
+          <th style="width: 23%;">실제 (Used) ✅</th>
+          <th style="width: 36%;">왜? Why?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>가요</strong><br><span style="font-size: 12px; color: var(--ink-soft);">to go</span></td>
+          <td><span class="wrong">가았어요</span></td>
+          <td><span class="correct">갔어요</span></td>
+          <td class="reason">가- ends in <b>ㅏ</b> + 았어요's <b>ㅏ</b> → 합쳐짐 (same vowel → merge)</td>
+        </tr>
+        <tr>
+          <td><strong>봐요</strong><br><span style="font-size: 12px; color: var(--ink-soft);">to see/watch</span></td>
+          <td><span class="wrong">보았어요</span></td>
+          <td><span class="correct">봤어요</span></td>
+          <td class="reason">보- (ㅗ) + 았어요 (ㅏ) → <b>ㅗ + ㅏ = 와</b> → 봤어요</td>
+        </tr>
+        <tr>
+          <td><strong>와요</strong><br><span style="font-size: 12px; color: var(--ink-soft);">to come</span></td>
+          <td><span class="wrong">오았어요</span></td>
+          <td><span class="correct">왔어요</span></td>
+          <td class="reason">오- (ㅗ) + 았어요 → <b>ㅗ + ㅏ = 와</b> → 왔어요 (same pattern as 봤어요)</td>
+        </tr>
+        <tr>
+          <td><strong>마셔요</strong><br><span style="font-size: 12px; color: var(--ink-soft);">to drink</span></td>
+          <td><span class="wrong">마시었어요</span></td>
+          <td><span class="correct">마셨어요</span></td>
+          <td class="reason">마시- (ㅣ) + 었어요 (ㅓ) → <b>ㅣ + ㅓ = ㅕ</b> → 마셨어요</td>
+        </tr>
+        <tr>
+          <td><strong>사요</strong><br><span style="font-size: 12px; color: var(--ink-soft);">to buy</span></td>
+          <td><span class="wrong">사았어요</span></td>
+          <td><span class="correct">샀어요</span></td>
+          <td class="reason">사- (ㅏ) + 았어요 (ㅏ) → 합쳐짐 → 샀어요</td>
+        </tr>
+        <tr>
+          <td><strong>서요</strong><br><span style="font-size: 12px; color: var(--ink-soft);">to stand</span></td>
+          <td><span class="wrong">서었어요</span></td>
+          <td><span class="correct">섰어요</span></td>
+          <td class="reason">서- (ㅓ) + 었어요 (ㅓ) → 합쳐짐 → 섰어요</td>
+        </tr>
+        <tr>
+          <td><strong>줘요</strong><br><span style="font-size: 12px; color: var(--ink-soft);">to give</span></td>
+          <td><span class="wrong">주었어요</span></td>
+          <td><span class="correct">줬어요</span></td>
+          <td class="reason">주- (ㅜ) + 었어요 (ㅓ) → <b>ㅜ + ㅓ = ㅝ</b> → 줬어요</td>
+        </tr>
+        <tr>
+          <td><strong>돼요</strong><br><span style="font-size: 12px; color: var(--ink-soft);">to become</span></td>
+          <td><span class="wrong">되었어요</span></td>
+          <td><span class="correct">됐어요</span></td>
+          <td class="reason">되- (ㅚ) + 었어요 → <b>ㅚ + ㅓ = ㅙ</b> → 됐어요</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert warn">
+    <div class="label">⚠️ 주의 / Watch out</div>
+    <p>"갔어요"랑 "보았어요"는 둘 다 문법적으로 맞아요. 그런데 회화에서는 <strong>거의 항상 축약형</strong>(갔어요, 봤어요)을 써요. 글쓰기에서는 가끔 풀어서 쓰기도 해요 — 문학적 효과.</p>
+    <p style="font-style: italic;">Both forms are grammatically correct, but in conversation, native speakers almost always use the contracted form. The full form may appear in literary writing.</p>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- 5. 이다/아니다 PAST -->
+<!-- ============================================== -->
+<section>
+  <h2><span class="num">05</span>이다 / 아니다 과거형</h2>
+  <p class="lead">"이다 (to be)"와 "아니다 (to not be)" 도 과거형 있어요. K-pop 가사에 정말 많이 나와요.</p>
+
+  <div class="contraction-table">
+    <table>
+      <thead>
+        <tr>
+          <th>현재형</th>
+          <th>과거형</th>
+          <th>예시</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>학생이에요</strong><br><span style="font-size: 12px; color: var(--ink-soft);">받침 O</span></td>
+          <td class="correct">학생이었어요</td>
+          <td>그때 저는 <strong>학생이었어요</strong>.<br><span style="font-size: 13px; color: var(--ink-soft); font-style: italic;">Back then, I was a student.</span></td>
+        </tr>
+        <tr>
+          <td><strong>친구예요</strong><br><span style="font-size: 12px; color: var(--ink-soft);">받침 X</span></td>
+          <td class="correct">친구였어요</td>
+          <td>그 사람은 제 <strong>친구였어요</strong>.<br><span style="font-size: 13px; color: var(--ink-soft); font-style: italic;">That person was my friend.</span></td>
+        </tr>
+        <tr>
+          <td><strong>학생이 아니에요</strong></td>
+          <td class="correct">학생이 아니었어요</td>
+          <td>그때는 <strong>학생이 아니었어요</strong>.<br><span style="font-size: 13px; color: var(--ink-soft); font-style: italic;">I wasn't a student then.</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert note">
+    <div class="label">📝 규칙 / Rule</div>
+    <p>받침 있으면 <b>이었어요</b>, 받침 없으면 <b>였어요</b> — 현재형의 "이에요/예요" 규칙과 똑같아요.</p>
+    <p style="font-style: italic;">Same pattern as "이에요/예요" — final consonant → 이었어요, no final consonant → 였어요.</p>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- 6. TIME ADVERBS -->
+<!-- ============================================== -->
+<section>
+  <h2><span class="num">06</span>시간 부사 — Time Words That Love Past Tense</h2>
+  <p class="lead">과거형은 보통 시간 표현이랑 짝을 이뤄요. 이 단어들이 나오면 거의 항상 과거형!</p>
+
+  <div class="time-grid">
+    <div class="time-card">
+      <div class="word-ko">어제</div>
+      <div class="word-en">yesterday</div>
+      <div class="example-ko">어제 영화를 봤어요.</div>
+      <div class="example-en">I watched a movie yesterday.</div>
+    </div>
+    <div class="time-card">
+      <div class="word-ko">지난주에</div>
+      <div class="word-en">last week</div>
+      <div class="example-ko">지난주에 친구를 만났어요.</div>
+      <div class="example-en">I met a friend last week.</div>
+    </div>
+    <div class="time-card">
+      <div class="word-ko">지난달에</div>
+      <div class="word-en">last month</div>
+      <div class="example-ko">지난달에 한국에 갔어요.</div>
+      <div class="example-en">I went to Korea last month.</div>
+    </div>
+    <div class="time-card">
+      <div class="word-ko">작년에</div>
+      <div class="word-en">last year</div>
+      <div class="example-ko">작년에 한국어 공부를 시작했어요.</div>
+      <div class="example-en">I started studying Korean last year.</div>
+    </div>
+    <div class="time-card">
+      <div class="word-ko">아까</div>
+      <div class="word-en">a little while ago</div>
+      <div class="example-ko">아까 전화했어요.</div>
+      <div class="example-en">I called a little while ago.</div>
+    </div>
+    <div class="time-card">
+      <div class="word-ko">방금</div>
+      <div class="word-en">just now</div>
+      <div class="example-ko">방금 도착했어요.</div>
+      <div class="example-en">I just arrived.</div>
+    </div>
+  </div>
+
+  <div class="alert warn">
+    <div class="label">⚠️ "에" 붙음? 안 붙음?</div>
+    <p><strong>붙어요:</strong> 지난주<b>에</b>, 작년<b>에</b>, 주말<b>에</b>, 월요일<b>에</b> (기간/날짜)</p>
+    <p><strong>안 붙어요:</strong> 어제, 오늘, 내일, 아까, 방금, 지금 (시간 부사 자체)</p>
+    <p style="font-style: italic;">"에" attaches to time periods/dates but not to standalone time adverbs.</p>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- 7. K-POP LYRICS -->
+<!-- ============================================== -->
+<section>
+  <h2><span class="num">07</span>K-pop 가사 속 과거형 🎶</h2>
+  <p class="lead">K-pop 가사에 과거형이 진짜 많이 나와요. 이제 들으면 보일 거예요!</p>
+
+  <div class="kpop-card">
+    <h3 style="margin-top: 0;">🎤 자주 등장하는 과거형 표현들</h3>
+
+    <div class="kpop-lyric">
+      <div class="ko"><span class="verb-highlight">사랑했어</span> / <span class="verb-highlight">사랑했어요</span></div>
+      <div class="en">"I loved (you)" — 사랑하다 → 사랑했어요 (하다 동사)</div>
+      <div class="breakdown">발라드 가사 단골 표현. 이별 노래에 정말 많이 나와요.</div>
+    </div>
+
+    <div class="kpop-lyric">
+      <div class="ko"><span class="verb-highlight">잊었어</span> / <span class="verb-highlight">잊었어요</span></div>
+      <div class="en">"(I) forgot" — 잊다 → 잊었어요 (ㅣ → Rule 2)</div>
+      <div class="breakdown">"너를 잊었어" (I forgot you) — 가사에 자주 등장.</div>
+    </div>
+
+    <div class="kpop-lyric">
+      <div class="ko"><span class="verb-highlight">떠났어</span> / <span class="verb-highlight">떠났어요</span></div>
+      <div class="en">"(You/I) left" — 떠나다 → 떠났어요 (축약: 나 + 았 → 났)</div>
+      <div class="breakdown">"너는 떠났어" — 또 이별 가사 단골.</div>
+    </div>
+
+    <div class="kpop-lyric">
+      <div class="ko"><span class="verb-highlight">알았어</span> / <span class="verb-highlight">알았어요</span></div>
+      <div class="en">"(I) knew" or "Got it / Understood" — 알다 → 알았어요</div>
+      <div class="breakdown">가사 외에 일상 회화에서도 매우 자주! "알았어!" = "Got it!"</div>
+    </div>
+
+    <div class="kpop-lyric">
+      <div class="ko"><span class="verb-highlight">몰랐어</span> / <span class="verb-highlight">몰랐어요</span></div>
+      <div class="en">"(I) didn't know" — 모르다 → 몰랐어요 (르 불규칙 — 다음 시간!)</div>
+      <div class="breakdown">"네 마음을 몰랐어" — 후회 표현. <strong>※ 르 불규칙 — 다음 시간 배워요!</strong></div>
+    </div>
+
+    <div class="kpop-lyric">
+      <div class="ko"><span class="verb-highlight">왔어</span> / <span class="verb-highlight">왔어요</span></div>
+      <div class="en">"(I) came" — 오다 → 왔어요 (축약: ㅗ + ㅏ → 와)</div>
+      <div class="breakdown">"너에게 왔어" — 만남 가사. 축약형 그대로!</div>
+    </div>
+  </div>
+
+  <div class="alert tip">
+    <div class="label">💡 듣기 연습 / Listening practice</div>
+    <p>좋아하는 K-pop 노래 하나를 골라서 <strong>-었어 / -았어 / -했어</strong>로 끝나는 단어가 몇 번 나오는지 세어 보세요. 보통 한 곡에 5-10번은 나와요!</p>
+    <p style="font-style: italic;">Pick a favorite K-pop song and count how many times you hear -었어 / -았어 / -했어 endings. Usually 5-10 times per song!</p>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- 8. SELF-CHECK QUIZ -->
+<!-- ============================================== -->
+<section>
+  <h2><span class="num">08</span>자가 진단 — Quick Quiz ✏️</h2>
+  <p class="lead">정답 박스를 클릭하면 답이 나타나요. 천천히 직접 만들어 보세요!</p>
+
+  <div class="quiz">
+    <div class="q-num">Q1</div>
+    <div class="q-text">"가요" → 과거형은?</div>
+    <div class="options">
+      <div class="option">① 가았어요</div>
+      <div class="option">② 갔어요</div>
+      <div class="option">③ 가요었어요</div>
+      <div class="option">④ 가갔어요</div>
+    </div>
+    <div class="answer-reveal" onclick="this.classList.toggle('revealed')">② 갔어요 — 가- (ㅏ) + 았어요 → 축약!</div>
+  </div>
+
+  <div class="quiz">
+    <div class="q-num">Q2</div>
+    <div class="q-text">"마셔요" → 과거형은?</div>
+    <div class="options">
+      <div class="option">① 마시었어요</div>
+      <div class="option">② 마섰어요</div>
+      <div class="option">③ 마셨어요</div>
+      <div class="option">④ 마쉈어요</div>
+    </div>
+    <div class="answer-reveal" onclick="this.classList.toggle('revealed')">③ 마셨어요 — 마시- (ㅣ) + 었어요 → ㅣ+ㅓ = ㅕ → 마셨어요</div>
+  </div>
+
+  <div class="quiz">
+    <div class="q-num">Q3</div>
+    <div class="q-text">"공부해요" → 과거형은?</div>
+    <div class="options">
+      <div class="option">① 공부했어요</div>
+      <div class="option">② 공부했요</div>
+      <div class="option">③ 공부았어요</div>
+      <div class="option">④ 공부었어요</div>
+    </div>
+    <div class="answer-reveal" onclick="this.classList.toggle('revealed')">① 공부했어요 — 하다 동사 → 했어요 (Rule 3)</div>
+  </div>
+
+  <div class="quiz">
+    <div class="q-num">Q4</div>
+    <div class="q-text">"그때 저는 학생 <span class="blank">___</span>" — 빈칸은?</div>
+    <div class="options">
+      <div class="option">① 였어요</div>
+      <div class="option">② 이었어요</div>
+      <div class="option">③ 이에요</div>
+      <div class="option">④ 됐어요</div>
+    </div>
+    <div class="answer-reveal" onclick="this.classList.toggle('revealed')">② 이었어요 — "학생" 받침 ㅇ 있음 → 이었어요</div>
+  </div>
+
+  <div class="quiz">
+    <div class="q-num">Q5</div>
+    <div class="q-text">다음 중 자연스러운 문장은?</div>
+    <div class="options">
+      <div class="option">① 어제에 영화를 봤어요</div>
+      <div class="option">② 어제 영화를 보았어요</div>
+      <div class="option">③ 어제 영화를 봤어요</div>
+      <div class="option">④ 어제에 영화를 보았어요</div>
+    </div>
+    <div class="answer-reveal" onclick="this.classList.toggle('revealed')">③ 어제 영화를 봤어요 — "어제"는 에 안 붙고, 보았어요는 회화에서 거의 안 씀</div>
+  </div>
+
+  <div class="quiz">
+    <div class="q-num">Q6 — Listening for K-pop</div>
+    <div class="q-text">"너를 사랑했어, 그런데 떠났어" — 두 동사의 원형은?</div>
+    <div class="options">
+      <div class="option">① 사랑하다 / 떠나다</div>
+      <div class="option">② 사랑해 / 떠나</div>
+      <div class="option">③ 사랑한다 / 떠난다</div>
+      <div class="option">④ 사랑함 / 떠남</div>
+    </div>
+    <div class="answer-reveal" onclick="this.classList.toggle('revealed')">① 사랑하다 / 떠나다 — 둘 다 동사 기본형. 가사에서는 -했어 / -났어 축약 형태로 들려요.</div>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- 9. NEXT TIME — IRREGULARS TEASER -->
+<!-- ============================================== -->
+<section>
+  <h2><span class="num">09</span>다음 시간 미리보기 — 불규칙</h2>
+  <p class="lead">오늘 다룬 건 95% 동사를 다 커버해요. 다음 시간은 <strong>나머지 5%</strong> — 불규칙 동사들이에요.</p>
+
+  <div class="teaser">
+    <h3>📚 다음 시간 (정규 11) — Coming Up</h3>
+    <p style="font-size: 14px; color: var(--ink-soft);">미리 알면 좋아요. 이번엔 외울 필요 없어요 — 그냥 "이런 게 있구나" 정도만!</p>
+
+    <div class="irregular-list">
+      <div class="irregular-item">
+        <div class="type">ㅡ 탈락 (ㅡ Drop)</div>
+        <div class="example">예쁘다 → <b>예뻤어요</b><br>쓰다 → <b>썼어요</b><br>바쁘다 → <b>바빴어요</b></div>
+      </div>
+      <div class="irregular-item">
+        <div class="type">ㅂ 불규칙 (ㅂ Irregular)</div>
+        <div class="example">춥다 → <b>추웠어요</b><br>덥다 → <b>더웠어요</b><br>쉽다 → <b>쉬웠어요</b></div>
+      </div>
+      <div class="irregular-item">
+        <div class="type">ㄷ 불규칙 (ㄷ Irregular)</div>
+        <div class="example">듣다 → <b>들었어요</b><br>걷다 → <b>걸었어요</b><br><span style="font-size: 12px; color: var(--ink-soft);">※ 지난번에 살짝 다뤘죠!</span></div>
+      </div>
+      <div class="irregular-item">
+        <div class="type">르 불규칙 (르 Irregular)</div>
+        <div class="example">모르다 → <b>몰랐어요</b><br>다르다 → <b>달랐어요</b><br>부르다 → <b>불렀어요</b></div>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; padding: 16px 20px; background: white; border-radius: 8px;">
+      <strong style="color: var(--purple);">+ 부정 과거형 (Negative Past)</strong>
+      <p style="margin: 6px 0 0; font-size: 14px; color: var(--ink);">
+        <b>안 했어요</b> = didn't do it (own choice)<br>
+        <b>못 했어요</b> = couldn't do it (couldn't manage)<br>
+        <em style="color: var(--ink-soft); font-size: 13px;">Two different "didn't"s in Korean!</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Made from Love 사랑을 담아 · 한국어 과거형 종합 가이드 <span class="heart">🌸</span>
+  K-pop 자막 없이 듣는 그 날까지 — Hanim과 함께 🎶
+</footer>
+
+</div>
+</body>
+</html>
