@@ -360,7 +360,24 @@
     }
     .vowel-pair { grid-template-columns: 1fr 1fr; }
     .vowel-pair .vowel-examples { grid-column: 1 / -1; }
+     body { padding: 16px 8px; }
+  .section { padding: 14px; }
+  .three-col,
+  .two-col {
+    gap:68px;              /* 간격 좁히기 */
   }
+  .card {
+    padding: 8px 6px;
+    font-size: 13px;     /* 글자 살짝 작게 */
+  }
+  .card .big-char {
+    font-size: 28px;       /* 큰 글자도 줄이기 (원래 큰 거면) */
+  }
+  /* 카드 안의 표 글자도 줄이기 */
+  .card table {
+    font-size: 11px;
+  }
+}
 </style>
 </head>
 <body>
