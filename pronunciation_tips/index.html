@@ -354,28 +354,32 @@
     .section { break-inside: avoid; border: 1px solid #ddd; }
   }
 
-  @media (max-width: 600px) { 
-    .vowel-section {
-     grid-template-columns: 1fr;
-    }
-    .vowel-pair { grid-template-columns: 1fr 1fr; }
-    .vowel-pair .vowel-examples { grid-column: 1 / -1; }
-  body { padding: 16px 8px; }
-  .section { padding: 14px; }
+@media (max-width: 600px) {
+  /* 바깥 여백 줄이기 */
+  body { padding: 16px 12px; }
+  .section { padding: 16px; }
+
+  /* ⭐ 핵심: 모든 비교 그리드를 세로 1열로 */
   .three-col,
   .two-col {
-    gap:68px;              /* 간격 좁히기 */
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
+
+  /* 모음 섹션 (기존) */
+  .vowel-section { grid-template-columns: 1fr; }
+  .vowel-pair { grid-template-columns: 1fr 1fr; }
+  .vowel-pair .vowel-examples { grid-column: 1 / -1; }
+
+  /* 큰 글자 letter-spacing 줄여서 한 줄에 들어가게 */
+  .big-chars {
+    letter-spacing: 4px;
+    font-size: 28px;
+  }
+
+  /* 카드 안에 padding 살짝 줄이기 (전체 폭 쓰니까 너무 크면 어색) */
   .card {
-    padding: 8px 6px;
-    font-size: 13px;     /* 글자 살짝 작게 */
-  }
-  .card .big-char {
-    font-size: 28px;       /* 큰 글자도 줄이기 (원래 큰 거면) */
-  }
-  /* 카드 안의 표 글자도 줄이기 */
-  .card table {
-    font-size: 11px;
+    padding: 16px;
   }
 }
 </style>
