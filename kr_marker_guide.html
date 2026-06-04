@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국어 조사 가이드 · Korean Particles Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Nanum+Myeongjo:wght@400;700;800&display=swap');
+
+  :root{
+    --bg:#f7f3 ;
+    --bg:#f8f4ec;
+    --ink:#2b2622;
+    --soft:#6b6258;
+    --line:#e3dccd;
+    --card:#fffdf8;
+
+    /* particle colors */
+    --topic:#d96c4a;     /* 은/는 */
+    --subject:#2f8f7f;   /* 이/가 */
+    --object:#3a6ea5;    /* 을/를 */
+    --place:#b5852f;     /* 에 / 에서 */
+    --to:#8a5fb0;        /* 에게 */
+    --poss:#c0507a;      /* 의 */
+    --conn:#4f8a3d;      /* 과/와/랑 */
+
+    --topic-bg:#fbe6dd;
+    --subject-bg:#d9efe9;
+    --object-bg:#dde8f3;
+    --place-bg:#f3e9d2;
+    --to-bg:#ece0f3;
+    --poss-bg:#f6dde7;
+    --conn-bg:#e2efd9;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Gowun Dodum','Nanum Myeongjo',serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--line) 0.6px, transparent 0.6px);
+    background-size:22px 22px;
+  }
+
+  .wrap{max-width:1020px;margin:0 auto;padding:0 22px 80px;}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    text-align:center;
+    padding:64px 0 40px;
+    position:relative;
+  }
+  .hero .kr{
+    font-family:'Nanum Myeongjo',serif;
+    font-weight:800;
+    font-size:clamp(38px,7vw,62px);
+    letter-spacing:-1px;
+    line-height:1.1;
+  }
+  .hero .kr b{ color:var(--topic); }
+  .hero .en{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:clamp(17px,3vw,21px);
+    color:var(--soft);
+    margin-top:12px;
+  }
+  .hero .lead{
+    max-width:760px;margin:22px auto 0;
+    font-size:16px;color:var(--soft);
+  }
+
+  /* ---------- BIG IDEA ---------- */
+  .bigidea{
+    background:var(--card);
+    border:1.5px solid var(--line);
+    border-radius:18px;
+    padding:30px 30px 26px;
+    margin:30px 0 50px;
+    box-shadow:6px 6px 0 #efe7d6;
+  }
+  .bigidea h2{
+    font-family:'Nanum Myeongjo',serif;
+    font-size:23px;margin-bottom:14px;
+  }
+  .bigidea .compare{
+    display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;
+  }
+  .bigidea .box{
+    border-radius:12px;padding:16px 16px 14px;font-size:15px;
+  }
+  .box.en-box{background:#efe9dd;}
+  .box.kr-box{background:var(--subject-bg);}
+  .box h3{font-size:14px;letter-spacing:.5px;text-transform:uppercase;color:var(--soft);margin-bottom:8px;font-family:'Fraunces',serif;font-style:italic;}
+  .box .ex{font-family:'Nanum Myeongjo',serif;font-size:17px;line-height:1.8;}
+  .tag{
+    display:inline-block;padding:1px 7px;border-radius:6px;font-size:13px;
+    font-weight:700;margin:0 1px;
+  }
+  .order-note{
+    margin-top:18px;font-size:14.5px;color:var(--soft);
+    border-top:1px dashed var(--line);padding-top:14px;
+  }
+
+  /* legend */
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 40px;justify-content:center;}
+  .legend span{
+    font-size:13.5px;padding:5px 12px;border-radius:20px;font-weight:700;
+    border:1.5px solid;
+  }
+
+  /* ---------- PARTICLE CARDS ---------- */
+  .card{
+    background:var(--card);
+    border-radius:18px;
+    border:1.5px solid var(--line);
+    padding:0;margin:0 0 30px;overflow:hidden;
+    box-shadow:5px 5px 0 #efe7d6;
+  }
+  .card .head{
+    padding:22px 26px 18px;color:#fff;position:relative;
+  }
+  .card .head .sym{
+    font-family:'Nanum Myeongjo',serif;font-weight:800;
+    font-size:34px;letter-spacing:1px;
+  }
+  .card .head .name{
+    font-family:'Fraunces',serif;font-style:italic;
+    font-size:16px;opacity:.92;margin-top:2px;
+  }
+  .card .head .role{
+    position:absolute;top:22px;right:24px;
+    font-size:13px;background:rgba(255,255,255,.22);
+    padding:4px 11px;border-radius:20px;font-weight:700;
+    backdrop-filter:blur(2px);
+  }
+  .card .body{padding:20px 26px 24px;}
+
+  .metaphor{
+    font-size:15px;color:var(--ink);
+    background:#faf6ec;border-left:3px solid;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin-bottom:18px;
+  }
+  .metaphor b{font-weight:700;}
+  .metaphor .en{display:block;color:var(--soft);font-size:13.5px;font-family:'Fraunces',serif;font-style:italic;margin-top:4px;}
+
+  .uselist{list-style:none;margin:0 0 16px;}
+  .uselist li{
+    font-size:15px;padding:6px 0 6px 24px;position:relative;border-bottom:1px dotted var(--line);
+  }
+  .uselist li:last-child{border-bottom:none;}
+  .uselist li::before{
+    content:"▸";position:absolute;left:4px;top:6px;font-size:13px;
+  }
+
+  table.ex{width:100%;border-collapse:collapse;margin-top:6px;}
+  table.ex td{
+    padding:10px 8px;border-bottom:1px solid var(--line);
+    font-size:16px;vertical-align:top;
+  }
+  table.ex tr:last-child td{border-bottom:none;}
+  table.ex .ko{font-family:'Nanum Myeongjo',serif;width:52%;line-height:1.7;}
+  table.ex .en{color:var(--soft);font-size:14px;}
+
+  /* 받침 rule pill */
+  .batchim{
+    display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 18px;
+  }
+  .batchim .pill{
+    flex:1;min-width:130px;border-radius:10px;padding:11px 14px;font-size:14px;
+  }
+  .batchim .pill b{font-family:'Nanum Myeongjo',serif;font-size:18px;}
+  .batchim .yes{background:#f1e7d3;}
+  .batchim .no{background:#e7eee9;}
+  .batchim small{display:block;color:var(--soft);font-size:12.5px;margin-top:3px;}
+
+  /* color helpers */
+  .c-topic{background:var(--topic);} .b-topic{border-color:var(--topic);color:var(--topic);}
+  .c-subject{background:var(--subject);} .b-subject{border-color:var(--subject);color:var(--subject);}
+  .c-object{background:var(--object);} .b-object{border-color:var(--object);color:var(--object);}
+  .c-place{background:var(--place);} .b-place{border-color:var(--place);color:var(--place);}
+  .c-to{background:var(--to);} .b-to{border-color:var(--to);color:var(--to);}
+  .c-poss{background:var(--poss);} .b-poss{border-color:var(--poss);color:var(--poss);}
+  .c-conn{background:var(--conn);} .b-conn{border-color:var(--conn);color:var(--conn);}
+
+  .hl-topic{background:var(--topic-bg);color:var(--topic);}
+  .hl-subject{background:var(--subject-bg);color:var(--subject);}
+  .hl-object{background:var(--object-bg);color:var(--object);}
+  .hl-place{background:var(--place-bg);color:var(--place);}
+  .hl-to{background:var(--to-bg);color:var(--to);}
+  .hl-poss{background:var(--poss-bg);color:var(--poss);}
+  .hl-conn{background:var(--conn-bg);color:var(--conn);}
+
+  /* ---------- 은는 vs 이가 special ---------- */
+  .versus{
+    background:var(--card);border:1.5px solid var(--line);border-radius:18px;
+    padding:26px;margin:0 0 30px;box-shadow:5px 5px 0 #efe7d6;
+  }
+  .versus h2{font-family:'Nanum Myeongjo',serif;font-size:22px;margin-bottom:6px;}
+  .versus .sub{color:var(--soft);font-size:14px;font-family:'Fraunces',serif;font-style:italic;margin-bottom:18px;}
+  .vrow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .vcol{border-radius:12px;padding:16px;}
+  .vcol.t{background:var(--topic-bg);}
+  .vcol.s{background:var(--subject-bg);}
+  .vcol h4{font-family:'Nanum Myeongjo',serif;font-size:19px;margin-bottom:8px;}
+  .vcol.t h4{color:var(--topic);}
+  .vcol.s h4{color:var(--subject);}
+  .vcol p{font-size:14px;margin-bottom:8px;}
+  .vcol .mini{font-family:'Nanum Myeongjo',serif;font-size:15.5px;line-height:1.7;background:rgba(255,255,255,.6);border-radius:8px;padding:9px 11px;}
+
+  /* ---------- QUIZ ---------- */
+  .quiz{
+    background:#2b2622;color:#f4efe4;border-radius:18px;padding:30px 28px;margin-top:46px;
+  }
+  .quiz h2{font-family:'Nanum Myeongjo',serif;font-size:24px;margin-bottom:6px;color:#fff;}
+  .quiz .sub{color:#b7 aaa;color:#bcae99;font-size:14px;font-family:'Fraunces',serif;font-style:italic;margin-bottom:22px;}
+  .q{margin-bottom:18px;border-bottom:1px solid #423b32;padding-bottom:18px;}
+  .q:last-of-type{border-bottom:none;}
+  .q .ask{font-family:'Nanum Myeongjo',serif;font-size:18px;margin-bottom:12px;}
+  .q .ask .blank{display:inline-block;min-width:46px;border-bottom:2px dashed #8a7f6c;text-align:center;color:#e0b25a;font-weight:700;}
+  .opts{display:flex;gap:8px;flex-wrap:wrap;}
+  .opt{
+    background:#3a332b;border:1.5px solid #4d453a;color:#f4efe4;
+    border-radius:10px;padding:8px 16px;font-size:16px;cursor:pointer;
+    font-family:'Nanum Myeongjo',serif;transition:.15s;
+  }
+  .opt:hover{background:#4a4236;}
+  .opt.correct{background:var(--subject);border-color:var(--subject);color:#fff;}
+  .opt.wrong{background:#9c4a3f;border-color:#9c4a3f;color:#fff;}
+  .feedback{margin-top:10px;font-size:14px;color:#bcae99;min-height:20px;}
+  .feedback.show{color:#e8dcc4;}
+
+  footer{text-align:center;color:var(--soft);font-size:13px;margin-top:50px;font-family:'Fraunces',serif;font-style:italic;}
+
+  @media(max-width:620px){
+    body{font-size:16px;}
+    .bigidea .compare,.vrow{grid-template-columns:1fr;}
+    .card .head .role{position:static;display:inline-block;margin-top:8px;}
+    table.ex td{display:block;}
+    table.ex .ko{width:100%;}
+    table.ex .en{padding-top:0;padding-bottom:12px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="kr">한국어 <b>조사</b> 완전 정복</div>
+    <div class="en">Korean Particles, Made Simple</div>
+    <p class="lead">조사는 단어 뒤에 붙어서 "이 단어가 문장에서 무슨 역할을 하는지" 알려주는 작은 꼬리표예요.<br>
+    Particles are little tags that attach to a word and tell you its <i>job</i> in the sentence.</p>
+  </header>
+
+  <!-- BIG IDEA -->
+  <section class="bigidea">
+    <h2>🔑 가장 중요한 생각 · The One Big Idea</h2>
+    <p style="font-size:15.5px;color:var(--soft);">영어는 <b>단어 순서(word order)</b>로 역할을 정해요. 한국어는 <b>조사(particle)</b>로 역할을 정해요.</p>
+    <div class="compare">
+      <div class="box en-box">
+        <h3>English — order matters</h3>
+        <div class="ex">
+          <u>The cat</u> bites <u>the dog</u>.<br>
+          <u>The dog</u> bites <u>the cat</u>.<br>
+          <span style="font-size:13px;color:var(--soft);">→ Swap the order, swap the meaning.</span>
+        </div>
+      </div>
+      <div class="box kr-box">
+        <h3>Korean — particles do the work</h3>
+        <div class="ex">
+          고양이<span class="tag hl-subject">가</span> 개<span class="tag hl-object">를</span> 물어요.<br>
+          개<span class="tag hl-object">를</span> 고양이<span class="tag hl-subject">가</span> 물어요.<br>
+          <span style="font-size:13px;color:var(--soft);">→ Same meaning! 가=doer, 를=target.</span>
+        </div>
+      </div>
+    </div>
+    <p class="order-note">💡 그래서 한국어는 단어 순서를 바꿔도 뜻이 통해요. 조사가 "누가 주인공인지, 누구를 향하는지"를 꽉 잡아주니까요. The particle holds the role, so the order can move around.</p>
+  </section>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <span class="b-topic">은 / 는 Topic</span>
+    <span class="b-subject">이 / 가 Subject</span>
+    <span class="b-object">을 / 를 Object</span>
+    <span class="b-place">에 · 에서 Place</span>
+    <span class="b-to">에게 To</span>
+    <span class="b-poss">의 Of</span>
+    <span class="b-conn">과·와·랑 And</span>
+  </div>
+
+  <!-- 은/는 -->
+  <article class="card">
+    <div class="head c-topic">
+      <div class="sym">은 / 는</div>
+      <div class="name">the TOPIC marker</div>
+      <div class="role">"As for ___"</div>
+    </div>
+    <div class="body">
+      <div class="metaphor" style="border-color:var(--topic);">
+        <b>비유:</b> 무대 위 스포트라이트 🔦 — "오늘 이야기의 주제는 이거예요!"
+        <span class="en">Think of a spotlight: "Let's talk about THIS now."</span>
+      </div>
+      <ul class="uselist">
+        <li>문장의 <b>주제</b>를 정할 때 (what the sentence is <i>about</i>)</li>
+        <li>두 가지를 <b>비교/대조</b>할 때 (A는 …, B는 …)</li>
+        <li>이미 아는 정보를 다시 가리킬 때 (old / known info)</li>
+      </ul>
+      <div class="batchim">
+        <div class="pill yes"><b>은</b> · 받침 O<small>after a consonant — 학생<span class="tag hl-topic">은</span></small></div>
+        <div class="pill no"><b>는</b> · 받침 X<small>after a vowel — 저<span class="tag hl-topic">는</span></small></div>
+      </div>
+      <table class="ex">
+        <tr><td class="ko">저<span class="tag hl-topic">는</span> 한국어를 배워요.</td><td class="en">As for me, I learn Korean.</td></tr>
+        <tr><td class="ko">커피<span class="tag hl-topic">는</span> 좋아요. 그런데 차<span class="tag hl-topic">는</span> 싫어요.</td><td class="en">Coffee, I like. But tea, I don't. (contrast)</td></tr>
+        <tr><td class="ko">한국<span class="tag hl-topic">은</span> 사계절이 있어요.</td><td class="en">As for Korea, it has four seasons.</td></tr>
+      </table>
+    </div>
+  </article>
+
+  <!-- 이/가 -->
+  <article class="card">
+    <div class="head c-subject">
+      <div class="sym">이 / 가</div>
+      <div class="name">the SUBJECT marker</div>
+      <div class="role">the "doer"</div>
+    </div>
+    <div class="body">
+      <div class="metaphor" style="border-color:var(--subject);">
+        <b>비유:</b> 손가락으로 콕 가리키기 👉 — "바로 이 사람/이것이!"
+        <span class="en">Points at WHO or WHAT does the action — often new info.</span>
+      </div>
+      <ul class="uselist">
+        <li>동작이나 상태의 <b>주체</b>를 표시 (the one doing / being)</li>
+        <li><b>새로운 정보</b>를 처음 소개할 때 (introducing something new)</li>
+        <li>"누가?" "뭐가?" 질문의 답 (answers who? / what?)</li>
+      </ul>
+      <div class="batchim">
+        <div class="pill yes"><b>이</b> · 받침 O<small>after a consonant — 사람<span class="tag hl-subject">이</span></small></div>
+        <div class="pill no"><b>가</b> · 받침 X<small>after a vowel — 친구<span class="tag hl-subject">가</span></small></div>
+      </div>
+      <table class="ex">
+        <tr><td class="ko">친구<span class="tag hl-subject">가</span> 왔어요!</td><td class="en">My friend came! (who came? → 친구)</td></tr>
+        <tr><td class="ko">날씨<span class="tag hl-subject">가</span> 좋아요.</td><td class="en">The weather is nice.</td></tr>
+        <tr><td class="ko">누가 한국어<span class="tag hl-subject">가</span> 어려워요? 제<span class="tag hl-subject">가</span> 어려워요.</td><td class="en">Who finds Korean hard? I do.</td></tr>
+      </table>
+    </div>
+  </article>
+
+  <!-- 은는 vs 이가 -->
+  <section class="versus">
+    <h2>⚖️ 은/는 vs 이/가 — 가장 헷갈리는 한 쌍</h2>
+    <div class="sub">The trickiest pair. Both can mark the "subject" in English — but they feel different.</div>
+    <div class="vrow">
+      <div class="vcol t">
+        <h4>은/는 — 주제 Topic</h4>
+        <p>"이것에 대해 말하자면…" 넓게 깔아줌. 비교의 느낌.<br><span style="color:var(--soft);font-size:12.5px;">Sets the theme; feels like contrast / known.</span></p>
+        <div class="mini">제 이름<span class="tag hl-topic">은</span> 하님이에요.<br><span style="color:var(--soft);font-size:13px;">(As for my name → it's Hanim.)</span></div>
+      </div>
+      <div class="vcol s">
+        <h4>이/가 — 주어 Subject</h4>
+        <p>"바로 이거!" 콕 집음. 새 정보의 느낌.<br><span style="color:var(--soft);font-size:12.5px;">Pinpoints; feels new / specific.</span></p>
+        <div class="mini">누<span class="tag hl-subject">가</span> 하님이에요? 제<span class="tag hl-subject">가</span> 하님이에요.<br><span style="color:var(--soft);font-size:13px;">(Who is Hanim? → I am.)</span></div>
+      </div>
+    </div>
+    <div style="background:#faf6ec;border-radius:12px;padding:14px 16px;margin-bottom:14px;font-size:14.5px;">
+      <b>같은 문장, 다른 느낌 · same sentence, different nuance:</b>
+      <div style="margin-top:8px;font-family:'Nanum Myeongjo',serif;font-size:16px;line-height:1.9;">
+        저<span class="tag hl-topic">는</span> 학생이에요. <span style="color:var(--soft);font-size:13px;font-family:inherit;">→ "As for me, I'm a student." (자기소개)</span><br>
+        제<span class="tag hl-subject">가</span> 학생이에요. <span style="color:var(--soft);font-size:13px;font-family:inherit;">→ "I'm the (one who is the) student." (누가 학생인지 물어본 뒤)</span>
+      </div>
+    </div>
+    <p style="font-size:14.5px;color:var(--soft);border-top:1px dashed var(--line);padding-top:14px;">
+    💡 <b>쉬운 트릭 (a quick trick):</b> 영어로 "<i>As for ___</i>"가 자연스러우면 → <span class="tag hl-topic">은/는</span>. 질문 "<i>Who / What?</i>"에 대한 콕 집은 답이면 → <span class="tag hl-subject">이/가</span>.</p>
+  </section>
+
+  <!-- 을/를 -->
+  <article class="card">
+    <div class="head c-object">
+      <div class="sym">을 / 를</div>
+      <div class="name">the OBJECT marker</div>
+      <div class="role">the "target"</div>
+    </div>
+    <div class="body">
+      <div class="metaphor" style="border-color:var(--object);">
+        <b>비유:</b> 화살이 꽂히는 과녁 🎯 — 동작이 향하는 대상.
+        <span class="en">The bullseye the action hits. (I eat <u>what</u>? I read <u>what</u>?)</span>
+      </div>
+      <ul class="uselist">
+        <li>동작의 <b>대상(목적어)</b>을 표시 (the thing the verb acts on)</li>
+        <li>"무엇을?" 질문의 답 (answers "___ what?")</li>
+      </ul>
+      <div class="batchim">
+        <div class="pill yes"><b>을</b> · 받침 O<small>밥<span class="tag hl-object">을</span> 먹어요</small></div>
+        <div class="pill no"><b>를</b> · 받침 X<small>커피<span class="tag hl-object">를</span> 마셔요</small></div>
+      </div>
+      <table class="ex">
+        <tr><td class="ko">저는 밥<span class="tag hl-object">을</span> 먹어요.</td><td class="en">I eat rice. (eat what? → 밥)</td></tr>
+        <tr><td class="ko">한국어<span class="tag hl-object">를</span> 공부해요.</td><td class="en">I study Korean.</td></tr>
+        <tr><td class="ko">친구<span class="tag hl-subject">가</span> 영화<span class="tag hl-object">를</span> 봐요.</td><td class="en">My friend watches a movie. (가=doer, 를=target)</td></tr>
+      </table>
+    </div>
+  </article>
+
+  <!-- 에 / 에서 -->
+  <article class="card">
+    <div class="head c-place">
+      <div class="sym">에 · 에서</div>
+      <div class="name">the PLACE / TIME markers</div>
+      <div class="role">where & when</div>
+    </div>
+    <div class="body">
+      <div class="metaphor" style="border-color:var(--place);">
+        <b>비유:</b> 에 = 지도 위의 핀 📍 (가만히/도착점) · 에서 = 활동이 일어나는 무대 🎬 (움직임/행동).
+        <span class="en">에 = a pin (location / destination / time). 에서 = a stage where action happens.</span>
+      </div>
+      <ul class="uselist">
+        <li><b>에</b> — 위치·도착지·시간 (with 있다/없다/가다/오다, and times)</li>
+        <li><b>에서</b> — 행동이 일어나는 장소 (with 공부하다/먹다/일하다…)</li>
+        <li><b>(으)로</b> — 방향·수단·도구 (direction / by means of)</li>
+        <li>핵심 질문: "가만히 있어요(에)? 뭔가 해요(에서)?"</li>
+      </ul>
+      <table class="ex">
+        <tr><td class="ko">집<span class="tag hl-place">에</span> 있어요.</td><td class="en">I'm AT home. (just being there → 에)</td></tr>
+        <tr><td class="ko">집<span class="tag hl-place">에서</span> 공부해요.</td><td class="en">I study AT home. (doing something → 에서)</td></tr>
+        <tr><td class="ko">학교<span class="tag hl-place">에</span> 가요.</td><td class="en">I go TO school. (destination → 에)</td></tr>
+        <tr><td class="ko">3시<span class="tag hl-place">에</span> 만나요.</td><td class="en">Let's meet AT 3. (time → 에)</td></tr>
+        <tr><td class="ko">카페<span class="tag hl-place">에서</span> 커피<span class="tag hl-object">를</span> 마셔요.</td><td class="en">I drink coffee at a café.</td></tr>
+        <tr><td class="ko">지하철<span class="tag hl-place">로</span> 왔어요.</td><td class="en">I came BY subway. (means → 로, no 받침)</td></tr>
+        <tr><td class="ko">왼쪽<span class="tag hl-place">으로</span> 가세요.</td><td class="en">Go TO the left. (direction → 으로, 받침 ㄱ)</td></tr>
+      </table>
+      <div class="batchim" style="margin-top:14px;">
+        <div class="pill yes"><b>으로</b> · 받침 O<small>왼쪽<span class="tag hl-place">으로</span> · 단, ㄹ받침은 그냥 '로'</small></div>
+        <div class="pill no"><b>로</b> · 받침 X<small>지하철<span class="tag hl-place">로</span> · 버스<span class="tag hl-place">로</span></small></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 에게 -->
+  <article class="card">
+    <div class="head c-to">
+      <div class="sym">에게 · 한테</div>
+      <div class="name">the "TO (a person)" marker</div>
+      <div class="role">to someone</div>
+    </div>
+    <div class="body">
+      <div class="metaphor" style="border-color:var(--to);">
+        <b>비유:</b> 사람에게 향하는 화살표 ➡️🙂 — 주거나 보내거나 말하는 <b>상대</b>.
+        <span class="en">An arrow pointing to a PERSON who receives something.</span>
+      </div>
+      <ul class="uselist">
+        <li>주다·보내다·말하다·쓰다의 <b>받는 사람</b> (the receiver)</li>
+        <li><b>에게</b> = 격식(글) · <b>한테</b> = 구어(대화) — 뜻은 같아요</li>
+        <li>받침과 상관없이 그대로 붙어요 (no 받침 change!)</li>
+        <li>📌 사물에는 <b>에</b>를 써요: 나무<u>에</u> 물을 줘요 (to a plant)</li>
+      </ul>
+      <table class="ex">
+        <tr><td class="ko">친구<span class="tag hl-to">에게</span> 선물을 줘요.</td><td class="en">I give a gift to my friend.</td></tr>
+        <tr><td class="ko">동생<span class="tag hl-to">한테</span> 편지를 써요.</td><td class="en">I write a letter to my sibling. (casual)</td></tr>
+        <tr><td class="ko">선생님<span class="tag hl-to">께</span> 여쭤봐요.</td><td class="en">I ask the teacher. (께 = honorific of 에게)</td></tr>
+      </table>
+    </div>
+  </article>
+
+  <!-- 의 -->
+  <article class="card">
+    <div class="head c-poss">
+      <div class="sym">의</div>
+      <div class="name">the POSSESSIVE marker</div>
+      <div class="role">'s / of</div>
+    </div>
+    <div class="body">
+      <div class="metaphor" style="border-color:var(--poss);">
+        <b>비유:</b> 영어의 <b>apostrophe-s ('s)</b> 또는 <b>of</b> — 소유·소속을 묶어줌.
+        <span class="en">Just like English 's or "of": 친구의 책 = friend's book.</span>
+      </div>
+      <ul class="uselist">
+        <li>소유·소속 표시 (X<b>의</b> Y = Y of X / X's Y)</li>
+        <li>발음은 흔히 [에]로 — 친구의[친구에]</li>
+        <li>회화에서는 자주 <b>생략</b>돼요: 제 책 = 저의 책</li>
+      </ul>
+      <table class="ex">
+        <tr><td class="ko">친구<span class="tag hl-poss">의</span> 가방</td><td class="en">my friend's bag</td></tr>
+        <tr><td class="ko">한국<span class="tag hl-poss">의</span> 문화</td><td class="en">the culture of Korea</td></tr>
+        <tr><td class="ko">저<span class="tag hl-poss">의</span> 이름 → 보통 "제 이름"</td><td class="en">my name (저의 → 제, contracted)</td></tr>
+      </table>
+    </div>
+  </article>
+
+  <!-- 과/와/랑/하고 -->
+  <article class="card">
+    <div class="head c-conn">
+      <div class="sym">과 · 와 · (이)랑 · 하고</div>
+      <div class="name">the CONNECTION markers</div>
+      <div class="role">and / with</div>
+    </div>
+    <div class="body">
+      <div class="metaphor" style="border-color:var(--conn);">
+        <b>비유:</b> 두 개를 잇는 고리 🔗 — 영어의 <b>and</b> 또는 <b>with</b>.
+        <span class="en">Links two nouns: "A and B" or "with someone."</span>
+      </div>
+      <ul class="uselist">
+        <li>명사 + 명사를 연결 (A and B) 또는 "누구와 함께" (with someone)</li>
+        <li><b>과/와</b> = 격식(글) · <b>(이)랑·하고</b> = 구어(대화)</li>
+        <li>뜻은 모두 같아요 — 상황에 따라 골라 써요</li>
+      </ul>
+      <div class="batchim">
+        <div class="pill yes"><b>과 / 이랑</b> · 받침 O<small>책<span class="tag hl-conn">과</span> · 책<span class="tag hl-conn">이랑</span></small></div>
+        <div class="pill no"><b>와 / 랑</b> · 받침 X<small>커피<span class="tag hl-conn">와</span> · 커피<span class="tag hl-conn">랑</span></small></div>
+      </div>
+      <p style="font-size:13.5px;color:var(--soft);margin:-6px 0 14px;">💡 <b>하고</b>는 받침과 상관없이 그대로 붙어서 제일 쉬워요: 커피하고 / 책하고</p>
+      <table class="ex">
+        <tr><td class="ko">커피<span class="tag hl-conn">와</span> 차<span class="tag hl-object">를</span> 준비했어요.</td><td class="en">I prepared coffee and tea. (formal)</td></tr>
+        <tr><td class="ko">친구<span class="tag hl-conn">랑</span> 영화를 봐요.</td><td class="en">I watch a movie with my friend. (casual)</td></tr>
+        <tr><td class="ko">엄마<span class="tag hl-conn">하고</span> 마트에 가요.</td><td class="en">I go to the mart with my mom.</td></tr>
+        <tr><td class="ko">책<span class="tag hl-conn">과</span> 펜<span class="tag hl-subject">이</span> 있어요.</td><td class="en">There's a book and a pen. (받침 → 과)</td></tr>
+      </table>
+    </div>
+  </article>
+
+  <!-- QUIZ -->
+  <section class="quiz">
+    <h2>🎯 미니 퀴즈 · Try it!</h2>
+    <div class="sub">Tap the particle that fits. (받침 규칙도 같이 생각해요!)</div>
+
+    <div class="q" data-answer="를">
+      <div class="ask">저는 한국어<span class="blank">?</span> 공부해요.</div>
+      <div class="opts">
+        <button class="opt">은</button>
+        <button class="opt">가</button>
+        <button class="opt">를</button>
+        <button class="opt">에</button>
+      </div>
+      <div class="feedback" data-explain="한국어 = study의 대상(target) → 을/를. 받침 없으니 '를'. (object marker)"></div>
+    </div>
+
+    <div class="q" data-answer="가">
+      <div class="ask">친구<span class="blank">?</span> 왔어요!</div>
+      <div class="opts">
+        <button class="opt">는</button>
+        <button class="opt">가</button>
+        <button class="opt">를</button>
+        <button class="opt">에서</button>
+      </div>
+      <div class="feedback" data-explain="누가 왔어요? → 친구(doer, new info) → 이/가. 받침 없으니 '가'."></div>
+    </div>
+
+    <div class="q" data-answer="에서">
+      <div class="ask">카페<span class="blank">?</span> 커피를 마셔요.</div>
+      <div class="opts">
+        <button class="opt">에</button>
+        <button class="opt">에서</button>
+        <button class="opt">의</button>
+        <button class="opt">은</button>
+      </div>
+      <div class="feedback" data-explain="마시다 = 행동이 일어나는 장소 → 에서. ('에'는 가만히 있을 때!)"></div>
+    </div>
+
+    <div class="q" data-answer="에게">
+      <div class="ask">동생<span class="blank">?</span> 선물을 줘요.</div>
+      <div class="opts">
+        <button class="opt">에서</button>
+        <button class="opt">를</button>
+        <button class="opt">에게</button>
+        <button class="opt">의</button>
+      </div>
+      <div class="feedback" data-explain="선물을 받는 사람 → 에게/한테. (사람에게 향하는 화살표!)"></div>
+    </div>
+
+    <div class="q" data-answer="는">
+      <div class="ask">커피<span class="blank">?</span> 좋아요. 그런데 차는 싫어요.</div>
+      <div class="opts">
+        <button class="opt">는</button>
+        <button class="opt">가</button>
+        <button class="opt">를</button>
+        <button class="opt">에</button>
+      </div>
+      <div class="feedback" data-explain="차와 비교/대조 → 은/는. '커피'는 받침이 없으니 '는'! (비교의 느낌)"></div>
+    </div>
+
+    <div class="q" data-answer="로">
+      <div class="ask">저는 지하철<span class="blank">?</span> 학교에 가요.</div>
+      <div class="opts">
+        <button class="opt">에서</button>
+        <button class="opt">로</button>
+        <button class="opt">을</button>
+        <button class="opt">의</button>
+      </div>
+      <div class="feedback" data-explain="교통수단(by subway) → (으)로. '지하철'은 ㄹ받침이라 그냥 '로'!"></div>
+    </div>
+
+    <div class="q" data-answer="랑">
+      <div class="ask">친구<span class="blank">?</span> 영화를 봐요. (casual)</div>
+      <div class="opts">
+        <button class="opt">에게</button>
+        <button class="opt">랑</button>
+        <button class="opt">를</button>
+        <button class="opt">에서</button>
+      </div>
+      <div class="feedback" data-explain="누구와 함께(with a friend) → (이)랑. '친구'는 받침 없으니 '랑'. (과/와/하고도 가능!)"></div>
+    </div>
+
+  </section>
+
+  <footer>한국어 조사 가이드 · made for learners whose languages have no particles 🌱</footer>
+</div>
+
+<script>
+  // fix last quiz answer (커피는)
+  document.querySelectorAll('.q').forEach(q=>{
+    const ans=q.dataset.answer;
+    const fb=q.querySelector('.feedback');
+    q.querySelectorAll('.opt').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        q.querySelectorAll('.opt').forEach(b=>{b.classList.remove('correct','wrong');});
+        if(btn.textContent===ans){
+          btn.classList.add('correct');
+          fb.textContent='✅ 정답! '+ (fb.dataset.explain||'');
+        }else{
+          btn.classList.add('wrong');
+          // also reveal correct
+          q.querySelectorAll('.opt').forEach(b=>{if(b.textContent===ans)b.classList.add('correct');});
+          fb.textContent='다시 생각해 봐요 — '+(fb.dataset.explain||'');
+        }
+        fb.classList.add('show');
+      });
+    });
+  });
+</script>
+</body>
+</html>
