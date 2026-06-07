@@ -36,12 +36,12 @@
   .mapbox{position:relative; width:100%; border:1px solid var(--line); border-radius:14px; overflow:hidden; line-height:0;}
   .mapbox img{width:100%; display:block;}
   .pin{position:absolute; transform:translate(-50%,-50%); cursor:pointer; text-align:center; z-index:2;}
-  .dot{width:16px; height:16px; border-radius:50%; background:var(--accent); border:2px solid #fff;
+  .dot{width:12px; height:12px; border-radius:50%; background:var(--accent); border:2px solid #fff;
     box-shadow:0 1px 4px rgba(0,0,0,.35); margin:0 auto; transition:.15s;}
   .pin .pname{font-size:11.5px; line-height:1.2; background:rgba(255,255,255,.9); border-radius:5px;
     padding:1px 5px; margin-top:2px; white-space:nowrap; display:none;}
   body.names .pin .pname{display:inline-block;}
-  .pin.marked .dot{background:var(--gold); width:20px; height:20px;}
+  .pin.marked .dot{background:var(--gold); width:15px; height:15px;}
   .pin.active .dot{background:var(--gold-deep); transform:scale(1.2);}
   .pin:hover .dot{transform:scale(1.2);}
 
@@ -71,7 +71,7 @@
   .small{font-size:13px; color:var(--muted); margin-top:24px;}
   @media (max-width:560px){
     h1{font-size:30px;} .detail .ko{font-size:26px;} .detail .flag{font-size:38px;}
-    .detail .mark{margin-left:0; width:100%;} .dot{width:13px;height:13px;}
+    .detail .mark{margin-left:0; width:100%;} .dot{width:10px;height:10px;}
     .pin .pname{font-size:10px;}
   }
 </style>
@@ -106,7 +106,7 @@
   <p class="gridhint">카드를 눌러도 똑같이 표시돼요. / Cards work the same way.</p>
   <div class="grid" id="grid"></div>
 
-  <p class="small">© 한국어 수업 자료 · 나라 이름 읽기 연습 · 지도 출처: BlankMap-World (public domain)</p>
+  <p class="small">© 한국어 수업 자료 · 나라 이름 읽기 연습 · 하님 씀 · 지도 출처: BlankMap-World (public domain)</p>
 </div>
 
 <script>
@@ -115,7 +115,7 @@ const COUNTRIES = [
   {ko:"중국", en:"China", flag:"🇨🇳", pron:"중·국", x:73.7, y:34.4},
   {ko:"인도", en:"India", flag:"🇮🇳", pron:"인·도", x:67.6, y:44.0},
   {ko:"태국", en:"Thailand", flag:"🇹🇭", pron:"태·국", x:74.5, y:47.2},
-  {ko:"사우디아라비아", en:"Saudi Arabia", flag:"🇸🇦", pron:"사·우·디·아·라·비·아", x:57.0, y:40.6},
+  {ko:"사우디 아라비아", en:"Saudi Arabia", flag:"🇸🇦", pron:"사·우·디·아·라·비·아", x:57.0, y:40.6},
   {ko:"이집트", en:"Egypt", flag:"🇪🇬", pron:"이·집·트", x:53.6, y:39.2},
   {ko:"영국", en:"UK", flag:"🇬🇧", pron:"영·국", x:45.0, y:20.8},
   {ko:"프랑스", en:"France", flag:"🇫🇷", pron:"프·랑·스", x:45.2, y:24.8},
