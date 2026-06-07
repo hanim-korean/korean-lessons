@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국의 선거 · Korean Elections</title>
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+  :root{
+    --bg:#f7f4ee;
+    --ink:#23201c;
+    --soft:#6c6358;
+    --line:#e2dccd;
+    --card:#fffdf8;
+    --red:#c8453a;      /* 도장 red */
+    --red-bg:#f8e3df;
+    --navy:#2f4a6b;
+    --navy-bg:#dde6f0;
+    --gold:#b5852f;
+    --gold-bg:#f3e9d2;
+    --green:#4f8a3d;
+    --green-bg:#e2efd9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Gowun Dodum',sans-serif;
+    font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--line) 0.6px, transparent 0.6px);
+    background-size:22px 22px;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 80px;}
+
+  /* HERO */
+  header.hero{text-align:center;padding:60px 0 30px;position:relative;}
+  .stamp{
+  width:80px; height:auto;
+  margin:0 auto 22px;
+  display:block;
+  transform:rotate(-9deg);
+}
+  .hero .kr{font-family:'Pretendard',sans-serif;font-weight:800;font-size:clamp(40px,7vw,58px);letter-spacing:-1px;line-height:1.1;}
+  .hero .kr b{color:var(--red);}
+  .hero .en{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(18px,3vw,22px);color:var(--soft);margin-top:10px;}
+  .hero .lead{max-width:720px;margin:20px auto 0;font-size:19px;color:var(--soft);}
+
+  /* SECTION TITLE */
+  h2.sec{font-family:'Pretendard',sans-serif;font-size:30px;margin:54px 0 6px;letter-spacing:-.5px;}
+  h2.sec .en{display:block;font-family:'Fraunces',serif;font-style:italic;font-size:16px;color:var(--soft);font-weight:400;margin-top:2px;}
+
+  /* CARD */
+  .card{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:26px 28px;margin:22px 0;box-shadow:6px 6px 0 #efe7d6;}
+  .card h3{font-family:'Pretendard',sans-serif;font-weight:700;font-size:22px;margin-bottom:10px;}
+  .card p{margin-bottom:10px;}
+  .en-sub{color:var(--soft);font-size:15px;}
+
+  /* NEWS BANNER */
+  .news{background:var(--red-bg);border:1.5px solid #eccdc7;border-left:6px solid var(--red);border-radius:14px;padding:22px 26px;margin:24px 0;}
+  .news .date{font-family:'Fraunces',serif;font-style:italic;color:var(--red);font-size:15px;letter-spacing:.4px;}
+  .news h3{font-family:'Pretendard',sans-serif;font-size:24px;margin:4px 0 8px;}
+
+  /* TYPE GRID */
+  .types{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px;}
+  .type{border-radius:14px;padding:18px 20px;border:1.5px solid var(--line);background:var(--card);}
+  .type .h{font-family:'Pretendard',sans-serif;font-size:20px;font-weight:700;}
+  .type .cycle{display:inline-block;font-size:13px;font-weight:700;padding:2px 9px;border-radius:20px;margin-top:6px;}
+  .type .desc{font-size:15.5px;color:var(--soft);margin-top:8px;}
+  .t-red .h{color:var(--red);}     .t-red .cycle{background:var(--red-bg);color:var(--red);}
+  .t-navy .h{color:var(--navy);}   .t-navy .cycle{background:var(--navy-bg);color:var(--navy);}
+  .t-gold .h{color:var(--gold);}   .t-gold .cycle{background:var(--gold-bg);color:var(--gold);}
+  .t-green .h{color:var(--green);} .t-green .cycle{background:var(--green-bg);color:var(--green);}
+
+  /* POSITIONS */
+  table{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px;}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{font-family:'Pretendard',sans-serif;background:var(--navy-bg);color:var(--navy);font-size:15px;}
+  td .en{display:block;color:var(--soft);font-size:14px;}
+
+  /* STEPS */
+  .steps{counter-reset:step;margin-top:16px;}
+  .step{display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px dashed var(--line);}
+  .step:last-child{border-bottom:none;}
+  .step .num{counter-increment:step;flex:0 0 38px;height:38px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Pretendard',sans-serif;font-weight:700;font-size:18px;}
+  .step .num::before{content:counter(step);}
+  .step .body .h{font-family:'Pretendard',sans-serif;font-size:18px;font-weight:700;}
+  .step .body .en{color:var(--soft);font-size:14.5px;}
+
+  /* CALLOUT */
+  .callout{background:var(--gold-bg);border:1.5px dashed #ddc99a;border-radius:14px;padding:18px 22px;margin:20px 0;font-size:16px;}
+  .callout b{color:var(--gold);}
+
+  /* MY PHOTO */
+  .myphoto{margin:18px auto 24px;max-width:500px;text-align:center;}
+  .myphoto img{width:100%;height:400px;object-fit:cover;object-position:center;border-radius:14px;border:1.5px solid var(--line);box-shadow:4px 4px 0 #efe7d6;}
+  .myphoto figcaption{margin-top:8px;font-size:14px;color:var(--soft);font-style:italic;}
+
+  /* SEMANTIC NETWORK */
+  .net-wrap{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:18px;margin:22px 0;box-shadow:6px 6px 0 #efe7d6;overflow-x:auto;}
+  svg{display:block;margin:0 auto;max-width:100%;height:auto;}
+
+  /* VOCAB CHIPS */
+  .vocab{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:14px;}
+  .chip{border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;background:var(--card);}
+  .chip .w{font-family:'Pretendard',sans-serif;font-weight:700;font-size:17px;}
+  .chip .m{color:var(--soft);font-size:14px;}
+
+  /* QUIZ */
+  .quiz{background:var(--navy-bg);border:1.5px solid #c8d6e6;border-radius:16px;padding:22px 26px;margin:22px 0;}
+  .quiz h3{font-family:'Pretendard',sans-serif;font-size:21px;color:var(--navy);margin-bottom:12px;}
+  .q{margin:14px 0;}
+  .q .ask{font-weight:700;}
+  details{margin-top:6px;background:#fff;border:1px solid #c8d6e6;border-radius:10px;padding:8px 14px;}
+  details summary{cursor:pointer;color:var(--navy);font-size:15px;font-weight:700;}
+  details p{margin-top:8px;font-size:15.5px;}
+
+  .talk{background:var(--green-bg);border:1.5px solid #cbe0bd;border-radius:16px;padding:22px 26px;margin:22px 0;}
+  .talk h3{font-family:'Pretendard',sans-serif;font-weight:700;font-size:21px;color:var(--green);margin-bottom:10px;}
+  .talk ul{list-style:none;}
+  .talk li{padding:7px 0 7px 26px;position:relative;}
+  .talk li::before{content:"🗣";position:absolute;left:0;}
+  .talk li .en{color:var(--soft);font-size:14.5px;}
+
+  footer{text-align:center;color:var(--soft);font-size:14px;margin-top:50px;padding-top:20px;border-top:1px solid var(--line);}
+
+  @media (max-width:680px){
+    body{font-size:16px;}
+    .types{grid-template-columns:1fr;}
+    .wrap{padding:0 16px 60px;}
+    h2.sec{font-size:25px;}
+  }
+  @media print{
+    body{background:#fff;}
+    .card,.net-wrap{box-shadow:none;}
+    details{display:block;}
+    details summary{display:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <img class="stamp" src="kr_vote_stamp.png" alt="투표 도장">
+    <div class="kr">한국의 <b>선거</b></div>
+    <div class="en">Elections in Korea</div>
+    <p class="lead">한국 사람들은 어떻게 투표할까요? 손등에 찍힌 빨간 도장의 의미부터 선거의 종류까지.<br>
+    <span class="en-sub">How do Koreans vote? From the red stamp on the hand to the types of elections.</span></p>
+  </header>
+
+  <!-- 최신 뉴스 -->
+  <div class="news">
+    <div class="date">2026. 6. 3. (수)</div>
+    <h3>제9회 전국동시지방선거 · The 9th Local Elections</h3>
+    <p>2026년 6월 3일, 한국에서 <b>지방선거</b>가 있었어요. 전국에서 동시에 시·도지사, 시장·군수, 지방의회 의원, 교육감을 뽑았어요. 같은 날 국회의원을 다시 뽑는 <b>재보궐선거</b>도 함께 열렸어요.</p>
+    <p class="en-sub">On June 3, 2026, Korea held local elections nationwide — choosing governors, mayors, local council members, and education superintendents. By-elections for the National Assembly were held the same day.</p>
+  </div>
+
+  <!-- 선거 종류 -->
+  <h2 class="sec">① 한국의 선거 종류 <span class="en">Three (+1) kinds of elections</span></h2>
+  <p>한국에는 크게 세 가지 큰 선거가 있어요. 대통령은 5년마다, 국회의원과 지방선거는 4년마다 열려요.<br>
+  <span class="en-sub">Korea has three major elections: president every 5 years, the others every 4 years.</span></p>
+
+  <div class="types">
+    <div class="type t-red">
+      <div class="h">대선 (대통령 선거)</div>
+      <span class="cycle">5년마다 · every 5 yrs</span>
+      <div class="desc">대통령을 뽑아요.<br><span class="en-sub">Presidential election.</span></div>
+    </div>
+    <div class="type t-navy">
+      <div class="h">총선 (국회의원 선거)</div>
+      <span class="cycle">4년마다 · every 4 yrs</span>
+      <div class="desc">국회의원을 뽑아요.<br><span class="en-sub">General (National Assembly) election.</span></div>
+    </div>
+    <div class="type t-gold">
+      <div class="h">지선 (지방선거)</div>
+      <span class="cycle">4년마다 · every 4 yrs</span>
+      <div class="desc">지역의 시장·도지사·의원을 뽑아요. ← 이번 선거!<br><span class="en-sub">Local election (this one!).</span></div>
+    </div>
+    <div class="type t-green">
+      <div class="h">재보궐선거</div>
+      <span class="cycle">필요할 때 · as needed</span>
+      <div class="desc">빈자리가 생기면 다시 뽑아요.<br><span class="en-sub">By-election to fill vacant seats.</span></div>
+    </div>
+  </div>
+  <div class="callout">💡 <b>줄임말 Tip</b> — 한국 뉴스에서는 줄여서 말해요. <b>대선</b>(대통령선거), <b>총선</b>(국회의원 총선거), <b>지선</b>(지방선거). 신문 제목에 자주 나와요!<br>
+  <span class="en-sub">Korean news shortens these: 대선 / 총선 / 지선.</span></div>
+
+  <!-- 지방선거에서 뽑는 사람 -->
+  <h2 class="sec">② 지방선거에서 누구를 뽑을까요? <span class="en">Who gets elected in a local election?</span></h2>
+  <div class="card">
+    <table>
+      <tr><th font-weight:700;>직책 Position</th><th>설명 Description</th></tr>
+      <tr><td>광역단체장 <span class="en">metropolitan / provincial leader</span></td><td>시·도지사 (서울시장, 경기도지사 등)<span class="en">city/province governor</span></td></tr>
+      <tr><td>기초단체장 <span class="en">municipal leader</span></td><td>시장·군수·구청장<span class="en">mayor / county or district head</span></td></tr>
+      <tr><td>지방의회 의원 <span class="en">council members</span></td><td>광역의원 + 기초의원<span class="en">provincial + local council members</span></td></tr>
+      <tr><td>교육감 <span class="en">superintendent of education</span></td><td>지역 교육을 책임지는 사람<span class="en">head of regional education</span></td></tr>
+    </table>
+  </div>
+
+  <!-- 투표하는 날 -->
+  <h2 class="sec">③ 투표하는 날, 무슨 일이 있을까요? <span class="en">What happens on voting day?</span></h2>
+  <div class="card">
+    <div class="steps">
+      <div class="step"><div class="num"></div><div class="body"><div class="h">투표소에 가요</div><div class="en">Go to the polling station (투표소). 만 18세 이상이면 투표할 수 있어요. / Anyone 18+ can vote.</div></div></div>
+      <div class="step"><div class="num"></div><div class="body"><div class="h">신분증을 보여줘요</div><div class="en">Show your ID (신분증) and get your ballot.</div></div></div>
+      <div class="step"><div class="num"></div><div class="body"><div class="h">투표용지를 받아요</div><div class="en">Receive the ballot paper (투표용지).</div></div></div>
+      <div class="step"><div class="num"></div><div class="body"><div class="h">기표소에서 도장을 찍어요</div><div class="en">In the booth, stamp your choice. The special mark is 卜 (점 복). / The stamp leaves a 卜 mark.</div></div></div>
+      <div class="step"><div class="num"></div><div class="body"><div class="h">투표함에 넣어요</div><div class="en">Drop it in the ballot box (투표함). Done!</div></div></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    🖐️ <b>손등의 빨간 도장 = 인증샷 문화!</b><br>
+    투표소 안에서는 <b>투표지를 사진 찍으면 안 돼요</b> (투표지 촬영 금지). 그래서 기표소에서 투표지에 도장을 찍은 다음, 마지막으로 <b>손등에 도장을 살짝 찍어요</b>. 그리고 투표소 밖으로 나와서 사진을 찍는 게 바로 "투표 인증샷"이에요!<br>
+    <span class="en-sub">You can't photograph your ballot (투표지 촬영 금지). So after marking your ballot in the booth, you lightly stamp the mark on the back of your hand — then step outside the polling station to take your "voting proof shot" (인증샷). The 卜 mark is asymmetric, so it can't be faked.</span>
+  </div>
+
+  <!-- ▼▼▼ 하님 사진 넣는 자리 — 아래 src만 본인 사진 파일 이름으로 바꾸면 돼요 ▼▼▼ -->
+  <figure class="myphoto">
+    <img src="kr_vote_proof_vote.jpg" alt="투표 인증샷 — 손등의 도장">
+    <figcaption>투표 인증샷 · My voting proof shot 🗳️</figcaption>
+  </figure>
+  <!-- ▲▲▲ 사진 자리 끝 ▲▲▲ -->
+
+  <div class="card">
+    <h3>사전투표 vs 본투표 <span class="en-sub">Early voting vs Election day</span></h3>
+    <p><b>사전투표</b> — 선거일 전에 미리 투표해요. 전국 어디서나 가능!<br><span class="en-sub">Early voting: vote before election day, at any station nationwide.</span></p>
+    <p><b>본투표</b> — 선거일 당일, 정해진 투표소에서 투표해요.<br><span class="en-sub">Main voting: on election day, at your assigned station.</span></p>
+  </div>
+
+  <!-- 의미망 -->
+  <h2 class="sec">④ 의미망: '선거' 단어 지도 <span class="en">Semantic network: words around 선거</span></h2>
+  <p>하나의 주제 단어에서 관련 단어들이 가지처럼 뻗어 나가요. 따로 외우지 말고 <b>연결해서</b> 기억해요.<br>
+  <span class="en-sub">Learn words in connected clusters, not in isolation.</span></p>
+
+  <div class="net-wrap">
+    <svg viewBox="0 0 760 520" role="img" aria-label="선거 의미망">
+      <defs>
+        <style>
+          .edge{stroke:#d8cfbd;stroke-width:2;}
+          .hub{font-family:'Pretendard',sans-serif;font-weight:800;}
+          .lbl{font-family:'Gowun Dodum',sans-serif;}
+          .en{font-family:'Fraunces',serif;font-style:italic;fill:#9a9082;}
+        </style>
+      </defs>
+      <!-- edges -->
+      <line class="edge" x1="380" y1="260" x2="380" y2="90"/>
+      <line class="edge" x1="380" y1="260" x2="150" y2="180"/>
+      <line class="edge" x1="380" y1="260" x2="150" y2="380"/>
+      <line class="edge" x1="380" y1="260" x2="610" y2="180"/>
+      <line class="edge" x1="380" y1="260" x2="610" y2="380"/>
+
+      <!-- center hub -->
+      <circle cx="380" cy="260" r="58" fill="#f8e3df" stroke="#c8453a" stroke-width="2.5"/>
+      <text class="hub" x="380" y="256" text-anchor="middle" font-size="28" fill="#c8453a">선거</text>
+      <text class="en" x="380" y="282" text-anchor="middle" font-size="13">election</text>
+
+      <!-- top: 투표 -->
+      <rect x="312" y="40" width="136" height="56" rx="14" fill="#dde6f0" stroke="#2f4a6b" stroke-width="1.5"/>
+      <text class="hub" x="380" y="66" text-anchor="middle" font-size="18" fill="#2f4a6b">투표</text>
+      <text class="en" x="380" y="84" text-anchor="middle" font-size="11">vote</text>
+
+      <!-- left top: 후보 -->
+      <rect x="58" y="150" width="150" height="60" rx="14" fill="#f3e9d2" stroke="#b5852f" stroke-width="1.5"/>
+      <text class="hub" x="133" y="176" text-anchor="middle" font-size="17" fill="#b5852f">후보 · 유권자</text>
+      <text class="en" x="133" y="195" text-anchor="middle" font-size="11">candidate · voter</text>
+
+      <!-- left bottom: 공약 -->
+      <rect x="58" y="350" width="150" height="60" rx="14" fill="#e2efd9" stroke="#4f8a3d" stroke-width="1.5"/>
+      <text class="hub" x="133" y="376" text-anchor="middle" font-size="17" fill="#4f8a3d">공약 · 유세</text>
+      <text class="en" x="133" y="395" text-anchor="middle" font-size="11">pledge · campaign</text>
+
+      <!-- right top: 개표 -->
+      <rect x="552" y="150" width="150" height="60" rx="14" fill="#dde6f0" stroke="#2f4a6b" stroke-width="1.5"/>
+      <text class="hub" x="627" y="176" text-anchor="middle" font-size="17" fill="#2f4a6b">개표 · 출구조사</text>
+      <text class="en" x="627" y="195" text-anchor="middle" font-size="11">counting · exit poll</text>
+
+      <!-- right bottom: 당선 -->
+      <rect x="552" y="350" width="150" height="60" rx="14" fill="#f8e3df" stroke="#c8453a" stroke-width="1.5"/>
+      <text class="hub" x="627" y="376" text-anchor="middle" font-size="17" fill="#c8453a">당선 · 낙선</text>
+      <text class="en" x="627" y="395" text-anchor="middle" font-size="11">win · lose</text>
+
+      <!-- small leaf words under 투표 area -->
+      <text class="lbl" x="380" y="470" text-anchor="middle" font-size="14" fill="#6c6358">투표소 · 투표용지 · 투표함 · 기표 · 사전투표</text>
+      <text class="en" x="380" y="492" text-anchor="middle" font-size="12">station · ballot · box · marking · early voting</text>
+    </svg>
+  </div>
+
+  <div class="vocab">
+    <div class="chip"><div class="w">투표 (投票)</div><div class="m">vote / voting</div></div>
+    <div class="chip"><div class="w">후보(자) (候補)</div><div class="m">candidate</div></div>
+    <div class="chip"><div class="w">유권자 (有權者)</div><div class="m">eligible voter</div></div>
+    <div class="chip"><div class="w">공약 (公約)</div><div class="m">campaign pledge</div></div>
+    <div class="chip"><div class="w">개표 (開票)</div><div class="m">vote counting</div></div>
+    <div class="chip"><div class="w">출구조사 (出口調査)</div><div class="m">exit poll</div></div>
+    <div class="chip"><div class="w">당선 (當選)</div><div class="m">winning election</div></div>
+    <div class="chip"><div class="w">투표율 (投票率)</div><div class="m">voter turnout</div></div>
+    <div class="chip"><div class="w">인증샷</div><div class="m">proof photo (인증+shot)</div></div>
+  </div>
+
+  <!-- 퀴즈 -->
+  <div class="quiz">
+    <h3>🅾️ 미니 퀴즈 · Mini Quiz</h3>
+    <div class="q">
+      <div class="ask">1. 2026년 6월 3일에 한국에서 무슨 선거가 있었어요? <span class="en-sub">What election was held on June 3, 2026?</span></div>
+      <details><summary>정답 보기</summary><p>지방선거 (제9회 전국동시지방선거) — 시장, 도지사, 지방의원, 교육감을 뽑았어요.</p></details>
+    </div>
+    <div class="q">
+      <div class="ask">2. 투표소에서 사진 찍으면 안 되는 것은 무엇일까요? <span class="en-sub">What can't you photograph?</span></div>
+      <details><summary>정답 보기</summary><p>투표지(투표용지) — 그래서 투표소에서 주는 인증 도장을 손등에 찍고 인증샷을 찍어요!</p></details>
+    </div>
+    <div class="q">
+      <div class="ask">3. "대선 / 총선 / 지선"은 각각 무슨 선거의 줄임말일까요? <span class="en-sub">What do these abbreviations mean?</span></div>
+      <details><summary>정답 보기</summary><p>대선 = 대통령 선거 / 총선 = 국회의원 총선거 / 지선 = 지방선거</p></details>
+    </div>
+  </div>
+
+  <!-- 이야기해 봐요 -->
+  <div class="talk">
+    <h3>🎤 이야기해 봐요 · Let's talk</h3>
+    <ul>
+      <li>여러분 나라에서는 몇 살부터 투표할 수 있어요?<span class="en"> From what age can you vote in your country?</span></li>
+      <li>여러분 나라에도 "투표 인증샷" 문화가 있어요?<span class="en"> Is there a "voting proof shot" culture where you live?</span></li>
+      <li>선거에서 가장 중요한 것은 무엇이라고 생각해요?<span class="en"> What do you think matters most in an election?</span></li>
+    </ul>
+  </div>
+
+  <footer>한국어 수업 자료, 하님 만듦 · Korean Lesson Material by Hanim<br>출처 참고: 중앙선거관리위원회, 제9회 전국동시지방선거 (2026.6.3)</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>요즘 한국 · Korean Trends & New Words</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Black+Han+Sans&family=Nanum+Myeongjo:wght@400;700;800&display=swap');
+
+  :root{
+    --bg:#fdf6ee;
+    --ink:#241f1a;
+    --soft:#736658;
+    --line:#ecdfcb;
+    --card:#fffdf9;
+    --coral:#e8623b;     /* hot accent */
+    --coral-bg:#fce0d5;
+    --teal:#1f8f86;
+    --teal-bg:#d3ece9;
+    --grape:#7a5bb0;
+    --grape-bg:#e7ddf3;
+    --mustard:#cf9a1e;
+    --mustard-bg:#f7ecca;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Gowun Dodum',sans-serif;
+    font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(#f0e2cc 0.7px, transparent 0.7px);
+    background-size:20px 20px;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 80px;}
+
+  /* HERO */
+  header.hero{text-align:center;padding:58px 0 26px;}
+  .kicker{display:inline-block;background:var(--coral);color:#fff;font-weight:700;font-size:14px;letter-spacing:1px;padding:5px 16px;border-radius:20px;transform:rotate(-2deg);}
+  .hero .kr{font-family:'Black Han Sans',sans-serif;font-size:clamp(46px,9vw,76px);line-height:1;letter-spacing:-1px;margin-top:18px;color:var(--ink);}
+  .hero .kr b{color:var(--coral);}
+  .hero .en{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(18px,3vw,22px);color:var(--soft);margin-top:8px;}
+  .hero .lead{max-width:720px;margin:18px auto 0;font-size:19px;color:var(--soft);}
+  .en-sub{color:var(--soft);font-size:15px;}
+
+  h2.sec{font-family:'Black Han Sans',sans-serif;font-size:32px;margin:54px 0 6px;letter-spacing:-.5px;}
+  h2.sec .en{display:block;font-family:'Fraunces',serif;font-style:italic;font-size:16px;color:var(--soft);font-weight:400;margin-top:2px;}
+
+  .card{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:26px 28px;margin:22px 0;box-shadow:6px 6px 0 #f0e3cf;}
+  .card h3{font-family:'Nanum Myeongjo',serif;font-size:22px;margin-bottom:10px;}
+  .card p{margin-bottom:10px;}
+
+  /* NEWS */
+  .news{background:var(--coral-bg);border:1.5px solid #f0c8b9;border-left:6px solid var(--coral);border-radius:14px;padding:22px 26px;margin:24px 0;}
+  .news .date{font-family:'Fraunces',serif;font-style:italic;color:var(--coral);font-size:15px;letter-spacing:.4px;}
+  .news h3{font-family:'Black Han Sans',sans-serif;font-size:26px;margin:6px 0 10px;letter-spacing:-.5px;}
+
+  /* SLANG CARDS */
+  .slang{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px;}
+  .scard{border-radius:16px;padding:20px 22px;border:1.5px solid var(--line);background:var(--card);position:relative;}
+  .scard .big{font-family:'Black Han Sans',sans-serif;font-size:34px;line-height:1;letter-spacing:-1px;}
+  .scard .eq{font-size:16px;margin-top:8px;font-weight:700;}
+  .scard .mean{color:var(--soft);font-size:14.5px;margin-top:6px;}
+  .s-coral .big{color:var(--coral);}    .s-coral{background:var(--coral-bg);border-color:#f0c8b9;}
+  .s-teal .big{color:var(--teal);}      .s-teal{background:var(--teal-bg);border-color:#bfe0db;}
+  .s-grape .big{color:var(--grape);}    .s-grape{background:var(--grape-bg);border-color:#d6c6ec;}
+  .s-mustard .big{color:var(--mustard);}.s-mustard{background:var(--mustard-bg);border-color:#ecdba6;}
+
+  .callout{background:var(--teal-bg);border:1.5px dashed #a9d4ce;border-radius:14px;padding:18px 22px;margin:20px 0;font-size:16px;}
+  .callout b{color:var(--teal);}
+  .callout.grape{background:var(--grape-bg);border-color:#c9b6e6;}
+  .callout.grape b{color:var(--grape);}
+
+  /* recipe-style formula */
+  .formula{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:18px 0;font-family:'Nanum Myeongjo',serif;}
+  .formula .term{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;font-size:17px;font-weight:700;}
+  .formula .op{font-size:22px;color:var(--coral);font-weight:800;}
+
+  /* NETWORK */
+  .net-wrap{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:18px;margin:22px 0;box-shadow:6px 6px 0 #f0e3cf;overflow-x:auto;}
+  svg{display:block;margin:0 auto;max-width:100%;height:auto;}
+
+  .vocab{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:14px;}
+  .chip{border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;background:var(--card);}
+  .chip .w{font-family:'Nanum Myeongjo',serif;font-weight:700;font-size:17px;}
+  .chip .m{color:var(--soft);font-size:14px;}
+
+  .talk{background:var(--mustard-bg);border:1.5px solid #ecdba6;border-radius:16px;padding:22px 26px;margin:22px 0;}
+  .talk h3{font-family:'Black Han Sans',sans-serif;font-size:23px;color:#a87b14;margin-bottom:10px;letter-spacing:-.5px;}
+  .talk ul{list-style:none;}
+  .talk li{padding:7px 0 7px 26px;position:relative;}
+  .talk li::before{content:"🗣";position:absolute;left:0;}
+  .talk li .en{color:var(--soft);font-size:14.5px;}
+
+  .quiz{background:var(--coral-bg);border:1.5px solid #f0c8b9;border-radius:16px;padding:22px 26px;margin:22px 0;}
+  .quiz h3{font-family:'Black Han Sans',sans-serif;font-size:23px;color:var(--coral);margin-bottom:12px;letter-spacing:-.5px;}
+  .q{margin:14px 0;}
+  .q .ask{font-weight:700;}
+  details{margin-top:6px;background:#fff;border:1px solid #f0c8b9;border-radius:10px;padding:8px 14px;}
+  details summary{cursor:pointer;color:var(--coral);font-size:15px;font-weight:700;}
+  details p{margin-top:8px;font-size:15.5px;}
+
+  footer{text-align:center;color:var(--soft);font-size:14px;margin-top:50px;padding-top:20px;border-top:1px solid var(--line);}
+
+  @media (max-width:680px){
+    body{font-size:16px;}
+    .slang{grid-template-columns:1fr;}
+    .wrap{padding:0 16px 60px;}
+    h2.sec{font-size:27px;}
+  }
+  @media print{
+    body{background:#fff;}
+    .card,.net-wrap{box-shadow:none;}
+    details{display:block;}
+    details summary{display:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="kicker">요즘 한국 · TRENDING NOW</span>
+    <div class="kr">신조어 <b>&</b> 트렌드</div>
+    <div class="en">New Words &amp; What's Hot in Korea</div>
+    <p class="lead">한국 뉴스에 나온 따끈따끈한 신조어! "삼쏘", "깐부", "인증샷"… 요즘 한국 사람들이 진짜 쓰는 말.<br>
+    <span class="en-sub">Fresh slang from Korean headlines — words Koreans actually use right now.</span></p>
+  </header>
+
+  <!-- 뉴스 -->
+  <div class="news">
+    <div class="date">2026. 6. 5.</div>
+    <h3>젠슨 황의 "삼쏘 회동"</h3>
+    <p>엔비디아(NVIDIA) CEO <b>젠슨 황</b>이 한국에 왔어요. 한국 대기업 회장들과 <b>삼겹살에 소주</b>를 먹는 "<b>삼쏘 회동</b>"을 했어요. 작년에는 치킨집에서 만난 "<b>깐부 회동</b>"이 화제였는데, 이번엔 삼겹살집이에요!</p>
+    <p class="en-sub">NVIDIA CEO Jensen Huang visited Korea and met top company chairmen over pork belly and soju — a "삼쏘 회동." Last year's chicken-restaurant "깐부 회동" went viral; this time it's a pork-belly place.</p>
+  </div>
+
+  <!-- 줄임말 문화 -->
+  <h2 class="sec">① 한국의 줄임말 문화 <span class="en">Korea loves abbreviations</span></h2>
+  <p>한국 사람들은 긴 말을 <b>줄여서</b> 말하는 걸 좋아해요. 특히 <b>음식 + 술</b> 조합은 거의 다 줄임말이 있어요!<br>
+  <span class="en-sub">Koreans love shortening long phrases — especially food + drink combos.</span></p>
+
+  <div class="slang">
+    <div class="scard s-coral">
+      <div class="big">삼쏘</div>
+      <div class="eq">삼겹살 + 소주</div>
+      <div class="mean">pork belly + soju · "삼소"라고도 써요</div>
+    </div>
+    <div class="scard s-teal">
+      <div class="big">소맥</div>
+      <div class="eq">소주 + 맥주</div>
+      <div class="mean">soju + beer (mixed together)</div>
+    </div>
+    <div class="scard s-mustard">
+      <div class="big">치맥</div>
+      <div class="eq">치킨 + 맥주</div>
+      <div class="mean">fried chicken + beer</div>
+    </div>
+    <div class="scard s-grape">
+      <div class="big">인증샷</div>
+      <div class="eq">인증 + 샷(shot)</div>
+      <div class="mean">a photo to "prove" you were there</div>
+    </div>
+  </div>
+
+  <div class="callout">💡 <b>패턴 발견!</b> — 음식 한 글자 + 술 한 글자 = 줄임말. 삼겹살의 "<b>삼</b>" + 소주의 "<b>쏘</b>" = <b>삼쏘</b>. 치킨의 "<b>치</b>" + 맥주의 "<b>맥</b>" = <b>치맥</b>!<br>
+  <span class="en-sub">Pattern: first syllable of the food + first syllable of the drink. Try making your own!</span></div>
+
+  <!-- 깐부 -->
+  <h2 class="sec">② 깐부 — 드라마에서 나온 신조어 <span class="en">"Kkanbu" — slang from a drama</span></h2>
+  <div class="card">
+    <h3>깐부 = 아주 친한 친구, 한 편 <span class="en-sub">a close buddy / teammate who shares everything</span></h3>
+    <p><b>깐부</b>는 넷플릭스 드라마 <b>〈오징어 게임〉</b>에서 유명해진 말이에요. 어렸을 때 구슬치기 같은 놀이를 같이 하는 <b>"단짝"</b>을 뜻해요. 깐부끼리는 가진 걸 나눠요.</p>
+    <p class="en-sub">"Kkanbu" became famous from Netflix's <i>Squid Game</i>. It means a childhood partner you share everything with.</p>
+    <div class="callout grape">🎬 그래서 젠슨 황이 한국 회장들과 친하게 만난 걸 "<b>깐부 회동</b>"이라고 불렀어요 — "절친 모임" 같은 느낌!<br>
+    <span class="en-sub">So Jensen Huang's friendly meeting with Korean chairmen was nicknamed "깐부 회동" — like a "best-buddy gathering."</span></div>
+  </div>
+
+  <!-- 회동 -->
+  <h2 class="sec">③ 회동 (會同) — 뉴스에 자주 나오는 단어 <span class="en">"Hoedong" — a news word</span></h2>
+  <div class="card">
+    <p><b>회동</b>은 중요한 사람들이 <b>만나는 것</b>을 말해요. 뉴스에서 정치인, 기업 회장들이 만날 때 써요.<br>
+    <span class="en-sub">회동 means an important meeting/gathering — used in news for politicians and executives.</span></p>
+    <div class="formula">
+      <span class="term">삼쏘</span><span class="op">+</span><span class="term">회동</span><span class="op">=</span><span class="term" style="background:var(--coral-bg);border-color:var(--coral);color:var(--coral)">삼쏘 회동</span>
+    </div>
+    <div class="formula">
+      <span class="term">깐부</span><span class="op">+</span><span class="term">회동</span><span class="op">=</span><span class="term" style="background:var(--grape-bg);border-color:var(--grape);color:var(--grape)">깐부 회동</span>
+    </div>
+  </div>
+
+  <!-- 의미망 -->
+  <h2 class="sec">④ 의미망: 신조어 단어 지도 <span class="en">Semantic network: connecting the words</span></h2>
+  <p>새 단어는 따로 외우면 금방 잊어요. <b>연결</b>해서 기억하면 오래 남아요.<br>
+  <span class="en-sub">Connect new words into a web — you'll remember them far longer.</span></p>
+
+  <div class="net-wrap">
+    <svg viewBox="0 0 760 540" role="img" aria-label="신조어 의미망">
+      <defs>
+        <style>
+          .edge{stroke:#e2d3bd;stroke-width:2;}
+          .hub{font-family:'Black Han Sans',sans-serif;}
+          .lbl{font-family:'Gowun Dodum',sans-serif;}
+          .en{font-family:'Fraunces',serif;font-style:italic;fill:#9a8d7c;}
+        </style>
+      </defs>
+
+      <!-- edges from center -->
+      <line class="edge" x1="380" y1="270" x2="380" y2="95"/>
+      <line class="edge" x1="380" y1="270" x2="150" y2="180"/>
+      <line class="edge" x1="380" y1="270" x2="150" y2="395"/>
+      <line class="edge" x1="380" y1="270" x2="610" y2="180"/>
+      <line class="edge" x1="380" y1="270" x2="610" y2="395"/>
+
+      <!-- center -->
+      <circle cx="380" cy="270" r="62" fill="#fce0d5" stroke="#e8623b" stroke-width="2.5"/>
+      <text class="hub" x="380" y="266" text-anchor="middle" font-size="24" fill="#e8623b">줄임말</text>
+      <text class="en" x="380" y="290" text-anchor="middle" font-size="12">abbreviations</text>
+
+      <!-- top: 음식+술 -->
+      <rect x="296" y="44" width="168" height="60" rx="14" fill="#f7ecca" stroke="#cf9a1e" stroke-width="1.5"/>
+      <text class="hub" x="380" y="70" text-anchor="middle" font-size="17" fill="#a87b14">음식 + 술</text>
+      <text class="en" x="380" y="90" text-anchor="middle" font-size="11">food + drink</text>
+
+      <!-- left top: 삼쏘 -->
+      <rect x="60" y="150" width="150" height="60" rx="14" fill="#fce0d5" stroke="#e8623b" stroke-width="1.5"/>
+      <text class="hub" x="135" y="176" text-anchor="middle" font-size="18" fill="#e8623b">삼쏘 · 소맥</text>
+      <text class="en" x="135" y="195" text-anchor="middle" font-size="11">pork belly+soju</text>
+
+      <!-- left bottom: 치맥 -->
+      <rect x="60" y="365" width="150" height="60" rx="14" fill="#d3ece9" stroke="#1f8f86" stroke-width="1.5"/>
+      <text class="hub" x="135" y="391" text-anchor="middle" font-size="18" fill="#1f8f86">치맥</text>
+      <text class="en" x="135" y="410" text-anchor="middle" font-size="11">chicken + beer</text>
+
+      <!-- right top: 깐부 -->
+      <rect x="552" y="150" width="156" height="60" rx="14" fill="#e7ddf3" stroke="#7a5bb0" stroke-width="1.5"/>
+      <text class="hub" x="630" y="176" text-anchor="middle" font-size="18" fill="#7a5bb0">깐부</text>
+      <text class="en" x="630" y="195" text-anchor="middle" font-size="11">close buddy (드라마)</text>
+
+      <!-- right bottom: 회동/인증샷 -->
+      <rect x="552" y="365" width="156" height="60" rx="14" fill="#f7ecca" stroke="#cf9a1e" stroke-width="1.5"/>
+      <text class="hub" x="630" y="391" text-anchor="middle" font-size="16" fill="#a87b14">회동 · 인증샷</text>
+      <text class="en" x="630" y="410" text-anchor="middle" font-size="11">meeting · proof shot</text>
+
+      <!-- bottom leaf -->
+      <text class="lbl" x="380" y="490" text-anchor="middle" font-size="14" fill="#736658">삼겹살 · 소주 · 맥주 · 치킨 · 회식</text>
+      <text class="en" x="380" y="512" text-anchor="middle" font-size="12">pork belly · soju · beer · chicken · company dinner</text>
+    </svg>
+  </div>
+
+  <div class="vocab">
+    <div class="chip"><div class="w">삼겹살</div><div class="m">pork belly (Korean BBQ)</div></div>
+    <div class="chip"><div class="w">소주 (燒酒)</div><div class="m">soju (clear liquor)</div></div>
+    <div class="chip"><div class="w">맥주 (麥酒)</div><div class="m">beer</div></div>
+    <div class="chip"><div class="w">회식 (會食)</div><div class="m">company/team dinner</div></div>
+    <div class="chip"><div class="w">회동 (會同)</div><div class="m">important meeting</div></div>
+    <div class="chip"><div class="w">깐부</div><div class="m">close buddy / teammate</div></div>
+    <div class="chip"><div class="w">인증샷</div><div class="m">proof photo</div></div>
+    <div class="chip"><div class="w">대기업 (大企業)</div><div class="m">big conglomerate</div></div>
+    <div class="chip"><div class="w">화제 (話題)</div><div class="m">hot topic / talk of the town</div></div>
+  </div>
+
+  <!-- 퀴즈 -->
+  <div class="quiz">
+    <h3>🅾️ 미니 퀴즈 · Mini Quiz</h3>
+    <div class="q">
+      <div class="ask">1. "삼쏘"는 무엇과 무엇의 줄임말일까요? <span class="en-sub">What two words make 삼쏘?</span></div>
+      <details><summary>정답 보기</summary><p>삼겹살 + 소주! (음식 한 글자 + 술 한 글자)</p></details>
+    </div>
+    <div class="q">
+      <div class="ask">2. "깐부"는 어느 드라마에서 유명해졌어요? <span class="en-sub">Which drama made 깐부 famous?</span></div>
+      <details><summary>정답 보기</summary><p>〈오징어 게임〉(Squid Game) — "아주 친한 친구, 단짝"이라는 뜻이에요.</p></details>
+    </div>
+    <div class="q">
+      <div class="ask">3. "치킨 + 맥주"는 줄여서 뭐라고 할까요? <span class="en-sub">How do you shorten chicken + beer?</span></div>
+      <details><summary>정답 보기</summary><p>치맥! 그럼 "피자 + 맥주"는? → 피맥 😎</p></details>
+    </div>
+  </div>
+
+  <!-- 이야기해 봐요 -->
+  <div class="talk">
+    <h3>🎤 이야기해 봐요 · Let's talk</h3>
+    <ul>
+      <li>여러분 나라에도 음식 + 음료 줄임말이 있어요?<span class="en"> Does your country have food+drink abbreviations?</span></li>
+      <li>여러분의 "깐부"는 누구예요?<span class="en"> Who is your "kkanbu" (best buddy)?</span></li>
+      <li>좋아하는 한국 음식 + 음료 조합으로 새 줄임말을 만들어 보세요!<span class="en"> Invent your own abbreviation from a Korean food + drink combo!</span></li>
+    </ul>
+  </div>
+
+  <footer>한국어 수업 자료 · Korean Lesson Material<br>참고: 젠슨 황 방한 "삼쏘 회동" 보도 (2026.6) · 〈오징어 게임〉</footer>
+</div>
+</body>
+</html>
