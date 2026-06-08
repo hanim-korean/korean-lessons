@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appearance Flashcards — 제3 과: 외모 & 색깔 + 은/는</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', -apple-system, sans-serif;
+    background: linear-gradient(135deg, #ffe5ec 0%, #fff0f5 50%, #e0f2ff 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+    color: #2d2d2d;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 24px;
+    max-width: 600px;
+  }
+  h1 {
+    font-size: 1.6rem;
+    color: #c2185b;
+    margin-bottom: 6px;
+  }
+  .subtitle {
+    color: #666;
+    font-size: 0.95rem;
+  }
+  .controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .deck-btn {
+    background: white;
+    border: 2px solid #f8bbd0;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #c2185b;
+    font-weight: 500;
+  }
+  .deck-btn.active {
+    background: #c2185b;
+    color: white;
+    border-color: #c2185b;
+  }
+  .deck-btn:hover:not(.active) {
+    background: #fce4ec;
+  }
+  .progress {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+  .card-container {
+    perspective: 1000px;
+    width: 100%;
+    max-width: 420px;
+    height: 320px;
+    margin-bottom: 24px;
+  }
+  .card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+  }
+  .card.flipped { transform: rotateY(180deg); }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(194, 24, 91, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+  }
+  .card-front {
+    background: white;
+  }
+  .card-back {
+    background: linear-gradient(135deg, #fff0f5, #ffe0ec);
+    transform: rotateY(180deg);
+  }
+  .korean {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #c2185b;
+    margin-bottom: 12px;
+  }
+  .romanization {
+    font-size: 1rem;
+    color: #999;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+  .english {
+    font-size: 1.4rem;
+    color: #444;
+    margin-bottom: 16px;
+  }
+  .example {
+    font-size: 0.95rem;
+    color: #555;
+    background: rgba(255,255,255,0.7);
+    padding: 10px 14px;
+    border-radius: 10px;
+    line-height: 1.5;
+    max-width: 100%;
+  }
+  .example-en {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 4px;
+    font-style: italic;
+  }
+  .hint {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 18px;
+  }
+  .nav {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .nav-btn {
+    background: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.2s;
+    color: #c2185b;
+  }
+  .nav-btn:hover { background: #fce4ec; transform: translateY(-2px); }
+  .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+  .shuffle-btn {
+    background: #c2185b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .shuffle-btn:hover { background: #a01548; }
+  .footer {
+    margin-top: 28px;
+    color: #888;
+    font-size: 0.85rem;
+    text-align: center;
+    max-width: 480px;
+    line-height: 1.6;
+  }
+  .badge {
+    display: inline-block;
+    background: #f8bbd0;
+    color: #880e4f;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎴 Appearance Flashcards</h1>
+  <p class="subtitle">Sejong Korean 2, Lesson 03 · 외모 & 색깔 + -은/-는</p>
+</header>
+
+<div class="controls">
+  <button class="deck-btn active" data-deck="all">전체 (All)</button>
+  <button class="deck-btn" data-deck="appearance">외모 Appearance</button>
+  <button class="deck-btn" data-deck="color">색깔 Colors</button>
+  <button class="deck-btn" data-deck="grammar">문법 -은/-는</button>
+</div>
+
+<div class="progress" id="progress">1 / 1</div>
+
+<div class="card-container">
+  <div class="card" id="card" onclick="flipCard()">
+    <div class="card-face card-front" id="frontFace"></div>
+    <div class="card-face card-back" id="backFace"></div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nav-btn" id="prevBtn" onclick="prev()">←</button>
+  <button class="shuffle-btn" onclick="shuffle()">🔀 섞기</button>
+  <button class="nav-btn" id="nextBtn" onclick="next()">→</button>
+</div>
+
+<div class="footer">
+  💡 카드를 탭하면 뒤집혀요. ← → 키로 이동, 스페이스바로 뒤집기도 가능해요.<br>
+  Tap a card to flip. Use ← → to navigate, spacebar to flip.
+</div>
+
+<script>
+  // 카드 데이터 — K-pop / 드라마 맥락 반영한 예문
+  const allCards = [
+    // 외모 Appearance
+    { deck: 'appearance', front: '멋있다', back: 'handsome / cool', example: '제 남자친구는 아주 멋있어요.', exampleEn: 'My boyfriend is very handsome.' },
+    { deck: 'appearance', front: '귀엽다', back: 'cute', example: '그 강아지는 정말 귀여워요.', exampleEn: 'That puppy is really cute.' },
+    { deck: 'appearance', front: '얼굴', back: 'face', example: '얼굴이 작아요.', exampleEn: '(Their) face is small.' },
+    { deck: 'appearance', front: '키가 크다', back: 'tall', example: '저 가수는 키가 커요.', exampleEn: 'That singer is tall.' },
+    { deck: 'appearance', front: '키가 작다', back: 'short (height)', example: '제 동생은 키가 작아요.', exampleEn: 'My younger sibling is short.' },
+    { deck: 'appearance', front: '머리가 길다', back: 'have long hair', example: '제 친구는 머리가 길어요.', exampleEn: 'My friend has long hair.' },
+    { deck: 'appearance', front: '머리가 짧다', back: 'have short hair', example: '그 사람은 머리가 짧아요.', exampleEn: 'That person has short hair.' },
+
+    // 색깔 Colors
+    { deck: 'color', front: '까만색', back: 'black ⚫', example: '저는 까만색 바지를 입고 있어요.', exampleEn: "I'm wearing black pants." },
+    { deck: 'color', front: '하얀색', back: 'white ⚪', example: '하얀색 모자를 좋아해요.', exampleEn: 'I like white hats.' },
+    { deck: 'color', front: '빨간색', back: 'red 🔴', example: '제 가방은 빨간색이에요.', exampleEn: 'My bag is red.' },
+    { deck: 'color', front: '파란색', back: 'blue 🔵', example: '파란색 티셔츠를 자주 입어요.', exampleEn: 'I often wear blue T-shirts.' },
+    { deck: 'color', front: '노란색', back: 'yellow 🟡', example: '노란색 꽃이 예뻐요.', exampleEn: 'Yellow flowers are pretty.' },
+    { deck: 'color', front: '분홍색', back: 'pink 🌸', example: '분홍색을 좋아하는 사람이 많아요.', exampleEn: 'Many people like pink.' },
+
+    // 문법 -은/-는 (관형형)
+    { deck: 'grammar', front: '크다 → ?', back: '큰 (Adjective + ㄴ)', example: '키가 큰 사람이 멋있어요.', exampleEn: 'A tall person is cool.' },
+    { deck: 'grammar', front: '작다 → ?', back: '작은 (Adjective + 은, 받침 O)', example: '얼굴이 작은 가수예요.', exampleEn: '(They are) a singer with a small face.' },
+    { deck: 'grammar', front: '길다 → ?', back: '긴 (ㄹ 탈락 + ㄴ)', example: '머리가 긴 사람이 좋아요.', exampleEn: 'I like people with long hair.' },
+    { deck: 'grammar', front: '짧다 → ?', back: '짧은 (받침 O)', example: '머리가 짧은 친구예요.', exampleEn: '(They are) a friend with short hair.' },
+    { deck: 'grammar', front: '예쁘다 → ?', back: '예쁜 (받침 X → ㄴ)', example: '예쁜 옷을 사고 싶어요.', exampleEn: 'I want to buy pretty clothes.' },
+    { deck: 'grammar', front: '먹다 → ?', back: '먹는 (Verb + 는)', example: '김밥을 먹는 사람이 누구예요?', exampleEn: 'Who is the person eating gimbap?' },
+    { deck: 'grammar', front: '듣다 → ?', back: '듣는 (Verb + 는)', example: '제가 듣는 음악은 K-pop이에요.', exampleEn: 'The music I listen to is K-pop.' },
+    { deck: 'grammar', front: '살다 → ?', back: '사는 (ㄹ 탈락 + 는)', example: '서울에 사는 친구가 있어요.', exampleEn: 'I have a friend who lives in Seoul.' },
+    { deck: 'grammar', front: '있다 → ?', back: '있는 (예외! verb-like)', example: '시간이 있는 날에 만나요.', exampleEn: "Let's meet on a day when I have time." },
+    { deck: 'grammar', front: '없다 → ?', back: '없는 (예외! verb-like)', example: '돈이 없는 학생이에요.', exampleEn: '(I am) a student with no money.' },
+  ];
+
+  let currentDeck = 'all';
+  let cards = [...allCards];
+  let index = 0;
+
+  function render() {
+    const c = cards[index];
+    const front = document.getElementById('frontFace');
+    const back = document.getElementById('backFace');
+    const card = document.getElementById('card');
+
+    // Reset flip
+    card.classList.remove('flipped');
+
+    const badgeMap = {
+      appearance: '외모 Appearance',
+      color: '색깔 Color',
+      grammar: '문법 -은/-는'
+    };
+
+    front.innerHTML = `
+      <span class="badge">${badgeMap[c.deck]}</span>
+      <div class="korean">${c.front}</div>
+      <div class="hint">탭해서 뜻 보기 · Tap to flip</div>
+    `;
+    back.innerHTML = `
+      <div class="english">${c.back}</div>
+      <div class="example">${c.example}<div class="example-en">${c.exampleEn}</div></div>
+    `;
+
+    document.getElementById('progress').textContent = `${index + 1} / ${cards.length}`;
+    document.getElementById('prevBtn').disabled = index === 0;
+    document.getElementById('nextBtn').disabled = index === cards.length - 1;
+  }
+
+  function flipCard() {
+    document.getElementById('card').classList.toggle('flipped');
+  }
+
+  function next() {
+    if (index < cards.length - 1) { index++; render(); }
+  }
+  function prev() {
+    if (index > 0) { index--; render(); }
+  }
+  function shuffle() {
+    for (let i = cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+    index = 0;
+    render();
+  }
+
+  // Deck filter
+  document.querySelectorAll('.deck-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.deck-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentDeck = btn.dataset.deck;
+      cards = currentDeck === 'all'
+        ? [...allCards]
+        : allCards.filter(c => c.deck === currentDeck);
+      index = 0;
+      render();
+    });
+  });
+
+  // Keyboard support
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') next();
+    else if (e.key === 'ArrowLeft') prev();
+    else if (e.key === ' ') { e.preventDefault(); flipCard(); }
+  });
+
+  render();
+</script>
+
+</body>
+</html>
