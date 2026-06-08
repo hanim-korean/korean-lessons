@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hanim · -어/-아 보다 플래시카드 · 세종학당 한국어2 02과</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(160deg, #eef4ee 0%, #d4e6d6 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 14px 40px;
+    color: #3a2a30;
+  }
+  header { text-align: center; margin-bottom: 14px; }
+  h1 { font-size: 1.5rem; color: #46694f; letter-spacing: -0.5px; }
+  .sub { font-size: 0.95rem; color: #5f7a66; margin-top: 4px; }
+
+  .decks {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    justify-content: center; margin-bottom: 16px;
+  }
+  .deck-btn {
+    border: 1.5px solid #5f8b6e; background: #fff; color: #5f8b6e;
+    padding: 7px 14px; border-radius: 999px; font-size: 0.9rem;
+    cursor: pointer; transition: .15s; font-weight: 600;
+  }
+  .deck-btn.active { background: #5f8b6e; color: #fff; }
+
+  .card-wrap { perspective: 1200px; width: 100%; max-width: 420px; }
+  .card {
+    position: relative; width: 100%; min-height: 320px;
+    transform-style: preserve-3d; transition: transform .5s;
+    cursor: pointer;
+  }
+  .card.flipped { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0; backface-visibility: hidden;
+    background: #fff; border-radius: 18px;
+    box-shadow: 0 8px 26px rgba(70,105,79,.18);
+    padding: 28px 24px; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+  }
+  .face.back { transform: rotateY(180deg); justify-content: flex-start; }
+
+  .verb { font-size: 2.4rem; font-weight: 700; color: #2a2a2a; }
+  .arrow { font-size: 1.6rem; color: #5f8b6e; margin: 10px 0; }
+  .verb-mean { font-size: 1.1rem; color: #777; margin-top: 6px; }
+  .tap-hint { font-size: 0.8rem; color: #bbb; margin-top: 18px; }
+
+  .answer { font-size: 2.2rem; font-weight: 700; color: #46694f; margin-top: 6px; }
+  .rule {
+    display: inline-block; margin-top: 12px; padding: 4px 12px;
+    background: #eef4ee; color: #46694f; border-radius: 8px;
+    font-size: 0.85rem; font-weight: 600;
+  }
+  .ex {
+    margin-top: 20px; font-size: 1.25rem; color: #333; line-height: 1.5;
+    border-top: 1px dashed #cfe2d2; padding-top: 16px; width: 100%;
+  }
+  .ex-en { font-size: 0.95rem; color: #888; margin-top: 6px; }
+
+  .nav { display: flex; align-items: center; gap: 16px; margin-top: 20px; }
+  .nav button {
+    border: none; background: #5f8b6e; color: #fff;
+    width: 48px; height: 48px; border-radius: 50%; font-size: 1.3rem;
+    cursor: pointer; box-shadow: 0 4px 10px rgba(70,105,79,.25);
+  }
+  .nav button:disabled { background: #aec9b4; cursor: default; box-shadow: none; }
+  .progress { font-size: 1rem; color: #5f7a66; min-width: 64px; text-align: center; }
+
+  .tools { margin-top: 14px; display: flex; gap: 10px; }
+  .tools button {
+    border: 1.5px solid #5f8b6e; background: #fff; color: #5f8b6e;
+    padding: 7px 16px; border-radius: 999px; font-size: 0.85rem;
+    cursor: pointer; font-weight: 600;
+  }
+  .note { margin-top: 22px; font-size: 0.8rem; color: #6b8472; text-align: center; max-width: 420px; line-height: 1.5; }
+</style>
+</head>
+<body>
+<header>
+  <h1>「-어 / -아 보다」 한번 해 보세요!</h1>
+  <div class="sub">try doing ~ · 세종학당 2권 2과 · 하님 만듦</div>
+</header>
+
+<div class="decks" id="decks">
+  <button class="deck-btn active" data-deck="all">전체 All</button>
+  <button class="deck-btn" data-deck="textbook">교재 2과</button>
+  <button class="deck-btn" data-deck="everyday">일상 빈출</button>
+  <button class="deck-btn" data-deck="irregular">불규칙</button>
+</div>
+
+<div class="card-wrap">
+  <div class="card" id="card">
+    <div class="face front">
+      <div class="verb" id="verb"></div>
+      <div class="arrow">→ -어/-아 보다 ?</div>
+      <div class="verb-mean" id="verbMean"></div>
+      <div class="tap-hint">탭하면 정답이 보여요 · tap to flip</div>
+    </div>
+    <div class="face back">
+      <div class="answer" id="answer"></div>
+      <div class="rule" id="rule"></div>
+      <div class="ex" id="ex"></div>
+      <div class="ex-en" id="exEn"></div>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <button id="prev">‹</button>
+  <div class="progress" id="progress"></div>
+  <button id="next">›</button>
+</div>
+
+<div class="tools">
+  <button id="shuffle">🔀 섞기</button>
+  <button id="reset">↺ 처음으로</button>
+</div>
+
+<div class="note">
+  외우려 하지 말고, 한번 소리 내어 읽어 보세요. 같은 표현을 여러 상황에서 만나면 자연스러워져요 💛
+</div>
+
+<script>
+const allCards = [
+  // ===== 교재 2과 =====
+  { deck:'textbook', verb:'가다', mean:'go', answer:'가 보세요', rule:'ㅏ → 모음 합쳐짐 (가아→가)', ex:'인사동에 가 보세요.', exEn:'Try going to Insa-dong.' },
+  { deck:'textbook', verb:'오다', mean:'come', answer:'와 보세요', rule:'ㅗ + 어 → 와', ex:'한국에 또 와 보세요.', exEn:'Try coming to Korea again.' },
+  { deck:'textbook', verb:'먹다', mean:'eat', answer:'먹어 보세요', rule:'ㅓ → -어', ex:'호떡을 먹어 보세요.', exEn:'Try eating hotteok.' },
+  { deck:'textbook', verb:'입다', mean:'wear', answer:'입어 보세요', rule:'ㅣ → -어', ex:'이 옷을 한번 입어 보세요.', exEn:'Try wearing these clothes.' },
+  { deck:'textbook', verb:'찾다', mean:'look for / find', answer:'찾아 보세요', rule:'ㅏ → -아', ex:'인터넷에서 찾아 보세요.', exEn:'Try looking it up online.' },
+  { deck:'textbook', verb:'배우다', mean:'learn', answer:'배워 보세요', rule:'ㅜ + 어 → 워', ex:'한국어를 배워 보세요.', exEn:'Try learning Korean.' },
+  { deck:'textbook', verb:'신다', mean:'put on (shoes)', answer:'신어 보세요', rule:'ㅣ → -어', ex:'이 신발을 신어 보세요.', exEn:'Try putting on these shoes.' },
+  { deck:'textbook', verb:'수영하다', mean:'swim', answer:'수영해 보세요', rule:'-하다 → -해 보세요', ex:'바다에서 수영해 보세요.', exEn:'Try swimming in the sea.' },
+  { deck:'textbook', verb:'공부하다', mean:'study', answer:'공부해 보세요', rule:'-하다 → -해 보세요', ex:'매일 조금씩 공부해 보세요.', exEn:'Try studying a little every day.' },
+
+  // ===== 일상 빈출 =====
+  { deck:'everyday', verb:'마시다', mean:'drink', answer:'마셔 보세요', rule:'ㅣ + 어 → 여 (마시→마셔)', ex:'한국 차를 마셔 보세요.', exEn:'Try drinking Korean tea.' },
+  { deck:'everyday', verb:'타다', mean:'ride / take', answer:'타 보세요', rule:'ㅏ → 모음 합쳐짐', ex:'KTX를 타 보세요.', exEn:'Try taking the KTX.' },
+  { deck:'everyday', verb:'만들다', mean:'make', answer:'만들어 보세요', rule:'ㅡ → -어 (ㄹ 받침 유지)', ex:'김밥을 만들어 보세요.', exEn:'Try making gimbap.' },
+  { deck:'everyday', verb:'읽다', mean:'read', answer:'읽어 보세요', rule:'ㅣ → -어', ex:'이 책을 읽어 보세요.', exEn:'Try reading this book.' },
+  { deck:'everyday', verb:'쓰다', mean:'write', answer:'써 보세요', rule:'ㅡ 탈락 (쓰+어→써)', ex:'한국어로 편지를 써 보세요.', exEn:'Try writing a letter in Korean.' },
+  { deck:'everyday', verb:'만나다', mean:'meet', answer:'만나 보세요', rule:'ㅏ → 모음 합쳐짐', ex:'한국 친구를 만나 보세요.', exEn:'Try meeting a Korean friend.' },
+  { deck:'everyday', verb:'기다리다', mean:'wait', answer:'기다려 보세요', rule:'ㅣ + 어 → 여 (리→려)', ex:'조금만 기다려 보세요.', exEn:'Try waiting just a moment.' },
+  { deck:'everyday', verb:'시키다', mean:'order (food)', answer:'시켜 보세요', rule:'ㅣ + 어 → 여 (키→켜)', ex:'떡볶이를 시켜 보세요.', exEn:'Try ordering tteokbokki.' },
+  { deck:'everyday', verb:'신청하다', mean:'apply / sign up', answer:'신청해 보세요', rule:'-하다 → -해 보세요', ex:'한국어 수업을 신청해 보세요.', exEn:'Try signing up for a Korean class.' },
+
+  // ===== 불규칙 =====
+  { deck:'irregular', verb:'걷다', mean:'walk', answer:'걸어 보세요', rule:'ㄷ 불규칙 (걷→걸)', ex:'한강을 걸어 보세요.', exEn:'Try walking along the Han River.' },
+  { deck:'irregular', verb:'듣다', mean:'listen', answer:'들어 보세요', rule:'ㄷ 불규칙 (듣→들)', ex:'이 노래를 들어 보세요.', exEn:'Try listening to this song.' },
+  { deck:'irregular', verb:'짓다', mean:'build / make (a name)', answer:'지어 보세요', rule:'ㅅ 불규칙 (짓→지)', ex:'한국 이름을 지어 보세요.', exEn:'Try making a Korean name.' },
+  { deck:'irregular', verb:'부르다', mean:'call / sing', answer:'불러 보세요', rule:'르 불규칙 (부르→불러)', ex:'노래를 불러 보세요.', exEn:'Try singing a song.' },
+  { deck:'irregular', verb:'굽다', mean:'grill / roast', answer:'구워 보세요', rule:'ㅂ 불규칙 (굽→구워)', ex:'고기를 구워 보세요.', exEn:'Try grilling the meat.' },
+  { deck:'irregular', verb:'눕다', mean:'lie down', answer:'누워 보세요', rule:'ㅂ 불규칙 (눕→누워)', ex:'여기 잠깐 누워 보세요.', exEn:'Try lying down here for a bit.' },
+];
+
+let currentDeck = 'all';
+let cards = [...allCards];
+let index = 0;
+
+const card = document.getElementById('card');
+const verbEl = document.getElementById('verb');
+const verbMeanEl = document.getElementById('verbMean');
+const answerEl = document.getElementById('answer');
+const ruleEl = document.getElementById('rule');
+const exEl = document.getElementById('ex');
+const exEnEl = document.getElementById('exEn');
+const progressEl = document.getElementById('progress');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+
+function render() {
+  card.classList.remove('flipped');
+  const c = cards[index];
+  verbEl.textContent = c.verb;
+  verbMeanEl.textContent = c.mean;
+  answerEl.textContent = c.answer;
+  ruleEl.textContent = c.rule;
+  exEl.textContent = c.ex;
+  exEnEl.textContent = c.exEn;
+  progressEl.textContent = (index + 1) + ' / ' + cards.length;
+  prevBtn.disabled = index === 0;
+  nextBtn.disabled = index === cards.length - 1;
+}
+function flipCard() { card.classList.toggle('flipped'); }
+function next() { if (index < cards.length - 1) { index++; render(); } }
+function prev() { if (index > 0) { index--; render(); } }
+
+card.addEventListener('click', flipCard);
+nextBtn.addEventListener('click', next);
+prevBtn.addEventListener('click', prev);
+
+document.querySelectorAll('.deck-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.deck-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentDeck = btn.dataset.deck;
+    cards = currentDeck === 'all' ? [...allCards] : allCards.filter(c => c.deck === currentDeck);
+    index = 0;
+    render();
+  });
+});
+
+document.getElementById('shuffle').addEventListener('click', () => {
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+  index = 0; render();
+});
+document.getElementById('reset').addEventListener('click', () => {
+  cards = currentDeck === 'all' ? [...allCards] : allCards.filter(c => c.deck === currentDeck);
+  index = 0; render();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') next();
+  else if (e.key === 'ArrowLeft') prev();
+  else if (e.key === ' ') { e.preventDefault(); flipCard(); }
+});
+
+render();
+</script>
+</body>
+</html>
