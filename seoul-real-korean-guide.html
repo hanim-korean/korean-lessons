@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서울 여행 실전 회화 가이드 · Real Seoul Korean · 하님 씀</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;800&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBFAF6;
+    --ink:#20262E;
+    --ink-soft:#5A626C;
+    --paper:#FFFFFF;
+    --panel:#F1ECE2;
+    --line:rgba(32,38,46,.12);
+    --book:#9AA1AC;       /* 교과서: 맞지만 밋밋한 회색 */
+    --real:#DD5B36;       /* 진짜 서울말: 살아있는 감색(persimmon) */
+    --real-soft:#FCEDE7;
+    --teal:#2E7D74;       /* 리액션·완충 */
+    --teal-soft:#E4F0EE;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Gowun Dodum","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 18px 72px;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:48px 0 28px;}
+  .kicker{
+    font-family:"Gothic A1",sans-serif;font-weight:700;
+    font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--real);margin:0 0 14px;
+  }
+  h1{
+    font-family:"Gothic A1",sans-serif;font-weight:800;
+    font-size:34px;line-height:1.22;margin:0 0 14px;letter-spacing:-.01em;
+  }
+  .hero .lead{font-size:18px;color:var(--ink-soft);margin:0;max-width:50ch;}
+  .hero .en{color:#8A8F97;font-size:14px;}
+
+  .layers{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;
+  }
+  .layer{
+    flex:1 1 180px;background:var(--paper);border:1px solid var(--line);
+    border-radius:var(--radius);padding:14px 16px;
+  }
+  .layer .n{font-family:"Gothic A1",sans-serif;font-weight:800;color:var(--real);font-size:13px;}
+  .layer .t{font-family:"Gothic A1",sans-serif;font-weight:700;font-size:16px;margin:2px 0 4px;}
+  .layer .d{font-size:13.5px;color:var(--ink-soft);line-height:1.5;}
+
+  /* ---------- SECTION ---------- */
+  section{margin-top:46px;}
+  .eyebrow{
+    font-family:"Gothic A1",sans-serif;font-weight:700;font-size:12px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin:0 0 8px;
+  }
+  h2{
+    font-family:"Gothic A1",sans-serif;font-weight:800;font-size:25px;
+    margin:0 0 6px;letter-spacing:-.01em;
+  }
+  .sub{color:var(--ink-soft);font-size:15px;margin:0 0 22px;}
+
+  /* ---------- 교과서 → 진짜 (signature) ---------- */
+  .upgrade{display:grid;gap:16px;}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;
+  }
+  .row{display:flex;align-items:baseline;gap:10px;}
+  .tag{
+    font-family:"Gothic A1",sans-serif;font-weight:700;font-size:11px;
+    letter-spacing:.08em;padding:3px 8px;border-radius:999px;flex:none;
+  }
+  .tag.book{background:#EDEEF0;color:var(--book);}
+  .tag.real{background:var(--real-soft);color:var(--real);}
+  .ko-book{color:var(--book);font-size:16px;text-decoration:line-through;text-decoration-color:rgba(154,161,172,.5);}
+  .arrow{color:var(--real);font-size:15px;margin:7px 0 6px 2px;font-family:"Gothic A1",sans-serif;font-weight:700;}
+  .ko-real{color:var(--ink);font-size:18px;font-weight:400;}
+  .ko-real b{color:var(--real);font-weight:400;}
+  .gloss{display:block;color:#8A8F97;font-size:13.5px;margin-top:4px;}
+
+  /* ---------- chips (완충 / 리액션) ---------- */
+  .chips{display:grid;gap:12px;}
+  .chip{
+    background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--teal);
+    border-radius:12px;padding:13px 15px;
+  }
+  .chip .head{font-family:"Gothic A1",sans-serif;font-weight:700;font-size:17px;}
+  .chip .head .en{font-weight:500;color:var(--teal);font-size:13px;margin-left:6px;}
+  .chip .ex{font-size:15px;color:var(--ink);margin-top:5px;}
+  .chip .ex .g{color:#8A8F97;font-size:13px;}
+
+  .react{display:flex;flex-wrap:wrap;gap:10px;}
+  .react .r{
+    background:var(--teal-soft);color:#1f5b54;border-radius:999px;
+    padding:9px 15px;font-size:15.5px;
+  }
+  .react .r small{display:block;color:var(--teal);font-size:11.5px;line-height:1.3;}
+
+  /* ---------- situations (dialogue) ---------- */
+  .situ{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px;margin-top:14px;
+  }
+  .situ h3{
+    font-family:"Gothic A1",sans-serif;font-weight:800;font-size:19px;margin:0 0 3px;
+  }
+  .situ .h-en{color:#8A8F97;font-size:13px;margin:0 0 14px;}
+  .bub-label{
+    font-family:"Gothic A1",sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;margin:14px 0 8px;
+  }
+  .bub-label.staff{color:var(--book);}
+  .bub-label.you{color:var(--real);text-align:right;}
+  .bubbles{display:flex;flex-direction:column;gap:8px;}
+  .bub{max-width:88%;padding:9px 13px;border-radius:14px;font-size:15.5px;line-height:1.5;}
+  .bub .g{display:block;font-size:12.5px;color:#8A8F97;margin-top:2px;}
+  .bub.staff{align-self:flex-start;background:#F0F1F3;color:#454b53;border-bottom-left-radius:5px;}
+  .bub.you{align-self:flex-end;background:var(--real-soft);color:#7d2f17;border-bottom-right-radius:5px;}
+  .bub.you b{color:var(--real);font-weight:700;}
+  .tip{
+    margin-top:14px;background:var(--panel);border-radius:11px;padding:10px 13px;
+    font-size:13.5px;color:#5b5446;
+  }
+  .tip b{color:var(--ink);}
+
+  /* ---------- footer ---------- */
+  footer{
+    margin-top:54px;padding-top:22px;border-top:1px solid var(--line);
+    font-size:13px;color:#8A8F97;text-align:center;line-height:1.7;
+  }
+  footer .site{color:var(--real);font-family:"Gothic A1",sans-serif;font-weight:700;}
+
+  a{color:var(--teal);}
+  :focus-visible{outline:2px solid var(--real);outline-offset:2px;border-radius:4px;}
+
+  /* load reveal — gated for reduced motion */
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(10px);animation:rise .5s ease forwards;}
+    .reveal:nth-child(2){animation-delay:.05s;}
+    @keyframes rise{to{opacity:1;transform:none;}}
+  }
+
+  @media (min-width:600px){
+    body{font-size:17px;}
+    h1{font-size:42px;}
+    h2{font-size:29px;}
+    .hero{padding:60px 0 30px;}
+  }
+
+  @media print{
+    :root{--bg:#fff;}
+    body{font-size:12pt;}
+    .reveal{opacity:1!important;transform:none!important;animation:none!important;}
+    section,.situ,.card,.chip{break-inside:avoid;}
+    .hero{padding:0 0 16px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero reveal">
+    <p class="kicker">서울 실전 회화 · Real Seoul Korean · 하님 만듦</p>
+    <h1>교과서 한국어를<br>진짜 서울말로</h1>
+    <p class="lead">이미 말할 줄 안다면, 다음은 <b style="color:var(--real)">자연스러움</b> 한 스푼을 더해 보세요.<br>
+    <span class="en">When you can already speak, the next layer is sounding natural.</span></p>
+
+    <div class="layers">
+      <div class="layer">
+        <div class="n">01</div>
+        <div class="t">교과서 → 실전</div>
+        <div class="d">맞는 말을 짧고 부드럽게<br><span style="color:#aab0b8">Shorter, softer</span></div>
+      </div>
+      <div class="layer">
+        <div class="n">02</div>
+        <div class="t">맞장구·리액션</div>
+        <div class="d">계속 반응하기<br><span style="color:#aab0b8">Keep reacting</span></div>
+      </div>
+      <div class="layer">
+        <div class="n">03</div>
+        <div class="t">완충 표현</div>
+        <div class="d">말의 윤활유 붙이기<br><span style="color:#aab0b8">Add softeners</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. 교과서 → 진짜 (signature) -->
+  <section class="reveal">
+    <p class="eyebrow">Layer 01</p>
+    <h2>교과서 → 진짜 서울말</h2>
+    <p class="sub">같은 뜻인데, 실전 버전은 더 짧고 부드럽고 빨라요. Same meaning, just lighter.</p>
+
+    <div class="upgrade">
+      <div class="card">
+        <div class="row"><span class="tag book">교과서</span><span class="ko-book">화장실이 어디에 있습니까?</span></div>
+        <div class="arrow">↓</div>
+        <div class="row"><span class="tag real">진짜</span><span class="ko-real"><b>혹시</b> 화장실 어디예요?</span></div>
+        <span class="gloss">Where's the restroom (by any chance)?</span>
+      </div>
+
+      <div class="card">
+        <div class="row"><span class="tag book">교과서</span><span class="ko-book">이것을 주세요.</span></div>
+        <div class="arrow">↓</div>
+        <div class="row"><span class="tag real">진짜</span><span class="ko-real">이거 <b>하나</b> 주세요.</span></div>
+        <span class="gloss">I'll have one of these, please.</span>
+      </div>
+
+      <div class="card">
+        <div class="row"><span class="tag book">교과서</span><span class="ko-book">계산해 주십시오.</span></div>
+        <div class="arrow">↓</div>
+        <div class="row"><span class="tag real">진짜</span><span class="ko-real">계산할게요. <span style="color:#aab0b8">/</span> (카드 내밀며) <b>여기요.</b></span></div>
+        <span class="gloss">I'll pay. / (handing card) Here you go.</span>
+      </div>
+
+      <div class="card">
+        <div class="row"><span class="tag book">교과서</span><span class="ko-book">다시 한번 말씀해 주시겠습니까?</span></div>
+        <div class="arrow">↓</div>
+        <div class="row"><span class="tag real">진짜</span><span class="ko-real"><b>네?</b> <span style="color:#aab0b8">/</span> 다시 한 번 말씀해 주세요. <span style="color:#aab0b8">/</span> 다시 한 번 말씀해 주시겠어요?</span></div>
+        <span class="gloss">Sorry? / Could you say that one more time?</span>
+      </div>
+
+      <div class="card">
+        <div class="row"><span class="tag book">교과서</span><span class="ko-book">얼마입니까?</span></div>
+        <div class="arrow">↓</div>
+        <div class="row"><span class="tag real">진짜</span><span class="ko-real">얼마예요?</span></div>
+        <span class="gloss">How much is it?</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 완충 표현 -->
+  <section class="reveal">
+    <p class="eyebrow">Layer 03 · 윤활유</p>
+    <h2>완충 표현</h2>
+    <p class="sub">이 네 개만 앞뒤에 붙여도 톤이 확 부드러워져요. Four little words that soften everything.</p>
+
+    <div class="chips">
+      <div class="chip">
+        <div class="head">혹시<span class="en">by any chance</span></div>
+        <div class="ex">혹시 이거 매워요? <span class="g">Is this spicy, by any chance?</span></div>
+      </div>
+      <div class="chip">
+        <div class="head">좀<span class="en">a little (softener)</span></div>
+        <div class="ex">물 좀 주세요. <span class="g">Could I get some water?</span></div>
+      </div>
+      <div class="chip">
+        <div class="head">여기요 / 저기요<span class="en">excuse me (to call staff)</span></div>
+        <div class="ex">여기요, 이거 하나 더요. <span class="g">Excuse me — one more of these.</span></div>
+      </div>
+      <div class="chip">
+        <div class="head">잠시만요<span class="en">one sec / let me through</span></div>
+        <div class="ex">잠시만요. <span class="g">Just a moment. (or: coming through, on the subway)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 맞장구 -->
+  <section class="reveal">
+    <p class="eyebrow">Layer 02 · 리액션</p>
+    <h2>맞장구 &amp; 리액션</h2>
+    <p class="sub">한국 사람은 들으면서 계속 반응해요. 가만히 있으면 오히려 어색해요. React, don't just listen.</p>
+
+    <div class="react">
+      <span class="r">아, 진짜요?<small>Oh really?</small></span>
+      <span class="r">아, 그래요?<small>Is that so?</small></span>
+      <span class="r">맞아요, 맞아요!<small>Exactly</small></span>
+      <span class="r">그쵸<small>Right?</small></span>
+      <span class="r">그러니까요<small>I know, right</small></span>
+      <span class="r">와, 좋네요<small>Wow, nice</small></span>
+    </div>
+  </section>
+
+  <!-- 4. 상황별 -->
+  <section class="reveal">
+    <p class="eyebrow">상황별 · Situations</p>
+    <h2>실제 상황에서</h2>
+    <p class="sub"><span style="color:var(--book)">회색 = 상대가 하는 말(알아듣기)</span> · <span style="color:var(--real)">주황 = 내 대답</span></p>
+
+    <!-- 카페·식당 주문 -->
+    <div class="situ">
+      <h3>카페 · 식당 주문</h3>
+      <p class="h-en">Ordering</p>
+      <div class="bub-label staff">직원 · staff</div>
+      <div class="bubbles">
+        <div class="bub staff">주문하시겠어요? / 뭐 드릴까요?<span class="g">Ready to order? / What can I get you?</span></div>
+        <div class="bub staff">드시고 가세요?<span class="g">For here?</span></div>
+        <div class="bub staff">몇 분이세요?<span class="g">How many people?</span></div>
+      </div>
+      <div class="bub-label you">나 · you</div>
+      <div class="bubbles">
+        <div class="bub you">잠시만요, 메뉴 좀 볼게요.<span class="g">One sec, let me look at the menu.</span></div>
+        <div class="bub you">이거 <b>하나</b> 주세요. / 아메리카노 한 잔이요.<span class="g">One of these, please.</span></div>
+        <div class="bub you">아니요, <b>포장이요.</b> / 먹고 갈게요.<span class="g">No, to go. / For here.</span></div>
+      </div>
+    </div>
+
+    <!-- 식당 부르기·추가 -->
+    <div class="situ">
+      <h3>식당에서 부르기 · 추가</h3>
+      <p class="h-en">Calling staff &amp; refills</p>
+      <div class="bub-label staff">직원 · staff</div>
+      <div class="bubbles">
+        <div class="bub staff">네~ / 물은 셀프예요.<span class="g">Yes~ / Water is self-serve.</span></div>
+        <div class="bub staff">나오면 진동벨로 알려 드릴게요.<span class="g">The buzzer will ring when it's ready.</span></div>
+      </div>
+      <div class="bub-label you">나 · you</div>
+      <div class="bubbles">
+        <div class="bub you">(손 들고) <b>여기요~</b> / 저기요~<span class="g">Excuse me!</span></div>
+        <div class="bub you">물 <b>좀</b> 주세요. / 반찬 좀 더 주세요.<span class="g">Some water / more side dishes, please.</span></div>
+        <div class="bub you">이거 리필 돼요?<span class="g">Can I get a refill?</span></div>
+        <div class="bub you">얼음 빼고 주세요. / 안 맵게 해 주세요.<span class="g">No ice, please. / Not spicy, please.</span></div>
+      </div>
+    </div>
+
+    <!-- 편의점·마트 -->
+    <div class="situ">
+      <h3>편의점 · 마트 계산대</h3>
+      <p class="h-en">Convenience store · checkout</p>
+      <div class="bub-label staff">직원 · staff <span style="font-weight:500;letter-spacing:0;text-transform:none;color:#b3b8bf">(빠르게 말해요!)</span></div>
+      <div class="bubbles">
+        <div class="bub staff">봉투 드릴까요? / 봉투 필요하세요?<span class="g">Need a bag?</span></div>
+        <div class="bub staff">적립하세요?<span class="g">Collecting points?</span></div>
+        <div class="bub staff">현금영수증 하세요?<span class="g">Cash receipt?</span></div>
+        <div class="bub staff">데워 드릴까요?<span class="g">Want it heated up?</span></div>
+      </div>
+      <div class="bub-label you">나 · you</div>
+      <div class="bubbles">
+        <div class="bub you">네, 봉투 주세요. / 아니요, <b>괜찮아요.</b><span class="g">Yes, a bag please. / No, I'm good.</span></div>
+        <div class="bub you">적립 안 해요. / 현금영수증 안 해도 돼요.<span class="g">No points / no receipt, thanks.</span></div>
+        <div class="bub you">네, 데워 주세요.<span class="g">Yes, please heat it up.</span></div>
+      </div>
+      <div class="tip"><b>안 들려도 괜찮아요.</b> 못 알아들었으면 그냥 <b>“네? 다시 한 번 말씀해 주세요.”</b> — 되묻는 게 가장 자연스러워요.</div>
+    </div>
+
+    <!-- 길 묻기·택시 -->
+    <div class="situ">
+      <h3>길 묻기 · 택시</h3>
+      <p class="h-en">Directions &amp; taxi</p>
+      <div class="bub-label staff">상대 · them</div>
+      <div class="bubbles">
+        <div class="bub staff">쭉 가세요. / 왼쪽으로 가세요.<span class="g">Go straight. / Go left.</span></div>
+        <div class="bub staff">저기 ~ 옆에 있어요. / 다 왔어요.<span class="g">It's next to ~ over there. / You're here.</span></div>
+        <div class="bub staff">(택시) 어디로 가세요?<span class="g">(taxi) Where to?</span></div>
+      </div>
+      <div class="bub-label you">나 · you</div>
+      <div class="bubbles">
+        <div class="bub you"><b>혹시</b> ○○ 어떻게 가요? / ○○가 어디예요?<span class="g">How do I get to ○○? / Where's ○○?</span></div>
+        <div class="bub you">여기에서 ○○까지 얼마나 걸려요? / 걸어서 갈 수 있어요?<span class="g">How long does it take to ○○? / Can I walk?</span></div>
+        <div class="bub you">(택시) 기사님, ○○역으로 가 주세요. / 여기서 세워 주세요.<span class="g">Driver, to ○○ Station, please. / Stop here, please.</span></div>
+      </div>
+    </div>
+
+    <!-- 관광·체험 -->
+    <div class="situ">
+      <h3>관광 · 체험</h3>
+      <p class="h-en">Palaces · museums · theme parks</p>
+      <div class="bub-label staff">직원 · staff</div>
+      <div class="bubbles">
+        <div class="bub staff">여기서 골라 보세요.<span class="g">Pick one from here. (hanbok)</span></div>
+        <div class="bub staff">신분증이나 여권 주시겠어요?<span class="g">Your ID or passport? (audio guide)</span></div>
+        <div class="bub staff">미리 신청하셔야 돼요.<span class="g">You need to register in advance.</span></div>
+      </div>
+      <div class="bub-label you">나 · you</div>
+      <div class="bubbles">
+        <div class="bub you">한복 좀 빌리려고 하는데요.<span class="g">I'd like to rent a hanbok…</span></div>
+        <div class="bub you">해설 들으면서 구경하고 싶은데요.<span class="g">I'd like a guided tour.</span></div>
+        <div class="bub you">짐 좀 맡기고 싶은데요. / 물품 보관함 어디예요?<span class="g">I'd like to store my bag. / Where are the lockers?</span></div>
+        <div class="bub you">자유이용권 두 장 주세요. / 여기서 사진 찍어도 돼요?<span class="g">Two day-passes, please. / Can I take a photo here?</span></div>
+      </div>
+    </div>
+
+    <!-- 호텔·숙소 -->
+    <div class="situ">
+      <h3>호텔 · 숙소</h3>
+      <p class="h-en">Hotel · check-in · requests</p>
+      <div class="bub-label staff">직원 · staff</div>
+      <div class="bubbles">
+        <div class="bub staff">여권 좀 보여 주세요.<span class="g">Your passport, please.</span></div>
+        <div class="bub staff">잠시만 기다려 주세요. / 몇 호실이세요?<span class="g">One moment. / What room are you in?</span></div>
+      </div>
+      <div class="bub-label you">나 · you</div>
+      <div class="bubbles">
+        <div class="bub you">체크인하려고 하는데요.<span class="g">I'd like to check in…</span></div>
+        <div class="bub you">와이파이 비밀번호가 뭐예요? / 아침 식사 몇 시까지예요?<span class="g">What's the Wi-Fi password? / Until when is breakfast?</span></div>
+        <div class="bub you">○○○호인데요, 헤어드라이어가 안 돼서요.<span class="g">This is room ○○○ — the hair dryer isn't working…</span></div>
+        <div class="bub you">수건 좀 더 주시겠어요? / 짐 좀 맡겨도 될까요?<span class="g">Could I get more towels? / Can I leave my bag here?</span></div>
+      </div>
+    </div>
+
+    <!-- 쇼핑 -->
+    <div class="situ">
+      <h3>쇼핑</h3>
+      <p class="h-en">Shopping · dealing with staff</p>
+      <div class="bub-label staff">점원 · staff</div>
+      <div class="bubbles">
+        <div class="bub staff">찾으시는 거 있으세요?<span class="g">Looking for anything in particular?</span></div>
+        <div class="bub staff">한번 입어 보세요.<span class="g">Go ahead and try it on.</span></div>
+      </div>
+      <div class="bub-label you">나 · you</div>
+      <div class="bubbles">
+        <div class="bub you">(그냥) 구경할게요. / 그냥 볼게요.<span class="g">Just browsing, thanks. (politely deflect)</span></div>
+        <div class="bub you">이거 입어 봐도 돼요? / 다른 색(사이즈) 있어요?<span class="g">Can I try this on? / Another color (size)?</span></div>
+        <div class="bub you">카드 되죠? / 교환이나 환불 돼요?<span class="g">You take card, right? / Can I exchange or refund?</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 담화 표지 보너스 -->
+  <section class="reveal">
+    <p class="eyebrow">보너스 · 한 단계 더</p>
+    <h2>문장 끝, 살짝만 바꾸기</h2>
+    <p class="sub">어미 하나로 훨씬 자연스러워져요. Tiny endings that make you sound local.</p>
+
+    <div class="chips">
+      <div class="chip" style="border-left-color:var(--real)">
+        <div class="head">-거든요<span class="en" style="color:var(--real)">you see, (giving a reason)</span></div>
+        <div class="ex">저 매운 거 잘 못 먹거든요. <span class="g">(You see, I'm not great with spicy food.)</span></div>
+      </div>
+      <div class="chip" style="border-left-color:var(--real)">
+        <div class="head">-더라고요<span class="en" style="color:var(--real)">I found that… (from experience)</span></div>
+        <div class="ex">그 집 진짜 맛있더라고요. <span class="g">(That place was really good, I found.)</span></div>
+      </div>
+      <div class="chip" style="border-left-color:var(--real)">
+        <div class="head">-잖아요<span class="en" style="color:var(--real)">you know, (shared fact)</span></div>
+        <div class="ex">거기 비싸잖아요. <span class="g">(That place is pricey, you know.)</span></div>
+      </div>
+      <div class="chip" style="border-left-color:var(--real)">
+        <div class="head">-는데요. <span class="en" style="color:var(--real)">soft, trailing request</span></div>
+        <div class="ex">체크인하려고 하는데요. <span class="g">(I'd like to check in. — left open, softer)</span></div>
+      </div>
+      <div class="chip" style="border-left-color:var(--real)">
+        <div class="head">-아·어서요. <span class="en" style="color:var(--real)">trailing reason</span></div>
+        <div class="ex">헤어드라이어가 안 돼서요. <span class="g">(The hair dryer isn't working. — polite, trailing)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    한국어는 한 번에 다 아는 게 아니라, 같은 표현을 여러 번 다른 상황에서 만나는 거예요.<br>
+    틀려도 괜찮아요. 모르면 더 좋아요 — 더 배울 수 있으니까요.<br><br>
+    <span class="site">하님 만듦 made by Hanim with Love 🫶</span>
+  </footer>
+
+</div>
+</body>
+</html>
