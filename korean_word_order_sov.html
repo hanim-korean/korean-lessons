@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국어 문장 순서 · Word Order (SVO vs SOV)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap');
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+  :root{
+    --bg:#f8f4ec;
+    --ink:#2b2622;
+    --soft:#6b6258;
+    --line:#e3dccd;
+    --card:#fffdf8;
+    --accent:#2f8f7f;  --accent-bg:#dcefe8;
+    --hi:#ffe7a3;
+    --shadow:#efe7d6;
+    /* S · O · V 색상 코딩 */
+    --s:#2f8f7f;  --s-bg:#dcefe8;   /* 주어  Subject  - teal  */
+    --o:#3b6fb0;  --o-bg:#dde6f5;   /* 목적어 Object  - blue  */
+    --v:#c2683d;  --v-bg:#f6e2d6;   /* 동사  Verb    - terracotta */
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    letter-spacing:-0.01em;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--line) 0.6px, transparent 0.6px);
+    background-size:22px 22px;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+
+  .hero{ text-align:center; padding:58px 0 26px; }
+  .hero .kr{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:clamp(38px,8vw,52px); letter-spacing:0; line-height:1.12; }
+  .hero .kr b{ color:var(--accent); }
+  .hero .en{ font-family:'Fraunces',serif; font-style:italic; font-size:clamp(18px,3vw,22px); color:var(--soft); margin-top:8px; letter-spacing:0; }
+  .hero .lead{ max-width:640px; margin:18px auto 0; font-size:18px; color:var(--soft); }
+
+  /* THE ONE RULE */
+  .rule{
+    background:var(--card); border:2px solid var(--accent); border-radius:18px;
+    padding:26px 28px; margin:30px 0 36px; box-shadow:6px 6px 0 #d6e8e2; text-align:center;
+  }
+  .rule .tag{ display:inline-block; background:var(--accent); color:#fff; font-size:12.5px; font-weight:700; letter-spacing:.4px; padding:3px 12px; border-radius:20px; margin-bottom:14px; }
+  .rule .big{ font-family:'Gowun Dodum',sans-serif; font-size:clamp(20px,4.4vw,26px); line-height:1.5; }
+  .rule .big b{ color:var(--v); }
+  .rule .en{ color:var(--soft); font-size:16px; margin-top:12px; }
+
+  /* legend */
+  .legend{ display:flex; justify-content:center; flex-wrap:wrap; gap:12px 26px; margin:0 0 30px; }
+  .legend .item{ display:inline-flex; align-items:center; gap:9px; font-size:15px; color:var(--soft); }
+  .legend .badge{ width:27px; height:27px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; font-family:'Fraunces',serif; font-style:italic; border:2px solid; flex:none; }
+  .legend .badge.s{ background:var(--s-bg); border-color:var(--s); color:#1f5d52; }
+  .legend .badge.o{ background:var(--o-bg); border-color:var(--o); color:#274a78; }
+  .legend .badge.v{ background:var(--v-bg); border-color:var(--v); color:#8f4426; }
+
+  /* word blocks */
+  .blk{ display:inline-block; border-radius:12px; padding:9px 14px; font-size:18px; font-weight:600; white-space:nowrap; border:2px solid; }
+  .blk small{ display:block; font-size:11px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; opacity:.85; margin-bottom:1px; font-family:'Fraunces',serif; font-style:italic; }
+  .s{ background:var(--s-bg); border-color:var(--s); color:#1f5d52; }
+  .o{ background:var(--o-bg); border-color:var(--o); color:#274a78; }
+  .v{ background:var(--v-bg); border-color:var(--v); color:#8f4426; }
+
+  /* compare card */
+  .compare{ background:var(--card); border:2px solid var(--accent); border-radius:18px; padding:24px 24px 26px; margin:0 0 18px; box-shadow:6px 6px 0 #d6e8e2; }
+  .row{ margin:0 0 18px; }
+  .row:last-child{ margin-bottom:0; }
+  .row .flag{ font-family:'Fraunces',serif; font-style:italic; font-size:14px; letter-spacing:.4px; color:var(--soft); margin-bottom:9px; }
+  .row .flag b{ color:var(--ink); font-style:normal; font-weight:700; }
+  .line{ display:flex; flex-wrap:wrap; gap:9px; align-items:flex-end; }
+  .gloss{ font-size:14px; color:var(--soft); margin-top:9px; }
+  .divider{ text-align:center; color:var(--v); font-size:22px; margin:4px 0 6px; }
+
+  .pointer{ text-align:center; font-size:15px; color:var(--soft); background:var(--v-bg); border:1.5px dashed var(--v); border-radius:14px; padding:14px 18px; margin:0 0 40px; }
+  .pointer b{ color:#8f4426; }
+
+  /* section */
+  .sec{ margin:0 0 14px; }
+  .sec h2{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:24px; margin-bottom:4px; letter-spacing:0; }
+  .sec .en{ color:var(--soft); font-size:15px; margin-bottom:16px; }
+
+  /* more examples */
+  .exlist{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:0 0 38px; }
+  .exrow{ background:var(--card); border:1.5px solid var(--line); border-radius:14px; padding:15px 17px; box-shadow:3px 3px 0 var(--shadow); }
+  .exrow .line{ gap:7px; }
+  .exrow .blk{ font-size:16px; padding:6px 11px; }
+  .exrow .eng{ font-size:13.5px; color:var(--soft); margin-top:9px; font-family:'Fraunces',serif; font-style:italic; }
+  @media(max-width:600px){ .exlist{ grid-template-columns:1fr; } }
+
+  /* O slot */
+  .oslot{ background:linear-gradient(180deg,#fff8ec,#fffdf8); border:2px solid var(--o); border-radius:18px; padding:24px 26px; margin:0 0 40px; box-shadow:6px 6px 0 #dde6f5; }
+  .oslot .tagq{ display:inline-block; background:var(--o); color:#fff; font-size:12.5px; font-weight:700; padding:3px 12px; border-radius:20px; margin-bottom:12px; }
+  .oslot h2{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:23px; margin-bottom:6px; letter-spacing:0; }
+  .oslot .en{ color:var(--soft); font-size:15px; margin-bottom:16px; }
+  .vgroup{ margin:0 0 14px; }
+  .vgroup:last-child{ margin-bottom:0; }
+  .vhead{ font-size:16px; font-weight:700; margin-bottom:7px; }
+  .vhead .vtag{ display:inline-block; background:var(--v-bg); border:1.5px solid var(--v); color:#8f4426; border-radius:9px; padding:2px 9px; font-size:15px; margin-right:6px; }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .ochip{ background:var(--o-bg); border:1.5px solid var(--o); color:#274a78; border-radius:11px; padding:6px 12px; font-size:16px; white-space:nowrap; }
+
+  /* practice */
+  .practice{ background:var(--card); border:1.5px solid var(--line); border-radius:18px; padding:24px 26px; margin:8px 0 30px; box-shadow:5px 5px 0 var(--shadow); }
+  .practice h2{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:23px; margin-bottom:4px; letter-spacing:0; }
+  .practice .en{ color:var(--soft); font-size:15px; margin-bottom:16px; }
+  details.q{ border:1.5px solid var(--line); border-radius:12px; padding:13px 17px; margin-bottom:11px; background:#fffdf8; }
+  details.q summary{ cursor:pointer; font-size:17px; font-weight:600; list-style:none; }
+  details.q summary .eng{ font-family:'Fraunces',serif; font-style:italic; color:var(--soft); font-size:15px; }
+  details.q summary::-webkit-details-marker{ display:none; }
+  details.q summary::before{ content:'?'; display:inline-block; width:23px; height:23px; line-height:23px; text-align:center; background:var(--accent); color:#fff; border-radius:50%; font-size:13px; margin-right:10px; vertical-align:1px;}
+  details.q[open] summary::before{ content:'✓'; }
+  details.q .ans{ margin-top:13px; padding-top:12px; border-top:1px dashed var(--line); }
+  details.q .ans .line{ gap:7px; }
+  details.q .ans .blk{ font-size:16px; padding:6px 11px; }
+  details.q .ans .tip{ font-size:14px; color:var(--soft); margin-top:9px; }
+
+  footer{ text-align:center; color:var(--soft); font-size:13.5px; margin-top:26px; letter-spacing:0; }
+
+  @media(max-width:520px){ body{ font-size:16px; } .wrap{ padding:0 16px 70px; } .blk{ font-size:16px; padding:8px 11px; } }
+  @media print{ body{ background:#fff; background-image:none; } .rule,.compare,.oslot,.exrow,.practice{ box-shadow:none; } details.q .ans{ display:block; } details.q[open] summary::before,details.q summary::before{content:'•';} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kr">한국어 <b>문장 순서</b></div>
+    <div class="en">Korean Word Order — SVO vs SOV</div>
+    <p class="lead">영어와 한국어는 단어를 놓는 순서가 딱 한 군데 달라요.<br>
+    <span style="font-size:16px">English and Korean differ in just one spot — where the verb goes.</span></p>
+  </header>
+
+  <!-- THE ONE RULE -->
+  <section class="rule">
+    <span class="tag">규칙은 하나 · Just one rule</span>
+    <div class="big">한국어는 <b>동사(verb)</b>가<br>항상 문장 <b>맨 끝</b>에 와요.</div>
+    <p class="en">In Korean, the verb always comes at the very end of the sentence.</p>
+  </section>
+
+  <!-- legend -->
+  <div class="legend">
+    <span class="item"><span class="badge s">S</span>누가 · Subject</span>
+    <span class="item"><span class="badge o">O</span>무엇을 · Object</span>
+    <span class="item"><span class="badge v">V</span>한다 · Verb</span>
+  </div>
+
+  <!-- MAIN COMPARE -->
+  <section class="compare">
+    <div class="row">
+      <div class="flag"><b>English</b> · SVO</div>
+      <div class="line">
+        <span class="blk s"><small>S</small>I</span>
+        <span class="blk v"><small>V</small>eat</span>
+        <span class="blk o"><small>O</small>an apple</span>
+      </div>
+      <div class="gloss">동사 <b style="color:var(--v)">eat</b>가 <b>가운데</b>에 있어요.</div>
+    </div>
+
+    <div class="divider">↓ 같은 뜻, 순서만 달라요 ↓</div>
+
+    <div class="row">
+      <div class="flag"><b>한국어</b> · SOV</div>
+      <div class="line">
+        <span class="blk s"><small>S</small>저는</span>
+        <span class="blk o"><small>O</small>사과를</span>
+        <span class="blk v"><small>V</small>먹어요</span>
+      </div>
+      <div class="gloss">동사 <b style="color:var(--v)">먹어요</b>가 <b>맨 끝</b>으로 갔어요.</div>
+    </div>
+  </section>
+
+  <div class="pointer">
+    같은 색 블록을 보세요. 주어(S)·목적어(O)는 그대로인데,
+    <b>동사(V)만 가운데 → 맨 끝</b>으로 자리를 옮겼어요.<br>
+    <span style="font-size:13.5px">Same colored blocks — only the <b>verb</b> moves: middle → end.</span>
+  </div>
+
+  <!-- MORE EXAMPLES -->
+  <section class="sec">
+    <h2>더 많은 예문</h2>
+    <p class="en">More examples — notice the verb at the end</p>
+  </section>
+  <div class="exlist">
+    <div class="exrow">
+      <div class="line">
+        <span class="blk s"><small>S</small>저는</span>
+        <span class="blk o"><small>O</small>커피를</span>
+        <span class="blk v"><small>V</small>마셔요</span>
+      </div>
+      <div class="eng">I drink coffee.</div>
+    </div>
+    <div class="exrow">
+      <div class="line">
+        <span class="blk s"><small>S</small>저는</span>
+        <span class="blk o"><small>O</small>드라마를</span>
+        <span class="blk v"><small>V</small>봐요</span>
+      </div>
+      <div class="eng">I watch a drama.</div>
+    </div>
+    <div class="exrow">
+      <div class="line">
+        <span class="blk s"><small>S</small>동생은</span>
+        <span class="blk o"><small>O</small>책을</span>
+        <span class="blk v"><small>V</small>읽어요</span>
+      </div>
+      <div class="eng">My sibling reads a book.</div>
+    </div>
+    <div class="exrow">
+      <div class="line">
+        <span class="blk s"><small>S</small>저는</span>
+        <span class="blk o"><small>O</small>음악을</span>
+        <span class="blk v"><small>V</small>들어요</span>
+      </div>
+      <div class="eng">I listen to music.</div>
+    </div>
+  </div>
+
+  <!-- O SLOT -->
+  <section class="oslot">
+    <span class="tagq">O 자리 · The Object spot</span>
+    <h2>O 자리에는 뭐가 와요?</h2>
+    <p class="en">O 자리에는 “무엇을?”에 답하는 단어가 와요 — 을/를이 붙어요. 동사마다 어울리는 짝꿍이 있어요.</p>
+
+    <div class="vgroup">
+      <div class="vhead"><span class="vtag">먹어요</span>eat</div>
+      <div class="chips"><span class="ochip">밥을</span><span class="ochip">김치를</span><span class="ochip">사과를</span></div>
+    </div>
+    <div class="vgroup">
+      <div class="vhead"><span class="vtag">마셔요</span>drink</div>
+      <div class="chips"><span class="ochip">물을</span><span class="ochip">커피를</span><span class="ochip">우유를</span></div>
+    </div>
+    <div class="vgroup">
+      <div class="vhead"><span class="vtag">봐요</span>watch</div>
+      <div class="chips"><span class="ochip">영화를</span><span class="ochip">드라마를</span><span class="ochip">책을</span></div>
+    </div>
+    <div class="vgroup">
+      <div class="vhead"><span class="vtag">배워요</span>learn</div>
+      <div class="chips"><span class="ochip">한국어를</span><span class="ochip">태권도를</span></div>
+    </div>
+    <div class="vgroup">
+      <div class="vhead"><span class="vtag">좋아해요</span>like</div>
+      <div class="chips"><span class="ochip">한국을</span><span class="ochip">김치를</span><span class="ochip">노래를</span></div>
+    </div>
+  </section>
+
+  <!-- PRACTICE -->
+  <section class="practice">
+    <h2>직접 해보기 · Try it</h2>
+    <p class="en">영어 문장을 한국어 순서(S–O–V)로 바꿔 보세요. Tap to reveal.</p>
+
+    <details class="q">
+      <summary>I eat rice. <span class="eng">→ 한국어로?</span></summary>
+      <div class="ans">
+        <div class="line">
+          <span class="blk s"><small>S</small>저는</span>
+          <span class="blk o"><small>O</small>밥을</span>
+          <span class="blk v"><small>V</small>먹어요</span>
+        </div>
+        <div class="tip">밥 = 받침 ㅂ → 밥<b>을</b>. 동사 ‘먹어요’는 맨 끝.</div>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>I watch a drama. <span class="eng">→ 한국어로?</span></summary>
+      <div class="ans">
+        <div class="line">
+          <span class="blk s"><small>S</small>저는</span>
+          <span class="blk o"><small>O</small>드라마를</span>
+          <span class="blk v"><small>V</small>봐요</span>
+        </div>
+        <div class="tip">드라마 = 받침 없음 → 드라마<b>를</b>. 동사 ‘봐요’는 맨 끝.</div>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>I drink water. <span class="eng">→ 한국어로?</span></summary>
+      <div class="ans">
+        <div class="line">
+          <span class="blk s"><small>S</small>저는</span>
+          <span class="blk o"><small>O</small>물을</span>
+          <span class="blk v"><small>V</small>마셔요</span>
+        </div>
+        <div class="tip">물 = 받침 ㄹ → 물<b>을</b>. 동사 ‘마셔요’는 맨 끝.</div>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>I read a book. <span class="eng">→ 한국어로?</span></summary>
+      <div class="ans">
+        <div class="line">
+          <span class="blk s"><small>S</small>저는</span>
+          <span class="blk o"><small>O</small>책을</span>
+          <span class="blk v"><small>V</small>읽어요</span>
+        </div>
+        <div class="tip">책 = 받침 ㄱ → 책<b>을</b>. 동사 ‘읽어요’는 맨 끝.</div>
+      </div>
+    </details>
+  </section>
+
+  <footer>한국어 문장 순서 · Word Order (SVO vs SOV) · 기초 과정</footer>
+
+</div>
+</body>
+</html>
