@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>발음 탐정 · Pronunciation Detective</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  :root{
+    --paper:#FAF6EE;
+    --dot:#E7DECF;
+    --ink:#2E2A26;
+    --cream:#FFFDF8;
+    --teal:#2F7E74;
+    --terra:#C4553D;
+    --muted:#9A9083;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
+    font-size:17px;line-height:1.6;color:var(--ink);
+    background:var(--paper);
+    background-image:radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size:22px 22px;
+    padding:36px 18px 60px;
+  }
+  .wrap{max-width:860px;margin:0 auto}
+
+  /* ── 헤더 ── */
+  header{text-align:center;margin-bottom:26px}
+  .badge{
+    display:inline-block;font-size:34px;background:var(--cream);
+    border:2px solid var(--ink);border-radius:50%;
+    width:64px;height:64px;line-height:60px;
+    box-shadow:4px 4px 0 var(--ink);margin-bottom:14px;
+  }
+  h1{font-family:'Gowun Dodum',sans-serif;font-size:clamp(30px,6vw,44px);letter-spacing:-.5px}
+  .eng{font-family:'Fraunces',serif;font-style:italic;font-size:16px;color:var(--terra);margin-top:2px}
+  .lead{font-size:15px;color:var(--muted);margin-top:8px}
+
+  /* ── 게임 방법 ── */
+  .howto{
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+    margin:0 auto 24px;max-width:760px;
+  }
+  .step{
+    background:var(--cream);border:2px solid var(--ink);border-radius:12px;
+    box-shadow:3px 3px 0 var(--ink);padding:10px 14px;
+    font-size:14px;flex:1 1 220px;text-align:center;
+  }
+  .step b{font-family:'Gowun Dodum',sans-serif}
+
+  /* ── 컨트롤 ── */
+  .controls{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin-bottom:26px}
+  .pillbox{display:inline-flex;border:2px solid var(--ink);border-radius:999px;background:var(--cream);overflow:hidden;box-shadow:3px 3px 0 var(--ink)}
+  .pill{
+    font-family:inherit;font-size:15px;font-weight:700;color:var(--ink);
+    background:transparent;border:none;padding:9px 20px;cursor:pointer;
+  }
+  .pill.active{background:var(--ink);color:var(--cream)}
+  .btn{
+    font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;
+    border:2px solid var(--ink);border-radius:999px;padding:10px 22px;
+    box-shadow:3px 3px 0 var(--ink);transition:transform .08s, box-shadow .08s;
+  }
+  .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+  .btn:focus-visible,.pill:focus-visible,.card:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+  .btn.primary{background:var(--terra);color:var(--cream)}
+  .btn.ghost{background:var(--cream);color:var(--ink)}
+
+  /* ── 카드 ── */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
+  .card{
+    font-family:inherit;background:var(--cream);color:var(--ink);
+    border:2px solid var(--ink);border-radius:16px;
+    box-shadow:4px 4px 0 var(--ink);
+    padding:24px 10px 16px;cursor:pointer;text-align:center;
+    transition:transform .08s, box-shadow .08s;
+  }
+  .card:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+  .card .word{font-family:'Gowun Dodum',sans-serif;font-size:clamp(34px,8vw,44px);line-height:1.2}
+  .card .pron{margin-top:10px;font-size:20px;font-weight:800;color:var(--teal);min-height:30px}
+  .card .hint{display:block;font-size:12px;color:var(--muted);margin-top:6px}
+  .card:not(.on) .pron{visibility:hidden}
+  .card.on{background:#F0F7F5;border-color:var(--teal)}
+  .card.on .hint{visibility:hidden}
+
+  footer{margin-top:34px;text-align:center;font-size:14px;color:var(--muted)}
+  footer b{color:var(--ink)}
+
+  @media (max-width:480px){
+    body{padding:24px 12px 48px}
+    .cards{grid-template-columns:repeat(2,1fr);gap:12px}
+  }
+  @media print{
+    .controls,.howto,footer{display:none}
+    .card .pron{visibility:visible !important}
+    body{background:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .btn,.card{transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="badge">🕵️</div>
+    <h1>발음 탐정</h1>
+    <div class="eng">Pronunciation Detective</div>
+    <p class="lead">받침 소리, 제대로 들었을까요? O/X로 판정해 보세요!</p>
+  </header>
+
+  <div class="howto">
+    <div class="step"><b>하나</b> · 튜터가 단어를 읽어요 — 가끔 일부러 틀리게! <span style="white-space:nowrap">Listen carefully.</span></div>
+    <div class="step"><b>둘</b> · 맞으면 🅾️ 틀리면 ❌ 외치기! <span style="white-space:nowrap">Correct or not?</span></div>
+    <div class="step"><b>셋</b> · 카드를 누르면 정답 발음 확인 <span style="white-space:nowrap">Tap to check.</span></div>
+  </div>
+
+  <div class="controls">
+    <div class="pillbox" role="group" aria-label="단어 세트 선택">
+      <button class="pill active" data-set="batchim">받침</button>
+      <button class="pill" data-set="gyeop">겹받침</button>
+    </div>
+    <button class="btn primary" id="shuffleBtn">🔀 순서 섞기</button>
+    <button class="btn ghost" id="revealBtn">👀 정답 모두 보기</button>
+  </div>
+
+  <div class="cards" id="cards"></div>
+
+  <footer>한 세트가 끝나면 <b>역할 바꾸기</b> — 학생이 읽고 튜터가 판정해요! 🎤</footer>
+</div>
+
+<script>
+/* ─────────────────────────────────────────────
+   단어를 바꾸고 싶으면 여기만 수정하세요!
+   w: 단어(글자), p: 정답 발음
+───────────────────────────────────────────── */
+const SETS = {
+  batchim: [
+    { w: "옷",  p: "옫" },
+    { w: "앞",  p: "압" },
+    { w: "꽃",  p: "꼳" },
+    { w: "밥",  p: "밥" },
+    { w: "책",  p: "책" },
+    { w: "밖",  p: "박" },
+  ],
+  gyeop: [
+    { w: "닭",   p: "닥" },
+    { w: "흙",   p: "흑" },
+    { w: "값",   p: "갑" },
+    { w: "여덟", p: "여덜" },
+    { w: "읽다", p: "익따" },
+    { w: "앉다", p: "안따" },
+    { w: "많다", p: "만타" },
+    { w: "끓다", p: "끌타" },
+  ],
+};
+
+let currentSet = "batchim";
+let order = [];
+let allRevealed = false;
+
+const cardsEl  = document.getElementById("cards");
+const revealBtn = document.getElementById("revealBtn");
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function render(){
+  cardsEl.innerHTML = "";
+  order.forEach(item => {
+    const btn = document.createElement("button");
+    btn.className = "card" + (allRevealed ? " on" : "");
+    btn.innerHTML =
+      '<div class="word">' + item.w + '</div>' +
+      '<div class="pron">[' + item.p + ']</div>' +
+      '<span class="hint">눌러서 확인 · tap</span>';
+    btn.addEventListener("click", () => btn.classList.toggle("on"));
+    cardsEl.appendChild(btn);
+  });
+}
+
+function newRound(){
+  order = shuffle(SETS[currentSet]);
+  allRevealed = false;
+  revealBtn.textContent = "👀 정답 모두 보기";
+  render();
+}
+
+document.getElementById("shuffleBtn").addEventListener("click", newRound);
+
+revealBtn.addEventListener("click", () => {
+  allRevealed = !allRevealed;
+  revealBtn.textContent = allRevealed ? "🙈 정답 모두 가리기" : "👀 정답 모두 보기";
+  document.querySelectorAll(".card").forEach(c => c.classList.toggle("on", allRevealed));
+});
+
+document.querySelectorAll(".pill").forEach(pill => {
+  pill.addEventListener("click", () => {
+    document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
+    pill.classList.add("active");
+    currentSet = pill.dataset.set;
+    newRound();
+  });
+});
+
+newRound();
+</script>
+</body>
+</html>
