@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>겹받침 빙고 · Double-Batchim Bingo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  :root{
+    --paper:#FAF6EE;
+    --dot:#E7DECF;
+    --ink:#2E2A26;
+    --cream:#FFFDF8;
+    --teal:#2F7E74;
+    --terra:#C4553D;
+    --gold:#E8B94A;
+    --muted:#9A9083;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
+    font-size:17px;line-height:1.6;color:var(--ink);
+    background:var(--paper);
+    background-image:radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size:22px 22px;
+    padding:36px 18px 60px;
+  }
+  .wrap{max-width:760px;margin:0 auto}
+
+  /* ── 헤더 ── */
+  header{text-align:center;margin-bottom:24px}
+  .badge{
+    display:inline-block;font-size:34px;background:var(--cream);
+    border:2px solid var(--ink);border-radius:50%;
+    width:64px;height:64px;line-height:60px;
+    box-shadow:4px 4px 0 var(--ink);margin-bottom:14px;
+  }
+  h1{font-family:'Gowun Dodum',sans-serif;font-size:clamp(30px,6vw,44px);letter-spacing:-.5px}
+  .eng{font-family:'Fraunces',serif;font-style:italic;font-size:16px;color:var(--terra);margin-top:2px}
+
+  /* ── 게임 방법 ── */
+  .howto{
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+    margin:0 auto 22px;max-width:700px;
+  }
+  .step{
+    background:var(--cream);border:2px solid var(--ink);border-radius:12px;
+    box-shadow:3px 3px 0 var(--ink);padding:10px 14px;
+    font-size:14px;flex:1 1 200px;text-align:center;
+  }
+  .step b{font-family:'Gowun Dodum',sans-serif}
+
+  /* ── 컨트롤 & 상태 ── */
+  .controls{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:18px}
+  .btn{
+    font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;
+    border:2px solid var(--ink);border-radius:999px;padding:10px 22px;
+    box-shadow:3px 3px 0 var(--ink);transition:transform .08s, box-shadow .08s;
+  }
+  .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+  .btn:focus-visible,.cell:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+  .btn.primary{background:var(--terra);color:var(--cream)}
+  .btn.ghost{background:var(--cream);color:var(--ink)}
+
+  .status{
+    text-align:center;font-family:'Gowun Dodum',sans-serif;
+    font-size:21px;min-height:34px;margin-bottom:16px;
+  }
+
+  /* ── 빙고판 ── */
+  .board{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+    max-width:540px;margin:0 auto;
+  }
+  .cell{
+    font-family:inherit;aspect-ratio:1/1;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    background:var(--cream);color:var(--ink);
+    border:2px solid var(--ink);border-radius:16px;
+    box-shadow:4px 4px 0 var(--ink);cursor:pointer;
+    transition:transform .1s, box-shadow .1s, background .15s;
+  }
+  .cell:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+  .cell .word{font-family:'Gowun Dodum',sans-serif;font-size:clamp(22px,6.5vw,32px);line-height:1.15}
+  .cell .pron{font-size:clamp(13px,3.5vw,16px);font-weight:800;visibility:hidden}
+  .cell.marked{background:var(--teal);border-color:var(--teal);color:var(--cream);transform:rotate(-1.5deg)}
+  .cell.marked .pron{visibility:visible;color:#DFF0EC}
+  .cell.line{border-color:var(--terra);box-shadow:4px 4px 0 var(--terra);animation:pop .45s ease}
+  @keyframes pop{
+    0%{transform:scale(1) rotate(-1.5deg)}
+    50%{transform:scale(1.07) rotate(-1.5deg)}
+    100%{transform:scale(1) rotate(-1.5deg)}
+  }
+
+  footer{margin-top:32px;text-align:center;font-size:14px;color:var(--muted)}
+  footer b{color:var(--ink)}
+
+  @media (max-width:480px){
+    body{padding:24px 12px 48px}
+    .board{gap:9px}
+  }
+  @media print{
+    .controls,.howto,footer,.status{display:none}
+    body{background:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .btn,.cell{transition:none}
+    .cell.line{animation:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="badge">🎯</div>
+    <h1>겹받침 빙고</h1>
+    <div class="eng">Double-Batchim Bingo</div>
+  </header>
+
+  <div class="howto">
+    <div class="step"><b>하나</b> · 튜터가 발음을 말해요 — “[닥]!” <span style="white-space:nowrap">Listen!</span></div>
+    <div class="step"><b>둘</b> · 맞는 글자를 찾아 소리 내어 읽고 누르기 <span style="white-space:nowrap">Find &amp; read.</span></div>
+    <div class="step"><b>셋</b> · 가로·세로·대각선 세 칸 = 빙고! <span style="white-space:nowrap">3 in a row!</span></div>
+  </div>
+
+  <div class="controls">
+    <button class="btn primary" id="newBtn">🔀 새 판 만들기</button>
+    <button class="btn ghost" id="clearBtn">⟲ 표시 지우기</button>
+  </div>
+
+  <p class="status" id="status">잘 듣고 찾아보세요!</p>
+
+  <div class="board" id="board"></div>
+
+  <footer>익숙해지면 <b>역할 바꾸기</b> — 학생이 발음을 말하고 튜터가 찾아요! 🎤</footer>
+</div>
+
+<script>
+/* ─────────────────────────────────────────────
+   단어를 바꾸고 싶으면 여기만 수정하세요!
+   w: 단어(글자), p: 정답 발음  — 9개가 딱 좋아요.
+───────────────────────────────────────────── */
+const WORDS = [
+  { w: "닭",   p: "닥" },
+  { w: "여덟", p: "여덜" },
+  { w: "값",   p: "갑" },
+  { w: "읽다", p: "익따" },
+  { w: "앉다", p: "안따" },
+  { w: "끓다", p: "끌타" },
+  { w: "많다", p: "만타" },
+  { w: "없다", p: "업따" },
+  { w: "싫다", p: "실타" },
+];
+
+const LINES = [
+  [0,1,2],[3,4,5],[6,7,8],   /* 가로 */
+  [0,3,6],[1,4,7],[2,5,8],   /* 세로 */
+  [0,4,8],[2,4,6],           /* 대각선 */
+];
+
+let layout = [];              /* 현재 배치 */
+let marked = new Set();       /* 표시된 칸 위치 */
+
+const boardEl  = document.getElementById("board");
+const statusEl = document.getElementById("status");
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function render(){
+  boardEl.innerHTML = "";
+  layout.forEach((item, idx) => {
+    const cell = document.createElement("button");
+    cell.className = "cell";
+    cell.dataset.idx = idx;
+    cell.innerHTML =
+      '<span class="word">' + item.w + '</span>' +
+      '<span class="pron">[' + item.p + ']</span>';
+    cell.addEventListener("click", () => {
+      if (marked.has(idx)) marked.delete(idx);
+      else marked.add(idx);
+      update();
+    });
+    boardEl.appendChild(cell);
+  });
+  update();
+}
+
+function update(){
+  const cells = boardEl.children;
+  const doneLines = LINES.filter(line => line.every(i => marked.has(i)));
+  const lineCells = new Set(doneLines.flat());
+
+  for (const cell of cells) {
+    const i = Number(cell.dataset.idx);
+    cell.classList.toggle("marked", marked.has(i));
+    cell.classList.toggle("line", lineCells.has(i));
+  }
+
+  const n = doneLines.length;
+  if (n === 0)      statusEl.textContent = "잘 듣고 찾아보세요!";
+  else if (n === 1) statusEl.textContent = "🎉 빙고 한 줄!";
+  else if (n === 2) statusEl.textContent = "🎉🎉 빙고 두 줄!";
+  else              statusEl.textContent = "🏆 세 줄 완성! 빙고 마스터!";
+}
+
+function newBoard(){
+  layout = shuffle(WORDS);
+  marked.clear();
+  render();
+}
+
+document.getElementById("newBtn").addEventListener("click", newBoard);
+document.getElementById("clearBtn").addEventListener("click", () => {
+  marked.clear();
+  update();
+});
+
+newBoard();
+</script>
+</body>
+</html>
