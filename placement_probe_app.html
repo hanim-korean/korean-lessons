@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>체험 수업 배치 조종석 · Placement Probe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  :root{
+    --paper:#FAF6EE; --dot:#E7DECF; --ink:#2E2A26; --cream:#FFFDF8;
+    --teal:#2F7E74; --terra:#C4553D; --gold:#D9A62E; --muted:#9A9083;
+    --teal-bg:#EAF3F1; --gold-bg:#F9F0DA; --terra-bg:#F7E5E0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
+    font-size:17px;line-height:1.6;color:var(--ink);
+    background:var(--paper);
+    background-image:radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size:22px 22px;
+    padding:30px 16px 60px;
+  }
+  .wrap{max-width:680px;margin:0 auto}
+  header{text-align:center;margin-bottom:22px}
+  .badge{display:inline-block;font-size:30px;background:var(--cream);border:2px solid var(--ink);
+    border-radius:50%;width:58px;height:58px;line-height:54px;box-shadow:4px 4px 0 var(--ink);margin-bottom:10px}
+  h1{font-family:'Gowun Dodum',sans-serif;font-size:clamp(26px,5.5vw,38px);letter-spacing:-.5px}
+  .eng{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--terra)}
+
+  .card{background:var(--cream);border:2px solid var(--ink);border-radius:16px;
+    box-shadow:5px 5px 0 var(--ink);padding:22px;margin-bottom:16px}
+  .btn{font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;
+    border:2px solid var(--ink);border-radius:999px;padding:12px 22px;
+    box-shadow:3px 3px 0 var(--ink);transition:transform .08s, box-shadow .08s;background:var(--cream);color:var(--ink)}
+  .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+  .btn:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+  .btn.primary{background:var(--terra);color:var(--cream)}
+  .btn.small{font-size:13px;padding:7px 14px;box-shadow:2px 2px 0 var(--ink)}
+  .hidden{display:none !important}
+
+  /* 시작 화면 */
+  .name-row{display:flex;gap:10px;margin-bottom:18px}
+  .name-row input{flex:1;font-family:inherit;font-size:16px;padding:11px 14px;
+    border:2px solid var(--ink);border-radius:12px;background:#fff}
+  .start-opts{display:grid;gap:10px}
+  .opt{text-align:left;font-family:inherit;font-size:15px;background:#fff;border:2px solid var(--ink);
+    border-radius:12px;padding:13px 16px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:transform .08s}
+  .opt:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+  .opt b{font-family:'Gowun Dodum',sans-serif}
+  .opt small{display:block;color:var(--muted);font-size:13px}
+  .check-row{display:flex;align-items:flex-start;gap:8px;margin-top:14px;font-size:14px;color:var(--muted)}
+  .check-row input{margin-top:4px;width:16px;height:16px;accent-color:var(--terra)}
+
+  /* 진행 점 */
+  .dots{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin-bottom:14px}
+  .dots .gap{width:10px}
+  .dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--ink);background:#fff}
+  .dot.pass{background:var(--teal);border-color:var(--teal)}
+  .dot.shaky{background:var(--gold);border-color:var(--gold)}
+  .dot.stuck{background:var(--terra);border-color:var(--terra)}
+  .dot.skip{background:var(--dot);border-color:var(--muted)}
+  .dot.now{box-shadow:0 0 0 3px var(--terra);background:#fff}
+
+  /* 프로브 화면 */
+  .rung-label{text-align:center;font-family:'Gowun Dodum',sans-serif;font-size:15px;color:var(--muted);margin-bottom:6px}
+  .probe-id{display:inline-block;background:var(--ink);color:var(--cream);border-radius:8px;
+    font-size:13px;font-weight:800;padding:2px 10px;margin-bottom:10px}
+  .probe-title{font-family:'Gowun Dodum',sans-serif;font-size:21px;margin-bottom:12px}
+  .ask{background:#fff;border:2px dashed var(--ink);border-radius:12px;padding:14px 16px;
+    font-size:18px;margin-bottom:12px;white-space:pre-line}
+  .expect{font-size:14px;color:var(--muted);margin-bottom:12px;white-space:pre-line}
+  .signal{background:var(--teal-bg);border-left:4px solid var(--teal);border-radius:0 10px 10px 0;
+    padding:10px 14px;font-size:14px;margin-bottom:6px}
+  .signal b{color:var(--teal)}
+
+  .judge{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+  .judge .btn{font-size:15px;padding:13px 6px}
+  .j-pass{background:var(--teal);color:var(--cream)}
+  .j-shaky{background:var(--gold);color:var(--ink)}
+  .j-stuck{background:var(--terra);color:var(--cream)}
+  .under{display:flex;justify-content:space-between;margin-top:12px}
+  .link{background:none;border:none;font-family:inherit;font-size:13px;color:var(--muted);
+    cursor:pointer;text-decoration:underline;padding:4px}
+
+  /* 결과 화면 */
+  .result-place{background:var(--terra-bg);border:2px solid var(--terra);border-radius:14px;
+    padding:16px 18px;margin:14px 0}
+  .result-place h3{font-family:'Gowun Dodum',sans-serif;font-size:22px;color:var(--terra)}
+  .result-place p{font-size:15px;margin-top:6px}
+  .mini{background:var(--gold-bg);border-radius:12px;padding:12px 16px;font-size:14px;margin-bottom:14px}
+  .log{font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.9}
+  .log .tag{display:inline-block;border-radius:6px;padding:0 7px;font-weight:700;margin:0 4px 2px 0}
+  .tag.pass{background:var(--teal-bg);color:var(--teal)}
+  .tag.shaky{background:var(--gold-bg);color:#8a6a12}
+  .tag.stuck{background:var(--terra-bg);color:var(--terra)}
+  .tag.skip{background:#eee;color:var(--muted)}
+  .rec-form label{display:block;font-size:13px;font-weight:700;margin:10px 0 4px}
+  .rec-form input,.rec-form textarea{width:100%;font-family:inherit;font-size:15px;
+    padding:9px 12px;border:2px solid var(--ink);border-radius:10px;background:#fff;resize:vertical}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+    background:var(--ink);color:var(--cream);border-radius:999px;padding:10px 20px;
+    font-size:14px;opacity:0;pointer-events:none;transition:opacity .25s}
+  .toast.show{opacity:1}
+  @media (max-width:440px){ .judge{grid-template-columns:1fr} }
+  @media (prefers-reduced-motion:reduce){ .btn,.opt{transition:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="badge">🧭</div>
+    <h1>체험 수업 배치 조종석</h1>
+    <div class="eng">Placement Probe · 입문 ~ 세종 3A</div>
+  </header>
+
+  <!-- ═══ 시작 화면 ═══ -->
+  <section id="scr-start">
+    <div class="card">
+      <div class="name-row">
+        <input id="stuName" type="text" placeholder="학생 이름 (선택)">
+      </div>
+      <p style="font-family:'Gowun Dodum';font-size:17px;margin-bottom:10px">사전 대화 — 학생의 대답과 가장 가까운 것은?</p>
+      <div class="start-opts">
+        <button class="opt" data-rung="1"><b>"한글 아직 못 읽어요"</b><small>계단 1(한글 읽기)부터 시작</small></button>
+        <button class="opt" data-rung="2"><b>"몇 달 배웠어요 / 앱으로 해요"</b><small>계단 1 건너뛰고 계단 2(기초 문장)부터</small></button>
+        <button class="opt" data-rung="3"><b>"1년 정도 배웠어요"</b><small>계단 3(과거·묘사·이유)부터</small></button>
+        <button class="opt" data-rung="4"><b>"1년 이상 + 드라마 조금 알아들어요"</b><small>계단 4(뉘앙스·확장)부터</small></button>
+      </div>
+      <div class="check-row">
+        <input type="checkbox" id="onlineTest">
+        <label for="onlineTest">온라인 객관식 테스트 점수를 가져온 학생이에요 → 한 계단 낮게 시작 (객관식은 실제 말하기보다 높게 나와요)</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 프로브 화면 ═══ -->
+  <section id="scr-probe" class="hidden">
+    <div class="dots" id="dots"></div>
+    <div class="rung-label" id="rungLabel"></div>
+    <div class="card">
+      <span class="probe-id" id="probeId"></span>
+      <div class="probe-title" id="probeTitle"></div>
+      <div class="ask" id="probeAsk"></div>
+      <div class="expect" id="probeExpect"></div>
+      <div class="signal" id="probeSignal"></div>
+      <div class="judge">
+        <button class="btn j-pass" id="btnPass">✅ 술술 통과</button>
+        <button class="btn j-shaky" id="btnShaky">〰️ 흔들림</button>
+        <button class="btn j-stuck" id="btnStuck">⛔ 막힘</button>
+      </div>
+      <div class="under">
+        <button class="link" id="btnUndo">← 이전 판정 취소</button>
+        <button class="link" id="btnSkip">이 프로브 건너뛰기 →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 결과 화면 ═══ -->
+  <section id="scr-result" class="hidden">
+    <div class="card">
+      <p style="font-family:'Gowun Dodum';font-size:19px">📋 배치 결과</p>
+      <div class="result-place">
+        <h3 id="placeTitle"></h3>
+        <p id="placeDesc"></p>
+      </div>
+      <div class="mini" id="miniLesson"></div>
+      <div class="log" id="judgeLog"></div>
+      <button class="btn small hidden" id="btnGoDown">⬇ 한 계단 내려가서 몇 개 더 확인하기</button>
+      <div class="rec-form">
+        <label>학습 배경 (기간·방법)</label><input id="fBg" type="text" placeholder="예: 1년, 앱 독학">
+        <label>동기 (배우는 이유)</label><input id="fWhy" type="text" placeholder="예: K-드라마, 여행">
+        <label>강점 (칭찬 포인트)</label><input id="fStrong" type="text" placeholder="예: 발음이 또렷함">
+        <label>보완할 부분 / 메모</label><textarea id="fNote" rows="2" placeholder="예: 조사 은/는·이/가 혼동"></textarea>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="btnCopy">📋 노션용 결과 복사</button>
+        <button class="btn" id="btnRestart">↺ 새 학생 시작</button>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast">복사됐어요!</div>
+
+<script>
+/* ─────────────────────────────────────────────────────────
+   프로브 내용을 바꾸고 싶으면 PROBES와 PLACE만 수정하세요!
+───────────────────────────────────────────────────────── */
+const RUNGS = {
+  1:"계단 1 — 한글 읽기 (세종 입문 영역)",
+  2:"계단 2 — 기초 문장 산출 (세종 01 영역)",
+  3:"계단 3 — 과거·묘사·이유 (세종 02 영역)",
+  4:"계단 4 — 뉘앙스·확장 (세종 3A 영역)",
+};
+
+const PROBES = [
+  {id:"1a", rung:1, title:"기본 글자 읽기",
+   ask:"(화면에 보여주고)\n나무 · 바다 · 커피 · 우유",
+   expect:"소리 내어 읽게 해요.",
+   signal:"자모 결합을 바로 읽는지, 한 글자씩 더듬는지."},
+  {id:"1b", rung:1, title:"받침 읽기",
+   ask:"밥 · 책 · 옷 · 꽃 · 앞",
+   expect:"",
+   signal:"옷을 [옫]으로 읽는지, [오스]처럼 읽는지 — 대표음!"},
+  {id:"1c", rung:1, title:"이중모음 + 겹받침",
+   ask:"과자 · 의사 · 회사 · 병원\n닭 · 여덟",
+   expect:"",
+   signal:"ㅘ·ㅢ·ㅚ·ㅝ 입 모양 / 닭[닥]·여덟[여덜]."},
+  {id:"2a", rung:2, title:"자기소개",
+   ask:"이름이 뭐예요?\n어느 나라 사람이에요?",
+   expect:"기대: 저는 ○○이에요/예요. ○○ 사람이에요.",
+   signal:"이에요/예요 받침 선택, 은/는이 나오는지."},
+  {id:"2b", rung:2, title:"사물·위치",
+   ask:"(펜이나 컵을 들고) 이건 뭐예요?\n책상 위에 뭐가 있어요?",
+   expect:"기대: 펜이에요. / 책이 있어요.",
+   signal:"이/가 있어요, 위·아래·옆 위치 표현."},
+  {id:"2c", rung:2, title:"일상 현재형",
+   ask:"주말에 보통 뭐 해요?",
+   expect:"기대: 친구를 만나요. 영화를 봐요.",
+   signal:"해요체 현재형, 을/를 조사, 어순."},
+  {id:"3a", rung:3, title:"과거형 산출",
+   ask:"지난 주말에 뭐 했어요?",
+   expect:"기대: 갔어요 · 봤어요 · 먹었어요",
+   signal:"-았/었어요 산출, 축약형(봤어요)까지 되는지."},
+  {id:"3b", rung:3, title:"관형형으로 묘사",
+   ask:"가족 중에 한 명 — 어떻게 생겼어요?",
+   expect:"기대: 짧은 머리예요. 키가 큰 사람이에요. 웃는 얼굴이에요.",
+   signal:"-은/-는 관형형이 나오는지, 문장 나열(머리 짧아요)만 하는지."},
+  {id:"3c", rung:3, title:"이유 연결",
+   ask:"왜 한국어를 배워요?",
+   expect:"기대: 드라마를 좋아해서 배워요.",
+   signal:"-아/어서 · -(으)니까 · 그래서 — 문장 연결 여부."},
+  {id:"4a", rung:4, title:"변환 과제 — -아/어도",
+   ask:"\"비가 와요. 그래도 갈 거예요.\"\n이 두 문장을 한 문장으로 만들 수 있어요?",
+   expect:"기대: 비가 와도 갈 거예요.",
+   signal:"-아/어도로 변환하는지, 그래도를 그대로 쓰는지."},
+  {id:"4b", rung:4, title:"-잖아요 이해·산출",
+   ask:"\"금요일 저녁엔 길이 많이 막히잖아요.\"\n무슨 뜻인지 알아요? 비슷하게 한 문장?",
+   expect:"산출 예: 오늘 사람이 많아요. 주말이잖아요.",
+   signal:"이해만 해도 통과 / 산출까지 되면 완벽."},
+  {id:"4c", rung:4, title:"다른 사람의 소망",
+   ask:"친구나 가족은 한국에서 뭘 하고 싶어 해요?",
+   expect:"기대: 친구가 서울에 가고 싶어 해요.",
+   signal:"-고 싶어요와 -고 싶어 하다를 구분하는지."},
+];
+
+const PLACE = {
+  "1a":{t:"세종 입문 — 처음부터", d:"한글 자모부터 차근차근 시작해요.", m:"미니 레슨: 자음·모음 카드 3개 읽기 성공으로 마무리."},
+  "1b":{t:"세종 입문 — 받침 단원부터", d:"기본 글자는 OK. 받침·대표음부터 다져요.", m:"미니 레슨: 받침 하나 정복 — 옷[옫] '소리는 하나!'"},
+  "1c":{t:"세종 입문 — 이중모음·겹받침부터", d:"받침까지 OK. 이중모음과 겹받침만 채우면 한글 완성.", m:"미니 레슨: 겹받침 닭[닥] — 메뉴판의 찜닭 읽기 성공!"},
+  "2a":{t:"세종학당 01 — 초반부터", d:"읽기는 되는데 문장 산출이 아직. 이에요/예요·은/는부터.", m:"미니 레슨: 자기소개 3문장 완성 — 저는 ○○이에요. ○○에서 왔어요. 만나서 반가워요."},
+  "2b":{t:"세종학당 01 — 초반부터", d:"자기소개는 OK. 이/가 있어요·위치 표현부터 다져요.", m:"미니 레슨: 자기소개 3문장 + 이건 ○○이에요 한 문장."},
+  "2c":{t:"세종학당 01 — 중반부터 (조사 다지기)", d:"문장은 나오는데 조사(은/는·이/가·을/를)가 섞여요.", m:"미니 레슨: 조사 하나 골라 확실히 — 을/를 문장 2개 성공."},
+  "3a":{t:"세종학당 02 — 초반부터", d:"현재형 대화는 술술. 과거형 산출부터 시작해요.", m:"미니 레슨: 어제 이야기 한 문장 — 어제 ○○했어요 (학생 실제 이야기로!)"},
+  "3b":{t:"세종학당 02 — 중반부터 (묘사·관형형)", d:"과거형 OK. -은/-는 관형형과 묘사 표현부터.", m:"미니 레슨: 관형형 한 덩어리 — '짧은 머리' 만들어 쓰기."},
+  "3c":{t:"세종학당 02 — 중반부터 (문장 연결)", d:"묘사까지 OK. -아/어서 이유 연결부터 다져요.", m:"미니 레슨: -아/어서 한 문장 — '○○해서 한국어를 배워요.'"},
+  "4a":{t:"세종 02 후반 ~ 3A 초입", d:"세종 02 내용은 탄탄. 3A 문법(-아/어도 등)은 이해 단계 — 빠른 복습 후 3A 진입 추천.", m:"미니 레슨: -아/어도 한 문장 변환 성공으로 마무리."},
+  "4b":{t:"세종 02 후반 ~ 3A 초입", d:"확장 표현이 이해 단계. 3A 초반에서 산출로 끌어올려요.", m:"미니 레슨: -잖아요 한 문장 — 학생 자기 상황으로."},
+  "4c":{t:"세종 02 후반 ~ 3A 초입", d:"-고 싶어 하다 구분부터 3A에서 정리하며 시작.", m:"미니 레슨: '친구는 ○○하고 싶어 해요' 한 문장 성공."},
+  "PASS":{t:"세종학당 3A 진행!", d:"계단 4까지 산출이 자연스러워요. 3A로 시작하고, 아주 술술이었다면 3A 중반 시작이나 3B/4A 상담도 열어두세요.", m:"미니 레슨: -잖아요 한 문장 — '저 케이팝 팬이잖아요' 같은 자기 문장으로."},
+  "PASS_SHAKY":{t:"세종 02 후반 ~ 3A 초입", d:"계단 4를 완주했지만 흔들림이 있었어요. 3A 초반에서 다지며 출발하는 게 안전해요.", m:"미니 레슨: 흔들렸던 표현 중 하나를 골라 한 문장 성공으로 마무리."},
+};
+
+/* ── 상태 ── */
+let startRung = 1, idx = 0, judgments = {}, history = [], stuckAt = null, wentDown = false;
+
+const $ = id => document.getElementById(id);
+const firstIdxOfRung = r => PROBES.findIndex(p => p.rung === r);
+
+/* ── 시작 화면 ── */
+document.querySelectorAll(".opt").forEach(o => o.addEventListener("click", () => {
+  let r = Number(o.dataset.rung);
+  if ($("onlineTest").checked) r = Math.max(1, r - 1);
+  startRung = r; idx = firstIdxOfRung(r);
+  judgments = {}; history = []; stuckAt = null; wentDown = false;
+  $("scr-start").classList.add("hidden");
+  $("scr-probe").classList.remove("hidden");
+  render();
+}));
+
+/* ── 프로브 렌더 ── */
+function render(){
+  const p = PROBES[idx];
+  $("rungLabel").textContent = RUNGS[p.rung];
+  $("probeId").textContent = p.id;
+  $("probeTitle").textContent = p.title;
+  $("probeAsk").textContent = p.ask;
+  $("probeExpect").textContent = p.expect;
+  $("probeSignal").innerHTML = "<b>듣기 신호:</b> " + p.signal;
+  $("btnUndo").style.visibility = history.length ? "visible" : "hidden";
+  renderDots();
+}
+function renderDots(){
+  const box = $("dots"); box.innerHTML = "";
+  PROBES.forEach((p,i) => {
+    if (i>0 && PROBES[i-1].rung !== p.rung){ const g=document.createElement("span"); g.className="gap"; box.appendChild(g); }
+    const d = document.createElement("span");
+    d.className = "dot" + (judgments[p.id] ? " "+judgments[p.id] : "") + (i===idx && !stuckAt ? " now" : "");
+    box.appendChild(d);
+  });
+}
+
+/* ── 판정 ── */
+function judge(kind){
+  const p = PROBES[idx];
+  judgments[p.id] = kind;
+  history.push(idx);
+  if (kind === "stuck"){ stuckAt = p.id; showResult(); return; }
+  if (idx === PROBES.length - 1){ showResult(); return; }
+  idx++;
+  render();
+}
+$("btnPass").addEventListener("click", () => judge("pass"));
+$("btnShaky").addEventListener("click", () => judge("shaky"));
+$("btnStuck").addEventListener("click", () => judge("stuck"));
+$("btnSkip").addEventListener("click", () => judge("skip"));
+$("btnUndo").addEventListener("click", () => {
+  if (!history.length) return;
+  idx = history.pop();
+  delete judgments[PROBES[idx].id];
+  stuckAt = null;
+  render();
+});
+
+/* ── 결과 ── */
+function computePlacement(){
+  if (stuckAt) return PLACE[stuckAt];
+  const shaky4 = ["4a","4b","4c"].filter(id => judgments[id]==="shaky").length;
+  return shaky4 >= 2 ? PLACE["PASS_SHAKY"] : PLACE["PASS"];
+}
+function showResult(){
+  $("scr-probe").classList.add("hidden");
+  $("scr-result").classList.remove("hidden");
+  const pl = computePlacement();
+  $("placeTitle").textContent = pl.t;
+  $("placeDesc").textContent = pl.d;
+  $("miniLesson").innerHTML = "🎁 " + pl.m;
+  const KIND = {pass:"통과", shaky:"흔들림", stuck:"막힘", skip:"건너뜀"};
+  $("judgeLog").innerHTML = "판정 기록 — " + PROBES
+    .filter(p => judgments[p.id])
+    .map(p => `<span class="tag ${judgments[p.id]}">${p.id} ${KIND[judgments[p.id]]}</span>`)
+    .join("");
+  const showDown = stuckAt && idx === firstIdxOfRung(PROBES[idx].rung) && PROBES[idx].rung > 1 && !wentDown;
+  $("btnGoDown").classList.toggle("hidden", !showDown);
+}
+$("btnGoDown").addEventListener("click", () => {
+  wentDown = true;
+  const r = PROBES[idx].rung - 1;
+  stuckAt = null; idx = firstIdxOfRung(r);
+  $("scr-result").classList.add("hidden");
+  $("scr-probe").classList.remove("hidden");
+  render();
+});
+
+/* ── 복사 & 재시작 ── */
+$("btnCopy").addEventListener("click", async () => {
+  const pl = computePlacement();
+  const KIND = {pass:"통과", shaky:"흔들림", stuck:"막힘", skip:"건너뜀"};
+  const today = new Date();
+  const dstr = `${today.getFullYear()}년 ${today.getMonth()+1}월 ${today.getDate()}일`;
+  const log = PROBES.filter(p=>judgments[p.id]).map(p=>`${p.id} ${KIND[judgments[p.id]]}`).join(" · ");
+  const md =
+`## 체험 수업 배치 결과 — ${$("stuName").value || "(이름)"} (${dstr})
+
+- 학습 배경: ${$("fBg").value || "-"}
+- 동기: ${$("fWhy").value || "-"}
+- 진행: 계단 ${startRung}부터 시작${stuckAt ? ` → ${stuckAt}에서 막힘` : " → 완주"}
+- 판정 기록: ${log}
+- **추천 배치: ${pl.t}**
+- 배치 메모: ${pl.d}
+- 강점: ${$("fStrong").value || "-"}
+- 보완할 부분: ${$("fNote").value || "-"}
+- ${pl.m}`;
+  try {
+    await navigator.clipboard.writeText(md);
+    toast("복사됐어요! 노션에 붙여넣으세요 📋");
+  } catch(e) {
+    prompt("아래 내용을 복사하세요:", md);
+  }
+});
+$("btnRestart").addEventListener("click", () => {
+  ["stuName","fBg","fWhy","fStrong","fNote"].forEach(id => $(id).value = "");
+  $("onlineTest").checked = false;
+  $("scr-result").classList.add("hidden");
+  $("scr-start").classList.remove("hidden");
+});
+function toast(msg){
+  const t = $("toast"); t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2200);
+}
+</script>
+</body>
+</html>
