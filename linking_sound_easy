@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>연음 · Linking Sounds (간단한 버전)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap');
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+ 
+  :root{
+    --bg:#f8f4ec;
+    --ink:#2b2622;
+    --soft:#6b6258;
+    --line:#e3dccd;
+    --card:#fffdf8;
+    --accent:#2f8f7f;  --accent-bg:#dcefe8;
+    --hi:#ffe7a3;
+    --shadow:#efe7d6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    letter-spacing:-0.01em;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--line) 0.6px, transparent 0.6px);
+    background-size:22px 22px;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+ 
+  .hero{ text-align:center; padding:58px 0 26px; }
+  .hero .kr{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:clamp(40px,8vw,54px); letter-spacing:0; line-height:1.1; }
+  .hero .kr b{ color:var(--accent); }
+  .hero .en{ font-family:'Fraunces',serif; font-style:italic; font-size:clamp(18px,3vw,22px); color:var(--soft); margin-top:8px; letter-spacing:0; }
+  .hero .lead{ max-width:620px; margin:18px auto 0; font-size:18px; color:var(--soft); }
+ 
+  /* pronunciation pill */
+  .pron{ background:var(--hi); border-radius:7px; padding:1px 8px; font-weight:600; white-space:nowrap; letter-spacing:0; }
+  .arr{ color:var(--soft); margin:0 6px; }
+  .moved{ color:var(--accent); font-weight:700; }
+ 
+  /* THE ONE RULE */
+  .rule{
+    background:var(--card); border:2px solid var(--accent); border-radius:18px;
+    padding:26px 28px; margin:30px 0 36px; box-shadow:6px 6px 0 #d6e8e2; text-align:center;
+  }
+  .rule .tag{ display:inline-block; background:var(--accent); color:#fff; font-size:12.5px; font-weight:700; letter-spacing:.4px; padding:3px 12px; border-radius:20px; margin-bottom:14px; }
+  .rule .big{ font-family:'Gowun Dodum',sans-serif; font-size:clamp(20px,4.4vw,26px); line-height:1.5; }
+  .rule .big b{ color:var(--accent); }
+  .rule .en{ color:var(--soft); font-size:16px; margin-top:12px; }
+ 
+  /* analogy */
+  .analogy{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:0 0 40px; }
+  .analogy .box{ border-radius:14px; padding:18px 20px; border:1.5px solid var(--line); background:var(--card); }
+  .analogy .box.kor{ background:var(--accent-bg); border-color:var(--accent); }
+  .analogy .lab{ font-family:'Fraunces',serif; font-style:italic; font-size:13px; letter-spacing:.4px; text-transform:uppercase; color:var(--soft); margin-bottom:8px; }
+  .analogy .big{ font-size:21px; line-height:1.6; }
+  .analogy .sub{ font-size:14px; color:var(--soft); margin-top:8px; }
+  @media(max-width:600px){ .analogy{ grid-template-columns:1fr; } }
+ 
+  /* 꽃 feature */
+  .feature{ background:linear-gradient(180deg,#fff8ec,#fffdf8); border:2px solid var(--accent); border-radius:18px; padding:24px 26px; margin:0 0 40px; box-shadow:6px 6px 0 #d6e8e2; }
+  .feature .tagq{ display:inline-block; background:var(--accent); color:#fff; font-size:12.5px; font-weight:700; padding:3px 12px; border-radius:20px; margin-bottom:12px; }
+  .feature h2{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:24px; margin-bottom:8px; letter-spacing:0; }
+  .feature p{ margin:8px 0; }
+  .feature .en{ color:var(--soft); font-size:15.5px; }
+  .feature .chain{ font-size:18px; margin:14px 0 6px; }
+  .feature .foot{ font-size:14px; color:var(--soft); border-top:1px dashed var(--line); margin-top:14px; padding-top:12px; }
+ 
+  /* examples */
+  .ex-sec{ margin:0 0 14px; }
+  .ex-sec h2{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:22px; margin-bottom:4px; letter-spacing:0; }
+  .ex-sec .en{ color:var(--soft); font-size:15px; margin-bottom:14px; }
+  .grid{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{ background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:11px 15px; font-size:17px; white-space:nowrap; box-shadow:3px 3px 0 var(--shadow); }
+  .note{ margin:14px 0 38px; font-size:15px; color:var(--soft); background:#f4efe4; border-left:3px solid var(--line); border-radius:0 10px 10px 0; padding:12px 16px; }
+  .note b{ color:var(--ink); }
+ 
+  /* practice */
+  .practice{ background:var(--card); border:1.5px solid var(--line); border-radius:18px; padding:24px 26px; margin:8px 0 30px; box-shadow:5px 5px 0 var(--shadow); }
+  .practice h2{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:22px; margin-bottom:4px; letter-spacing:0; }
+  .practice .en{ color:var(--soft); font-size:15px; margin-bottom:16px; }
+  details.q{ border:1.5px solid var(--line); border-radius:12px; padding:13px 17px; margin-bottom:11px; background:#fffdf8; }
+  details.q summary{ cursor:pointer; font-size:17px; font-weight:600; list-style:none; }
+  details.q summary::-webkit-details-marker{ display:none; }
+  details.q summary::before{ content:'?'; display:inline-block; width:23px; height:23px; line-height:23px; text-align:center; background:var(--accent); color:#fff; border-radius:50%; font-size:13px; margin-right:10px; }
+  details.q[open] summary::before{ content:'✓'; }
+  details.q .ans{ margin-top:11px; padding-top:11px; border-top:1px dashed var(--line); font-size:16px; }
+ 
+  .more{ text-align:center; font-size:15px; color:var(--soft); background:var(--accent-bg); border:1.5px dashed var(--accent); border-radius:14px; padding:16px 20px; margin:0 0 30px; }
+  .more b{ color:var(--accent); }
+ 
+  footer{ text-align:center; color:var(--soft); font-size:13.5px; margin-top:26px; letter-spacing:0; }
+ 
+  @media(max-width:520px){ body{ font-size:16px; } .wrap{ padding:0 16px 70px; } }
+  @media print{ body{ background:#fff; background-image:none; } .rule,.feature,.chip,.practice{ box-shadow:none; } details.q .ans{ display:block; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+ 
+  <header class="hero">
+    <div class="kr">연음 <b>이어 발음하기</b></div>
+    <div class="en">Linking Sounds</div>
+    <p class="lead">받침이 다음 글자의 모음과 함께 발음돼요.<br>
+    <span style="font-size:16px">When a vowel follows, the 받침 links to it.</span></p>
+  </header>
+ 
+  <!-- THE ONE RULE -->
+  <section class="rule">
+    <span class="tag">규칙은 하나 · Just one rule</span>
+    <div class="big">받침 뒤에 <b>모음</b>(이·을·에·아·어…)이 오면,<br>받침이 다음 글자의 모음과 <b>함께 발음돼요.</b></div>
+    <p class="en">When a vowel comes right after a 받침, the 받침 joins that vowel and the two are pronounced together.</p>
+  </section>
+ 
+  <!-- ANALOGY -->
+  <section class="analogy">
+    <div class="box eng">
+      <div class="lab">English</div>
+      <div class="big">an apple <span class="arr">→</span> “a&nbsp;<b>NAP</b>&nbsp;ple”</div>
+      <div class="sub">‘an’의 n이 ‘apple’로 넘어가 함께 소리 나죠.<br>The n of “an” links onto “apple.”</div>
+    </div>
+    <div class="box kor">
+      <div class="lab">Korean</div>
+      <div class="big">옷이 <span class="arr">→</span> <span class="pron">[오<span class="moved">시</span>]</span></div>
+      <div class="sub">받침 ㅅ이 ‘이’와 만나 [시]가 돼요.<br>받침 ㅅ links with ‘이’ → [시].</div>
+    </div>
+  </section>
+ 
+  <!-- 꽃 FEATURE -->
+  <section class="feature">
+    <span class="tagq">오늘의 질문 · Today’s question</span>
+    <h2>왜 ‘꽃이요’는 [꼬<span class="moved">치</span>요]일까요?</h2>
+    <p>‘꽃’은 받침 <b>ㅊ</b>으로 끝나요. 뒤에 <b>이</b>가 오니까, 받침 ㅊ이 ‘이’와 만나서 <b>[치]</b>가 돼요. 그래서 [꼬<span class="moved">치</span>요]가 돼요!</p>
+    <p class="en">‘꽃’ ends in ㅊ. Since the vowel 이 follows, ㅊ links with 이 → [치], giving [꼬치요].</p>
+    <div class="chain">‘꽃’만 말하면 <span class="pron">[꼳]</span> · 그런데 모음이 붙으면 ㅊ이 살아나요 →
+      <span class="pron">꽃이 [꼬<span class="moved">치</span>]</span>
+      <span class="pron">꽃을 [토<span class="moved">츨</span>]</span>
+      <span class="pron">꽃에 [토<span class="moved">체</span>]</span>
+    </div>
+    <p class="foot">참고 — ‘꽃 안’처럼 <b>단어 두 개</b>가 붙으면 소리가 살짝 달라져요(받침이 ㄷ으로). 그 경우는 〈연음 법칙 — 자세한 버전〉에서 다뤄요.</p>
+  </section>
+ 
+  <!-- EXAMPLES: 조사 -->
+  <section class="ex-sec">
+    <h2>조사와 이어질 때 (이 · 을 · 에)</h2>
+    <p class="en">With particles 이 / 을 / 에</p>
+    <div class="grid">
+      <span class="chip">옷이 <span class="arr">→</span> <span class="pron">[오시]</span></span>
+      <span class="chip">옷을 <span class="arr">→</span> <span class="pron">[오슬]</span></span>
+      <span class="chip">옷에 <span class="arr">→</span> <span class="pron">[오세]</span></span>
+      <span class="chip">집이 <span class="arr">→</span> <span class="pron">[지비]</span></span>
+      <span class="chip">집에 <span class="arr">→</span> <span class="pron">[지베]</span></span>
+      <span class="chip">책을 <span class="arr">→</span> <span class="pron">[채글]</span></span>
+      <span class="chip">밥이 <span class="arr">→</span> <span class="pron">[바비]</span></span>
+      <span class="chip">사람이 <span class="arr">→</span> <span class="pron">[사라미]</span></span>
+      <span class="chip">음악을 <span class="arr">→</span> <span class="pron">[으마글]</span></span>
+      <span class="chip">한국어 <span class="arr">→</span> <span class="pron">[한구거]</span></span>
+    </div>
+  </section>
+ 
+  <!-- EXAMPLES: 동사 -->
+  <section class="ex-sec">
+    <h2>동사가 이어질 때 (-아요 · -어요)</h2>
+    <p class="en">With verb endings -아요 / -어요</p>
+    <div class="grid">
+      <span class="chip">먹어요 <span class="arr">→</span> <span class="pron">[머거요]</span></span>
+      <span class="chip">읽어요 <span class="arr">→</span> <span class="pron">[일거요]</span></span>
+      <span class="chip">앉아요 <span class="arr">→</span> <span class="pron">[안자요]</span></span>
+      <span class="chip">있어요 <span class="arr">→</span> <span class="pron">[이써요]</span></span>
+    </div>
+  </section>
+  <div class="note"><b>받침이 두 개여도 똑같아요.</b> 읽어요·앉아요·있어요처럼 받침이 두 개(겹받침·쌍받침)인 단어도, 모음이 오면 자연스럽게 이어서 발음돼요.<br>
+  <span style="color:var(--soft)">Even words with two 받침 link the same way when a vowel follows.</span></div>
+ 
+  <!-- PRACTICE -->
+  <section class="practice">
+    <h2>직접 해보기 · Try it</h2>
+    <p class="en">Tap to reveal the pronunciation.</p>
+    <details class="q"><summary>집이 — 어떻게 읽어요?</summary><div class="ans"><span class="pron">[지비]</span> — 받침 ㅂ이 ‘이’와 함께 발음돼요.</div></details>
+    <details class="q"><summary>책을 — 어떻게 읽어요?</summary><div class="ans"><span class="pron">[채글]</span> — 받침 ㄱ이 ‘을’과 함께 발음돼요.</div></details>
+    <details class="q"><summary>꽃을, 꽃에는?</summary><div class="ans"><span class="pron">[꼬츨]</span> · <span class="pron">[꼬체]</span> — 받침 ㅊ이 그대로 이어져요.</div></details>
+    <details class="q"><summary>먹어요 — 어떻게 읽어요?</summary><div class="ans"><span class="pron">[머거요]</span> — 받침 ㄱ이 ‘어’와 함께 발음돼요.</div></details>
+  </section>
+ 
+  <div class="more">더 알고 싶다면 — 단어와 단어가 붙는 경우, 자모 이름의 예외 같은 내용은 <b>〈연음 법칙 — 자세한 버전〉</b>에서 만나요.</div>
+ 
+  <footer>한국어 발음 가이드 · 연음(Linking Sounds) · 쉬운 버전</footer>
+ 
+</div>
+</body>
+</html>
