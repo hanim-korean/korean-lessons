@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국어 동사 활용 '해요'체 — -아요 / -어요 / -여요(해요)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f8f8f6;padding:24px 20px;color:#1a1a1a}
+.wrap{max-width:780px;margin:0 auto}
+h1{font-size:20px;font-weight:700;margin-bottom:2px;color:#111}
+.h1-en{font-size:13px;font-weight:500;color:#374151;margin-bottom:10px}
+.desc{font-size:13px;color:#374151;background:#eff6ff;border-left:3px solid #3b82f6;border-radius:6px;padding:10px 14px;line-height:1.7;margin-bottom:10px}
+.desc .en{color:#6b7280;font-size:12px}
+.subtitle{font-size:12px;color:#9ca3af;margin-bottom:20px}
+.tabs{display:flex;gap:6px;margin-bottom:1.5rem;flex-wrap:wrap}
+.tab{font-size:13px;padding:6px 14px;border-radius:8px;border:1px solid #d1d5db;background:#f3f4f6;color:#6b7280;cursor:pointer}
+.tab.active{background:#dbeafe;color:#1d4ed8;border-color:#93c5fd}
+.section{display:none}
+.section.active{display:block}
+.sec-label{font-size:11px;color:#6b7280;font-weight:600;letter-spacing:.04em;margin-bottom:12px}
+.rule-box{background:#fff;border:1px solid #e5e7eb;border-left:4px solid #3b82f6;border-radius:10px;padding:12px 16px;margin-bottom:14px;line-height:1.7}
+.rule-box .rk{font-size:14px;color:#111;font-weight:600}
+.rule-box .re{font-size:12px;color:#6b7280;margin-top:2px}
+.card-area{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:1.5rem}
+.fc{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:14px 10px;text-align:center;cursor:pointer;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;transition:border-color .15s}
+.fc:hover{border-color:#93c5fd}
+.fc.flipped{background:#dbeafe}
+.fc-kr{font-size:19px;font-weight:600;color:#111}
+.fc.flipped .fc-kr{color:#1d4ed8;font-size:21px}
+.fc-en{font-size:11px;color:#6b7280}
+.fc.flipped .fc-en{display:none}
+.score-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.score-lbl{font-size:13px;color:#6b7280}
+.score-num{font-size:18px;font-weight:700;color:#111}
+.reset-btn{font-size:12px;padding:4px 12px;border-radius:20px;border:1px solid #e5e7eb;background:#f3f4f6;color:#6b7280;cursor:pointer}
+.reset-btn:hover{background:#fee2e2;color:#b91c1c}
+.qcard{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:1rem 1.25rem;margin-bottom:10px}
+.qnum{font-size:11px;font-weight:600;color:#b91c1c;margin-bottom:6px}
+.qq{font-size:14px;font-weight:600;color:#111;line-height:1.6;margin-bottom:10px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{font-size:14px;font-weight:600;color:#374151;background:#f3f4f6;border-radius:8px;padding:7px 14px;cursor:pointer;border:1px solid #e5e7eb;transition:background .15s}
+.opt:hover{background:#dbeafe;color:#1d4ed8}
+.opt.correct{background:#dcfce7;color:#15803d;border-color:#86efac}
+.opt.wrong{background:#fee2e2;color:#b91c1c;border-color:#fca5a5}
+.opt.disabled{pointer-events:none}
+.fb{font-size:13px;margin-top:8px;padding:6px 10px;border-radius:8px;display:none;line-height:1.5}
+.fb.show{display:block}
+.fb.ok{background:#dcfce7;color:#15803d}
+.fb.no{background:#fee2e2;color:#b91c1c}
+.irr-rule{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:1rem 1.25rem;margin-bottom:12px}
+.irr-title{font-size:15px;font-weight:700;color:#111;margin-bottom:4px}
+.irr-sub{font-size:12.5px;color:#374151;margin-bottom:2px;line-height:1.6}
+.irr-sub-en{font-size:12px;color:#6b7280;margin-bottom:10px;line-height:1.6}
+.irr-table{width:100%;border-collapse:collapse;font-size:13px}
+.irr-table th{text-align:left;color:#6b7280;font-weight:600;padding:4px 8px 6px;border-bottom:1px solid #e5e7eb}
+.irr-table td{padding:5px 8px;border-bottom:1px solid #f3f4f6;color:#111;vertical-align:top}
+.irr-table td:last-child{color:#1d4ed8;font-weight:600}
+.irr-table tr:last-child td{border-bottom:none}
+h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
+.irr-table tr.reg td:last-child{color:#15803d;font-weight:600}
+.reg-tag{display:inline-block;font-size:10px;font-weight:600;padding:1px 7px;border-radius:10px;background:#dcfce7;color:#15803d;margin-left:5px;vertical-align:middle}
+.star{color:#d97706;font-weight:700}
+.irr-table tr.star-row td:last-child{color:#d97706;font-weight:700}
+.legend{font-size:11.5px;color:#6b7280;margin:-4px 0 12px;line-height:1.6}
+.legend .reg-tag{margin-left:0}
+.rule-badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;background:#fef3c7;color:#92400e;margin-left:6px;vertical-align:middle}
+.note-box{background:#f9fafb;border-radius:6px;padding:8px 12px;font-size:12px;color:#6b7280;margin-top:8px;line-height:1.6;border-left:3px solid #3b82f6}
+.ex{font-size:14px;color:#111;padding:5px 4px;border-bottom:1px solid #f3f4f6;line-height:1.7}
+.ex:last-of-type{border-bottom:none}
+.ex .en{font-size:11.5px;color:#9ca3af}
+.ex b{color:#1d4ed8}
+.ex .mid{color:#6b7280}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>한국어 동사 활용 '해요'체<br><span class="h1-sub">-아요 / -어요 / -여요(해요)</span></h1>
+<p class="h1-en">Korean Verb Conjugation '해요' form — -아요 / -어요 / -여요(해요)</p>
+<div class="desc">
+  '-아요/-어요/-여요'는 동사나 형용사에 붙어 동작이나 상태를 서술할 때 사용합니다.<br>
+  <span class="en">'-아요/-어요/-여요(해요)' is attached to a verb or adjective and describes an action or state.</span>
+</div>
+<p class="subtitle">플래시카드를 클릭하면 활용형이 나와요. 퀴즈는 다시 하기를 누르면 문제가 섞여요!</p>
+
+<div class="tabs">
+  <div class="tab active" data-target="fc12">-아요 / -어요</div>
+  <div class="tab" data-target="fc3">-여요(해요)</div>
+  <div class="tab" data-target="comb">모음 축약 Combining Vowels</div>
+  <div class="tab" data-target="irr">불규칙 Irregular</div>
+  <div class="tab" data-target="q1">퀴즈 -아요</div>
+  <div class="tab" data-target="q2">퀴즈 -어요</div>
+  <div class="tab" data-target="q3">퀴즈 -여요(해요)</div>
+  <div class="tab" data-target="q4">퀴즈 불규칙</div>
+</div>
+
+<!-- ─────────── -아요 / -어요 (통합) ─────────── -->
+<div id="fc12" class="section active">
+  <div class="rule-box">
+    <div class="rk">Rule 1. 어간의 마지막 모음이 <b>ㅏ</b> 또는 <b>ㅗ</b>이면 <b>-아요</b>를 붙여요.</div>
+    <div class="re">If the verb or adjective stem ends with the vowel ㅏ or ㅗ, attach <b>아요</b>.</div>
+  </div>
+  <p class="sec-label">-아요 WORDS</p>
+  <div class="card-area" id="fc1-cards"></div>
+
+  <div class="rule-box">
+    <div class="rk">Rule 2. 어간의 마지막 모음이 <b>그 외의 모음</b>이면 <b>-어요</b>를 붙여요.</div>
+    <div class="re">If the verb or adjective stem ends with any other vowel, attach <b>어요</b>.</div>
+  </div>
+  <p class="sec-label">-어요 WORDS</p>
+  <div class="card-area" id="fc2-cards"></div>
+</div>
+
+<!-- ─────────── -여요(해요) ─────────── -->
+<div id="fc3" class="section">
+  <div class="rule-box">
+    <div class="rk">Rule. 어간이 <b>'-하다'</b>로 끝나면 <b>-여요</b>를 붙여요. '하여요'는 실제 대화에서 거의 항상 <b>'해요'</b>로 줄여서 말해요.</div>
+    <div class="re">If the verb or adjective stem ends with '-하다', attach <b>-여요</b>. 하여요 is almost always contracted to <b>해요</b>.</div>
+  </div>
+  <div class="irr-rule">
+    <div class="ex">조용하다 <span class="en">(to be quiet)</span> <span class="mid">→ 조용하여요 →</span> <b>조용해요</b></div>
+    <div class="ex">깨끗하다 <span class="en">(to be clean)</span> <span class="mid">→ 깨끗하여요 →</span> <b>깨끗해요</b></div>
+    <div class="ex">행복하다 <span class="en">(to be happy)</span> <span class="mid">→ 행복하여요 →</span> <b>행복해요</b></div>
+  </div>
+  <p class="sec-label">-여요(해요) WORDS</p>
+  <div class="card-area" id="fc3-cards"></div>
+</div>
+
+<!-- ─────────── 모음 축약 Combining Vowels ─────────── -->
+<div id="comb" class="section">
+  <p class="sec-label">모음 축약 — 받침이 없을 때 모음끼리 합쳐져요! COMBINING VOWELS</p>
+
+  <div class="irr-rule">
+    <div class="irr-title">ㅏ + 아요 → 하나로!</div>
+    <div class="irr-sub">받침이 없고 어간이 <b>ㅏ</b>로 끝나면, '아요'의 '아'가 겹쳐서 하나로 합쳐져요.</div>
+    <div class="irr-sub-en">If the verb &amp; adjective stem doesn't have a final consonant and ends with 'ㅏ', attach -(아)요 — the two ㅏ sounds merge into one.</div>
+    <div class="ex">가다 <span class="en">(to go)</span> <span class="mid">→ '가-' + 아요 → 가(아)요 →</span> <b>가요</b></div>
+    <div class="ex">자다 <span class="en">(to sleep)</span> <span class="mid">→ 자(아)요 →</span> <b>자요</b></div>
+    <div class="ex">사다 <span class="en">(to buy)</span> <span class="mid">→ 사(아)요 →</span> <b>사요</b></div>
+  </div>
+
+  <div class="irr-rule">
+    <div class="irr-title">ㅗ + ㅏ → 와</div>
+    <div class="irr-sub">받침이 없고 어간이 <b>ㅗ</b>로 끝나면, ㅗ와 ㅏ가 합쳐져 <b>'ㅘ'</b>가 돼요.</div>
+    <div class="irr-sub-en">If the verb &amp; adjective stem doesn't have a final consonant and ends with 'ㅗ', attach -ㅏ요 — ㅗ + ㅏ combine into ㅘ.</div>
+    <div class="ex">오다 <span class="en">(to come)</span> <span class="mid">→ '오-' + ㅏ요 →</span> <b>와요</b></div>
+    <div class="ex">보다 <span class="en">(to see/look)</span> <span class="mid">→ '보-' + ㅏ요 →</span> <b>봐요</b></div>
+  </div>
+
+  <div class="irr-rule">
+    <div class="irr-title">ㅏ, ㅗ가 아니면 → -어요</div>
+    <div class="irr-sub">마지막 모음이 ㅏ/ㅗ가 아니면 <b>-어요</b>를 붙여요. 받침이 있으면 그대로 붙이면 끝!</div>
+    <div class="irr-sub-en">If the final vowel of the word stem is something else rather than 'ㅏ' or 'ㅗ', attach -어요. With a final consonant, just attach it.</div>
+    <div class="ex">열다 <span class="en">(to open)</span> <span class="mid">→</span> <b>열어요</b></div>
+    <div class="ex">읽다 <span class="en">(to read)</span> <span class="mid">→</span> <b>읽어요</b></div>
+    <div class="ex">먹다 <span class="en">(to eat)</span> <span class="mid">→</span> <b>먹어요</b></div>
+  </div>
+
+  <div class="irr-rule">
+    <div class="irr-title">ㅜ + ㅓ → 워</div>
+    <div class="irr-sub">받침 없이 어간이 <b>ㅜ</b>로 끝나면, ㅜ와 ㅓ가 합쳐져 <b>'ㅝ'</b>가 돼요.</div>
+    <div class="irr-sub-en">If the word stem especially ends in the vowel 'ㅜ', attach ㅓ요 — ㅜ + ㅓ combine into ㅝ.</div>
+    <div class="ex">배우다 <span class="en">(to learn)</span> <span class="mid">→ '배우-' + ㅓ요 →</span> <b>배워요</b></div>
+    <div class="ex">바꾸다 <span class="en">(to change)</span> <span class="mid">→ '바꾸-' + ㅓ요 →</span> <b>바꿔요</b></div>
+    <div class="ex">멈추다 <span class="en">(to stop)</span> <span class="mid">→ '멈추-' + ㅓ요 →</span> <b>멈춰요</b></div>
+  </div>
+
+  <div class="irr-rule">
+    <div class="irr-title">ㅣ + ㅓ → 여</div>
+    <div class="irr-sub">받침 없이 어간이 <b>ㅣ</b>로 끝나면, ㅣ와 ㅓ가 합쳐져 <b>'ㅕ'</b>가 돼요.</div>
+    <div class="irr-sub-en">If the word stem especially ends in the vowel 'ㅣ', attach ㅓ요 — ㅣ + ㅓ changes to 'ㅕ'.</div>
+    <div class="ex">기다리다 <span class="en">(to wait)</span> <span class="mid">→ '기다리-' + ㅓ →</span> <b>기다려요</b></div>
+    <div class="ex">마시다 <span class="en">(to drink)</span> <span class="mid">→ '마시-' + ㅓ →</span> <b>마셔요</b></div>
+    <div class="ex">지다 <span class="en">(to lose)</span> <span class="mid">→ '지-' + ㅓ →</span> <b>져요</b></div>
+  </div>
+
+  <div class="irr-rule">
+    <div class="irr-title">ㅐ, ㅓ, ㅕ → 그냥 '요'만!</div>
+    <div class="irr-sub">받침 없이 어간이 <b>ㅐ, ㅓ, ㅕ</b>로 끝나면, '어'가 흡수되고 <b>'요'</b>만 붙어요.</div>
+    <div class="irr-sub-en">If the word stem ends in the vowel 'ㅐ, ㅓ, or ㅕ' (no final consonant), the 어 is absorbed — just attach '요'.</div>
+    <div class="ex">매다 <span class="en">(to tie)</span> <span class="mid">→ 매(어)요 →</span> <b>매요</b></div>
+    <div class="ex">캐다 <span class="en">(to dig)</span> <span class="mid">→ 캐(어)요 →</span> <b>캐요</b></div>
+    <div class="ex">서다 <span class="en">(to stand)</span> <span class="mid">→ 서(어)요 →</span> <b>서요</b></div>
+    <div class="ex">펴다 <span class="en">(to spread)</span> <span class="mid">→ 펴(어)요 →</span> <b>펴요</b></div>
+  </div>
+
+  <div class="irr-rule">
+    <div class="irr-title">ㅚ + ㅓ → 왜</div>
+    <div class="irr-sub">어간이 <b>ㅚ</b>로 끝나면 ㅚ와 ㅓ가 합쳐져 <b>'ㅙ'</b>가 돼요.</div>
+    <div class="irr-sub-en">If the stem ends in 'ㅚ', ㅚ + ㅓ combine into 'ㅙ'.</div>
+    <div class="ex">되다 <span class="en">(to become)</span> <span class="mid">→ '되-' + ㅓ요 →</span> <b>돼요</b></div>
+  </div>
+</div>
+
+<!-- ─────────── 불규칙 Irregular ─────────── -->
+<div id="irr" class="section">
+  <p class="sec-label">불규칙 활용 — 규칙형을 완전히 익힌 후에 봐요! IRREGULAR CONJUGATION</p>
+  <p class="legend"><span class="reg-tag">규칙 regular</span> = 모양은 비슷하지만 규칙 활용이에요 (헷갈리기 쉬운 단어!) &nbsp;·&nbsp; <span class="star">*</span> = 특별한 예외 special exception</p>
+
+  <div class="irr-rule">
+    <div class="irr-title">ㅡ 탈락 <span class="rule-badge">ㅡ 탈락</span></div>
+    <div class="irr-sub">어간 끝 모음 <b>ㅡ</b>가 모음 어미 앞에서 사라져요. 앞 음절 모음이 ㅏ/ㅗ이면 -아요, 아니면 -어요를 붙여요.</div>
+    <div class="irr-sub-en">The final vowel ㅡ drops before -아/어요. If the previous syllable has ㅏ/ㅗ, attach -아요; otherwise -어요.</div>
+    <table class="irr-table">
+      <tr><th>기본형</th><th>뜻</th><th>→ 활용형</th></tr>
+      <tr><td>쓰다</td><td>to write / to use</td><td>써요</td></tr>
+      <tr><td>끄다</td><td>to turn off</td><td>꺼요</td></tr>
+      <tr><td>크다</td><td>to be big (adj)</td><td>커요</td></tr>
+      <tr><td>예쁘다</td><td>to be pretty (adj)</td><td>예뻐요</td></tr>
+      <tr><td>바쁘다</td><td>to be busy (adj)</td><td>바빠요</td></tr>
+      <tr><td>아프다</td><td>to be sick / hurt (adj)</td><td>아파요</td></tr>
+      <tr><td>고프다</td><td>to be hungry (adj)</td><td>고파요</td></tr>
+      <tr><td>잠그다</td><td>to lock</td><td>잠가요</td></tr>
+      <tr><td>따르다</td><td>to follow / to pour</td><td>따라요</td></tr>
+    </table>
+    <div class="note-box">쓰다 → 쓰- → ㅡ 탈락 → 앞에 모음이 없으면 -어요 → <b>써요</b> / 바쁘다 → 바ㅃ(ㅏ) + 아요 → <b>바빠요</b><br>주의: <b>따르다</b>는 '르'로 끝나지만 르 불규칙이 아니라 ㅡ 탈락이에요 (따라요). 반대로 <b>빠르다, 다르다</b>는 르 불규칙!</div>
+  </div>
+
+  <div class="irr-rule">
+    <div class="irr-title">ㄷ 불규칙 <span class="rule-badge">ㄷ 불규칙</span></div>
+    <div class="irr-sub">받침이 <b>ㄷ</b>인 일부 동사는 모음 앞에서 ㄷ이 <b>ㄹ</b>로 바뀌어요.</div>
+    <div class="irr-sub-en">In some verbs with final consonant ㄷ, the ㄷ changes to ㄹ before a vowel.</div>
+    <table class="irr-table">
+      <tr><th>기본형</th><th>뜻</th><th>→ 활용형</th></tr>
+      <tr><td>걷다</td><td>to walk</td><td>걸어요</td></tr>
+      <tr><td>듣다</td><td>to listen / hear</td><td>들어요</td></tr>
+      <tr><td>묻다</td><td>to ask</td><td>물어요</td></tr>
+      <tr><td>깨닫다</td><td>to realize</td><td>깨달아요</td></tr>
+      <tr><td>싣다</td><td>to load</td><td>실어요</td></tr>
+      <tr class="reg"><td>묻다</td><td>to bury</td><td>묻어요 <span class="reg-tag">규칙 regular</span></td></tr>
+      <tr class="reg"><td>받다</td><td>to receive</td><td>받아요 <span class="reg-tag">규칙 regular</span></td></tr>
+      <tr class="reg"><td>닫다</td><td>to close</td><td>닫아요 <span class="reg-tag">규칙 regular</span></td></tr>
+      <tr class="reg"><td>믿다</td><td>to believe</td><td>믿어요 <span class="reg-tag">규칙 regular</span></td></tr>
+      <tr class="reg"><td>얻다</td><td>to get / gain</td><td>얻어요 <span class="reg-tag">규칙 regular</span></td></tr>
+      <tr class="reg"><td>쏟다</td><td>to spill</td><td>쏟아요 <span class="reg-tag">규칙 regular</span></td></tr>
+    </table>
+    <div class="note-box"><b>묻다</b>는 뜻이 중요해요! <b>묻다 = to ask</b>는 불규칙 → <b>물어요</b>. 하지만 <b>묻다 = to bury</b>는 규칙 → <b>묻어요</b>.</div>
+  </div>
+
+  <div class="irr-rule">
+    <div class="irr-title">ㅂ 불규칙 <span class="rule-badge">ㅂ 불규칙</span></div>
+    <div class="irr-sub">받침이 <b>ㅂ</b>인 일부 형용사/동사는 모음 앞에서 ㅂ이 <b>우</b>(대부분) 또는 <b>오</b>(돕다·곱다)로 바뀌어요.</div>
+    <div class="irr-sub-en">In some verbs and adjectives, final ㅂ changes to 우 (most) or 오 (only 돕다, 곱다) before a vowel.</div>
+    <table class="irr-table">
+      <tr><th>기본형</th><th>뜻</th><th>→ 활용형</th></tr>
+      <tr><td>덥다</td><td>to be hot (adj)</td><td>더워요</td></tr>
+      <tr><td>춥다</td><td>to be cold (adj)</td><td>추워요</td></tr>
+      <tr><td>맵다</td><td>to be spicy (adj)</td><td>매워요</td></tr>
+      <tr><td>어렵다</td><td>to be difficult (adj)</td><td>어려워요</td></tr>
+      <tr><td>쉽다</td><td>to be easy (adj)</td><td>쉬워요</td></tr>
+      <tr><td>고맙다</td><td>to be thankful (adj)</td><td>고마워요</td></tr>
+      <tr><td>아름답다</td><td>to be beautiful (adj)</td><td>아름다워요</td></tr>
+      <tr><td>눕다</td><td>to lie down</td><td>누워요</td></tr>
+      <tr><td>새롭다</td><td>to be new (adj)</td><td>새로워요</td></tr>
+      <tr><td>부럽다</td><td>to be envious (adj)</td><td>부러워요</td></tr>
+      <tr><td>굽다</td><td>to roast / grill</td><td>구워요</td></tr>
+      <tr class="star-row"><td><span class="star">*</span>돕다</td><td>to help</td><td>도와요 (ㅂ→오!)</td></tr>
+      <tr class="star-row"><td><span class="star">*</span>곱다</td><td>to be lovely (adj)</td><td>고와요 (ㅂ→오!)</td></tr>
+      <tr class="reg"><td>입다</td><td>to wear</td><td>입어요 <span class="reg-tag">규칙 regular</span></td></tr>
+      <tr class="reg"><td>잡다</td><td>to hold / catch</td><td>잡아요 <span class="reg-tag">규칙 regular</span></td></tr>
+      <tr class="reg"><td>접다</td><td>to fold</td><td>접어요 <span class="reg-tag">규칙 regular</span></td></tr>
+      <tr class="reg"><td>좁다</td><td>to be narrow (adj)</td><td>좁아요 <span class="reg-tag">규칙 regular</span></td></tr>
+    </table>
+    <div class="note-box"><span class="star">*</span> = 특별한 예외예요! special exceptions<br>대부분은 <b>우</b>로 바뀌지만 (더워요), <b><span class="star">*</span>돕다·<span class="star">*</span>곱다</b>만 <b>오</b>로 바뀌어요 (도와요·고와요). 날씨 어휘랑 함께 배우면 자연스러워요 — 오늘 너무 더워요!</div>
+  </div>
+
+  <div class="irr-rule">
+    <div class="irr-title">ㅅ 불규칙 <span class="rule-badge">ㅅ 불규칙</span></div>
+    <div class="irr-sub">받침이 <b>ㅅ</b>인 일부 동사는 모음 앞에서 ㅅ이 <b>사라져요</b>. 단, ㅅ이 사라져도 모음은 합쳐지지 않아요!</div>
+    <div class="irr-sub-en">In some verbs, final ㅅ drops before a vowel. Even after ㅅ drops, the vowels do NOT contract (지어요, not 져요).</div>
+    <table class="irr-table">
+      <tr><th>기본형</th><th>뜻</th><th>→ 활용형</th></tr>
+      <tr><td>짓다</td><td>to build / make</td><td>지어요</td></tr>
+      <tr><td>낫다</td><td>to recover / be better</td><td>나아요</td></tr>
+      <tr><td>젓다</td><td>to stir</td><td>저어요</td></tr>
+      <tr><td>잇다</td><td>to connect</td><td>이어요</td></tr>
+      <tr><td>붓다</td><td>to pour / to swell</td><td>부어요</td></tr>
+      <tr class="reg"><td>웃다</td><td>to laugh / smile</td><td>웃어요 <span class="reg-tag">규칙 regular</span></td></tr>
+      <tr class="reg"><td>씻다</td><td>to wash</td><td>씻어요 <span class="reg-tag">규칙 regular</span></td></tr>
+      <tr class="reg"><td>벗다</td><td>to take off</td><td>벗어요 <span class="reg-tag">규칙 regular</span></td></tr>
+    </table>
+    <div class="note-box">짓다 → 지(ㅣ) + 어요 → <b>지어요</b> (져요 ✗) / 낫다 → 나(ㅏ) + 아요 → <b>나아요</b> (나요 ✗) — ㅅ은 사라져도 흔적을 남겨요!</div>
+  </div>
+
+  <div class="irr-rule">
+    <div class="irr-title">ㅎ 불규칙 <span class="rule-badge">ㅎ 불규칙</span></div>
+    <div class="irr-sub">받침이 <b>ㅎ</b>인 일부 형용사는 ㅎ이 사라지고 어미와 합쳐져 <b>ㅐ/ㅒ/ㅔ</b>가 돼요.</div>
+    <div class="irr-sub-en">In some adjectives, final ㅎ drops and the vowel combines with the ending into ㅐ/ㅒ/ㅔ.</div>
+    <table class="irr-table">
+      <tr><th>기본형</th><th>뜻</th><th>→ 활용형</th></tr>
+      <tr><td>그렇다</td><td>to be so</td><td>그래요</td></tr>
+      <tr><td>어떻다</td><td>to be how</td><td>어때요</td></tr>
+      <tr><td>빨갛다</td><td>to be red (adj)</td><td>빨개요</td></tr>
+      <tr><td>하얗다</td><td>to be white (adj)</td><td>하얘요 (ㅑ→ㅒ!)</td></tr>
+      <tr><td>노랗다</td><td>to be yellow (adj)</td><td>노래요</td></tr>
+      <tr><td>누렇다</td><td>to be golden yellow (adj)</td><td>누레요 (ㅓ→ㅔ!)</td></tr>
+      <tr class="reg"><td>좋다</td><td>to be good (adj)</td><td>좋아요 <span class="reg-tag">규칙 regular</span></td></tr>
+      <tr class="reg"><td>많다</td><td>to be many (adj)</td><td>많아요 <span class="reg-tag">규칙 regular</span></td></tr>
+      <tr class="reg"><td>넣다</td><td>to put in</td><td>넣어요 <span class="reg-tag">규칙 regular</span></td></tr>
+    </table>
+    <div class="note-box">그렇다 → 그러 + ㅐ요 → <b>그래요</b> / 하얗다 → 하야 + ㅐ요 → <b>하얘요</b> (ㅑ라서 ㅒ) / 누렇다 → 누러 + ㅐ요 → <b>누레요</b> (ㅓ라서 ㅔ)<br>주의: <b>좋다</b>는 규칙이에요! → 좋아요 (좋애요 ✗)</div>
+  </div>
+
+  <div class="irr-rule">
+    <div class="irr-title">르 불규칙 <span class="rule-badge">르 불규칙</span></div>
+    <div class="irr-sub">어간이 <b>르</b>로 끝나면 ㅡ가 빠지고 <b>ㄹ이 앞 음절 받침</b>으로 붙어서 <b>-라요/-러요</b>가 돼요.</div>
+    <div class="irr-sub-en">When the stem ends in 르, ㅡ drops and an extra ㄹ attaches to the previous syllable — the ending becomes -라요/-러요.</div>
+    <table class="irr-table">
+      <tr><th>기본형</th><th>뜻</th><th>→ 활용형</th></tr>
+      <tr><td>모르다</td><td>to not know</td><td>몰라요</td></tr>
+      <tr><td>부르다</td><td>to call / to sing</td><td>불러요</td></tr>
+      <tr><td>다르다</td><td>to be different (adj)</td><td>달라요</td></tr>
+      <tr><td>빠르다</td><td>to be fast (adj)</td><td>빨라요</td></tr>
+      <tr><td>자르다</td><td>to cut</td><td>잘라요</td></tr>
+      <tr><td>흐르다</td><td>to flow</td><td>흘러요</td></tr>
+      <tr><td>따르다</td><td>to follow / to pour</td><td>따라요 (예외! ㅡ 탈락)</td></tr>
+    </table>
+    <div class="note-box">모르다 → 모르- → ㄹ이 앞으로 → 몰 + 라요 → <b>몰라요</b><br>주의: <b>따르다</b>만 예외로 르 불규칙이 아니라 ㅡ 탈락이에요 → <b>따라요</b> (딸라요 ✗)</div>
+  </div>
+</div>
+
+<div id="q1" class="section"><p class="sec-label">-아요 퀴즈 — 10문제</p><div class="score-row"><span class="score-lbl">점수</span><span class="score-num" id="s1">0</span><span class="score-lbl">/ 100</span><button class="reset-btn" type="button" data-reset="1">다시 하기</button></div><div id="q1-wrap"></div></div>
+<div id="q2" class="section"><p class="sec-label">-어요 퀴즈 — 10문제</p><div class="score-row"><span class="score-lbl">점수</span><span class="score-num" id="s2">0</span><span class="score-lbl">/ 100</span><button class="reset-btn" type="button" data-reset="2">다시 하기</button></div><div id="q2-wrap"></div></div>
+<div id="q3" class="section"><p class="sec-label">-여요(해요) 퀴즈 — 10문제</p><div class="score-row"><span class="score-lbl">점수</span><span class="score-num" id="s3">0</span><span class="score-lbl">/ 100</span><button class="reset-btn" type="button" data-reset="3">다시 하기</button></div><div id="q3-wrap"></div></div>
+<div id="q4" class="section"><p class="sec-label">불규칙 퀴즈 — 10문제 (규칙인 척하는 함정 단어도 있어요!)</p><div class="score-row"><span class="score-lbl">점수</span><span class="score-num" id="s4">0</span><span class="score-lbl">/ 100</span><button class="reset-btn" type="button" data-reset="4">다시 하기</button></div><div id="q4-wrap"></div></div>
+
+</div>
+
+<script>
+(function(){
+  var data = {
+    1:[
+      {kr:'앉다',en:'to sit',conj:'앉아요'},
+      {kr:'오다',en:'to come',conj:'와요'},
+      {kr:'자다',en:'to sleep',conj:'자요'},
+      {kr:'가다',en:'to go',conj:'가요'},
+      {kr:'만나다',en:'to meet',conj:'만나요'},
+      {kr:'보다',en:'to see/look',conj:'봐요'},
+      {kr:'받다',en:'to get/receive',conj:'받아요'},
+      {kr:'사다',en:'to buy',conj:'사요'},
+      {kr:'닫다',en:'to close',conj:'닫아요'},
+      {kr:'놀다',en:'to play',conj:'놀아요'},
+      {kr:'막다',en:'to stop/block',conj:'막아요'},
+      {kr:'잡다',en:'to hold',conj:'잡아요'},
+      {kr:'알다',en:'to know',conj:'알아요'},
+      {kr:'나오다',en:'to come out',conj:'나와요'},
+      {kr:'살다',en:'to live',conj:'살아요'},
+      {kr:'나가다',en:'to go out',conj:'나가요'},
+      {kr:'찾다',en:'to find',conj:'찾아요'},
+      {kr:'싸다',en:'to pack / wrap; to surround; to be cheap (adj)',conj:'싸요'},
+      {kr:'좋다',en:'to be good (adj)',conj:'좋아요'},
+      {kr:'많다',en:'to be many (adj)',conj:'많아요'},
+      {kr:'작다',en:'to be small (adj)',conj:'작아요'},
+      {kr:'높다',en:'to be high (adj)',conj:'높아요'},
+      {kr:'낮다',en:'to be low (adj)',conj:'낮아요'},
+      {kr:'팔다',en:'to sell',conj:'팔아요'},
+      {kr:'타다',en:'to ride',conj:'타요'},
+      {kr:'놓다',en:'to put / place',conj:'놓아요'},
+      {kr:'볶다',en:'to stir-fry',conj:'볶아요'},
+      {kr:'날다',en:'to fly',conj:'날아요'}
+    ],
+    2:[
+      {kr:'열다',en:'to open',conj:'열어요'},
+      {kr:'읽다',en:'to read',conj:'읽어요'},
+      {kr:'먹다',en:'to eat',conj:'먹어요'},
+      {kr:'만들다',en:'to make',conj:'만들어요'},
+      {kr:'배우다',en:'to learn',conj:'배워요'},
+      {kr:'서다',en:'to stand',conj:'서요'},
+      {kr:'멈추다',en:'to stop',conj:'멈춰요'},
+      {kr:'바꾸다',en:'to change',conj:'바꿔요'},
+      {kr:'지다',en:'to lose',conj:'져요'},
+      {kr:'보내다',en:'to send',conj:'보내요'},
+      {kr:'움직이다',en:'to move',conj:'움직여요'},
+      {kr:'기다리다',en:'to wait',conj:'기다려요'},
+      {kr:'마시다',en:'to drink',conj:'마셔요'},
+      {kr:'입다',en:'to wear',conj:'입어요'},
+      {kr:'믿다',en:'to believe',conj:'믿어요'},
+      {kr:'묻다',en:'to bury',conj:'묻어요'},
+      {kr:'있다',en:'to exist/have',conj:'있어요'},
+      {kr:'없다',en:'to not exist',conj:'없어요'},
+      {kr:'다니다',en:'to attend/commute',conj:'다녀요'},
+      {kr:'켜다',en:'to turn on',conj:'켜요'},
+      {kr:'씻다',en:'to wash',conj:'씻어요'},
+      {kr:'벗다',en:'to take off',conj:'벗어요'},
+      {kr:'웃다',en:'to laugh / smile',conj:'웃어요'},
+      {kr:'주다',en:'to give',conj:'줘요'},
+      {kr:'쉬다',en:'to rest',conj:'쉬어요'},
+      {kr:'그리다',en:'to draw',conj:'그려요'},
+      {kr:'가르치다',en:'to teach',conj:'가르쳐요'},
+      {kr:'던지다',en:'to throw',conj:'던져요'},
+      {kr:'접다',en:'to fold',conj:'접어요'},
+      {kr:'세다',en:'to count; to be strong (adj)',conj:'세요'},
+      {kr:'건너다',en:'to cross',conj:'건너요'}
+    ],
+    3:[
+      {kr:'공부하다',en:'to study',conj:'공부해요'},
+      {kr:'말하다',en:'to talk/speak',conj:'말해요'},
+      {kr:'청소하다',en:'to clean',conj:'청소해요'},
+      {kr:'노래하다',en:'to sing',conj:'노래해요'},
+      {kr:'설명하다',en:'to explain',conj:'설명해요'},
+      {kr:'운동하다',en:'to exercise',conj:'운동해요'},
+      {kr:'일하다',en:'to work',conj:'일해요'},
+      {kr:'요리하다',en:'to cook',conj:'요리해요'},
+      {kr:'운전하다',en:'to drive',conj:'운전해요'},
+      {kr:'생각하다',en:'to think',conj:'생각해요'},
+      {kr:'전화하다',en:'to call',conj:'전화해요'},
+      {kr:'기록하다',en:'to record',conj:'기록해요'},
+      {kr:'참여하다',en:'to participate',conj:'참여해요'},
+      {kr:'좋아하다',en:'to like',conj:'좋아해요'},
+      {kr:'싫어하다',en:'to dislike',conj:'싫어해요'},
+      {kr:'시작하다',en:'to start',conj:'시작해요'},
+      {kr:'준비하다',en:'to prepare',conj:'준비해요'},
+      {kr:'약속하다',en:'to promise',conj:'약속해요'},
+      {kr:'이야기하다',en:'to talk/chat',conj:'이야기해요'},
+      {kr:'사랑하다',en:'to love',conj:'사랑해요'},
+      {kr:'걱정하다',en:'to worry',conj:'걱정해요'},
+      {kr:'쇼핑하다',en:'to go shopping',conj:'쇼핑해요'},
+      {kr:'수영하다',en:'to swim',conj:'수영해요'},
+      {kr:'여행하다',en:'to travel',conj:'여행해요'},
+      {kr:'산책하다',en:'to take a walk',conj:'산책해요'},
+      {kr:'숙제하다',en:'to do homework',conj:'숙제해요'},
+      {kr:'연습하다',en:'to practice',conj:'연습해요'},
+      {kr:'초대하다',en:'to invite',conj:'초대해요'},
+      {kr:'도착하다',en:'to arrive',conj:'도착해요'},
+      {kr:'출발하다',en:'to depart',conj:'출발해요'},
+      {kr:'대답하다',en:'to answer',conj:'대답해요'},
+      {kr:'질문하다',en:'to ask a question',conj:'질문해요'}
+    ],
+    4:[
+      {kr:'쓰다',en:'to write / to use · ㅡ 탈락',conj:'써요',w:['쓰어요','쎠요','쓰아요']},
+      {kr:'끄다',en:'to turn off · ㅡ 탈락',conj:'꺼요',w:['끄어요','껴요','끄아요']},
+      {kr:'바쁘다',en:'to be busy (adj) · ㅡ 탈락',conj:'바빠요',w:['바쁘어요','바뻐요','바쁘아요']},
+      {kr:'아프다',en:'to be sick / hurt (adj) · ㅡ 탈락',conj:'아파요',w:['아프어요','아퍼요','아프아요']},
+      {kr:'예쁘다',en:'to be pretty (adj) · ㅡ 탈락',conj:'예뻐요',w:['예쁘어요','예빠요','예쁘아요']},
+      {kr:'걷다',en:'to walk · ㄷ 불규칙',conj:'걸어요',w:['걷어요','걸러요','걷아요']},
+      {kr:'듣다',en:'to listen / hear · ㄷ 불규칙',conj:'들어요',w:['듣어요','들러요','듣아요']},
+      {kr:'묻다',en:'to ask · ㄷ 불규칙',conj:'물어요',w:['묻어요','물러요','묻아요']},
+      {kr:'덥다',en:'to be hot (adj) · ㅂ 불규칙',conj:'더워요',w:['덥어요','더버요','덥아요']},
+      {kr:'춥다',en:'to be cold (adj) · ㅂ 불규칙',conj:'추워요',w:['춥어요','추버요','춰요']},
+      {kr:'맵다',en:'to be spicy (adj) · ㅂ 불규칙',conj:'매워요',w:['맵어요','매버요','맵아요']},
+      {kr:'쉽다',en:'to be easy (adj) · ㅂ 불규칙',conj:'쉬워요',w:['쉽어요','쉬버요','쉽아요']},
+      {kr:'어렵다',en:'to be difficult (adj) · ㅂ 불규칙',conj:'어려워요',w:['어렵어요','어려버요','어렵아요']},
+      {kr:'돕다',en:'to help · ㅂ 불규칙 *예외',conj:'도와요',w:['도워요','돕아요','도바요']},
+      {kr:'곱다',en:'to be lovely (adj) · ㅂ 불규칙 *예외',conj:'고와요',w:['고워요','곱아요','고바요']},
+      {kr:'짓다',en:'to build / make · ㅅ 불규칙',conj:'지어요',w:['져요','짓어요','지아요']},
+      {kr:'낫다',en:'to recover / be better · ㅅ 불규칙',conj:'나아요',w:['나요','낫아요','나써요']},
+      {kr:'붓다',en:'to pour / to swell · ㅅ 불규칙',conj:'부어요',w:['붜요','붓어요','부아요']},
+      {kr:'그렇다',en:'to be so · ㅎ 불규칙',conj:'그래요',w:['그렇어요','그러요','그레요']},
+      {kr:'어떻다',en:'to be how · ㅎ 불규칙',conj:'어때요',w:['어떻어요','어떠요','어떻아요']},
+      {kr:'빨갛다',en:'to be red (adj) · ㅎ 불규칙',conj:'빨개요',w:['빨갛아요','빨가요','빨게요']},
+      {kr:'하얗다',en:'to be white (adj) · ㅎ 불규칙',conj:'하얘요',w:['하얗아요','하야요','하예요']},
+      {kr:'모르다',en:'to not know · 르 불규칙',conj:'몰라요',w:['모르어요','모라요','몰러요']},
+      {kr:'부르다',en:'to call / to sing · 르 불규칙',conj:'불러요',w:['부르어요','불라요','부러요']},
+      {kr:'다르다',en:'to be different (adj) · 르 불규칙',conj:'달라요',w:['다르어요','달아요','다라요']},
+      {kr:'빠르다',en:'to be fast (adj) · 르 불규칙',conj:'빨라요',w:['빠르어요','빨아요','빠라요']},
+      {kr:'따르다',en:'to follow / to pour · 예외! ㅡ 탈락',conj:'따라요',w:['딸라요','따르어요','따러요']},
+      {kr:'믿다',en:'to believe · 함정! 규칙',conj:'믿어요',w:['밀어요','믿아요','미러요']},
+      {kr:'받다',en:'to receive · 함정! 규칙',conj:'받아요',w:['발아요','받어요','바다요']},
+      {kr:'입다',en:'to wear · 함정! 규칙',conj:'입어요',w:['이워요','입아요','이버요']},
+      {kr:'웃다',en:'to laugh · 함정! 규칙',conj:'웃어요',w:['우어요','웃아요','우서요']},
+      {kr:'좋다',en:'to be good (adj) · 함정! 규칙',conj:'좋아요',w:['좋애요','좋어요','조와요']}
+    ]
+  };
+
+  var scores = {1:0,2:0,3:0,4:0};
+  var answered = {1:{},2:{},3:{},4:{}};
+  var tabMap = {'fc12':0,'fc3':1,'comb':2,'irr':3,'q1':4,'q2':5,'q3':6,'q4':7};
+
+  function byId(id){ return document.getElementById(id); }
+  function safeSetHTML(id, html){ var el = byId(id); if(el) el.innerHTML = html; }
+  function shuffle(a){ var b=a.slice(); for(var i=b.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=b[i]; b[i]=b[j]; b[j]=t; } return b; }
+
+  function buildCards(n){
+    var el = byId('fc'+n+'-cards');
+    if(!el) return;
+    el.innerHTML='';
+    data[n].forEach(function(v){
+      var d=document.createElement('div');
+      d.className='fc';
+      d.innerHTML='<div class="fc-kr">'+v.kr+'</div><div class="fc-en">'+v.en+'</div>';
+      d.addEventListener('click', function(){
+        if(d.classList.contains('flipped')){
+          d.classList.remove('flipped');
+          d.innerHTML='<div class="fc-kr">'+v.kr+'</div><div class="fc-en">'+v.en+'</div>';
+        }else{
+          d.classList.add('flipped');
+          d.innerHTML='<div class="fc-kr">'+v.conj+'</div>';
+        }
+      });
+      el.appendChild(d);
+    });
+  }
+
+  function ans(n, qid, el, isCorrect){
+    if(answered[n][qid]) return;
+    answered[n][qid]=true;
+    var opts=document.querySelectorAll('#'+qid+' .opt');
+    opts.forEach(function(o){ o.classList.add('disabled'); });
+    var fb = byId(qid+'-fb');
+    if(isCorrect){
+      el.classList.add('correct');
+      scores[n]+=10;
+      safeSetHTML('s'+n, String(scores[n]));
+      if(fb){ fb.textContent='정답! +10점'; fb.className='fb show ok'; }
+    }else{
+      el.classList.add('wrong');
+      opts.forEach(function(o){ if(o.getAttribute('data-correct')==='true') o.classList.add('correct'); });
+      if(fb){ fb.textContent='아쉬워요! 다시 기억해봐요.'; fb.className='fb show no'; }
+    }
+  }
+  window.ans = ans;
+
+  function buildQuiz(n){
+    var wrap = byId('q'+n+'-wrap');
+    if(!wrap) return;
+    wrap.innerHTML='';
+    var pool=data[n];
+    var picked=shuffle(pool).slice(0,10);
+    picked.forEach(function(v,i){
+      var qid='c'+n+'q'+i;
+      var wrongs;
+      if(v.w){ wrongs = shuffle(v.w).slice(0,3); }
+      else { wrongs = shuffle(pool.filter(function(x){return x.kr!==v.kr && x.conj!==v.conj;})).slice(0,3).map(function(x){return x.conj;}); }
+      var opts=shuffle([v.conj].concat(wrongs));
+      var div=document.createElement('div');
+      div.className='qcard';
+      div.id=qid;
+      var optHtml=opts.map(function(o){
+        var isC=(o===v.conj);
+        return '<div class="opt" data-correct="'+isC+'" onclick="ans('+n+',\''+qid+'\',this,'+isC+')">'+o+'</div>';
+      }).join('');
+      div.innerHTML='<p class="qnum">문제 '+(i+1)+'/10</p>'+
+        '<p class="qq">'+v.kr+' <span style="font-size:12px;font-weight:400;color:#6b7280">('+v.en+')</span> 의 -요 형태는?</p>'+
+        '<div class="opts">'+optHtml+'</div><div class="fb" id="'+qid+'-fb"></div>';
+      wrap.appendChild(div);
+    });
+  }
+
+  function resetQ(n){
+    scores[n]=0;
+    answered[n]={};
+    safeSetHTML('s'+n, '0');
+    buildQuiz(n);
+  }
+  window.resetQ = resetQ;
+
+  function switchTab(id){
+    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+    document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+    var section = byId(id);
+    if(section) section.classList.add('active');
+    var tabs = document.querySelectorAll('.tab');
+    if(typeof tabMap[id] === 'number' && tabs[tabMap[id]]) tabs[tabMap[id]].classList.add('active');
+  }
+  window.switchTab = switchTab;
+
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.tab').forEach(function(tab){
+      tab.addEventListener('click', function(){ switchTab(tab.getAttribute('data-target')); });
+    });
+    document.querySelectorAll('.reset-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){ resetQ(Number(btn.getAttribute('data-reset'))); });
+    });
+
+    buildCards(1); buildCards(2); buildCards(3);
+    buildQuiz(1); buildQuiz(2); buildQuiz(3); buildQuiz(4);
+  });
+})();
+</script>
+</body>
+</html>
