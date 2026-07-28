@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이 그 저 · 삼각 구도로 배우는 한국어 지시어</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Nanum+Myeongjo:wght@400;700;800&display=swap');
+
+  :root{
+    --bg:#f8f4ec; --ink:#2b2622; --soft:#6b6258;
+    --line:#e3dccd; --card:#fffdf8; --shadow:#efe7d6;
+    --near:#2f8f7f;  --mid:#3a6ea5;  --far:#d96c4a;  --gold:#b5852f;
+    --near-bg:#d9efe9; --mid-bg:#dde8f3; --far-bg:#fbe6dd; --gold-bg:#f3e9d2;
+    --ribbon-a:#e8b8d0; --ribbon-b:#f0c898; --ribbon-base:#f6d0cd;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:'Gowun Dodum','Nanum Myeongjo',serif;
+    font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--line) 0.6px, transparent 0.6px);
+    background-size:22px 22px;
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px 80px;}
+
+  header.hero{text-align:center;padding:56px 0 28px;}
+  .hero .kr{font-family:'Nanum Myeongjo',serif;font-weight:800;
+    font-size:clamp(32px,7vw,44px);letter-spacing:-1px;line-height:1.2;}
+  .hero .kr .a{color:var(--near);} .hero .kr .b{color:var(--mid);} .hero .kr .c{color:var(--far);}
+  .hero .en{font-family:'Fraunces',serif;font-style:italic;
+    font-size:clamp(16px,3vw,20px);color:var(--soft);margin-top:10px;}
+  .hero .lead{max-width:730px;margin:20px auto 0;font-size:19px;color:var(--soft);}
+
+  .sec-title{margin:0 0 4px;font-family:'Nanum Myeongjo',serif;font-size:30px;}
+  .sec-sub{font-family:'Fraunces',serif;font-style:italic;color:var(--soft);font-size:16px;margin-bottom:18px;}
+  .hint{font-size:14px;color:var(--soft);margin-bottom:16px;}
+
+  .panel{background:var(--card);border:1.5px solid var(--line);border-radius:18px;
+    padding:26px;margin:0 0 44px;box-shadow:6px 6px 0 var(--shadow);}
+
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+  .tab{font-family:'Gowun Dodum',serif;font-size:16px;padding:10px 18px;border-radius:24px;
+    border:1.5px solid var(--line);background:var(--bg);cursor:pointer;transition:.15s;font-weight:700;}
+  .tab:hover{border-color:var(--soft);}
+  .tab.on{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .tab .sm{display:block;font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:12.5px;opacity:.8;}
+
+  .slide-title{font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:24px;margin-bottom:2px;}
+  .slide-sub{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--soft);margin-bottom:22px;}
+
+  /* 위: 규칙 + 큰 삼각형 / 아래: 문장 칸 전체 폭 */
+  .board{display:grid;grid-template-columns:268px 1fr;gap:28px;align-items:center;}
+
+  .rules{display:flex;flex-direction:column;gap:11px;}
+  .rule{display:flex;align-items:center;gap:12px;}
+  .rule .k{font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:20px;
+    padding:6px 12px;border-radius:8px;letter-spacing:2px;min-width:48px;text-align:center;}
+  .rule.r1 .k{background:var(--near-bg);color:var(--near);}
+  .rule.r2 .k{background:var(--mid-bg);color:var(--mid);}
+  .rule.r3 .k{background:var(--far-bg);color:var(--far);}
+  .rule .d{font-size:16px;}
+  .rule .d small{font-family:'Fraunces',serif;font-style:italic;color:var(--soft);font-size:13.5px;display:block;}
+
+  .tri-wrap svg{width:100%;height:auto;display:block;}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px;}
+  .col{border-radius:14px;padding:18px 20px;border:2px solid transparent;
+    cursor:pointer;transition:.2s;background:#faf6ec;}
+  .col.a{border-color:var(--ribbon-a);}
+  .col.b{border-color:var(--ribbon-b);}
+  .col.dim{opacity:.42;}
+  .col h4{font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:19px;
+    text-align:center;margin-bottom:12px;}
+  .col .ln{font-family:'Nanum Myeongjo',serif;font-size:18px;line-height:2.05;}
+  .col .ln div{white-space:nowrap;}
+  .col .ln .p1{color:var(--near);font-weight:800;}
+  .col .ln .p2{color:var(--mid);font-weight:800;}
+  .col .ln .p3{color:var(--far);font-weight:800;}
+
+  .note{margin-top:20px;font-size:15px;color:var(--soft);
+    background:#faf6ec;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:12px 16px;}
+  .note b{color:var(--ink);}
+
+  table{width:100%;border-collapse:collapse;margin-top:14px;}
+  th,td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;font-size:16px;}
+  th{font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:var(--soft);
+    text-transform:uppercase;letter-spacing:.4px;}
+  td b{color:var(--near);}
+  tr.r-mid td b{color:var(--mid);} tr.r-far td b{color:var(--far);}
+  td.sound{font-size:15px;color:var(--soft);}
+
+  /* ---------- 연습 ---------- */
+  .pmode{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;align-items:center;}
+  .pmode .lbl{font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;color:var(--soft);margin-right:4px;}
+  .mbtn{font-family:'Gowun Dodum',serif;font-size:15.5px;padding:8px 16px;border-radius:22px;
+    border:1.5px solid var(--line);background:var(--bg);cursor:pointer;transition:.15s;font-weight:700;}
+  .mbtn:hover{border-color:var(--soft);}
+  .mbtn.on{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+  .pstage{display:grid;grid-template-columns:1fr 1fr;gap:20px;
+    grid-template-areas:"far far" "ga na";margin-bottom:22px;}
+  .pz{border-radius:16px;padding:16px 16px 18px;border:2px solid var(--line);}
+  .pz.far{grid-area:far;max-width:620px;justify-self:center;width:100%;
+    background:var(--far-bg);border-color:var(--far);}
+  .pz.ga{grid-area:ga;background:#fbeef4;border-color:var(--ribbon-a);}
+  .pz.na{grid-area:na;background:#fdf0e0;border-color:var(--ribbon-b);}
+  .pz .zhead{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:13px;}
+  .pz .circle{width:46px;height:46px;border-radius:50%;border:2.5px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;background:#fff;
+    font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:22px;flex:0 0 auto;}
+  .pz .zword{font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:21px;}
+  .pz.far .zword{color:var(--far);}
+  .pz .zen{font-family:'Fraunces',serif;font-style:italic;font-size:13.5px;color:var(--soft);}
+  .items{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;}
+  .it{background:#fff;border:1.5px solid var(--line);border-radius:12px;
+    padding:9px 12px 7px;cursor:pointer;transition:.15s;text-align:center;min-width:78px;}
+  .it:hover{border-color:var(--ink);transform:translateY(-2px);}
+  .it.sel{border-color:var(--ink);box-shadow:3px 3px 0 var(--shadow);}
+  .it .em{font-size:28px;line-height:1.15;display:block;}
+  .it .nm{font-family:'Nanum Myeongjo',serif;font-size:14.5px;}
+
+  .pbottom{display:grid;grid-template-columns:minmax(240px,0.8fr) 1.2fr;gap:20px;align-items:start;}
+  .boki{border:2px solid var(--ink);border-radius:6px;padding:18px 20px;background:#fff;}
+  .boki .t{text-align:center;font-family:'Nanum Myeongjo',serif;font-weight:800;
+    font-size:19px;margin-bottom:12px;}
+  .boki .l{font-family:'Nanum Myeongjo',serif;font-size:18px;line-height:1.95;}
+  .boki .l b{color:var(--far);}
+  .dbox{background:#faf6ec;border:1.5px dashed var(--line);border-radius:14px;padding:20px 22px;min-height:158px;}
+  .dbox .ph{color:var(--soft);font-size:15.5px;}
+  .dbox .turn{font-family:'Nanum Myeongjo',serif;font-size:21px;line-height:1.9;margin-bottom:4px;}
+  .dbox .turn .who{display:inline-block;min-width:32px;font-weight:800;}
+  .dbox .turn .p1{color:var(--near);font-weight:800;}
+  .dbox .turn .p2{color:var(--mid);font-weight:800;}
+  .dbox .turn .p3{color:var(--far);font-weight:800;}
+  .dbox .bat{font-size:14.5px;color:var(--soft);margin-top:9px;}
+  .dbox .en{font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;color:var(--soft);
+    margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;margin-bottom:36px;}
+  .fc{perspective:1000px;height:182px;cursor:pointer;}
+  .fc .inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
+  .fc.flip .inner{transform:rotateY(180deg);}
+  .fc .face{position:absolute;inset:0;backface-visibility:hidden;
+    background:var(--card);border:1.5px solid var(--line);border-radius:16px;
+    box-shadow:5px 5px 0 var(--shadow);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;text-align:center;}
+  .fc .front .word{font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:30px;}
+  .fc .front .sound{font-size:14.5px;color:var(--soft);margin-top:5px;}
+  .fc .front .tap{font-family:'Fraunces',serif;font-style:italic;font-size:13px;
+    color:var(--soft);position:absolute;bottom:11px;opacity:.7;}
+  .fc .back{transform:rotateY(180deg);background:var(--near-bg);}
+  .fc .back .eng{font-family:'Fraunces',serif;font-style:italic;font-size:18px;margin-bottom:9px;}
+  .fc .back .form{font-family:'Nanum Myeongjo',serif;font-size:18px;line-height:1.7;}
+  .fc .back .form b{color:var(--near);}
+  .fc .back .bat{font-size:13px;color:var(--soft);margin-top:8px;}
+  .fc.k-mid .back{background:var(--mid-bg);} .fc.k-mid .back .form b{color:var(--mid);}
+  .fc.k-far .back{background:var(--far-bg);} .fc.k-far .back .form b{color:var(--far);}
+  .deck-label{font-family:'Fraunces',serif;font-style:italic;color:var(--soft);font-size:15px;margin:0 0 12px;}
+
+  .q{background:var(--card);border:1.5px solid var(--line);border-radius:16px;
+    padding:20px 22px;margin-bottom:16px;box-shadow:5px 5px 0 var(--shadow);}
+  .q .setup{font-size:15px;color:var(--soft);margin-bottom:8px;}
+  .q .ask{font-family:'Nanum Myeongjo',serif;font-size:21px;margin-bottom:12px;}
+  .opts{display:flex;flex-wrap:wrap;gap:8px;}
+  .opt{font-family:'Gowun Dodum',serif;font-size:16px;padding:8px 16px;border-radius:22px;
+    border:1.5px solid var(--line);background:var(--bg);cursor:pointer;transition:.15s;}
+  .opt:hover{border-color:var(--near);}
+  .opt.right{background:var(--near-bg);border-color:var(--near);color:var(--near);font-weight:700;}
+  .opt.wrong{background:var(--far-bg);border-color:var(--far);color:var(--far);}
+  .why{display:none;margin-top:14px;font-size:15.5px;color:var(--soft);
+    border-top:1px dashed var(--line);padding-top:12px;}
+  .why.show{display:block;}
+
+  footer{text-align:center;color:var(--soft);font-size:14px;padding-top:26px;
+    border-top:1px solid var(--line);margin-top:44px;}
+  footer .en{font-family:'Fraunces',serif;font-style:italic;}
+
+  @media (max-width:860px){
+    .board{grid-template-columns:1fr;gap:20px;}
+    .pbottom{grid-template-columns:1fr;}
+  }
+  @media (max-width:640px){
+    body{font-size:16px;}
+    .hero{padding:36px 0 20px;}
+    .cols{grid-template-columns:1fr;}
+    .col .ln{font-size:17px;}
+    .pstage{grid-template-columns:1fr;grid-template-areas:"far" "ga" "na";}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));}
+    .fc{height:170px;} .fc .front .word{font-size:26px;}
+    .tab{font-size:15px;padding:9px 14px;}
+  }
+  @media print{
+    body{background:#fff;background-image:none;}
+    .tabs,.pmode{display:none;}
+    .fc{height:auto;perspective:none;}
+    .fc .inner{transform:none !important;}
+    .fc .face{position:static;backface-visibility:visible;box-shadow:none;}
+    .fc .back{transform:none;margin-top:8px;}
+    .fc .front .tap{display:none;}
+    .col.dim{opacity:1 !important;}
+    .why{display:block;}
+    .panel{page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kr"><span class="a">이</span> · <span class="b">그</span> · <span class="c">저</span></div>
+    <div class="en">Korean demonstratives, seen as a triangle</div>
+    <p class="lead">물건은 그대로예요. 말이 바뀌는 건 <b>말하는 사람이 바뀌기 때문</b>이에요.</p>
+  </header>
+
+  <section class="panel">
+    <h2 class="sec-title" style="margin-bottom:0;">기준은 딱 하나</h2>
+    <div class="sec-sub">One rule for all three</div>
+    <div class="rules">
+      <div class="rule r1"><span class="k">이</span><span class="d">나 - 가깝다 <small>close to me (the speaker)</small></span></div>
+      <div class="rule r2"><span class="k">그</span><span class="d">너 - 가깝다 <small>close to you (the listener)</small></span></div>
+      <div class="rule r3"><span class="k">저</span><span class="d">나, 너 - 멀다 <small>far from both of us</small></span></div>
+    </div>
+    <div class="note">
+      거리가 얼마나 먼지가 아니라, <b>누구 쪽에 있는지</b>가 기준이에요.<br>
+      <span style="font-family:'Fraunces',serif;font-style:italic;">Not how far it is, but whose side it is on.</span>
+    </div>
+  </section>
+
+  <h2 class="sec-title">삼각 구도로 보기</h2>
+  <div class="sec-sub">Felix, Jimin, and the thing far away</div>
+  <p class="hint">위 탭으로 세 가지 형태를 바꿔 보세요. 아래 이름을 누르면 그 사람의 시선만 남아요. · Tap a tab, then tap a name.</p>
+
+  <section class="panel">
+    <div class="tabs">
+      <button class="tab on" data-t="n">이 · 그 · 저 <span class="sm">+ 명사 · this N, that N</span></button>
+      <button class="tab" data-t="t">이건 · 그건 · 저건 <span class="sm">물건 · thing</span></button>
+      <button class="tab" data-t="p">여긴 · 거긴 · 저긴 <span class="sm">장소 · place</span></button>
+    </div>
+
+    <div class="slide-title" id="slideTitle"></div>
+    <div class="slide-sub" id="slideSub"></div>
+
+    <div class="board">
+      <div class="rules" id="ruleBox"></div>
+      <div class="tri-wrap">
+        <svg viewBox="0 0 760 570" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="triTitle">
+          <title id="triTitle">필릭스, 지민, 그리고 멀리 있는 것의 삼각 구도</title>
+          <line id="bandBase" x1="185" y1="452" x2="575" y2="452"
+                stroke="#f6d0cd" stroke-width="58" stroke-linecap="round" opacity="0.9"/>
+          <line id="bandA" x1="185" y1="452" x2="380" y2="122"
+                stroke="#e8b8d0" stroke-width="58" stroke-linecap="round" opacity="0.9"/>
+          <line id="bandB" x1="380" y1="122" x2="575" y2="452"
+                stroke="#f0c898" stroke-width="58" stroke-linecap="round" opacity="0.9"/>
+
+          <text id="emT" x="380" y="72" text-anchor="middle" font-size="58">🍊</text>
+          <text id="emA" x="185" y="470" text-anchor="middle" font-size="52">🐯</text>
+          <text id="emB" x="575" y="470" text-anchor="middle" font-size="52">🍑</text>
+
+          <text id="nmA" x="138" y="462" text-anchor="end"
+                font-family="Nanum Myeongjo, serif" font-weight="800" font-size="31" fill="#2b2622">필릭스</text>
+          <text id="nmB" x="622" y="462" text-anchor="start"
+                font-family="Nanum Myeongjo, serif" font-weight="800" font-size="31" fill="#2b2622">지민</text>
+
+          <text id="lbT" x="380" y="540" text-anchor="middle"
+                font-family="Gowun Dodum, serif" font-size="19" fill="#6b6258">둘 다 멀어요 · far from both</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div class="col a" id="colA"><h4 id="nameA"></h4><div class="ln" id="lnA"></div></div>
+      <div class="col b" id="colB"><h4 id="nameB"></h4><div class="ln" id="lnB"></div></div>
+    </div>
+
+    <div class="note" id="tabNote"></div>
+  </section>
+
+  <h2 class="sec-title">연습</h2>
+  <div class="sec-sub">Practice · tap any item</div>
+  <p class="hint">물건이나 장소를 하나 누르면 두 사람의 대화가 만들어져요. 누르기 전에 학생이 먼저 말해 보게 하세요. · Tap an item to build the dialogue.</p>
+
+  <section class="panel">
+    <div class="pmode">
+      <span class="lbl">무엇을 연습해요?</span>
+      <button class="mbtn on" data-m="thing">물건 · 이건 그건 저건</button>
+      <button class="mbtn" data-m="place">장소 · 여긴 거긴 저긴</button>
+      <span class="lbl" style="margin-left:14px;">누가 물어봐요?</span>
+      <button class="mbtn on" data-s="가">가</button>
+      <button class="mbtn" data-s="나">나</button>
+    </div>
+
+    <div class="pstage">
+      <div class="pz far">
+        <div class="zhead"><div class="zword" id="zwFar">저건</div><div class="zen">far from both</div></div>
+        <div class="items" id="itFar"></div>
+      </div>
+      <div class="pz ga">
+        <div class="zhead"><div class="circle">가</div>
+          <div><div class="zword" id="zwGa">이건</div><div class="zen" id="zeGa"></div></div></div>
+        <div class="items" id="itGa"></div>
+      </div>
+      <div class="pz na">
+        <div class="zhead"><div class="circle">나</div>
+          <div><div class="zword" id="zwNa">그건</div><div class="zen" id="zeNa"></div></div></div>
+        <div class="items" id="itNa"></div>
+      </div>
+    </div>
+
+    <div class="pbottom">
+      <div class="boki">
+        <div class="t">&lt;보기&gt;</div>
+        <div class="l" id="bokiBody"></div>
+      </div>
+      <div class="dbox" id="dbox"></div>
+    </div>
+
+    <div class="note">
+      💡 <b>수업 팁</b> 누르기 전에 학생이 먼저 말하게 하세요. 예측하고 확인하는 순서가 되면 훨씬 오래 남아요.<br>
+      가 · 나 버튼을 바꿔 가며 <b>같은 물건을 두 번</b> 물어보면 관점 전환이 저절로 연습돼요.
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 class="sec-title" style="margin-bottom:0;">이 vs 이것, 무엇이 다를까요</h2>
+    <div class="sec-sub">Determiner or pronoun</div>
+    <table>
+      <tr><th></th><th>형태</th><th>혼자 쓸 수 있어요?</th><th>예</th></tr>
+      <tr><td>꾸며 주는 말</td><td><b>이</b> / <b>그</b> / <b>저</b></td><td>아니요, 뒤에 명사가 와요<br><span style="font-size:14px;color:var(--soft);font-family:'Fraunces',serif;font-style:italic;">determiner, needs a noun</span></td><td><b>이</b> 호랑이 · <b>그</b> 복숭아 · <b>저</b> 귤</td></tr>
+      <tr class="r-mid"><td>대신하는 말</td><td><b>이것</b> / <b>그것</b> / <b>저것</b></td><td>네, 혼자 써요<br><span style="font-size:14px;color:var(--soft);font-family:'Fraunces',serif;font-style:italic;">pronoun, stands alone</span></td><td><b>이건</b> 호랑이예요.</td></tr>
+    </table>
+    <div class="note">
+      영어로 보면 쉬워요. <b>이 호랑이</b> = this tiger. <b>이건</b> = this one.<br>
+      "이 예요" 라고는 말할 수 없어요. 꼭 <b>이것</b>이 되어야 해요.
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 class="sec-title" style="margin-bottom:0;">줄임말 정리</h2>
+    <div class="sec-sub">Contractions you will hear constantly</div>
+    <table>
+      <tr><th></th><th>원래</th><th>+ 은/는 (topic)</th><th>+ 이/가 (subject)</th><th>회화체</th></tr>
+      <tr><td>물건</td><td>이것</td><td><b>이건</b></td><td><b>이게</b></td><td><b>이거</b></td></tr>
+      <tr class="r-mid"><td>물건</td><td>그것</td><td><b>그건</b></td><td><b>그게</b></td><td><b>그거</b></td></tr>
+      <tr class="r-far"><td>물건</td><td>저것</td><td><b>저건</b></td><td><b>저게</b></td><td><b>저거</b></td></tr>
+      <tr><td>장소</td><td>여기</td><td><b>여긴</b></td><td>여기가</td><td>여기</td></tr>
+      <tr class="r-mid"><td>장소</td><td>거기</td><td><b>거긴</b></td><td>거기가</td><td>거기</td></tr>
+      <tr class="r-far"><td>장소</td><td>저기</td><td><b>저긴</b></td><td>저기가</td><td>저기</td></tr>
+    </table>
+    <div class="note">
+      이건 = 이것<b>은</b>, 이게 = 이것<b>이</b>. 여긴 = 여기<b>는</b>.<br>
+      장소도 은/는을 붙이면 똑같이 줄어들어요. 다만 이/가는 줄지 않아요 (여기가 ⭕, 여긴가 ❌).
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 class="sec-title" style="margin-bottom:0;">받침 규칙 하나로 두 가지</h2>
+    <div class="sec-sub">One 받침 rule, two markers</div>
+    <table>
+      <tr><th>받침</th><th>주격 조사</th><th>이에요 / 예요</th><th>예 · example</th></tr>
+      <tr><td>있음 · yes</td><td><b>이</b></td><td><b>이에요</b></td><td>귤<b>이</b> 어디예요? → 귤<b>이에요</b>.</td></tr>
+      <tr><td>없음 · no</td><td><b>가</b></td><td><b>예요</b></td><td>소파<b>가</b> 어디예요? → 소파<b>예요</b>.</td></tr>
+    </table>
+    <div class="note">받침은 <b>마지막 글자</b>만 봐요. 놀이공원 → 원 → 받침 ㄴ → 놀이공원<b>이에요</b>.</div>
+  </section>
+
+  <section class="panel">
+    <h2 class="sec-title" style="margin-bottom:0;">발음 체크</h2>
+    <div class="sec-sub">Say it the way it actually sounds</div>
+    <table>
+      <tr><th>글자</th><th>소리</th><th>왜?</th></tr>
+      <tr><td>복숭아</td><td class="sound">[복쑹아]</td><td>ㄱ 받침 뒤 ㅅ이 된소리로 · tensing</td></tr>
+      <tr><td>귤이에요</td><td class="sound">[규리에요]</td><td>받침 ㄹ이 뒤 모음으로 · linking</td></tr>
+      <tr><td>책이에요</td><td class="sound">[채기에요]</td><td>받침 ㄱ이 뒤 모음으로 · linking</td></tr>
+      <tr><td>버스정류장</td><td class="sound">[버스정뉴장]</td><td>ㅇ 받침 뒤 ㄹ이 ㄴ으로 · nasalization</td></tr>
+      <tr><td>놀이공원</td><td class="sound">[노리공원]</td><td>받침 ㄹ이 뒤 모음으로 · linking</td></tr>
+      <tr><td>편의점</td><td class="sound">[펴니점]</td><td>첫 음절이 아닌 ㅢ는 ㅣ로도 발음해요 · allowed variant</td></tr>
+    </table>
+  </section>
+
+  <h2 class="sec-title">단어 카드</h2>
+  <div class="sec-sub">Flashcards</div>
+  <p class="hint">카드를 눌러서 뒤집어 보세요. · Tap a card to flip it.</p>
+
+  <p class="deck-label">꾸며 주는 말 · determiners</p>
+  <div class="grid" id="deckDet"></div>
+
+  <p class="deck-label">물건 · things</p>
+  <div class="grid" id="deckThing"></div>
+
+  <p class="deck-label">장소 · places</p>
+  <div class="grid" id="deckPlace"></div>
+
+  <h2 class="sec-title">확인해 볼까요</h2>
+  <div class="sec-sub">Quick check</div>
+  <div id="quiz"></div>
+
+  <footer>
+    한국어 학습은 한 번에 다 알기가 아니라, 같은 표현을 여러 번 다른 상황에서 만나는 것이에요.<br>
+    <span class="en">Learning Korean is not knowing it all at once. It is meeting the same expression again and again, in different places.</span>
+  </footer>
+
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+
+/* ============ 슬라이드 3장 ============ */
+const T = {
+  n:{title:'이, 그, 저 + N : 가리키다 (to point)',
+     sub:'this N, that N · 뒤에 명사가 꼭 와요',
+     keys:['이','그','저'], emT:'🍊', emA:'🐯', emB:'🍑', nameA:'필릭스', nameB:'지민',
+     a:[['이','호랑이'],['그','복숭아'],['저','귤']],
+     b:[['이','복숭아'],['그','호랑이'],['저','귤']],
+     note:'필릭스는 자기가 호랑이니까 <b>이 호랑이</b>, 지민이는 복숭아니까 <b>이 복숭아</b>. 귤은 둘 다에게 머니까 누가 말해도 <b>저 귤</b>이에요.'},
+  t:{title:'이건(이것은), 그건(그것은), 저건(저것은) : 물건 (thing)',
+     sub:'혼자 쓰는 말이에요 · stands alone, no noun needed',
+     keys:['이 건','그 건','저 건'], emT:'🍊', emA:'🐯', emB:'🍑', nameA:'필릭스', nameB:'지민',
+     a:[['이건','호랑이예요.'],['그건','복숭아예요.'],['저건','귤이에요.']],
+     b:[['이건','복숭아예요.'],['그건','호랑이예요.'],['저건','귤이에요.']],
+     note:'호랑이는 움직이지 않았어요. 필릭스는 <b>이건 호랑이예요</b>, 지민이는 <b>그건 호랑이예요</b>라고 해요. 바뀐 건 말하는 사람뿐이에요.'},
+  p:{title:'여긴(여기는), 거긴(거기는), 저긴(저기는) : 장소 (place)',
+     sub:'장소를 가리켜요 · here, there, over there',
+     keys:['여 긴','거 긴','저 긴'], emT:'🎢', emA:'🚏', emB:'🏥', nameA:'필릭스', nameB:'지민',
+     a:[['여긴','버스정류장이에요.'],['거긴','병원이에요.'],['저긴','놀이공원이에요.']],
+     b:[['여긴','병원이에요.'],['거긴','버스정류장이에요.'],['저긴','놀이공원이에요.']],
+     note:'장소도 규칙이 똑같아요. 필릭스가 서 있는 곳이 <b>여긴</b>, 지민이가 서 있는 곳이 <b>거긴</b>. 놀이공원은 둘 다 머니까 <b>저긴</b>이에요.'}
+};
+const RULE_D=[['나 - 가깝다','close to me'],['너 - 가깝다','close to you'],['나, 너 - 멀다','far from both']];
+let focus=null;
+
+function paint(k){
+  const d=T[k];
+  $('slideTitle').textContent=d.title;
+  $('slideSub').textContent=d.sub;
+  $('ruleBox').innerHTML=d.keys.map((kk,i)=>
+    '<div class="rule r'+(i+1)+'"><span class="k">'+kk+'</span>'+
+    '<span class="d">'+RULE_D[i][0]+' <small>'+RULE_D[i][1]+'</small></span></div>').join('');
+  $('nameA').textContent=d.nameA+' '+d.emA;
+  $('nameB').textContent=d.nameB+' '+d.emB;
+  const rows=arr=>arr.map((r,i)=>'<div><span class="p'+(i+1)+'">'+r[0]+'</span> '+r[1]+'</div>').join('');
+  $('lnA').innerHTML=rows(d.a); $('lnB').innerHTML=rows(d.b);
+  $('emT').textContent=d.emT; $('emA').textContent=d.emA; $('emB').textContent=d.emB;
+  $('nmA').textContent=d.nameA; $('nmB').textContent=d.nameB;
+  $('tabNote').innerHTML=d.note;
+}
+function applyFocus(){
+  const a=$('colA'), b=$('colB');
+  a.classList.remove('dim'); b.classList.remove('dim');
+  ['bandA','bandB','bandBase'].forEach(i=>$(i).setAttribute('opacity','0.9'));
+  if(focus==='a'){ b.classList.add('dim'); $('bandB').setAttribute('opacity','0.18'); }
+  if(focus==='b'){ a.classList.add('dim'); $('bandA').setAttribute('opacity','0.18'); }
+}
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+    btn.classList.add('on'); paint(btn.dataset.t); applyFocus();
+  });
+});
+$('colA').addEventListener('click',()=>{focus=(focus==='a'?null:'a');applyFocus();});
+$('colB').addEventListener('click',()=>{focus=(focus==='b'?null:'b');applyFocus();});
+paint('n'); applyFocus();
+
+/* ============ 연습 ============ */
+const P = {
+  thing:{
+    far:[['🎲','주사위','예요'],['💻','노트북','이에요'],['☂️','우산','이에요'],['🌽','옥수수','예요'],['🛞','바퀴','예요']],
+    ga:[['🎮','게임기','예요'],['👟','신발','이에요'],['📱','핸드폰','이에요'],['☕','컵','이에요']],
+    na:[['📬','우편함','이에요'],['🧢','모자','예요'],['🔨','망치','예요'],['🧯','소화기','이에요']],
+    near:'이건', mid:'그건', dist:'저건', ask:'뭐예요?'
+  },
+  place:{
+    far:[['🎢','놀이공원','이에요'],['🏭','공장','이에요'],['🚽','화장실','이에요']],
+    ga:[['🚏','버스정류장','이에요'],['🏪','편의점','이에요'],['☕','카페','예요']],
+    na:[['🏥','병원','이에요'],['🏦','은행','이에요'],['⛲️','분수대','예요']],
+    near:'여긴', mid:'거긴', dist:'저긴', ask:'어디예요?'
+  }
+};
+let mode='thing', asker='가', sel=null;
+
+function wordFor(zone){
+  const p=P[mode];
+  if(zone==='far') return p.dist;
+  if(asker==='가') return zone==='ga' ? p.near : p.mid;
+  return zone==='ga' ? p.mid : p.near;
+}
+function cls(w){
+  const p=P[mode];
+  return w===p.near ? 'p1' : (w===p.mid ? 'p2' : 'p3');
+}
+function resetBox(){
+  $('dbox').innerHTML='<div class="ph">위에서 하나 눌러 보세요.<br>'+
+    '<span style="font-family:Fraunces,serif;font-style:italic;">Tap an item above to build the dialogue.</span></div>';
+}
+function renderItems(){
+  const p=P[mode];
+  [['far','itFar'],['ga','itGa'],['na','itNa']].forEach(function(pair){
+    $(pair[1]).innerHTML = p[pair[0]].map(function(it,i){
+      return '<button class="it" data-z="'+pair[0]+'" data-i="'+i+'">'+
+             '<span class="em">'+it[0]+'</span><span class="nm">'+it[1]+'</span></button>';
+    }).join('');
+  });
+  $('zwFar').textContent=p.dist;
+  $('zwGa').textContent=wordFor('ga');
+  $('zwNa').textContent=wordFor('na');
+  $('zeGa').textContent = (asker==='가') ? 'near the speaker' : 'near the listener';
+  $('zeNa').textContent = (asker==='나') ? 'near the speaker' : 'near the listener';
+}
+function renderBoki(){
+  const ex = (mode==='thing')
+    ? ['가: <b>이건</b> 뭐예요?','나: <b>그건 바퀴</b>예요.']
+    : ['가: <b>여긴</b> 어디예요?','나: <b>거긴 버스정류장</b>이에요.'];
+  $('bokiBody').innerHTML = ex.map(function(s){return '<div>'+s+'</div>';}).join('');
+}
+function renderDialogue(){
+  if(!sel){ resetBox(); return; }
+  const p=P[mode];
+  const it=p[sel.z][sel.i];
+  const other = (asker==='가') ? '나' : '가';
+  let qW, aW;
+  if(sel.z==='far'){ qW=p.dist; aW=p.dist; }
+  else if((asker==='가'&&sel.z==='ga')||(asker==='나'&&sel.z==='na')){ qW=p.near; aW=p.mid; }
+  else { qW=p.mid; aW=p.near; }
+
+ $('dbox').innerHTML =
+  '<div class="turn"><span class="who">'+asker+':</span> <span class="'+cls(qW)+'">'+qW+'</span> '+p.ask+'</div>'+
+  '<div class="turn"><span class="who">'+other+':</span> <span class="'+cls(aW)+'">'+aW+'</span> '+it[1]+it[2]+'.</div>';
+}
+document.querySelectorAll('.mbtn').forEach(function(b){
+  b.addEventListener('click',function(){
+    if(b.dataset.m){
+      document.querySelectorAll('.mbtn[data-m]').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on'); mode=b.dataset.m; sel=null; renderBoki();
+    } else {
+      document.querySelectorAll('.mbtn[data-s]').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on'); asker=b.dataset.s;
+    }
+    renderItems(); renderDialogue();
+  });
+});
+document.querySelector('.pstage').addEventListener('click',function(e){
+  const b=e.target.closest('.it'); if(!b) return;
+  document.querySelectorAll('.it').forEach(function(x){x.classList.remove('sel');});
+  b.classList.add('sel');
+  sel={z:b.dataset.z, i:+b.dataset.i};
+  renderDialogue();
+});
+renderItems(); renderBoki(); resetBox();
+
+/* ============ 카드 ============ */
+const DET=[
+  {w:"이 + 명사", s:"이 호랑이", e:"this + noun", f:"<b>이</b> 호랑이", b:"나에게 가까워요", c:""},
+  {w:"그 + 명사", s:"그 복숭아", e:"that + noun (near you)", f:"<b>그</b> 복숭아", b:"너에게 가까워요", c:"k-mid"},
+  {w:"저 + 명사", s:"저 귤", e:"that + noun (over there)", f:"<b>저</b> 귤", b:"둘 다 멀어요", c:"k-far"}
+];
+const THINGS=[
+  {w:"이건", s:"이것은", e:"this one", f:"<b>이건</b> 호랑이예요.", b:"이것 · 이건 · 이게 · 이거", c:""},
+  {w:"그건", s:"그것은", e:"that one (near you)", f:"<b>그건</b> 복숭아예요.", b:"그것 · 그건 · 그게 · 그거", c:"k-mid"},
+  {w:"저건", s:"저것은", e:"that one over there", f:"<b>저건</b> 귤이에요.", b:"저것 · 저건 · 저게 · 저거", c:"k-far"}
+];
+const PLACES=[
+  {w:"여긴", s:"여기는", e:"this place, here", f:"<b>여긴</b> 버스정류장이에요.", b:"내가 있는 곳", c:""},
+  {w:"거긴", s:"거기는", e:"that place, there", f:"<b>거긴</b> 병원이에요.", b:"네가 있는 곳", c:"k-mid"},
+  {w:"저긴", s:"저기는", e:"that place over there", f:"<b>저긴</b> 놀이공원이에요.", b:"둘 다 먼 곳", c:"k-far"}
+];
+function build(list,target){
+  const box=$(target);
+  list.forEach(function(c){
+    const el=document.createElement('div'); el.className='fc '+c.c;
+    el.innerHTML='<div class="inner">'+
+      '<div class="face front"><div class="word">'+c.w+'</div><div class="sound">'+c.s+'</div><div class="tap">tap to flip</div></div>'+
+      '<div class="face back"><div class="eng">'+c.e+'</div><div class="form">'+c.f+'</div><div class="bat">'+c.b+'</div></div>'+
+      '</div>';
+    el.addEventListener('click',function(){el.classList.toggle('flip');});
+    box.appendChild(el);
+  });
+}
+build(DET,'deckDet'); build(THINGS,'deckThing'); build(PLACES,'deckPlace');
+
+/* ============ 퀴즈 ============ */
+const QUIZ=[
+  {setup:'🐯 호랑이는 필릭스, 🍑 복숭아는 지민이에요. <b>필릭스</b>가 말해요.',
+   ask:'"___ 복숭아예요."', opts:['이건','그건','저건','여긴'], a:1,
+   why:'복숭아는 상대방(지민) 쪽에 있어요. 그래서 그건이에요.'},
+  {setup:'이번엔 <b>지민</b>이가 말해요. 복숭아는 그대로 지민이 자리에 있어요.',
+   ask:'"___ 복숭아예요."', opts:['이건','그건','저건','여긴'], a:0,
+   why:'복숭아는 움직이지 않았어요. 그런데 지민이에게는 자기 쪽이니까 이건이에요. 이게 핵심이에요.'},
+  {setup:'🍊 귤은 필릭스에게도 지민이에게도 멀어요.',
+   ask:'누가 말해도 답은?', opts:['이건 귤이에요','그건 귤이에요','저건 귤이에요','저긴 귤이에요'], a:2,
+   why:'둘 다에게 멀면 누가 말해도 저건이에요. 저만 안 바뀌어요.'},
+  {setup:'가: "이건 뭐예요?" 소파는 가 옆에 있어요. 나가 대답해요.',
+   ask:'"___ 소파예요."', opts:['이건','그건','저건','여긴'], a:1,
+   why:'가 쪽에 있는 물건이니까 나에게는 그건이에요.'},
+  {setup:'',
+   ask:'"이 ___예요." 이 문장이 안 되는 이유는?', opts:['이는 명사가 필요해요','이는 장소예요','이는 과거예요','문제 없어요'], a:0,
+   why:'이 · 그 · 저는 혼자 못 써요. 뒤에 명사가 와야 해요. 혼자 쓰려면 이것 · 이건이 돼요.'},
+  {setup:'가가 서 있는 곳은 🚏 버스정류장이에요. 가가 말해요.',
+   ask:'"___ 버스정류장이에요."', opts:['여긴','거긴','저긴','이건'], a:0,
+   why:'말하는 사람이 있는 장소는 여긴이에요. 장소니까 이건이 아니라 여긴.'},
+  {setup:'',
+   ask:'"여기는"을 줄이면?', opts:['여긴','여기가','여게','줄일 수 없어요'], a:0,
+   why:'여기는 → 여긴. 이것은 → 이건과 똑같은 방식이에요.'},
+  {setup:'',
+   ask:'"귤___" 알맞은 형태는?', opts:['예요','이에요','가예요','이예요'], a:1,
+   why:'귤은 받침 ㄹ이 있어요. 받침이 있으면 이에요.'},
+  {setup:'',
+   ask:'"의자___" 알맞은 형태는?', opts:['예요','이에요','가예요','이예요'], a:0,
+   why:'의자는 마지막 글자 자에 받침이 없어요. 받침이 없으면 예요.'}
+];
+const quizBox=$('quiz');
+QUIZ.forEach(function(q,qi){
+  const el=document.createElement('div'); el.className='q';
+  let html=q.setup?'<div class="setup">'+q.setup+'</div>':'';
+  html+='<div class="ask">'+q.ask+'</div><div class="opts">';
+  q.opts.forEach(function(o,oi){html+='<button class="opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</button>';});
+  html+='</div><div class="why" id="why'+qi+'">'+q.why+'</div>';
+  el.innerHTML=html; quizBox.appendChild(el);
+});
+quizBox.addEventListener('click',function(e){
+  const b=e.target.closest('.opt'); if(!b) return;
+  const qi=+b.dataset.q, oi=+b.dataset.o, correct=QUIZ[qi].a;
+  b.parentElement.querySelectorAll('.opt').forEach(function(s,i){
+    s.classList.remove('right','wrong'); if(i===correct) s.classList.add('right');
+  });
+  if(oi!==correct) b.classList.add('wrong');
+  $('why'+qi).classList.add('show');
+});
+</script>
+</body>
+</html>
