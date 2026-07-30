@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ㄴ이 두 개일 때 · Double ㄴ</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap');
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+  :root{
+    --bg:#f8f4ec;
+    --ink:#2b2622;
+    --soft:#6b6258;
+    --line:#e3dccd;
+    --card:#fffdf8;
+    --accent:#2f8f7f;  --accent-bg:#dcefe8;  --accent-sh:#d6e8e2;
+    --one:#5a7fa8;     --one-bg:#e2ebf3;     --one-sh:#dbe5ef;
+    --wrong:#b8563f;   --wrong-bg:#f7e6e0;
+    --hi:#ffe7a3;
+    --shadow:#efe7d6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    letter-spacing:-0.01em;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--line) 0.6px, transparent 0.6px);
+    background-size:22px 22px;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+
+  .hero{ text-align:center; padding:58px 0 26px; }
+  .hero .kr{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:clamp(38px,8vw,52px); letter-spacing:0; line-height:1.12; }
+  .hero .kr b{ color:var(--accent); }
+  .hero .en{ font-family:'Fraunces',serif; font-style:italic; font-size:clamp(18px,3vw,22px); color:var(--soft); margin-top:8px; letter-spacing:0; }
+  .hero .lead{ max-width:640px; margin:18px auto 0; font-size:19px; color:var(--soft); }
+  .hero .lead span{ font-size:16px; }
+
+  h2.sec{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:30px; letter-spacing:0; margin:0 0 4px; }
+  h3.sub{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:22px; letter-spacing:0; margin:0 0 4px; }
+  .subline{ color:var(--soft); font-size:15.5px; margin-bottom:16px; }
+  .pron{ background:var(--hi); border-radius:7px; padding:1px 8px; font-weight:600; white-space:nowrap; letter-spacing:0; }
+
+  /* two rules side by side */
+  .rules{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:30px 0 40px; }
+  .rbox{ border-radius:18px; padding:22px 22px 24px; border:2px solid var(--one); background:var(--card); box-shadow:6px 6px 0 var(--one-sh); }
+  .rbox.two{ border-color:var(--accent); box-shadow:6px 6px 0 var(--accent-sh); background:linear-gradient(180deg,#fff8ec,#fffdf8); }
+  .rbox .tag{ display:inline-block; color:#fff; background:var(--one); font-size:13px; font-weight:700; letter-spacing:.4px; padding:3px 12px; border-radius:20px; margin-bottom:12px; }
+  .rbox.two .tag{ background:var(--accent); }
+  .rbox .cond{ font-family:'Gowun Dodum',sans-serif; font-size:21px; line-height:1.45; }
+  .rbox .cond b{ color:var(--one); }
+  .rbox.two .cond b{ color:var(--accent); }
+  .rbox .say{ font-size:16px; color:var(--soft); margin-top:10px; }
+  .rbox .demo{ font-family:'Gowun Dodum',sans-serif; font-size:26px; margin-top:14px; letter-spacing:1px; }
+  @media(max-width:600px){ .rules{ grid-template-columns:1fr; } }
+
+  /* signature: hold marker */
+  .hold{ background:var(--card); border:2px solid var(--accent); border-radius:18px; padding:26px 24px 28px; margin:0 0 40px; box-shadow:6px 6px 0 var(--accent-sh); text-align:center; }
+  .hold .tagq{ display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:3px 12px; border-radius:20px; margin-bottom:16px; }
+  .blocks{ display:inline-flex; align-items:flex-end; gap:6px; }
+  .blk{ font-family:'Gowun Dodum',sans-serif; font-size:clamp(46px,11vw,64px); line-height:1; padding:6px 10px; border-radius:12px; background:#f4efe4; }
+  .blk .n{ color:var(--accent); }
+  .tie{ position:relative; width:clamp(38px,9vw,56px); height:14px; margin:0 -2px 14px; }
+  .tie::before{ content:''; position:absolute; inset:0; border:2.5px solid var(--accent); border-top:none; border-radius:0 0 40px 40px; }
+  .hold .pause{ font-family:'Fraunces',serif; font-style:italic; font-size:15px; color:var(--soft); margin-top:14px; }
+  .hold .how{ max-width:560px; margin:14px auto 0; font-size:17px; }
+  .hold .how .en{ display:block; color:var(--soft); font-size:15.5px; margin-top:6px; }
+
+  /* pair grid */
+  .pairwrap{ margin:0 0 12px; }
+  .phead{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:10px; }
+  .phead div{ font-family:'Fraunces',serif; font-style:italic; font-size:13.5px; letter-spacing:.4px; text-transform:uppercase; color:var(--soft); padding-left:4px; }
+  .prow{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:12px; }
+  .pc{ border:1.5px solid var(--line); border-radius:14px; padding:14px 16px; background:var(--card); box-shadow:3px 3px 0 var(--shadow); }
+  .pc.one{ background:var(--one-bg); border-color:var(--one); box-shadow:3px 3px 0 var(--one-sh); }
+  .pc.two{ background:var(--accent-bg); border-color:var(--accent); box-shadow:3px 3px 0 var(--accent-sh); }
+  .pc .w{ font-size:20px; }
+  .pc .p{ margin-top:6px; font-size:16px; }
+  .pc .m{ font-family:'Fraunces',serif; font-style:italic; font-size:14.5px; color:var(--soft); margin-top:4px; }
+  @media(max-width:600px){ .phead{ display:none; } .prow{ grid-template-columns:1fr; gap:8px; margin-bottom:16px; } }
+
+  /* analogy */
+  .analogy{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:6px 0 40px; }
+  .analogy .box{ border-radius:14px; padding:16px 18px; border:1.5px solid var(--line); background:var(--card); }
+  .analogy .box.kor{ background:var(--accent-bg); border-color:var(--accent); }
+  .analogy .lab{ font-family:'Fraunces',serif; font-style:italic; font-size:13px; letter-spacing:.4px; text-transform:uppercase; color:var(--soft); margin-bottom:6px; }
+  .analogy .big{ font-size:19px; line-height:1.5; }
+  .analogy .sub{ font-size:14.5px; color:var(--soft); margin-top:6px; }
+  @media(max-width:700px){ .analogy{ grid-template-columns:1fr; } }
+
+  /* warn */
+  .warn{ background:var(--wrong-bg); border-left:3px solid var(--wrong); border-radius:0 12px 12px 0; padding:14px 18px; margin:0 0 40px; font-size:16px; }
+  .warn b{ color:var(--wrong); }
+  .warn .en{ color:var(--soft); font-size:15px; display:block; margin-top:4px; }
+  .no{ color:var(--wrong); font-weight:700; }
+  .yes{ color:var(--accent); font-weight:700; }
+
+  /* chips */
+  .ex-sec{ margin:0 0 34px; }
+  .grid{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{ background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:10px 15px; font-size:17px; white-space:nowrap; box-shadow:3px 3px 0 var(--shadow); }
+  .chip b{ color:var(--accent); }
+  .chip em{ font-family:'Fraunces',serif; font-style:italic; font-size:14.5px; color:var(--soft); margin-left:7px; }
+
+  /* practice */
+  .practice{ background:var(--card); border:1.5px solid var(--line); border-radius:18px; padding:22px 24px; margin:0 0 34px; box-shadow:6px 6px 0 var(--shadow); }
+  .practice h2{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:24px; letter-spacing:0; }
+  .practice .en{ color:var(--soft); font-size:15px; margin-bottom:14px; }
+  details.q{ border-top:1px dashed var(--line); padding:12px 0 4px; }
+  details.q:first-of-type{ border-top:none; }
+  details.q summary{ cursor:pointer; font-size:17px; list-style:none; }
+  details.q summary::-webkit-details-marker{ display:none; }
+  details.q summary::before{ content:'▸ '; color:var(--accent); }
+  details.q[open] summary::before{ content:'▾ '; }
+  details.q .ans{ margin:8px 0 6px 18px; font-size:16px; color:var(--soft); }
+  details.q .ans b{ color:var(--ink); }
+
+  footer{ text-align:center; color:var(--soft); font-size:13.5px; margin-top:46px; padding-top:22px; border-top:1px solid var(--line); }
+
+  @media print{
+    body{ background:#fff; background-image:none; }
+    .rbox,.hold,.pc,.chip,.practice{ box-shadow:none; }
+    details.q .ans{ display:block; }
+  }
+  @media(max-width:600px){ body{ font-size:16px; } .wrap{ padding:0 16px 70px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kr">ㄴ이 <b>두 개</b>일 때</div>
+    <div class="en">When two ㄴ meet</div>
+    <p class="lead">만나요를 <span class="pron">[마나요]</span>로 읽으면 뜻이 달라져요.<br>
+    <span>Korean keeps both ㄴ. The difference is real, and it changes meaning.</span></p>
+  </header>
+
+  <section class="rules">
+    <div class="rbox">
+      <span class="tag">받침 ㄴ + 모음</span>
+      <div class="cond">받침 ㄴ이 <b>옆으로 이사</b>해요</div>
+      <p class="say">ㄴ을 한 번만 소리 내요 (연음).</p>
+      <div class="demo">언어 → <span class="pron">[어너]</span></div>
+    </div>
+    <div class="rbox two">
+      <span class="tag">받침 ㄴ + ㄴ</span>
+      <div class="cond">두 개가 <b>둘 다 살아 있어요</b></div>
+      <p class="say">ㄴ을 붙인 채로 잠깐 눌렀다가 다음 글자로.</p>
+      <div class="demo">언니 → <span class="pron">[언니]</span></div>
+    </div>
+  </section>
+
+  <section class="hold">
+    <span class="tagq">소리 내는 법 · How to say it</span>
+    <div class="blocks">
+      <span class="blk">만<span class="n"></span></span>
+      <span class="tie"></span>
+      <span class="blk"><span class="n">나</span></span>
+      <span class="blk">요</span>
+    </div>
+    <p class="pause">hold the ㄴ, then release</p>
+    <p class="how">첫 ㄴ에서 혀를 입천장에 <b>붙인 채로</b> 아주 짧게 멈췄다가, 그대로 다음 글자를 시작해요.
+      <span class="en">Touch the tongue to the roof of the mouth on the first ㄴ, hold it a beat, then start the next syllable without letting go.</span></p>
+  </section>
+
+  <h2 class="sec">소리 짝</h2>
+  <p class="subline">왼쪽과 오른쪽을 나란히 읽어 보세요. <span style="font-size:14.5px">Read each pair side by side.</span></p>
+
+  <div class="pairwrap">
+    <div class="phead"><div>ㄴ 한 개 · one</div><div>ㄴ 두 개 · two</div></div>
+
+    <div class="prow">
+      <div class="pc one"><div class="w">언어</div><div class="p"><span class="pron">[어너]</span></div><div class="m">language</div></div>
+      <div class="pc two"><div class="w">언니</div><div class="p"><span class="pron">[언니]</span></div><div class="m">older sister</div></div>
+    </div>
+
+    <div class="prow">
+      <div class="pc one"><div class="w">신어요</div><div class="p"><span class="pron">[시너요]</span></div><div class="m">put shoes on</div></div>
+      <div class="pc two"><div class="w">신나요</div><div class="p"><span class="pron">[신나요]</span></div><div class="m">it's exciting</div></div>
+    </div>
+
+    <div class="prow">
+      <div class="pc one"><div class="w">안아요</div><div class="p"><span class="pron">[아나요]</span></div><div class="m">hug</div></div>
+      <div class="pc two"><div class="w">않나요?</div><div class="p"><span class="pron">[안나요?]</span></div><div class="m">(isn’t it?)</div></div>
+    </div>
+
+    <div class="prow">
+      <div class="pc one"><div class="w">많아요</div><div class="p"><span class="pron">[마나요]</span></div><div class="m">a lot</div></div>
+      <div class="pc two"><div class="w">만나요</div><div class="p"><span class="pron">[만나요]</span></div><div class="m">meet</div></div>
+    </div>
+  </div>
+
+  <h3 class="sub" style="margin-top:34px">왜 어려울까요?</h3>
+  <p class="subline">언어마다 같은 자음이 겹칠 때의 규칙이 달라요.</p>
+  <section class="analogy">
+    <div class="box">
+      <div class="lab">Français</div>
+      <div class="big">année</div>
+      <div class="sub">nn을 써도 소리는 한 번. 그래서 한국어에서도 한 번만 내기 쉬워요.</div>
+    </div>
+    <div class="box">
+      <div class="lab">English</div>
+      <div class="big">unnamed · ten names</div>
+      <div class="sub">여기서는 영어도 ㄴ을 두 번 내요. 그 느낌 그대로 가져오면 돼요.</div>
+    </div>
+    <div class="box kor">
+      <div class="lab">한국어</div>
+      <div class="big">만나요</div>
+      <div class="sub">두 번 다 살아 있어요. 길이가 뜻을 바꿔요.</div>
+    </div>
+  </section>
+
+  <div class="warn">
+    <b>쓸 때도 조심!</b> 소리를 한 번만 내면 쓸 때도 ㄴ 하나로 쓰게 돼요.
+    <span class="yes">만나요</span> <span class="no">만아요 ✗</span> · <span class="yes">신나요</span> <span class="no">시나요 ✗</span>
+    <span class="en">If you say one ㄴ, you'll spell one ㄴ. The spelling follows the sound.</span>
+  </div>
+
+  <section class="ex-sec">
+    <h3 class="sub">자주 만나는 ㄴㄴ 단어</h3>
+    <p class="subline">전부 받침 ㄴ 다음에 ㄴ이 와요. <span style="font-size:14.5px">All of these have ㄴ + ㄴ.</span></p>
+    <div class="grid">
+      <span class="chip">만<b>나</b>요 <em>meet</em></span>
+      <span class="chip">안<b>녕</b>하세요 <em>hello</em></span>
+      <span class="chip">언<b>니</b> <em>older sister</em></span>
+      <span class="chip">신<b>나</b>요 <em>exciting</em></span>
+      <span class="chip">안<b>내</b> <em>guidance</em></span>
+      <span class="chip">손<b>님</b> <em>guest</em></span>
+      <span class="chip">신<b>년</b> <em>new year</em></span>
+      <span class="chip">반<b>납</b> <em>return</em></span>
+      <span class="chip">인<b>내</b> <em>patience</em></span>
+      <span class="chip">산<b>나</b>물 <em>wild vegetables</em></span>
+      <span class="chip">만<b>난</b> 적이 있어요 <em>have met</em></span>
+    </div>
+  </section>
+
+  <section class="practice">
+    <h2>직접 해보기 · Try it</h2>
+    <p class="en">눌러서 답을 확인하세요. Tap to reveal.</p>
+    <details class="q"><summary>신나요 — 어떻게 읽어요?</summary><div class="ans"><b><span class="pron">[신나요]</span></b> — ㄴ 두 개. <span class="pron">[시너요]</span>로 읽으면 '신어요'(신발을 신다)가 돼요.</div></details>
+    <details class="q"><summary>안아요 — 어떻게 읽어요?</summary><div class="ans"><b><span class="pron">[아나요]</span></b> — 다음이 모음이라서 받침 ㄴ이 이사 가요. ㄴ은 한 번.</div></details>
+    <details class="q"><summary>만난 적이 있어요 — 어떻게 읽어요?</summary><div class="ans"><b><span class="pron">[만난 저기 이써요]</span></b> — 만난의 ㄴ 두 개를 살리고, 적이는 이어서 <span class="pron">[저기]</span>.</div></details>
+    <details class="q"><summary>안녕하세요에도 ㄴ이 두 개 있어요?</summary><div class="ans"><b>네</b> — 안 + 녕. 매일 쓰는 인사말에 이미 들어 있어요.</div></details>
+    <details class="q"><summary>언어와 언니, 뭐가 달라요?</summary><div class="ans">글자는 '언'으로 같지만, 다음 글자가 <b>모음이면 이사</b>(<span class="pron">[어너]</span>), <b>ㄴ이면 둘 다</b>(<span class="pron">[언니]</span>).</div></details>
+  </section>
+
+  <footer>한국어 발음 가이드 · ㄴ + ㄴ (Double ㄴ)</footer>
+
+</div>
+</body>
+</html>
