@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기본 모음 10 · Basic Vowels (스페인어 화자용)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap');
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+  :root{
+    --bg:#f8f4ec;
+    --ink:#2b2622;
+    --soft:#6b6258;
+    --line:#e3dccd;
+    --card:#fffdf8;
+    --accent:#2f8f7f;  --accent-bg:#dcefe8;  --accent-sh:#d6e8e2;
+    --warm:#c0703f;    --warm-bg:#f8ebdf;    --warm-sh:#f0dfce;
+    --hi:#ffe7a3;
+    --shadow:#efe7d6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    letter-spacing:-0.01em;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--line) 0.6px, transparent 0.6px);
+    background-size:22px 22px;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+
+  .hero{ text-align:center; padding:58px 0 26px; }
+  .hero .kr{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:clamp(38px,8vw,52px); letter-spacing:0; line-height:1.12; }
+  .hero .kr b{ color:var(--accent); }
+  .hero .en{ font-family:'Fraunces',serif; font-style:italic; font-size:clamp(18px,3vw,22px); color:var(--soft); margin-top:8px; letter-spacing:0; }
+  .hero .lead{ max-width:640px; margin:18px auto 0; font-size:19px; color:var(--soft); }
+  .hero .lead span{ font-size:16px; }
+
+  h2.sec{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:30px; letter-spacing:0; margin:0 0 4px; }
+  h3.sub{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:22px; letter-spacing:0; margin:0 0 4px; }
+  .subline{ color:var(--soft); font-size:15.5px; margin-bottom:16px; }
+
+  .rule{
+    background:var(--card); border:2px solid var(--accent); border-radius:18px;
+    padding:26px 28px; margin:30px 0 40px; box-shadow:6px 6px 0 var(--accent-sh); text-align:center;
+  }
+  .rule .tag{ display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; letter-spacing:.4px; padding:3px 12px; border-radius:20px; margin-bottom:14px; }
+  .rule .big{ font-family:'Gowun Dodum',sans-serif; font-size:clamp(20px,4.4vw,26px); line-height:1.5; }
+  .rule .big b{ color:var(--accent); }
+  .rule .en{ color:var(--soft); font-size:16px; margin-top:12px; }
+
+  /* three groups */
+  .grp{ margin:0 0 26px; }
+  .grp .gh{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .grp .gh .n{ font-family:'Gowun Dodum',sans-serif; font-size:22px; }
+  .grp .gh .c{ font-family:'Fraunces',serif; font-style:italic; font-size:14px; color:var(--soft); letter-spacing:.3px; }
+  .row{ display:flex; flex-wrap:wrap; gap:10px; }
+  .vc{ background:var(--card); border:1.5px solid var(--line); border-radius:14px; padding:12px 16px 13px; min-width:104px; text-align:center; box-shadow:3px 3px 0 var(--shadow); }
+  .vc .g{ font-family:'Gowun Dodum',sans-serif; font-size:34px; line-height:1.05; }
+  .vc .s{ font-family:'Fraunces',serif; font-style:italic; font-size:15px; color:var(--accent); margin-top:2px; }
+  .vc .h{ font-size:14px; color:var(--soft); margin-top:3px; }
+  .grp.have .vc{ background:var(--accent-bg); border-color:var(--accent); box-shadow:3px 3px 0 var(--accent-sh); }
+  .grp.newv .vc{ background:var(--hi); border-color:var(--warm); box-shadow:3px 3px 0 var(--warm-sh); }
+  .grp.newv .vc .s{ color:var(--warm); }
+
+  /* magic stroke — signature */
+  .magic{ background:var(--card); border:2px solid var(--accent); border-radius:18px; padding:24px 22px 26px; margin:14px 0 40px; box-shadow:6px 6px 0 var(--accent-sh); }
+  .magic .tagq{ display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:3px 12px; border-radius:20px; margin-bottom:6px; }
+  .magic h2{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:24px; margin-bottom:4px; letter-spacing:0; }
+  .magic .en{ color:var(--soft); font-size:15.5px; margin-bottom:16px; }
+  .mgrid{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .mc{ text-align:center; border:1.5px solid var(--line); border-radius:14px; padding:14px 8px; background:#fffdf8; }
+  .mc .eq{ font-family:'Gowun Dodum',sans-serif; font-size:clamp(24px,5vw,30px); line-height:1.2; }
+  .mc .eq .add{ color:var(--warm); }
+  .mc .eq .res{ color:var(--accent); }
+  .mc .s{ font-family:'Fraunces',serif; font-style:italic; font-size:14.5px; color:var(--soft); margin-top:6px; }
+  @media(max-width:640px){ .mgrid{ grid-template-columns:repeat(2,1fr); } }
+
+  /* mouth compare */
+  .mouth{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:0 0 26px; }
+  .mbox{ border:2px solid var(--warm); border-radius:18px; padding:20px 20px 22px; background:var(--card); box-shadow:6px 6px 0 var(--warm-sh); }
+  .mbox .tagq{ display:inline-block; background:var(--warm); color:#fff; font-size:13px; font-weight:700; padding:3px 12px; border-radius:20px; margin-bottom:12px; }
+  .mbox h3{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:22px; letter-spacing:0; margin-bottom:8px; }
+  .lips{ display:flex; gap:14px; align-items:center; margin:12px 0 10px; }
+  .lip{ text-align:center; flex:1; }
+  .lip .shape{ width:56px; height:38px; margin:0 auto 6px; border:2.5px solid var(--soft); }
+  .lip .shape.round{ border-radius:50%; width:38px; }
+  .lip .shape.wide{ border-radius:26px; width:66px; height:22px; margin-top:8px; margin-bottom:14px; }
+  .lip .shape.open{ border-radius:40%; width:46px; height:44px; margin-bottom:0; }
+  .lip .cap{ font-family:'Gowun Dodum',sans-serif; font-size:21px; }
+  .lip .t{ font-size:13.5px; color:var(--soft); }
+  .mbox .tip{ font-size:15.5px; color:var(--soft); border-top:1px dashed var(--line); padding-top:10px; margin-top:8px; }
+  @media(max-width:640px){ .mouth{ grid-template-columns:1fr; } }
+
+  /* placeholder rule */
+  .note{ font-size:16px; color:var(--soft); background:#f4efe4; border-left:3px solid var(--line); border-radius:0 12px 12px 0; padding:14px 18px; margin:0 0 34px; }
+  .note b{ color:var(--ink); }
+
+  .order{ font-family:'Gowun Dodum',sans-serif; font-size:clamp(22px,5vw,30px); text-align:center; background:var(--accent-bg); border:1.5px solid var(--accent); border-radius:14px; padding:18px 12px; letter-spacing:4px; margin:0 0 34px; }
+
+  /* chips */
+  .ex-sec{ margin:0 0 34px; }
+  .grid{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{ background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:10px 15px; font-size:17px; white-space:nowrap; box-shadow:3px 3px 0 var(--shadow); }
+  .chip em{ font-family:'Fraunces',serif; font-style:italic; font-size:14.5px; color:var(--soft); margin-left:7px; }
+  .chip.only{ background:var(--accent-bg); border-color:var(--accent); box-shadow:3px 3px 0 var(--accent-sh); }
+
+  /* practice */
+  .practice{ background:var(--card); border:1.5px solid var(--line); border-radius:18px; padding:22px 24px; margin:0 0 34px; box-shadow:6px 6px 0 var(--shadow); }
+  .practice h2{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:24px; letter-spacing:0; }
+  .practice .en{ color:var(--soft); font-size:15px; margin-bottom:14px; }
+  details.q{ border-top:1px dashed var(--line); padding:12px 0 4px; }
+  details.q:first-of-type{ border-top:none; }
+  details.q summary{ cursor:pointer; font-size:17px; list-style:none; }
+  details.q summary::-webkit-details-marker{ display:none; }
+  details.q summary::before{ content:'▸ '; color:var(--accent); }
+  details.q[open] summary::before{ content:'▾ '; }
+  details.q .ans{ margin:8px 0 6px 18px; font-size:16px; color:var(--soft); }
+  details.q .ans b{ color:var(--ink); }
+
+  footer{ text-align:center; color:var(--soft); font-size:13.5px; margin-top:46px; padding-top:22px; border-top:1px solid var(--line); }
+
+  @media print{
+    body{ background:#fff; background-image:none; }
+    .rule,.magic,.mbox,.vc,.chip,.practice{ box-shadow:none; }
+    details.q .ans{ display:block; }
+  }
+  @media(max-width:600px){ body{ font-size:16px; } .wrap{ padding:0 16px 70px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kr">기본 모음 <b>열 개</b></div>
+    <div class="en">The 10 Basic Vowels</div>
+    <p class="lead">모든 한국어 글자에는 모음이 <b>하나씩</b> 들어 있어요.<br>
+    <span>Every Korean syllable contains exactly one vowel.</span></p>
+  </header>
+
+  <section class="rule">
+    <span class="tag">스페인어 화자용 · For Spanish speakers</span>
+    <div class="big">열 개 중 <b>네 개</b>는 스페인어에 이미 있어요.<br><b>네 개</b>는 규칙 하나로 얻어요.<br>진짜 새로 연습할 건 <b>두 개</b>예요.</div>
+    <p class="en">Four already exist in Spanish, four come free with one rule, and only two are genuinely new.</p>
+  </section>
+
+  <section class="grp have">
+    <div class="gh"><span class="n">벌써 알아요</span><span class="c">Already in Spanish</span></div>
+    <div class="row">
+      <div class="vc"><div class="g">ㅏ</div><div class="s">a</div><div class="h">casa</div></div>
+      <div class="vc"><div class="g">ㅣ</div><div class="s">i</div><div class="h">sí</div></div>
+      <div class="vc"><div class="g">ㅜ</div><div class="s">u</div><div class="h">luna</div></div>
+      <div class="vc"><div class="g">ㅗ</div><div class="s">o</div><div class="h">sol</div></div>
+    </div>
+  </section>
+
+  <section class="grp newv">
+    <div class="gh"><span class="n">새로 연습할 두 개</span><span class="c">Not in Spanish</span></div>
+    <div class="row">
+      <div class="vc"><div class="g">ㅓ</div><div class="s">eo</div><div class="h">call, song</div></div>
+      <div class="vc"><div class="g">ㅡ</div><div class="s">eu</div><div class="h">put (입술 안 둥글게)</div></div>
+    </div>
+  </section>
+
+  <section class="magic">
+    <span class="tagq">매직 패턴 · The free four</span>
+    <h2>작대기 하나 더 = y 소리</h2>
+    <p class="en">One extra stroke adds a "y". Four letters for the price of one rule.</p>
+    <div class="mgrid">
+      <div class="mc"><div class="eq">ㅏ <span class="add">+ㅣ</span> → <span class="res">ㅑ</span></div><div class="s">a → ya</div></div>
+      <div class="mc"><div class="eq">ㅓ <span class="add">+ㅣ</span> → <span class="res">ㅕ</span></div><div class="s">eo → yeo</div></div>
+      <div class="mc"><div class="eq">ㅗ <span class="add">+ㅣ</span> → <span class="res">ㅛ</span></div><div class="s">o → yo</div></div>
+      <div class="mc"><div class="eq">ㅜ <span class="add">+ㅣ</span> → <span class="res">ㅠ</span></div><div class="s">u → yu</div></div>
+    </div>
+    <p class="en" style="margin-top:16px;margin-bottom:0">ㅑ는 스페인어 <b>ya</b>, ㅛ는 스페인어 <b>yo</b> 그대로예요. 이미 매일 말하는 소리죠.</p>
+  </section>
+
+  <h2 class="sec">새 소리 둘, 입 모양으로</h2>
+  <p class="subline">거울을 보고 하나씩 해 보세요. <span style="font-size:14.5px">Watch your lips in a mirror.</span></p>
+
+  <section class="mouth">
+    <div class="mbox">
+      <span class="tagq">ㅗ vs ㅓ</span>
+      <h3>입술 힘을 풀어요</h3>
+      <div class="lips">
+        <div class="lip"><div class="shape round"></div><div class="cap">오</div><div class="t">동그랗게 모아요</div></div>
+        <div class="lip"><div class="shape open"></div><div class="cap">어</div><div class="t">힘을 풀고 턱을 내려요</div></div>
+      </div>
+      <p class="tip">오 → 어 → 오 → 어. 입술이 움직이면 잘하고 있는 거예요.<br>영어 c<b>a</b>ll, s<b>o</b>ng의 소리예요.</p>
+    </div>
+    <div class="mbox">
+      <span class="tagq">ㅜ vs ㅡ</span>
+      <h3>입술을 옆으로 펴요</h3>
+      <div class="lips">
+        <div class="lip"><div class="shape round"></div><div class="cap">우</div><div class="t">동그랗게 앞으로</div></div>
+        <div class="lip"><div class="shape wide"></div><div class="cap">으</div><div class="t">웃는 모양으로 쫙</div></div>
+      </div>
+      <p class="tip">"u"라고 말하면서 입술을 웃는 모양으로 펴 보세요. 그게 ㅡ예요.<br>혀는 그대로, 입술만 바뀌어요.</p>
+    </div>
+  </section>
+
+  <div class="note">
+    <b>모음은 혼자 못 서요.</b> 한국어 글자에는 자음 자리가 꼭 있어야 해서, 모음만 쓸 때는 앞에 <b>ㅇ</b>을 붙여요.
+    ㅇ은 이 자리에서 소리가 없어요. 자리만 지켜요. ㅏ → 아 · ㅓ → 어 · ㅡ → 으
+    <br><span style="font-size:15px">A vowel can't stand alone. Add a silent ㅇ as a placeholder.</span>
+  </div>
+
+  <h3 class="sub">한국의 모음 순서</h3>
+  <p class="subline">한국 사람 누구나 이 순서로 외워요. <span style="font-size:14.5px">Everyone learns them in this order.</span></p>
+  <div class="order">아 야 어 여 오 요 우 유 으 이</div>
+
+  <section class="ex-sec">
+    <h3 class="sub">모음만으로 읽는 진짜 단어</h3>
+    <p class="subline">자음이 하나도 없어도 읽을 수 있어요. <span style="font-size:14.5px">Real words made of vowels alone.</span></p>
+    <div class="grid">
+      <span class="chip only">아이 <em>child</em></span>
+      <span class="chip only">오이 <em>cucumber</em></span>
+      <span class="chip only">우유 <em>milk</em></span>
+      <span class="chip only">여우 <em>fox</em></span>
+      <span class="chip only">요요 <em>yo-yo</em></span>
+      <span class="chip only">이 <em>tooth</em></span>
+      <span class="chip only">오 <em>five</em></span>
+    </div>
+  </section>
+
+  <section class="practice">
+    <h2>직접 해보기 · Try it</h2>
+    <p class="en">눌러서 답을 확인하세요. Tap to reveal.</p>
+    <details class="q"><summary>스페인어 sol의 o와 같은 모음은?</summary><div class="ans"><b>ㅗ</b> — 입술을 동그랗게 모으는 소리예요.</div></details>
+    <details class="q"><summary>입술을 옆으로 쭉 펴는 모음은? ㅜ 또는 ㅡ</summary><div class="ans"><b>ㅡ</b> — ㅜ는 동그랗게, ㅡ는 웃는 모양으로. 혀는 같고 입술만 달라요.</div></details>
+    <details class="q"><summary>ㅗ에 작대기 하나를 더하면?</summary><div class="ans"><b>ㅛ</b> (yo) — 스페인어 yo 그대로예요.</div></details>
+    <details class="q"><summary>"ㅓ"만 종이에 쓰면 글자가 될까요?</summary><div class="ans"><b>아니요</b> — 앞에 ㅇ을 붙여서 <b>어</b>라고 써야 글자가 돼요. ㅇ은 소리가 없어요.</div></details>
+    <details class="q"><summary>여우는 무슨 뜻이에요?</summary><div class="ans"><b>fox · zorro</b> 🦊 — 여 + 우, 모음만으로 만든 단어예요.</div></details>
+  </section>
+
+  <footer>한국어 발음 가이드 · 기본 모음 10 (스페인어 화자용)</footer>
+
+</div>
+</body>
+</html>

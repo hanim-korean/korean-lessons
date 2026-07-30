@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기본 자음 14 · Basic Consonants (스페인어 화자용)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap');
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+  :root{
+    --bg:#f8f4ec;
+    --ink:#2b2622;
+    --soft:#6b6258;
+    --line:#e3dccd;
+    --card:#fffdf8;
+    --accent:#2f8f7f;  --accent-bg:#dcefe8;  --accent-sh:#d6e8e2;
+    --warm:#c0703f;    --warm-bg:#f8ebdf;
+    --hi:#ffe7a3;
+    --shadow:#efe7d6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    letter-spacing:-0.01em;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--line) 0.6px, transparent 0.6px);
+    background-size:22px 22px;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+
+  .hero{ text-align:center; padding:58px 0 26px; }
+  .hero .kr{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:clamp(38px,8vw,52px); letter-spacing:0; line-height:1.12; }
+  .hero .kr b{ color:var(--accent); }
+  .hero .en{ font-family:'Fraunces',serif; font-style:italic; font-size:clamp(18px,3vw,22px); color:var(--soft); margin-top:8px; letter-spacing:0; }
+  .hero .lead{ max-width:640px; margin:18px auto 0; font-size:19px; color:var(--soft); }
+  .hero .lead span{ font-size:16px; }
+
+  h2.sec{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:30px; letter-spacing:0; margin:0 0 4px; }
+  h3.sub{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:22px; letter-spacing:0; margin:0 0 4px; }
+  .subline{ color:var(--soft); font-size:15.5px; margin-bottom:16px; }
+
+  .rule{
+    background:var(--card); border:2px solid var(--accent); border-radius:18px;
+    padding:26px 28px; margin:30px 0 40px; box-shadow:6px 6px 0 var(--accent-sh); text-align:center;
+  }
+  .rule .tag{ display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; letter-spacing:.4px; padding:3px 12px; border-radius:20px; margin-bottom:14px; }
+  .rule .big{ font-family:'Gowun Dodum',sans-serif; font-size:clamp(20px,4.4vw,26px); line-height:1.5; }
+  .rule .big b{ color:var(--accent); }
+  .rule .en{ color:var(--soft); font-size:16px; margin-top:12px; }
+
+  /* consonant table */
+  .tbl{ width:100%; border-collapse:collapse; background:var(--card); border:1.5px solid var(--line); border-radius:14px; overflow:hidden; margin-bottom:14px; }
+  .tbl th{ background:var(--accent-bg); font-size:13.5px; font-weight:700; letter-spacing:.3px; color:var(--soft); text-align:left; padding:11px 14px; border-bottom:1.5px solid var(--line); }
+  .tbl td{ padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:middle; }
+  .tbl tr:last-child td{ border-bottom:none; }
+  .tbl .ltr{ font-family:'Gowun Dodum',sans-serif; font-size:27px; line-height:1; width:64px; }
+  .tbl .snd{ font-family:'Fraunces',serif; font-style:italic; font-size:16px; color:var(--accent); width:92px; }
+  .tbl .eng{ font-size:15.5px; color:var(--soft); }
+  .tbl .esp{ font-size:15.5px; }
+  .tbl tr.star{ background:var(--accent-bg); }
+  .tbl tr.star .esp{ font-weight:600; }
+  .star-mark{ color:var(--warm); font-size:14px; }
+  @media(max-width:620px){
+    .tbl .eng{ display:none; }
+    .tbl th.eng-h{ display:none; }
+    .tbl .ltr{ width:52px; font-size:24px; }
+    .tbl .snd{ width:70px; font-size:15px; }
+    .tbl td, .tbl th{ padding:9px 10px; }
+  }
+
+  /* feature */
+  .feature{ background:linear-gradient(180deg,#fff8ec,#fffdf8); border:2px solid var(--accent); border-radius:18px; padding:24px 26px; margin:0 0 40px; box-shadow:6px 6px 0 var(--accent-sh); }
+  .feature .tagq{ display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:3px 12px; border-radius:20px; margin-bottom:12px; }
+  .feature h2{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:24px; margin-bottom:8px; letter-spacing:0; }
+  .feature p{ margin:8px 0; }
+  .feature .en{ color:var(--soft); font-size:15.5px; }
+  .adv{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+  .adv .a{ background:var(--card); border:1.5px solid var(--accent); border-radius:14px; padding:14px 12px; text-align:center; box-shadow:3px 3px 0 var(--accent-sh); }
+  .adv .a .g{ font-family:'Gowun Dodum',sans-serif; font-size:34px; line-height:1.1; color:var(--accent); }
+  .adv .a .w{ font-size:15.5px; margin-top:6px; }
+  .adv .a .t{ font-size:13.5px; color:var(--soft); margin-top:2px; }
+  @media(max-width:520px){ .adv{ grid-template-columns:1fr; } }
+
+  /* breath test — signature */
+  .breath{ background:var(--card); border:2px solid var(--warm); border-radius:18px; padding:24px 26px; margin:0 0 40px; box-shadow:6px 6px 0 var(--warm-bg); }
+  .breath .tagq{ display:inline-block; background:var(--warm); color:#fff; font-size:13px; font-weight:700; padding:3px 12px; border-radius:20px; margin-bottom:12px; }
+  .breath h2{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:24px; margin-bottom:6px; letter-spacing:0; }
+  .pairs{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px; }
+  .pcol{ border:1.5px solid var(--line); border-radius:14px; padding:16px 14px; text-align:center; background:#fffdf8; }
+  .pcol.soft{ background:#f4efe4; }
+  .pcol.strong{ background:var(--hi); border-color:var(--warm); }
+  .pcol .lab{ font-family:'Fraunces',serif; font-style:italic; font-size:13.5px; letter-spacing:.4px; text-transform:uppercase; color:var(--soft); }
+  .pcol .set{ font-family:'Gowun Dodum',sans-serif; font-size:34px; letter-spacing:10px; margin:8px 0 4px; }
+  .pcol .desc{ font-size:15px; color:var(--soft); }
+  .paper{ display:block; width:34px; height:44px; margin:12px auto 0; background:#fff; border:1.5px solid var(--line); border-radius:2px 2px 6px 6px; transform-origin:top center; }
+  .pcol.strong .paper{ border-color:var(--warm); animation:flap 1.6s ease-in-out infinite; }
+  @keyframes flap{ 0%,60%,100%{ transform:rotate(0deg);} 68%{ transform:rotate(26deg);} 78%{ transform:rotate(10deg);} 86%{ transform:rotate(18deg);} }
+  @media(prefers-reduced-motion:reduce){ .pcol.strong .paper{ animation:none; transform:rotate(20deg); } }
+  @media(max-width:520px){ .pairs{ grid-template-columns:1fr; } }
+
+  /* warn */
+  .warn{ background:var(--warm-bg); border-left:3px solid var(--warm); border-radius:0 12px 12px 0; padding:14px 18px; margin:0 0 40px; font-size:16px; }
+  .warn b{ color:var(--warm); }
+  .warn .en{ color:var(--soft); font-size:15px; display:block; margin-top:4px; }
+
+  /* chips */
+  .ex-sec{ margin:0 0 34px; }
+  .grid{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{ background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:10px 15px; font-size:17px; white-space:nowrap; box-shadow:3px 3px 0 var(--shadow); }
+  .chip em{ font-family:'Fraunces',serif; font-style:italic; font-size:14.5px; color:var(--soft); margin-left:7px; }
+  .chip.known{ background:var(--accent-bg); border-color:var(--accent); box-shadow:3px 3px 0 var(--accent-sh); }
+
+  /* practice */
+  .practice{ background:var(--card); border:1.5px solid var(--line); border-radius:18px; padding:22px 24px; margin:0 0 34px; box-shadow:6px 6px 0 var(--shadow); }
+  .practice h2{ font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:24px; letter-spacing:0; }
+  .practice .en{ color:var(--soft); font-size:15px; margin-bottom:14px; }
+  details.q{ border-top:1px dashed var(--line); padding:12px 0 4px; }
+  details.q:first-of-type{ border-top:none; }
+  details.q summary{ cursor:pointer; font-size:17px; list-style:none; }
+  details.q summary::-webkit-details-marker{ display:none; }
+  details.q summary::before{ content:'▸ '; color:var(--accent); }
+  details.q[open] summary::before{ content:'▾ '; }
+  details.q .ans{ margin:8px 0 6px 18px; font-size:16px; color:var(--soft); }
+  details.q .ans b{ color:var(--ink); }
+
+  footer{ text-align:center; color:var(--soft); font-size:13.5px; margin-top:46px; padding-top:22px; border-top:1px solid var(--line); }
+
+  @media print{
+    body{ background:#fff; background-image:none; }
+    .rule,.feature,.breath,.chip,.practice,.adv .a{ box-shadow:none; }
+    .pcol.strong .paper{ animation:none; }
+    details.q .ans{ display:block; }
+  }
+  @media(max-width:600px){ body{ font-size:16px; } .wrap{ padding:0 16px 70px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kr">기본 자음 <b>열네 개</b></div>
+    <div class="en">The 14 Basic Consonants</div>
+    <p class="lead">모음 열 개 + 자음 열네 개 = 한국어의 모든 글자.<br>
+    <span>Ten vowels and fourteen consonants build every syllable in Korean.</span></p>
+  </header>
+
+  <section class="rule">
+    <span class="tag">스페인어 화자용 · For Spanish speakers</span>
+    <div class="big">스페인어를 하면 <b>세 개는 이미 갖고 있어요.</b><br>새로 익힐 건 <b>숨의 세기</b> 하나예요.</div>
+    <p class="en">Three of these sounds already exist in Spanish. The one new thing to learn is aspiration: how much air comes out.</p>
+  </section>
+
+  <h2 class="sec">자음 열네 개</h2>
+  <p class="subline">Sound · English hint · Spanish hint</p>
+  <table class="tbl">
+    <thead>
+      <tr><th>글자</th><th>소리</th><th class="eng-h">English</th><th>스페인어 힌트 · Español</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="ltr">ㄱ</td><td class="snd">g / k</td><td class="eng">gate</td><td class="esp">casa의 c (숨 안 나가게)</td></tr>
+      <tr><td class="ltr">ㄴ</td><td class="snd">n</td><td class="eng">name</td><td class="esp">nada의 n</td></tr>
+      <tr><td class="ltr">ㄷ</td><td class="snd">d / t</td><td class="eng">dog</td><td class="esp">todo의 t (숨 안 나가게)</td></tr>
+      <tr class="star"><td class="ltr">ㄹ</td><td class="snd">l / r</td><td class="eng">lake, road</td><td class="esp">pero의 r <span class="star-mark">벌써 알아요</span></td></tr>
+      <tr><td class="ltr">ㅁ</td><td class="snd">m</td><td class="eng">moon</td><td class="esp">mano의 m</td></tr>
+      <tr><td class="ltr">ㅂ</td><td class="snd">b / p</td><td class="eng">boy</td><td class="esp">papá의 p (숨 안 나가게)</td></tr>
+      <tr><td class="ltr">ㅅ</td><td class="snd">s</td><td class="eng">sky</td><td class="esp">sol의 s</td></tr>
+      <tr class="star"><td class="ltr">ㅇ</td><td class="snd">— / ng</td><td class="eng">mango</td><td class="esp">banco의 n <span class="star-mark">벌써 알아요</span></td></tr>
+      <tr><td class="ltr">ㅈ</td><td class="snd">j</td><td class="eng">juice</td><td class="esp">yo의 y보다 조금 더 강하게</td></tr>
+      <tr class="star"><td class="ltr">ㅊ</td><td class="snd">ch</td><td class="eng">chair</td><td class="esp">chico의 ch <span class="star-mark">벌써 알아요</span></td></tr>
+      <tr><td class="ltr">ㅋ</td><td class="snd">k</td><td class="eng">keys</td><td class="esp">c에 숨을 세게</td></tr>
+      <tr><td class="ltr">ㅌ</td><td class="snd">t</td><td class="eng">tea</td><td class="esp">t에 숨을 세게</td></tr>
+      <tr><td class="ltr">ㅍ</td><td class="snd">p</td><td class="eng">pen</td><td class="esp">p에 숨을 세게</td></tr>
+      <tr><td class="ltr">ㅎ</td><td class="snd">h</td><td class="eng">hat</td><td class="esp">부드러운 h (jamón의 j 아니에요)</td></tr>
+    </tbody>
+  </table>
+  <p class="subline">ㅇ은 글자 앞자리에서는 소리가 없어요. 자리만 지켜요. 받침 자리에서만 ng 소리가 나요.<br>
+  <span style="font-size:14.5px">ㅇ is silent at the start of a syllable. It only sounds like ng at the bottom.</span></p>
+
+  <section class="feature" style="margin-top:34px">
+    <span class="tagq">유리한 출발 · Head start</span>
+    <h2>스페인어가 주는 세 글자</h2>
+    <p class="en">These three are already in your mouth. Most learners have to build them from scratch.</p>
+    <div class="adv">
+      <div class="a"><div class="g">ㄹ</div><div class="w">pe<b>r</b>o</div><div class="t">혀를 한 번 톡</div></div>
+      <div class="a"><div class="g">ㅊ</div><div class="w"><b>ch</b>ico</div><div class="t">그대로 같은 소리</div></div>
+      <div class="a"><div class="g">ㅇ</div><div class="w">ba<b>n</b>co</div><div class="t">받침 자리에서</div></div>
+    </div>
+  </section>
+
+  <section class="breath">
+    <span class="tagq">종이 실험 · The paper test</span>
+    <h2>숨이 나가요, 안 나가요?</h2>
+    <p>한국어 자음은 <b>짝</b>으로 다녀요. 입 모양은 같고, <b>숨의 세기</b>만 달라요.</p>
+    <p class="en">Same mouth shape, different puff of air. Hold a sheet of paper in front of your mouth and say each set.</p>
+    <div class="pairs">
+      <div class="pcol soft">
+        <div class="lab">Soft · 숨 약하게</div>
+        <div class="set">ㄱㄷㅂ</div>
+        <div class="desc">종이가 가만히 있어요<br><span style="font-size:14px">The paper stays still</span></div>
+        <span class="paper"></span>
+      </div>
+      <div class="pcol strong">
+        <div class="lab">Strong · 숨 세게</div>
+        <div class="set">ㅋㅌㅍ</div>
+        <div class="desc">종이가 흔들려요<br><span style="font-size:14px">The paper moves</span></div>
+        <span class="paper"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="warn">
+    <b>ㅎ 주의!</b> 스페인어 h는 소리가 없고 (hola), j는 목에서 나는 세찬 소리예요 (jamón).
+    한국어 ㅎ은 그 사이, 영어 hat의 부드러운 h예요.
+    <span class="en">Spanish h is silent and Spanish j is harsh. Korean ㅎ is the gentle h of English "hat".</span>
+  </div>
+
+  <section class="ex-sec">
+    <h3 class="sub">벌써 아는 단어들</h3>
+    <p class="subline">받침 없이, 오늘 배운 자음만으로 읽을 수 있어요. <span style="font-size:14.5px">Words you already know, readable today.</span></p>
+    <div class="grid">
+      <span class="chip known">타코 <em>taco</em></span>
+      <span class="chip known">바나나 <em>banana</em></span>
+      <span class="chip known">토마토 <em>tomate</em></span>
+      <span class="chip known">나초 <em>nachos</em></span>
+      <span class="chip known">부리토 <em>burrito</em></span>
+      <span class="chip known">아보카도 <em>aguacate</em></span>
+      <span class="chip known">기타 <em>guitarra</em></span>
+      <span class="chip known">소파 <em>sofá</em></span>
+      <span class="chip known">라디오 <em>radio</em></span>
+      <span class="chip known">피아노 <em>piano</em></span>
+      <span class="chip known">코코아 <em>cacao</em></span>
+    </div>
+  </section>
+
+  <section class="ex-sec">
+    <h3 class="sub">새 단어 읽기</h3>
+    <p class="subline">한 글자씩 소리 내어 읽어 보세요. <span style="font-size:14.5px">Read each syllable out loud.</span></p>
+    <div class="grid">
+      <span class="chip">나무 <em>árbol</em></span>
+      <span class="chip">바다 <em>mar</em></span>
+      <span class="chip">우유 <em>leche</em></span>
+      <span class="chip">커피 <em>café</em></span>
+      <span class="chip">나비 <em>mariposa</em></span>
+      <span class="chip">다리 <em>pierna</em></span>
+      <span class="chip">가수 <em>cantante</em></span>
+      <span class="chip">포도 <em>uva</em></span>
+      <span class="chip">모자 <em>sombrero</em></span>
+      <span class="chip">지도 <em>mapa</em></span>
+    </div>
+  </section>
+
+  <section class="practice">
+    <h2>직접 해보기 · Try it</h2>
+    <p class="en">눌러서 답을 확인하세요. Tap to reveal.</p>
+    <details class="q"><summary>스페인어 pero의 r과 같은 자음은?</summary><div class="ans"><b>ㄹ</b> — 혀를 한 번만 톡 치면 돼요. 이미 할 수 있는 소리예요.</div></details>
+    <details class="q"><summary>종이가 흔들리는 쪽은? ㄱ 또는 ㅋ</summary><div class="ans"><b>ㅋ</b> — 숨이 세게 나가는 짝이에요. ㄱ은 조용히.</div></details>
+    <details class="q"><summary>'아'에서 ㅇ은 무슨 소리예요?</summary><div class="ans"><b>소리가 없어요</b> — 앞자리 ㅇ은 자리 지킴이예요. 받침 자리에서만 ng로 소리 나요.</div></details>
+    <details class="q"><summary>ㅌ + ㅏ / ㅋ + ㅗ = ?</summary><div class="ans"><b>타코</b> — 벌써 아는 단어를 한국어로 읽었어요.</div></details>
+    <details class="q"><summary>한국어 ㅎ은 스페인어 j(jamón)와 같아요?</summary><div class="ans"><b>아니에요</b> — 훨씬 부드러워요. 영어 hat의 h예요.</div></details>
+  </section>
+
+  <footer>한국어 발음 가이드 · 기본 자음 14 (스페인어 화자용)</footer>
+
+</div>
+</body>
+</html>
