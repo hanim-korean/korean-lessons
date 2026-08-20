@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hanim-korean.example/schemas/content-manifest.schema.json",
+  "title": "Hanim Korean content manifest",
+  "type": "object",
+  "required": ["schema_version", "items"],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "items": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/item" }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "item": {
+      "type": "object",
+      "required": [
+        "id",
+        "slug",
+        "title_ko",
+        "summary",
+        "primary_category",
+        "level",
+        "format",
+        "tags",
+        "source_path",
+        "canonical",
+        "visibility",
+        "status"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "slug": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "title_ko": { "type": "string", "minLength": 1 },
+        "title_en": { "type": "string" },
+        "summary": { "type": "string", "minLength": 1 },
+        "primary_category": {
+          "enum": [
+            "hangul-pronunciation",
+            "grammar-sentences",
+            "vocabulary",
+            "conversation-culture",
+            "textbook-courses",
+            "studio-tools",
+            "personalized"
+          ]
+        },
+        "level": { "enum": ["beginner", "intermediate", "advanced", "mixed", "not-applicable"] },
+        "sublevel": { "enum": ["A0", "A1", "A2", "B1", "B2", "C1", "C2", "mixed", "not-assessed"] },
+        "level_min": { "enum": ["A0", "A1", "A2", "B1", "B2", "C1", "C2"] },
+        "level_max": { "enum": ["A0", "A1", "A2", "B1", "B2", "C1", "C2"] },
+        "skills": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["speaking", "listening", "reading", "writing", "grammar", "vocabulary", "pronunciation", "culture"] }
+        },
+        "format": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["game", "quiz", "flashcards", "slides", "worksheet", "role-play", "guide", "review", "generator", "probe"] }
+        },
+        "tags": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "audience": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["adult", "teen", "child", "all-ages", "teacher", "specific-student"] }
+        },
+        "support_languages": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["ko", "en", "es", "fr", "other"] }
+        },
+        "series": { "type": "string" },
+        "source_path": { "type": "string", "minLength": 1 },
+        "canonical": { "type": "boolean" },
+        "canonical_id": { "type": "string" },
+        "visibility": { "enum": ["public", "members", "student", "internal"] },
+        "status": { "enum": ["draft", "review", "published", "archived"] },
+        "rights_status": { "enum": ["owned", "licensed", "link-only", "needs-review", "restricted"] },
+        "thumbnail": {
+          "type": "object",
+          "required": ["src", "alt"],
+          "properties": {
+            "src": { "type": "string" },
+            "alt": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "updated_at": { "type": "string", "format": "date" },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  }
+}
