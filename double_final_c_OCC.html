@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>겹받침 ㄺ 제대로 읽기 · 늙크크</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+  :root{
+    --bg:#f8f4ec; --ink:#2b2622; --soft:#6b6258; --line:#e3dccd; --card:#fffdf8;
+    --hi:#ffe7a3; --shadow:#e7ddc8;
+    --terra:#a8593f; --teal:#2f8f7f; --blue:#3d6d9e; --purple:#7a5c9e; --gold:#b07d24;
+    --wrong:#b64a3a; --wrong-bg:#fbe9e4; --right:#2f8f7f; --right-bg:#e6f4ef;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+    font-size:17px; line-height:1.65; letter-spacing:-0.01em; word-break:keep-all; overflow-wrap:break-word; -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--line) 0.6px, transparent 0.6px); background-size:22px 22px;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:0 22px 80px;}
+
+  .hero{text-align:center;padding:52px 0 14px;}
+  .hero .kicker{font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;font-size:14px;color:var(--gold);letter-spacing:.4px;}
+  .hero h1{font-family:'Gowun Dodum',sans-serif;font-weight:400;font-size:clamp(32px,7.5vw,44px);line-height:1.15;margin-top:8px;}
+  .hero h1 b{color:var(--terra);}
+  .hero .en{font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;font-size:clamp(16px,3vw,20px);color:var(--soft);margin-top:8px;}
+  .hero .lead{max-width:600px;margin:18px auto 0;font-size:19px;color:var(--soft);}
+
+  section{margin-top:34px;}
+  .h2{font-family:'Gowun Dodum',sans-serif;font-weight:400;font-size:clamp(24px,5vw,30px);margin-bottom:4px;display:flex;align-items:center;gap:10px;}
+  .h2 .en{font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;font-size:15px;color:var(--soft);font-weight:400;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 22px;box-shadow:5px 5px 0 var(--shadow);margin-top:14px;}
+  .scope{background:#f6f1e6;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:13px 16px;margin-top:12px;font-size:15.5px;}
+  .scope b{color:var(--terra);}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px;}
+  .rulecard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:5px 5px 0 var(--shadow);}
+  .rulecard .tag{display:inline-block;font-size:13px;font-weight:700;padding:4px 12px;border-radius:999px;margin-bottom:12px;}
+  .tag.base{background:#eaf4f1;color:var(--teal);}
+  .tag.exc{background:#f1ecf6;color:var(--purple);}
+  .rulecard h3{font-family:'Gowun Dodum',sans-serif;font-weight:400;font-size:21px;margin-bottom:6px;}
+  .rulecard .sub{font-size:14px;color:var(--soft);margin-bottom:12px;}
+  .ex{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-top:1px dashed var(--line);}
+  .ex .w{font-size:19px;font-weight:600;}
+  .ex .p{font-size:19px;font-family:'Gowun Dodum',sans-serif;}
+  .ex .p b{color:var(--terra);}
+  .ex .p.tealb b{color:var(--teal);}
+  .ex .p.purpleb b{color:var(--purple);}
+
+  .spot{background:linear-gradient(180deg,#fffdf8,#fff8ec);border:2px solid var(--gold);border-radius:20px;padding:26px 24px;box-shadow:6px 6px 0 var(--shadow);text-align:center;margin-top:16px;}
+  .spot .big{font-family:'Gowun Dodum',sans-serif;font-size:clamp(40px,10vw,60px);line-height:1;margin:4px 0 2px;}
+  .spot .pieces{font-size:16px;color:var(--soft);margin-bottom:18px;}
+  .versus{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:520px;margin:0 auto;}
+  .vs{border-radius:14px;padding:16px 12px;}
+  .vs.no{background:var(--wrong-bg);border:1px solid #eecabf;}
+  .vs.yes{background:var(--right-bg);border:1px solid #c3e3d8;}
+  .vs .label{font-size:13px;font-weight:700;letter-spacing:.3px;}
+  .vs.no .label{color:var(--wrong);}
+  .vs.yes .label{color:var(--right);}
+  .vs .sound{font-family:'Gowun Dodum',sans-serif;font-size:34px;margin-top:6px;}
+  .vs.no .sound{color:var(--wrong);text-decoration:line-through;text-decoration-thickness:2px;}
+  .vs.yes .sound{color:var(--right);}
+  .vs .mini{font-size:13px;color:var(--soft);margin-top:6px;}
+
+  .why{background:#f4efe4;border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:16px 18px;margin-top:16px;}
+  .why .t{font-weight:700;color:var(--gold);font-size:14px;margin-bottom:6px;}
+  .why p{font-size:15.5px;}
+  .why .en{font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;font-size:14px;color:var(--soft);margin-top:6px;}
+  .key{background:var(--hi);border-radius:6px;padding:1px 7px;font-weight:600;}
+
+  .practice{display:flex;flex-direction:column;gap:10px;margin-top:14px;}
+  .prow{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;box-shadow:3px 3px 0 var(--shadow);}
+  .prow .num{font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;color:var(--gold);font-size:15px;width:22px;flex:none;}
+  .prow .w{font-size:20px;font-weight:600;flex:none;min-width:88px;}
+  .prow .arrow{color:var(--soft);}
+  .prow .p{font-family:'Gowun Dodum',sans-serif;font-size:20px;}
+  .prow .p b{color:var(--teal);}
+  .prow .note{margin-left:auto;font-size:13px;color:var(--soft);text-align:right;}
+
+  .quiz{background:var(--card);border:1px dashed var(--purple);border-radius:16px;padding:22px;margin-top:16px;text-align:center;}
+  .quiz .q{font-family:'Gowun Dodum',sans-serif;font-size:22px;margin-bottom:14px;}
+  .quiz .btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .quiz button{font-family:'Pretendard',sans-serif;font-size:20px;font-weight:600;border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 22px;cursor:pointer;box-shadow:3px 3px 0 var(--shadow);transition:transform .08s;}
+  .quiz button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--shadow);}
+  .quiz .ans{margin-top:16px;font-size:16px;min-height:24px;}
+  .quiz .ans.ok{color:var(--right);font-weight:600;}
+  .quiz .ans.bad{color:var(--wrong);font-weight:600;}
+
+  .foot{margin-top:48px;text-align:center;color:var(--soft);font-size:14px;}
+  .foot .made{font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;}
+
+  @media (max-width:620px){
+    .two,.versus{grid-template-columns:1fr;}
+    .prow{flex-wrap:wrap;}
+    .prow .note{margin-left:0;text-align:left;width:100%;}
+  }
+  @media print{
+    body{background:#fff;background-image:none;}
+    .card,.rulecard,.spot,.prow{box-shadow:none;}
+    .quiz{display:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">겹받침 발음 · one tricky pair</div>
+    <h1>겹받침 <b>ㄺ</b> 제대로 읽기</h1>
+    <div class="en">reading the double final ㄺ — and the trendy word 늙크크</div>
+    <p class="lead">늙크크, 많은 사람이 "늘크크"라고 읽어요. 그런데 사실은 "늑크크"가 맞아요.<br>왜 그런지 규칙 하나로 알 수 있어요.</p>
+  </div>
+
+  <section>
+    <div class="h2">규칙 하나, 경우 둘 <span class="en">one rule, two cases</span></div>
+    <div class="card" style="padding:16px 20px;">
+      겹받침 <b>ㄺ</b>은 뒤에 뭐가 오느냐로 소리가 정해져요.
+      <span style="color:var(--soft);font-size:15px;">(ㄺ is read differently depending on what follows.)</span>
+    </div>
+    <div class="scope">
+      먼저, <b>이 노트는</b> ㄺ 뒤에 <b>자음</b>이 오거나 <b>단어가 끝날 때</b>만 봐요. 뒤에 모음(ㅇ)이 오면 소리가 또 달라져서(읽어요 → [일거요]), 그 경우는 여기서 뺐어요.
+      <span style="color:var(--soft);font-size:14px;display:block;margin-top:4px;">(This note covers ㄺ before a consonant or at the end of a word. When a vowel follows, the sound changes again, so that case is left out here.)</span>
+    </div>
+
+    <div class="two">
+      <div class="rulecard">
+        <span class="tag base">기본 · usually</span>
+        <h3>ㄺ + 자음 → [ㄱ]</h3>
+        <div class="sub">단어 끝이나 자음 앞에서는 ㄱ 소리. (at the end of a word, or before a consonant)</div>
+        <div class="ex"><span class="w">읽다</span><span class="p">[<b>익</b>따]</span></div>
+        <div class="ex"><span class="w">늙다</span><span class="p">[<b>늑</b>따]</span></div>
+        <div class="ex"><span class="w">닭</span><span class="p">[<b>닥</b>]</span></div>
+        <div class="ex"><span class="w">흙</span><span class="p">[<b>흑</b>]</span></div>
+      </div>
+      <div class="rulecard">
+        <span class="tag exc">예외 · before ㄱ</span>
+        <h3>ㄺ + ㄱ → [ㄹ]</h3>
+        <div class="sub">동사·형용사 어간 ㄺ 뒤에 ㄱ이 오면 ㄹ 소리. (verb·adjective stem + ㄱ)</div>
+        <div class="ex"><span class="w">읽고</span><span class="p purpleb">[<b>일</b>꼬]</span></div>
+        <div class="ex"><span class="w">늙고</span><span class="p purpleb">[<b>늘</b>꼬]</span></div>
+        <div class="ex"><span class="w">읽게</span><span class="p purpleb">[<b>일</b>께]</span></div>
+        <div class="ex"><span class="w">맑게</span><span class="p purpleb">[<b>말</b>께]</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2">그래서 늙크크는? <span class="en">so how about 늙크크?</span></div>
+    <div class="spot">
+      <div style="font-size:14px;color:var(--soft);letter-spacing:.3px;">늙 + 크크 (늙다 + ㅋㅋ)</div>
+      <div class="big">늙크크</div>
+      <div class="pieces">뒤 글자 "크"는 <b>ㅋ</b>으로 시작해요. ㅋ은 ㄱ이 아니에요. So the basic rule wins.</div>
+      <div class="versus">
+        <div class="vs no">
+          <div class="label">✗ 흔한 실수</div>
+          <div class="sound">늘크크</div>
+          <div class="mini">ㄹ로 읽으면 틀려요</div>
+        </div>
+        <div class="vs yes">
+          <div class="label">✓ 맞는 발음</div>
+          <div class="sound">늑크크</div>
+          <div class="mini">ㄱ 소리가 맞아요</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why">
+      <div class="t">왜 사람들이 "늘크크"라고 할까요? · why the mix-up</div>
+      <p>"늙고"를 <span class="key">[늘꼬]</span>라고 읽는 게 익숙하니까, "크크"도 비슷하게 ㄹ로 읽어버리는 거예요. 그런데 그 예외는 <b>ㄱ 앞에서만</b> 적용돼요. "크"는 <b>ㅋ</b>이라서 예외가 아니에요. 그래서 기본 규칙대로 <span class="key">[늑크크]</span>.</p>
+      <p class="en">People know 늙고 → [늘꼬], so they extend the ㄹ sound. But that exception only happens before ㄱ. 크 starts with ㅋ, so we stay with the ㄱ sound: [늑크크].</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2">같이 소리 내어 읽기 <span class="en">say them out loud</span></div>
+    <div class="practice">
+      <div class="prow"><span class="num">1</span><span class="w">읽다</span><span class="arrow">→</span><span class="p">[<b>익</b>따]</span><span class="note">ㄱ 소리</span></div>
+      <div class="prow"><span class="num">2</span><span class="w">늙다</span><span class="arrow">→</span><span class="p">[<b>늑</b>따]</span><span class="note">ㄱ 소리</span></div>
+      <div class="prow"><span class="num">3</span><span class="w">늙크크</span><span class="arrow">→</span><span class="p">[<b>늑</b>크크]</span><span class="note">ㅋ 앞이라 ㄱ 소리</span></div>
+      <div class="prow"><span class="num">4</span><span class="w">읽고</span><span class="arrow">→</span><span class="p purpleb" style="color:inherit;">[<b style="color:var(--purple)">일</b>꼬]</span><span class="note">ㄱ 앞이라 ㄹ 소리</span></div>
+      <div class="prow"><span class="num">5</span><span class="w">늙고</span><span class="arrow">→</span><span class="p" style="color:inherit;">[<b style="color:var(--purple)">늘</b>꼬]</span><span class="note">ㄱ 앞이라 ㄹ 소리</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2">직접 골라보기 <span class="en">your turn</span></div>
+    <div class="quiz">
+      <div class="q">"맑고"는 어떻게 읽어요?</div>
+      <div class="btns">
+        <button onclick="pick(this,false)">막꼬</button>
+        <button onclick="pick(this,true)">말꼬</button>
+      </div>
+      <div class="ans" id="ans"></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <div>겹받침 ㄺ · 늙크크 발음 노트</div>
+    <div class="made">written by Hanim · 하님 만듦</div>
+  </div>
+
+</div>
+
+<script>
+  function pick(btn,correct){
+    var a=document.getElementById('ans');
+    if(correct){
+      a.textContent='맞아요! 맑고 → [말꼬]. 맑다(형용사) + ㄱ이라서 ㄹ 소리예요. (before ㄱ → ㄹ)';
+      a.className='ans ok';
+    }else{
+      a.textContent='아쉬워요. "고"는 ㄱ으로 시작하죠? 동사·형용사 어간 ㄺ + ㄱ이라 ㄹ 소리, [말꼬]예요.';
+      a.className='ans bad';
+    }
+  }
+</script>
+</body>
+</html>
