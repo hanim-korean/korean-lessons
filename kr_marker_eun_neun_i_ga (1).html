@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>은/는 vs 이/가 · Korean Particles, the Tricky Pair</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Nanum+Myeongjo:wght@400;700;800&display=swap');
+
+  :root{
+    --bg:#f8f4ec;
+    --ink:#2b2622;
+    --soft:#6b6258;
+    --line:#e3dccd;
+    --card:#fffdf8;
+
+    --topic:#d96c4a;      /* 은/는  — warm, spotlight */
+    --subject:#2f8f7f;    /* 이/가  — cool, pointing  */
+
+    --topic-bg:#fbe6dd;
+    --subject-bg:#d9efe9;
+
+    --shadow:6px 6px 0 #efe7d6;
+    --shadow-sm:5px 5px 0 #efe7d6;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Gowun Dodum','Pretendard','Nanum Myeongjo',sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--line) 0.6px, transparent 0.6px);
+    background-size:22px 22px;
+  }
+  .wrap{max-width:1020px;margin:0 auto;padding:0 22px 60px;}
+
+  /* serif helper for Korean example sentences */
+  .kr-serif{font-family:'Nanum Myeongjo',serif;}
+  .en-it{font-family:'Fraunces',serif;font-style:italic;}
+
+  /* highlight chips for the two particles inside sentences */
+  .t{color:var(--topic);font-weight:700;}
+  .s{color:var(--subject);font-weight:700;}
+  .hl-t{background:var(--topic-bg);color:var(--topic);border-radius:5px;padding:0 4px;font-weight:700;}
+  .hl-s{background:var(--subject-bg);color:var(--subject);border-radius:5px;padding:0 4px;font-weight:700;}
+
+  /* ---------- TOP BAR (Hanim) ---------- */
+  .topbar{
+    display:flex;justify-content:space-between;align-items:center;
+    max-width:1020px;margin:0 auto;padding:14px 22px 0;
+    font-family:'Fraunces',serif;font-style:italic;font-size:13.5px;color:var(--soft);
+  }
+  .topbar .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--topic);margin-right:6px;vertical-align:middle;}
+  .topbar .r{color:var(--subject);}
+
+  /* ---------- HERO ---------- */
+  header.hero{text-align:center;padding:40px 0 30px;}
+  .hero .kr{
+    font-family:'Nanum Myeongjo',serif;font-weight:800;
+    font-size:clamp(34px,6.4vw,58px);letter-spacing:-1px;line-height:1.12;
+  }
+  .hero .kr .t{color:var(--topic);}
+  .hero .kr .s{color:var(--subject);}
+  .hero .en{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(16px,3vw,20px);color:var(--soft);margin-top:12px;}
+  .hero .lead{max-width:730px;margin:20px auto 0;font-size:16px;color:var(--soft);}
+
+  /* ---------- SECTION HEADING ---------- */
+  .sec-h{
+    display:flex;align-items:baseline;gap:12px;margin:44px 0 18px;
+    padding-bottom:10px;border-bottom:2px solid var(--line);
+  }
+  .sec-h .no{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--soft);}
+  .sec-h h2{font-family:'Nanum Myeongjo',serif;font-size:clamp(21px,3.6vw,26px);letter-spacing:-.5px;}
+  .sec-h .no b{font-size:20px;color:var(--topic);font-style:normal;}
+
+  /* ---------- CARD (generic) ---------- */
+  .card{
+    background:var(--card);border:1.5px solid var(--line);border-radius:18px;
+    padding:26px 28px;margin:0 0 22px;box-shadow:var(--shadow-sm);
+  }
+  .card p{margin-bottom:12px;}
+  .card p:last-child{margin-bottom:0;}
+
+  /* ---------- STEP 0 : what is 조사 ---------- */
+  .zerobox{
+    background:var(--card);border:1.5px solid var(--line);border-radius:18px;
+    padding:26px 28px;margin:0 0 22px;box-shadow:var(--shadow);
+  }
+  .zerobox .eq{
+    text-align:center;font-family:'Nanum Myeongjo',serif;font-size:clamp(19px,4vw,26px);
+    letter-spacing:-.5px;margin:6px 0 14px;line-height:1.5;
+  }
+  .zerobox .eq .x{color:var(--soft);margin:0 10px;font-size:.8em;}
+  .zerobox .eq .kk{color:var(--ink);font-weight:800;}
+  .zerobox .note{font-size:15px;color:var(--soft);text-align:center;border-top:1px dashed var(--line);padding-top:14px;margin-top:6px;}
+
+  /* ---------- BIG IDEA : two feelings ---------- */
+  .feelings{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:0 0 22px;}
+  .feel{
+    border-radius:16px;padding:22px 22px 20px;box-shadow:var(--shadow-sm);
+    border:1.5px solid var(--line);position:relative;overflow:hidden;
+  }
+  .feel.t{background:var(--topic-bg);}
+  .feel.s{background:var(--subject-bg);}
+  .feel .emoji{font-size:30px;line-height:1;margin-bottom:8px;}
+  .feel .lab{font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:26px;letter-spacing:-.5px;margin-bottom:2px;}
+  .feel.t .lab{color:var(--topic);}
+  .feel.s .lab{color:var(--subject);}
+  .feel .en{font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;color:var(--soft);margin-bottom:12px;}
+  .feel .does{font-size:15.5px;line-height:1.6;}
+  .feel .does b{font-weight:700;}
+  .feel.t .does b{color:var(--topic);}
+  .feel.s .does b{color:var(--subject);}
+  .feel .say{
+    margin-top:12px;font-family:'Nanum Myeongjo',serif;font-size:15px;
+    background:rgba(255,255,255,.6);border-radius:9px;padding:9px 12px;line-height:1.6;
+  }
+
+  /* 받침 rule (shared) */
+  .batchim{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 0;}
+  .batchim .pill{flex:1;min-width:140px;border-radius:10px;padding:11px 14px;font-size:14px;border:1.5px solid var(--line);}
+  .batchim .pill b{font-family:'Nanum Myeongjo',serif;font-size:18px;}
+  .batchim .yes{background:#f1e7d3;}
+  .batchim .no{background:#e7eee9;}
+  .batchim small{display:block;color:var(--soft);font-size:12.5px;margin-top:3px;}
+  .batchim .pill .p-t{color:var(--topic);}
+  .batchim .pill .p-s{color:var(--subject);}
+
+  /* ---------- VERSUS PAIRS (the heart) ---------- */
+  .pair{
+    background:var(--card);border:1.5px solid var(--line);border-radius:18px;
+    padding:0;margin:0 0 20px;overflow:hidden;box-shadow:var(--shadow-sm);
+  }
+  .pair .situ{
+    padding:14px 22px;font-size:14.5px;color:var(--soft);
+    background:#faf6ec;border-bottom:1px solid var(--line);
+  }
+  .pair .situ b{color:var(--ink);font-weight:700;}
+  .pair .two{display:grid;grid-template-columns:1fr 1fr;}
+  .pair .side{padding:20px 22px;}
+  .pair .side.t{background:linear-gradient(0deg,rgba(217,108,74,.05),transparent);}
+  .pair .side.s{background:linear-gradient(0deg,rgba(47,143,127,.05),transparent);border-left:1px solid var(--line);}
+  .pair .side .sent{font-family:'Nanum Myeongjo',serif;font-size:19px;line-height:1.5;margin-bottom:8px;letter-spacing:-.3px;}
+  .pair .side .gloss{font-size:14px;color:var(--soft);margin-bottom:10px;line-height:1.5;}
+  .pair .side .why{font-size:13.5px;line-height:1.55;padding-top:10px;border-top:1px dotted var(--line);}
+  .pair .side .why .badge{display:inline-block;font-size:12px;font-weight:700;border-radius:20px;padding:2px 10px;margin-bottom:6px;}
+  .pair .side.t .why .badge{background:var(--topic-bg);color:var(--topic);}
+  .pair .side.s .why .badge{background:var(--subject-bg);color:var(--subject);}
+
+  /* ---------- TRICK LINE ---------- */
+  .trick{
+    background:var(--card);border:1.5px dashed var(--topic);border-radius:16px;
+    padding:20px 24px;margin:0 0 22px;
+  }
+  .trick h3{font-family:'Nanum Myeongjo',serif;font-size:18px;margin-bottom:10px;}
+  .trick .row{display:flex;gap:12px;align-items:flex-start;font-size:15px;margin-bottom:8px;line-height:1.55;}
+  .trick .row:last-child{margin-bottom:0;}
+  .trick .q{flex-shrink:0;font-weight:700;border-radius:8px;padding:3px 11px;font-size:13.5px;white-space:nowrap;margin-top:2px;}
+  .trick .q.t{background:var(--topic-bg);color:var(--topic);}
+  .trick .q.s{background:var(--subject-bg);color:var(--subject);}
+
+  /* ---------- MYTH BUSTER (은/는 not subject) ---------- */
+  .myth{
+    background:#fff4ee;border:1.5px solid #f0d3c4;border-radius:18px;
+    padding:24px 26px;margin:0 0 22px;box-shadow:var(--shadow-sm);
+  }
+  .myth .flag{
+    display:inline-block;font-family:'Fraunces',serif;font-style:italic;
+    font-size:13px;color:#fff;background:var(--topic);border-radius:20px;padding:3px 13px;margin-bottom:12px;
+  }
+  .myth h3{font-family:'Nanum Myeongjo',serif;font-size:19px;margin-bottom:10px;}
+  .myth .ex{font-family:'Nanum Myeongjo',serif;font-size:17.5px;line-height:1.7;background:#fffdf8;border-radius:10px;padding:12px 16px;margin:12px 0;}
+  .myth .ex small{display:block;font-family:'Gowun Dodum',sans-serif;color:var(--soft);font-size:13.5px;margin-top:3px;}
+
+  /* ---------- QUIZ ---------- */
+  .quiz{background:#2b2622;color:#f4efe4;border-radius:18px;padding:32px 28px;margin-top:20px;}
+  .quiz h2{font-family:'Nanum Myeongjo',serif;font-size:24px;margin-bottom:6px;color:#fff;}
+  .quiz .sub{color:#bcae99;font-size:14px;font-family:'Fraunces',serif;font-style:italic;margin-bottom:8px;}
+  .quiz .howto{color:#a99d88;font-size:13px;margin-bottom:24px;}
+  .q{margin-bottom:20px;border-bottom:1px solid #423b32;padding-bottom:20px;}
+  .q:last-of-type{border-bottom:none;margin-bottom:0;}
+  .q .situ{color:#bcae99;font-size:13.5px;margin-bottom:8px;font-style:italic;font-family:'Fraunces',serif;}
+  .q .ask{font-family:'Nanum Myeongjo',serif;font-size:18.5px;margin-bottom:14px;line-height:1.6;}
+  .q .ask .blank{display:inline-block;min-width:52px;border-bottom:2px dashed #8a7f6c;text-align:center;color:#e0b25a;font-weight:700;}
+  .opts{display:flex;gap:10px;flex-wrap:wrap;}
+  .opt{
+    background:#3a332b;border:1.5px solid #4d453a;color:#f4efe4;border-radius:10px;
+    padding:9px 20px;font-size:17px;cursor:pointer;font-family:'Nanum Myeongjo',serif;transition:.15s;
+  }
+  .opt:hover{background:#4a4236;}
+  .opt.correct{background:var(--subject);border-color:var(--subject);color:#fff;}
+  .opt.wrong{background:#9c4a3f;border-color:#9c4a3f;color:#fff;}
+  .feedback{margin-top:12px;font-size:14px;color:#bcae99;min-height:20px;line-height:1.55;}
+  .feedback.show{color:#e8dcc4;}
+
+  /* ---------- CLOSING NOTE ---------- */
+  .closing{
+    text-align:center;background:var(--card);border:1.5px solid var(--line);
+    border-radius:18px;padding:26px 28px;margin-top:22px;box-shadow:var(--shadow-sm);
+  }
+  .closing .big{font-family:'Nanum Myeongjo',serif;font-size:19px;line-height:1.7;margin-bottom:8px;}
+  .closing .small{font-size:14.5px;color:var(--soft);}
+
+  /* ---------- FOOTER (Hanim) ---------- */
+  footer{
+    text-align:center;margin-top:36px;padding-top:22px;border-top:1px solid var(--line);
+    color:var(--soft);font-size:13.5px;
+  }
+  footer .made{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--ink);}
+  footer .made b{color:var(--topic);font-style:normal;font-family:'Nanum Myeongjo',serif;}
+  footer .sub{margin-top:5px;font-family:'Fraunces',serif;font-style:italic;}
+
+  @media(max-width:620px){
+    body{font-size:16px;}
+    .feelings,.pair .two{grid-template-columns:1fr;}
+    .pair .side.s{border-left:none;border-top:1px solid var(--line);}
+    .topbar{font-size:12px;padding-left:16px;padding-right:16px;}
+    .trick .row{flex-direction:column;gap:4px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span><span class="dot"></span>한국어 조사 · Korean Particles</span>
+  <span class="r en-it">written by Hanim</span>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kr"><span class="t">은/는</span> vs <span class="s">이/가</span></div>
+    <div class="en">The two little words that trip everyone up</div>
+    <p class="lead">둘 다 문장 맨 앞에 자주 나와서 헷갈려요. 그런데 하는 일이 서로 달라요.
+    규칙을 외우기보다, <b>느낌</b>을 잡으면 훨씬 쉬워요.<br>
+    <span class="en-it">Both often sit at the front of a sentence — but they do different jobs. Feel the difference, don't memorize it.</span></p>
+  </header>
+
+  <!-- STEP 0 -->
+  <div class="sec-h"><span class="no">먼저 · <b>0</b></span><h2>조사가 뭐예요?</h2></div>
+  <div class="zerobox">
+    <div class="eq">particle <span class="x">=</span> marker <span class="x">=</span> <span class="kk">조사</span></div>
+    <p style="text-align:center;font-size:16px;">단어 뒤에 붙어서 <b>“이 단어가 문장에서 무슨 일을 하는지”</b> 알려주는 작은 꼬리표예요.</p>
+    <div class="note en-it">A particle (= a marker) is a little tag on the back of a word. It tells you the word's job in the sentence. That's all it is.</div>
+  </div>
+
+  <!-- BIG IDEA: two feelings -->
+  <div class="sec-h"><span class="no">핵심 · <b>1</b></span><h2>느낌 두 개만 기억해요</h2></div>
+  <div class="feelings">
+    <div class="feel t">
+      <div class="emoji">🔦</div>
+      <div class="lab">은 / 는</div>
+      <div class="en">the spotlight</div>
+      <div class="does">무대에 <b>불을 비춰요.</b> “자, 이제 이 얘기 할게요.”<br>그리고 딴 것과 <b>견줘요.</b> (대조·강조)</div>
+      <div class="say kr-serif">저<span class="t">는</span>… &nbsp;/&nbsp; 커피<span class="t">는</span> 좋아요, 차<span class="t">는</span> 싫어요.</div>
+    </div>
+    <div class="feel s">
+      <div class="emoji">👉</div>
+      <div class="lab">이 / 가</div>
+      <div class="en">the pointing finger</div>
+      <div class="does">손가락으로 <b>콕 집어요.</b> “바로 이 사람, 이거!”<br>주로 <b>처음 등장</b>하거나 질문의 답이에요.</div>
+      <div class="say kr-serif">누<span class="s">가</span> 왔어요? — 친구<span class="s">가</span> 왔어요.</div>
+    </div>
+  </div>
+
+  <!-- 받침 rule -->
+  <div class="card">
+    <p style="font-size:15px;margin-bottom:10px;"><b>붙이는 규칙은 둘 다 받침으로 정해요.</b> <span class="en-it" style="color:var(--soft);font-size:13.5px;">Both are chosen by 받침 — the same way.</span></p>
+    <div class="batchim">
+      <div class="pill yes">받침 O <b><span class="p-t">은</span> / <span class="p-s">이</span></b><small>after a consonant · 사람<span class="p-t">은</span> · 사람<span class="p-s">이</span></small></div>
+      <div class="pill no">받침 X <b><span class="p-t">는</span> / <span class="p-s">가</span></b><small>after a vowel · 저<span class="p-t">는</span> · 친구<span class="p-s">가</span></small></div>
+    </div>
+  </div>
+
+  <!-- THE HEART: versus pairs -->
+  <div class="sec-h"><span class="no">비교 · <b>2</b></span><h2>같은 문장, 다른 느낌</h2></div>
+  <p style="color:var(--soft);font-size:15px;margin:-6px 0 18px;">조사 하나만 바꿔도 뜻이 달라져요. 왼쪽은 <span class="t">은/는</span>, 오른쪽은 <span class="s">이/가</span>예요.
+  <span class="en-it">Swap just the particle, and the meaning shifts.</span></p>
+
+  <!-- pair 1 -->
+  <div class="pair">
+    <div class="situ">🗣️ <b>“누가 왔어요?”</b> 라고 물어본 뒤의 대답</div>
+    <div class="two">
+      <div class="side t">
+        <div class="sent">친구<span class="hl-t">는</span> 왔어요.</div>
+        <div class="gloss">As for my friend, they came. (딴 사람은 몰라도)</div>
+        <div class="why"><span class="badge">견주기</span><br>다른 사람과 대조하는 느낌. “친구는 왔는데 다른 사람은요?” 질문의 답으로는 조금 어색해요.</div>
+      </div>
+      <div class="side s">
+        <div class="sent">친구<span class="hl-s">가</span> 왔어요.</div>
+        <div class="gloss">(It was) my friend who came.</div>
+        <div class="why"><span class="badge">콕 집기</span><br>누가 왔는지 <b>딱 집어서</b> 답해요. “누가?”의 자연스러운 답이에요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- pair 2 -->
+  <div class="pair">
+    <div class="situ">🐆 <b>치타 이야기</b> — 일반적인 사실 vs 지금 눈앞의 저 치타</div>
+    <div class="two">
+      <div class="side t">
+        <div class="sent">치타<span class="hl-t">는</span> 빠르다.</div>
+        <div class="gloss">Cheetahs are fast. (원래, 일반적으로)</div>
+        <div class="why"><span class="badge">일반적 사실</span><br>치타라는 동물 전체에 대한 이야기예요. 늘 그렇다는 느낌.</div>
+      </div>
+      <div class="side s">
+        <div class="sent">저 치타<span class="hl-s">가</span> 느리다.</div>
+        <div class="gloss">That cheetah (right there) is slow.</div>
+        <div class="why"><span class="badge">지금 이것</span><br>동물원에서 본 <b>바로 저 치타</b>를 가리켜요. 우리 둘 다 아는 특정한 그것.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- pair 3 -->
+  <div class="pair">
+    <div class="situ">🌊 <b>바다 이야기</b> — 늘 그런 색 vs 지금 보는 저 바다</div>
+    <div class="two">
+      <div class="side t">
+        <div class="sent">바다<span class="hl-t">는</span> 파래요.</div>
+        <div class="gloss">The sea is blue. (일반적으로)</div>
+        <div class="why"><span class="badge">일반적 사실</span><br>바다는 원래 파랗다는 이야기. 누구나 아는 사실.</div>
+      </div>
+      <div class="side s">
+        <div class="sent">바다<span class="hl-s">가</span> 까매요!</div>
+        <div class="gloss">The sea is black! (지금 보니까)</div>
+        <div class="why"><span class="badge">지금 이것</span><br>밤바다를 보고 <b>놀라서</b> 하는 말. 지금 눈앞의 이 바다요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- pair 4 -->
+  <div class="pair">
+    <div class="situ">🙋 <b>자기소개할 때</b> vs <b>“누가 OO예요?” 물어본 뒤</b></div>
+    <div class="two">
+      <div class="side t">
+        <div class="sent">저<span class="hl-t">는</span> 학생이에요.</div>
+        <div class="gloss">As for me, I'm a student. (나로 말하자면)</div>
+        <div class="why"><span class="badge">화제 얹기</span><br>나에 대해 이야기를 시작해요. 평범한 자기소개.</div>
+      </div>
+      <div class="side s">
+        <div class="sent">제<span class="hl-s">가</span> 학생이에요.</div>
+        <div class="gloss">I'm the one who's the student.</div>
+        <div class="why"><span class="badge">콕 집기</span><br>“누가 학생이에요?” 물어본 뒤, <b>내가 바로 그 사람</b>이라고 답해요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRICK -->
+  <div class="trick">
+    <h3>💡 헷갈릴 때 스스로 물어보기</h3>
+    <div class="row"><span class="q t">은/는?</span><div>지금 <b>일반적인 이야기</b>예요? 아니면 딴 것과 <b>견주는</b> 거예요? → <span class="t">은/는</span>이 자연스러워요.</div></div>
+    <div class="row"><span class="q s">이/가?</span><div>“누가? 뭐가?”에 <b>콕 집어 답</b>하거나, <b>지금 이거</b>를 처음 가리켜요? → <span class="s">이/가</span>가 자연스러워요.</div></div>
+  </div>
+
+  <!-- MYTH BUSTER -->
+  <div class="sec-h"><span class="no">주의 · <b>3</b></span><h2>은/는은 “주어 붙이는 말”이 아니에요</h2></div>
+  <div class="myth">
+    <span class="flag">자주 하는 오해 · a common myth</span>
+    <h3>은/는은 주어 자리가 아니어도 나와요</h3>
+    <p style="font-size:15px;">많은 사람이 “은/는은 주어에 붙는다”고 생각해요. 그런데 그렇지 않아요.
+    은/는은 <b>화제를 얹고 견주는</b> 말이라서, 목적어 자리에도 얼마든지 와요.</p>
+    <div class="ex">밥<span class="t">은</span> 먹었어. <small>Rice, I did eat. (딴 건 몰라도 밥은) — 여기 ‘밥’은 주어가 아니라 목적어예요</small></div>
+    <div class="ex">커피<span class="t">는</span> 좋아요. 그런데 차<span class="t">는</span> 싫어요. <small>Coffee I like, but tea I don't. (A는… B는… 견주기)</small></div>
+    <p style="font-size:14.5px;color:var(--soft);">그래서 “은/는 = 주어”라고 외우면 나중에 꼭 깨져요.
+    <b style="color:var(--ink);">은/는은 ‘화제와 대조’, 이/가는 ‘콕 집기’</b> — 이 느낌만 가져가면 돼요.
+    <span class="en-it">So 은/는 isn't a subject tag. It highlights a topic and draws contrast.</span></p>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz">
+    <h2>스스로 골라보기 🎯</h2>
+    <div class="sub">Which one feels right?</div>
+    <div class="howto">각 문장의 상황을 읽고, <span style="color:#e0b25a;">은/는</span>일지 <span style="color:#7fc9b8;">이/가</span>일지 골라 보세요. 정답이 하나만은 아닐 때도 있어요. 느낌을 잡는 게 목표예요.</div>
+
+    <div class="q" data-answer="가">
+      <div class="situ">Someone asks: “누가 이거 만들었어요?” (Who made this?)</div>
+      <div class="ask">마크 씨<span class="blank"></span> 만들었어요.</div>
+      <div class="opts">
+        <button class="opt" data-opt="는">마크 씨는</button>
+        <button class="opt" data-opt="가">마크 씨가</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-answer="은">
+      <div class="situ">General fact about winter.</div>
+      <div class="ask">겨울<span class="blank"></span> 추워요.</div>
+      <div class="opts">
+        <button class="opt" data-opt="은">겨울은</button>
+        <button class="opt" data-opt="이">겨울이</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-answer="가">
+      <div class="situ">You look outside and suddenly notice it.</div>
+      <div class="ask">비<span class="blank"></span> 와요!</div>
+      <div class="opts">
+        <button class="opt" data-opt="는">비는</button>
+        <button class="opt" data-opt="가">비가</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-answer="은">
+      <div class="situ">Contrast: you like one, not the other.</div>
+      <div class="ask">여름<span class="blank"></span> 좋아요, 그런데 겨울<span class="blank"></span> 싫어요.</div>
+      <div class="opts">
+        <button class="opt" data-opt="은">여름은…겨울은</button>
+        <button class="opt" data-opt="이">여름이…겨울이</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-answer="은">
+      <div class="situ">Introducing yourself for the first time.</div>
+      <div class="ask">안녕하세요, 제 이름<span class="blank"></span> 마크예요.</div>
+      <div class="opts">
+        <button class="opt" data-opt="은">제 이름은</button>
+        <button class="opt" data-opt="이">제 이름이</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <div class="big">은/는 vs 이/가는 <b>원어민도 규칙으로 딱 나누지 못해요.</b><br>둘 다 자연스러운 경우도 많아요.</div>
+    <div class="small">그러니까 틀려도 괜찮아요. 여러 문장에서 계속 만나다 보면 느낌이 저절로 생겨요. 🌱
+    <span class="en-it">Even natives can't fully rule this out. Meet it often, and the feeling grows on its own.</span></div>
+  </div>
+
+  <footer>
+    <div class="made">made by <b>하님</b> · written by Hanim</div>
+    <div class="sub">Korean Particles — 은/는 vs 이/가</div>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.q').forEach(function(q){
+    var answer = q.getAttribute('data-answer');
+    var fb = q.querySelector('.feedback');
+    q.querySelectorAll('.opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var chosen = btn.getAttribute('data-opt');
+        q.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('correct','wrong'); });
+        if(chosen === answer){
+          btn.classList.add('correct');
+          fb.textContent = feedbackFor(answer, true);
+        } else {
+          btn.classList.add('wrong');
+          q.querySelectorAll('.opt').forEach(function(b){
+            if(b.getAttribute('data-opt') === answer) b.classList.add('correct');
+          });
+          fb.textContent = feedbackFor(answer, false);
+        }
+        fb.classList.add('show');
+      });
+    });
+  });
+
+  function feedbackFor(ans, correct){
+    var isGa = (ans === '가' || ans === '이');
+    if(isGa){
+      return (correct ? '맞아요! ' : '이/가예요. ') + '“콕 집기” 느낌 — 누가/뭐가를 딱 집거나, 지금 이것을 가리켜요. 👉';
+    } else {
+      return (correct ? '맞아요! ' : '은/는이에요. ') + '“화제·견주기” 느낌 — 일반적인 이야기이거나 딴 것과 대조해요. 🔦';
+    }
+  }
+</script>
+
+</body>
+</html>
