@@ -1,286 +1,924 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Korean Colors Flashcards & Quiz</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>한국어 색깔 · Allbarun Korean</title>
   <style>
-    :root{
-      --bg:#f6f7fb;
-      --card:#ffffff;
-      --text:#1f2937;
-      --muted:#6b7280;
-      --line:#e5e7eb;
-      --shadow:0 10px 30px rgba(0,0,0,.06);
-      --radius:24px;
+    :root {
+      --ecru: #fafbf7;
+      --hippie: #5f8651;
+      --hippie-dark: #46663c;
+      --cream: #fff8e7;
+      --sheet: #ffffff;
+      --ink: #203426;
+      --muted: #607062;
+      --line: #c5d0bd;
+      --sage-strong: #aec3b0;
+      --peach: #d99a79;
+      --danger: #6d3d2d;
+      --danger-bg: #f2dfd1;
+      --correct-bg: #dcebd9;
     }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--bg);color:var(--text)}
-    .wrap{max-width:1200px;margin:0 auto;padding:24px}
-    .hero,.section{background:#fff;border-radius:28px;box-shadow:var(--shadow)}
-    .hero{padding:28px;background:linear-gradient(135deg,#eef7ff,#f4fdf7)}
-    .section{padding:24px;margin-top:20px}
-    h1{margin:0 0 8px;font-size:40px}
-    h2{margin:0 0 10px;font-size:28px}
-    .subtitle{color:#4b5563;line-height:1.7}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-    .color-card{border-radius:22px;overflow:hidden;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;position:relative;border:2px solid rgba(0,0,0,.08);cursor:pointer;transition:.2s transform,.2s box-shadow}
-    .color-card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(0,0,0,.15)}
-    .listen{position:absolute;top:12px;right:12px;border:0;border-radius:999px;padding:8px 12px;background:rgba(255,255,255,.25);backdrop-filter:blur(6px);font-weight:800;cursor:pointer}
-    .top{padding:20px 18px 10px;text-align:center}
-    .eng{font-size:22px;font-weight:800;margin-bottom:18px;text-transform:lowercase}
-    .formal{font-size:42px;font-weight:900;line-height:1.1;margin-bottom:8px}
-    .common{font-size:22px;font-weight:800}
-    .examples{padding:0 18px 18px;text-align:center;font-size:16px;font-weight:700;line-height:1.6}
-    .note-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
-    .note{background:#eef7ff;border-radius:18px;padding:16px;line-height:1.7}
-    .flip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px}
-    .flip{perspective:1000px;height:190px;cursor:pointer}
-    .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s}
-    .flip.flipped .flip-inner{transform:rotateY(180deg)}
-    .flip-face{position:absolute;inset:0;border-radius:20px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid rgba(0,0,0,.08);padding:16px;text-align:center;font-weight:800}
-    .flip-back{transform:rotateY(180deg);background:#fff;color:#111}
-    .mcq-card{border:2px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px}
-    .swatch{height:100px;border-radius:16px;border:2px solid rgba(0,0,0,.12);margin:14px 0}
-    .options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .opt{padding:12px 14px;border-radius:14px;border:2px solid #d1d5db;background:#fff;cursor:pointer;font-weight:700}
-    .opt.correct{background:#dcfce7;border-color:#22c55e}
-    .opt.wrong{background:#fee2e2;border-color:#ef4444}
-    .scorebox{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:10px 0 20px}
-    .pill{background:#111827;color:#fff;padding:10px 16px;border-radius:999px;font-weight:800}
-    .btn{padding:10px 16px;border-radius:999px;border:0;background:#2563eb;color:#fff;font-weight:800;cursor:pointer}
-    .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
-    .legend div{background:#f3f4f6;padding:12px 14px;border-radius:12px;font-size:14px}
-    .small{color:#6b7280}
-    @media (max-width:680px){
-      .note-grid{grid-template-columns:1fr}
-      .formal{font-size:34px}
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--ecru);
+      font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    button { color: inherit; font: inherit; }
+    button:focus-visible, a:focus-visible, summary:focus-visible {
+      outline: 3px solid rgba(217, 154, 121, .55);
+      outline-offset: 3px;
+    }
+    [hidden] { display: none !important; }
+
+    .brandbar {
+      color: var(--cream);
+      background: var(--hippie);
+      border-bottom: 1px solid var(--hippie-dark);
+    }
+    .brandbar-inner {
+      width: min(1080px, calc(100% - 36px));
+      min-height: 62px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      color: inherit;
+      text-decoration: none;
+    }
+    .brand strong {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      letter-spacing: -.02em;
+    }
+    .brand span {
+      color: rgba(255, 248, 231, .78);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+    .text-button {
+      min-height: 36px;
+      padding: 6px 12px;
+      border: 1px solid rgba(255, 248, 231, .54);
+      border-radius: 6px;
+      color: var(--cream);
+      background: transparent;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 750;
+    }
+    .text-button[aria-pressed="true"] { color: var(--hippie-dark); background: var(--cream); }
+
+    .page {
+      width: min(1080px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 42px 0 64px;
+    }
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-items: end;
+      gap: 34px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow, .section-number {
+      margin: 0 0 8px;
+      color: var(--hippie-dark);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .08em;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(34px, 5vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -.045em;
+    }
+    .intro-copy {
+      max-width: 600px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .lesson-index {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 247, .5);
+    }
+    .lesson-index a {
+      position: relative;
+      min-width: 0;
+      padding: 14px 12px;
+      color: var(--muted);
+      border-right: 1px solid var(--line);
+      text-align: center;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 750;
+    }
+    .lesson-index a:last-child { border-right: 0; }
+    .lesson-index a.active { color: var(--hippie-dark); background: var(--sheet); }
+    .lesson-index a.active::after {
+      position: absolute;
+      right: 12px;
+      bottom: -1px;
+      left: 12px;
+      height: 3px;
+      background: var(--hippie);
+      content: "";
+    }
+
+    .lesson-section {
+      scroll-margin-top: 20px;
+      padding: 54px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, 390px);
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 26px;
+    }
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(27px, 3.5vw, 36px);
+      line-height: 1.2;
+      letter-spacing: -.035em;
+    }
+    .section-copy { margin-bottom: 2px; color: var(--muted); font-size: 15px; }
+
+    .study-layout {
+      display: grid;
+      grid-template-columns: minmax(300px, .88fr) minmax(0, 1.12fr);
+      min-height: 390px;
+      border: 1px solid var(--line);
+      background: var(--sheet);
+    }
+    .focus-panel {
+      display: grid;
+      grid-template-rows: minmax(250px, 1fr) auto;
+      min-width: 0;
+      border-right: 1px solid var(--line);
+    }
+    .focus-swatch {
+      min-height: 235px;
+      border-bottom: 1px solid rgba(32, 52, 38, .12);
+      transition: background-color 180ms ease;
+    }
+    .focus-swatch, .practice-swatch, .quiz-swatch, .mini-swatch {
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .color-visual.has-object-image { background: #fbfbf8 !important; }
+    .color-object {
+      display: block;
+      max-width: 78%;
+      max-height: 78%;
+      object-fit: contain;
+    }
+    .focus-swatch .color-object, .practice-swatch .color-object {
+      max-width: 68%;
+      max-height: 88%;
+      filter: drop-shadow(0 10px 18px rgba(32, 52, 38, .1));
+    }
+    .quiz-swatch .color-object { max-width: 72%; max-height: 94%; }
+    .focus-copy { min-height: 160px; padding: 24px 26px; background: var(--sheet); }
+    .focus-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+    .english-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .primary-button, .secondary-button {
+      min-height: 44px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+    .focus-word {
+      margin-bottom: 4px;
+      font-size: clamp(36px, 5vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -.045em;
+    }
+    .alternate-row { min-height: 28px; margin-bottom: 16px; color: var(--muted); font-size: 15px; }
+    .alternate-row[hidden] { display: block !important; visibility: hidden; }
+    .example-line {
+      margin-bottom: 7px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .culture-line { margin-bottom: 0; color: var(--muted); font-size: 13px; }
+
+    .palette-panel { min-width: 0; padding: 22px; }
+    .tab-row { display: flex; gap: 22px; margin-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .tab-button {
+      position: relative;
+      padding: 0 0 10px;
+      border: 0;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .tab-button.active { color: var(--hippie-dark); }
+    .tab-button.active::after {
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+      height: 3px;
+      background: var(--hippie);
+      content: "";
+    }
+    .palette-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+    .palette-button {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+      min-height: 56px;
+      padding: 6px 10px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+    }
+    .palette-button:hover { background: #f4f6ed; }
+    .palette-button.active { border-color: var(--sage-strong); background: #eef3e9; }
+    .mini-swatch {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(32, 52, 38, .22);
+      border-radius: 50%;
+    }
+    .mini-swatch .color-object {
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      max-height: none;
+      object-fit: contain;
+    }
+    .palette-name {
+      overflow: hidden;
+      font-size: 13px;
+      font-weight: 800;
+      text-overflow: ellipsis;
+      white-space: normal;
+    }
+
+    .language-note { margin-top: 14px; border: 1px solid var(--line); background: rgba(255, 253, 247, .62); }
+    .language-note summary {
+      padding: 15px 18px;
+      cursor: pointer;
+      color: var(--hippie-dark);
+      font-size: 14px;
+      font-weight: 850;
+    }
+    .note-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      padding: 2px 18px 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .note-content p { margin-bottom: 0; }
+    .note-content strong { color: var(--ink); }
+
+    .practice-stage, .quiz-stage { border: 1px solid var(--line); background: var(--sheet); }
+    .practice-stage {
+      display: grid;
+      grid-template-columns: minmax(290px, .92fr) minmax(0, 1.08fr);
+      min-height: 340px;
+    }
+    .practice-swatch { min-height: 340px; border-right: 1px solid rgba(32, 52, 38, .14); }
+    .practice-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(28px, 5vw, 52px);
+    }
+    .progress-label { margin-bottom: 24px; color: var(--muted); font-size: 13px; font-weight: 750; }
+    .practice-question {
+      margin-bottom: 8px;
+      font-size: clamp(29px, 4vw, 42px);
+      line-height: 1.2;
+      letter-spacing: -.04em;
+      white-space: nowrap;
+    }
+    .practice-help { min-height: 25px; margin-bottom: 28px; color: var(--muted); font-size: 15px; }
+    .practice-answer {
+      min-height: 74px;
+      margin-bottom: 22px;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .practice-answer[hidden] { display: block !important; visibility: hidden; }
+    .practice-answer strong { display: block; font-size: 25px; }
+    .practice-answer span { color: var(--muted); font-size: 14px; }
+    .button-row { display: flex; flex-wrap: wrap; gap: 9px; }
+    .primary-button, .secondary-button { padding: 10px 17px; }
+    .primary-button { border: 1px solid var(--hippie-dark); color: var(--cream); background: var(--hippie-dark); }
+    .primary-button:hover { background: var(--hippie); }
+    .secondary-button { border: 1px solid var(--line); background: var(--sheet); }
+    .secondary-button:hover { background: #eef3e9; }
+
+    .sentence-board { border: 1px solid var(--line); background: var(--sheet); }
+    .sentence-comparison { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
+    .sentence-mode { min-height: 150px; padding: 25px; }
+    .sentence-mode + .sentence-mode { border-left: 1px solid var(--line); }
+    .sentence-mode small {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .sentence-mode p {
+      margin-bottom: 0;
+      font-size: clamp(21px, 3vw, 28px);
+      font-weight: 800;
+      letter-spacing: -.025em;
+    }
+    .word-change-list { display: grid; grid-template-columns: 1fr 1fr; }
+    .word-change {
+      display: grid;
+      grid-template-columns: minmax(0, .72fr) 26px minmax(0, 1.28fr);
+      align-items: center;
+      min-height: 74px;
+      padding: 13px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .word-change:nth-child(odd) { border-right: 1px solid var(--line); }
+    .word-change:nth-last-child(-n + 2) { border-bottom: 0; }
+    .word-change .before { color: var(--muted); }
+    .word-change .arrow { color: var(--peach); text-align: center; }
+    .word-change .after { font-weight: 850; }
+
+    .quiz-stage { max-width: 780px; margin: 0 auto; }
+    .quiz-status {
+      display: grid;
+      grid-template-columns: auto minmax(120px, 1fr) auto;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+    .progress-track { height: 4px; overflow: hidden; background: #dfe6da; }
+    .progress-fill { width: 12.5%; height: 100%; background: var(--hippie); transition: width 180ms ease; }
+    .quiz-body { padding: clamp(24px, 5vw, 44px); }
+    .quiz-question {
+      margin-bottom: 20px;
+      font-size: clamp(27px, 4vw, 38px);
+      line-height: 1.22;
+      text-align: center;
+      letter-spacing: -.04em;
+      white-space: nowrap;
+    }
+    .quiz-swatch { height: 170px; margin: 0 auto 24px; border: 1px solid rgba(32, 52, 38, .2); }
+    .options { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .option-button {
+      min-height: 56px;
+      padding: 10px 15px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--sheet);
+      cursor: pointer;
+      font-weight: 800;
+    }
+    .option-button:hover:not(:disabled) { border-color: var(--hippie); background: #eef3e9; }
+    .option-button.correct { border-color: #7ca17a; background: var(--correct-bg); }
+    .option-button.wrong { border-color: var(--peach); color: var(--danger); background: var(--danger-bg); }
+    .quiz-footer {
+      display: flex;
+      min-height: 74px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 20px;
+      border-top: 1px solid var(--line);
+    }
+    .feedback { margin-bottom: 0; color: var(--muted); font-size: 14px; font-weight: 750; }
+    .result { min-height: 350px; padding: 64px 24px; text-align: center; }
+    .result strong { display: block; margin-bottom: 12px; font-size: clamp(42px, 7vw, 66px); line-height: 1; }
+    .result p { margin-bottom: 24px; color: var(--muted); }
+
+    .personal-board {
+      display: grid;
+      grid-template-columns: minmax(220px, .72fr) minmax(0, 1.28fr);
+      border: 1px solid var(--line);
+      background: var(--sheet);
+    }
+    .personal-palette {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-content: start;
+      gap: 8px;
+      padding: 24px;
+      border-right: 1px solid var(--line);
+    }
+    .personal-color {
+      aspect-ratio: 1;
+      border: 2px solid var(--sheet);
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 0 1px rgba(32, 52, 38, .22);
+    }
+    .personal-color.active { box-shadow: 0 0 0 3px var(--hippie-dark); }
+    .personal-copy {
+      display: flex;
+      min-height: 260px;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(28px, 5vw, 54px);
+    }
+    .personal-task { padding: 18px 0; }
+    .personal-task + .personal-task { border-top: 1px solid var(--line); }
+    .personal-label { margin: 0 0 10px; color: var(--muted); font-size: 15px; font-weight: 750; }
+    .personal-sentence {
+      margin: 0;
+      font-size: clamp(27px, 4vw, 40px);
+      font-weight: 850;
+      line-height: 1.35;
+      letter-spacing: -.035em;
+    }
+    .page-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 86px;
+      color: var(--muted);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 15px;
+    }
+    .hide-english .english-label, .hide-english .english-copy { display: none; }
+
+    @media (max-width: 800px) {
+      .page { padding-top: 30px; }
+      .intro { grid-template-columns: 1fr; gap: 18px; }
+      .lesson-index { grid-template-columns: repeat(5, auto); overflow-x: auto; }
+      .lesson-index a { min-width: 112px; }
+      .section-heading { grid-template-columns: 1fr; gap: 10px; }
+      .study-layout, .practice-stage, .personal-board { grid-template-columns: 1fr; }
+      .focus-panel, .practice-swatch, .personal-palette { border-right: 0; border-bottom: 1px solid var(--line); }
+      .focus-swatch { min-height: 220px; }
+      .practice-swatch { min-height: 245px; }
+      .personal-palette { grid-template-columns: repeat(8, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .brandbar-inner, .page { width: min(100% - 22px, 1080px); }
+      .brand span { font-size: 10px; }
+      .page { padding-top: 24px; }
+      .lesson-section { padding: 42px 0; }
+      .note-content, .sentence-comparison, .word-change-list { grid-template-columns: 1fr; }
+      .palette-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sentence-mode + .sentence-mode { border-top: 1px solid var(--line); border-left: 0; }
+      .word-change:nth-child(odd) { border-right: 0; }
+      .word-change:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+      .practice-question, .quiz-question { white-space: normal; }
+      .quiz-footer { align-items: stretch; flex-direction: column; }
+      .quiz-footer .primary-button { width: 100%; }
+      .personal-palette { grid-template-columns: repeat(4, 1fr); }
+      .personal-sentence { font-size: 27px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <h1>색깔 공부하기 <span style="font-size:22px;color:#6b7280;">Korean Colors</span></h1>
-      <div class="subtitle">카드형 플래시카드 + 클릭하면 말하기 + 뒤집기 퀴즈 + 사지선다 퀴즈가 한 번에 들어 있어요. 카드나 🔊 버튼을 누르면 한국어로 읽어 줘요.</div>
+  <header class="brandbar">
+    <div class="brandbar-inner">
+      <a class="brand" href="./" target="_top" aria-label="한국어 자료실로 돌아가기"><strong>Allbarun Korean</strong><span>with Hanim</span></a>
+      <button class="text-button" id="englishToggle" type="button" aria-pressed="false">영어 숨기기</button>
     </div>
+  </header>
 
-    <div class="section">
-      <h2>1. 색깔 카드</h2>
-      <div class="grid" id="cards"></div>
-      <div class="note-grid">
-        <div class="note"><b>형태</b><br>정식 표현: 빨간색, 파란색, 노란색<br>자주 말하는 표현: 빨강, 파랑, 노랑</div>
-        <div class="note"><b>연습 문장</b><br>바나나는 노란색이에요.<br>하늘은 파란색이에요.<br>포도는 보라색이에요.</div>
+  <main class="page">
+    <header class="intro">
+      <div>
+        <p class="eyebrow english-copy">BEGINNER · COLORS</p>
+        <h1>한국어 색깔</h1>
+        <p class="intro-copy">색 이름을 보고, 소리 내어 말하고, 문장에 써 봐요.</p>
       </div>
-    </div>
+    </header>
 
-    <div class="section">
-      <h2>2. 뒤집기 퀴즈</h2>
-      <p class="small">앞면은 색만 보여요. 카드를 누르면 정답이 보여요.</p>
-      <div class="flip-grid" id="flipGrid"></div>
-    </div>
+    <nav class="lesson-index" aria-label="학습 순서">
+      <a class="active" href="#learn">01 색 보기</a>
+      <a href="#speak">02 말하기</a>
+      <a href="#combine">03 함께 쓰기</a>
+      <a href="#check">04 확인하기</a>
+      <a href="#my-sentence">05 내 문장</a>
+    </nav>
 
-    <div class="section">
-      <h2>3. 사지선다 퀴즈</h2>
-      <div class="scorebox">
-        <div class="pill">점수: <span id="score">0</span> / 10</div>
-        <button class="btn" onclick="resetQuiz()">다시하기</button>
+    <section class="lesson-section" id="learn" aria-labelledby="learn-title">
+      <div class="section-heading">
+        <div><p class="section-number">01 · 색 보기</p><h2 id="learn-title">색 이름을 알아봐요</h2></div>
+        <p class="section-copy">색을 누르면 이름, 그림, 예문이 바뀌어요.</p>
       </div>
-      <div id="quizArea"></div>
-    </div>
 
-    <div class="section">
-      <h2>4. 자주 쓰는 말</h2>
-      <div class="legend">
-        <div>이건 무슨 색이에요?</div>
-        <div>빨간색이에요.</div>
-        <div>저는 파란색 좋아해요.</div>
-        <div>바나나는 노란색이에요.</div>
-        <div>검은색 셔츠예요.</div>
-        <div>분홍색 꽃이에요.</div>
+      <div class="study-layout">
+        <article class="focus-panel" aria-live="polite">
+          <div class="focus-swatch color-visual" id="focusSwatch"></div>
+          <div class="focus-copy">
+            <div class="focus-topline">
+              <span class="english-label" id="focusEnglish" lang="en"></span>
+            </div>
+            <h3 class="focus-word" id="focusWord"></h3>
+            <p class="alternate-row" id="focusAlternate"></p>
+            <p class="example-line" id="focusExample"></p>
+            <p class="culture-line" id="focusCulture"></p>
+          </div>
+        </article>
+
+        <div class="palette-panel">
+          <div class="tab-row" role="tablist" aria-label="색깔 묶음">
+            <button class="tab-button active" type="button" role="tab" aria-selected="true" aria-controls="paletteGrid" data-group="basic">기본 색 12</button>
+            <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="paletteGrid" data-group="extra">더 알아보기 5</button>
+          </div>
+          <div class="palette-grid" id="paletteGrid" role="tabpanel"></div>
+        </div>
       </div>
-    </div>
-  </div>
+
+      <details class="language-note">
+        <summary>검은색 표현은 어떻게 달라요?</summary>
+        <div class="note-content">
+          <p><strong>검은색</strong>은 가장 일반적인 색 이름이에요. <strong>검정</strong>도 같은 색을 가리켜요. 검정에는 이미 색이라는 뜻이 들어 있어서 <strong>검정색</strong>은 겹말이지만, 일상에서는 널리 써요.</p>
+          <p><strong>까만색</strong>은 더 짙고 생생한 느낌을 줄 수 있어요. <strong>새까만</strong>은 “아주 까만”이라는 뜻이에요. 예: 새까만 밤하늘.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="lesson-section" id="speak" aria-labelledby="speak-title">
+      <div class="section-heading">
+        <div><p class="section-number">02 · 말하기</p><h2 id="speak-title">정답을 보기 전에 말해요</h2></div>
+        <p class="section-copy">색 이름을 먼저 소리 내어 말하세요. 그다음 정답을 확인하세요.</p>
+      </div>
+      <div class="practice-stage">
+        <div class="practice-swatch color-visual" id="practiceSwatch"></div>
+        <div class="practice-copy">
+          <div class="progress-label" id="practiceProgress">1 / 12</div>
+          <h3 class="practice-question">무슨 색이에요?</h3>
+          <p class="practice-help">먼저 말해 보세요.</p>
+          <div class="practice-answer" id="practiceAnswer" hidden><strong id="practiceWord"></strong><span id="practiceSentence"></span></div>
+          <div class="button-row">
+            <button class="primary-button" id="revealPractice" type="button">정답 보기</button>
+            <button class="secondary-button" id="nextPractice" type="button">다른 색</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="combine" aria-labelledby="combine-title">
+      <div class="section-heading">
+        <div><p class="section-number">03 · 함께 쓰기</p><h2 id="combine-title">색을 물건 이름 앞에 써요</h2></div>
+        <p class="section-copy">색을 말할 때와 물건 이름 앞에 쓸 때 모양이 달라지는 말이 있어요.</p>
+      </div>
+      <div class="sentence-board">
+        <div class="sentence-comparison">
+          <div class="sentence-mode"><small>색을 말해요</small><p>사과가 빨간색이에요.</p></div>
+          <div class="sentence-mode"><small>물건 이름 앞에 써요</small><p>빨간 사과예요.</p></div>
+        </div>
+        <div class="word-change-list" aria-label="색 이름과 명사 표현 비교">
+          <div class="word-change"><span class="before">검은색</span><span class="arrow">→</span><span class="after">검은 갓</span></div>
+          <div class="word-change"><span class="before">파란색</span><span class="arrow">→</span><span class="after">파란 제주 바다</span></div>
+          <div class="word-change"><span class="before">노란색</span><span class="arrow">→</span><span class="after">노란 개나리</span></div>
+          <div class="word-change"><span class="before">분홍색</span><span class="arrow">→</span><span class="after">분홍색 진달래</span></div>
+          <div class="word-change"><span class="before">초록색</span><span class="arrow">→</span><span class="after">초록색 송편</span></div>
+          <div class="word-change"><span class="before">갈색</span><span class="arrow">→</span><span class="after">갈색 장독</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="check" aria-labelledby="check-title">
+      <div class="section-heading">
+        <div><p class="section-number">04 · 확인하기</p><h2 id="check-title">색 이름 맞히기</h2></div>
+        <p class="section-copy">그림의 색을 보고 알맞은 이름을 고르세요. 문제는 여덟 개예요.</p>
+      </div>
+      <div class="quiz-stage" id="quizStage">
+        <div class="quiz-status">
+          <span id="quizProgress">1 / 8</span>
+          <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+          <span>점수 <strong id="score">0</strong></span>
+        </div>
+        <div id="quizContent">
+          <div class="quiz-body">
+            <h3 class="quiz-question">무슨 색이에요?</h3>
+            <div class="quiz-swatch color-visual" id="quizSwatch"></div>
+            <div class="options" id="quizOptions"></div>
+          </div>
+          <div class="quiz-footer">
+            <p class="feedback" id="feedback" aria-live="polite">정답을 골라 보세요.</p>
+            <button class="primary-button" id="nextQuestion" type="button" hidden>다음 문제</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="my-sentence" aria-labelledby="my-sentence-title">
+      <div class="section-heading">
+        <div><p class="section-number">05 · 내 문장</p><h2 id="my-sentence-title">좋아하는 색으로 말해요</h2></div>
+        <p class="section-copy">색을 하나 고르고 완성된 문장을 소리 내어 읽어 보세요.</p>
+      </div>
+      <div class="personal-board">
+        <div class="personal-palette" id="personalPalette" aria-label="좋아하는 색 고르기"></div>
+        <div class="personal-copy">
+          <div class="personal-task">
+            <p class="personal-label">좋아하는 색을 말해요</p>
+            <p class="personal-sentence" id="personalSentence">저는 파란색을 좋아해요.</p>
+          </div>
+          <div class="personal-task">
+            <p class="personal-label">눈앞에 보이는 물건을 말해요</p>
+            <p class="personal-sentence">제 ______은/는 ______색이에요.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="page-footer">Allbarun Korean · with Hanim</footer>
 
   <script>
-    const colorsData = [
-      {id:'white',eng:'white',formal:'흰색',common:'하양',bg:'#F5F5F5',text:'#111111',examples:['눈','우유','토끼']},
-      {id:'black',eng:'black',formal:'검은색',common:'검정 / 까망',bg:'#111111',text:'#FFFFFF',examples:['밤','고양이','까마귀']},
-      {id:'gray',eng:'grey',formal:'회색',common:'회색',bg:'#8E8E8E',text:'#FFFFFF',examples:['구름','돌','코끼리']},
-      {id:'red',eng:'red',formal:'빨간색',common:'빨강',bg:'#FF2A2A',text:'#FFFFFF',examples:['토마토','사과','딸기']},
-      {id:'pink',eng:'pink',formal:'분홍색',common:'분홍',bg:'#F6B7C8',text:'#111111',examples:['꽃','돼지','솜사탕']},
-      {id:'orange',eng:'orange',formal:'주황색',common:'주황',bg:'#FFA500',text:'#111111',examples:['귤','당근','오렌지']},
-      {id:'yellow',eng:'yellow',formal:'노란색',common:'노랑',bg:'#F6F700',text:'#111111',examples:['바나나','병아리','해']},
-      {id:'green',eng:'green',formal:'초록색',common:'초록',bg:'#1E7A46',text:'#FFFFFF',examples:['잎','개구리','오이']},
-      {id:'lightgreen',eng:'light green',formal:'연두색',common:'연두',bg:'#B6E35A',text:'#111111',examples:['새싹','라임','멜론']},
-      {id:'blue',eng:'blue',formal:'파란색',common:'파랑',bg:'#1743FF',text:'#FFFFFF',examples:['하늘','바다','지구']},
-      {id:'skyblue',eng:'sky blue',formal:'하늘색',common:'하늘색',bg:'#7FD6FF',text:'#111111',examples:['맑은 하늘','풍선','수영장']},
-      {id:'navy',eng:'navy',formal:'남색',common:'남색',bg:'#0E1D8F',text:'#FFFFFF',examples:['교복','밤바다','재킷']},
-      {id:'purple',eng:'purple',formal:'보라색',common:'보라',bg:'#8A11B0',text:'#FFFFFF',examples:['포도','라벤더','자두']},
-      {id:'brown',eng:'brown',formal:'갈색',common:'갈색',bg:'#A52A2A',text:'#FFFFFF',examples:['초콜릿','나무','곰']},
-      {id:'gold',eng:'gold',formal:'금색',common:'금색',bg:'#D4AF37',text:'#111111',examples:['메달','왕관','별']},
-      {id:'silver',eng:'silver',formal:'은색',common:'은색',bg:'#C9CDD1',text:'#111111',examples:['숟가락','동전','로봇']},
+    const colors = [
+      { id: "red", group: "basic", eng: "red", name: "빨간색", label: "빨간색", alt: "빨강", bg: "#df4e52", example: "빨간 고추", object: "고추", image: "assets/color-icons/red-chili.png?v=2", culture: "고추로 고춧가루를 만들어요. 한국 음식에는 고추를 자주 써요.", speech: ["빨간색", "빨강"] },
+      { id: "orange", group: "basic", eng: "orange", name: "주황색", label: "주황색", alt: "주황", bg: "#ed8b3f", example: "주황색 감", object: "감", image: "assets/color-icons/orange-persimmon.png?v=2", culture: "감은 한국에서 가을에 많이 먹는 과일이에요.", speech: ["주황색", "주황"] },
+      { id: "yellow", group: "basic", eng: "yellow", name: "노란색", label: "노란색", alt: "노랑", bg: "#edd04f", example: "노란 개나리", object: "개나리", image: "assets/color-icons/yellow-forsythia.png?v=2", culture: "개나리는 봄의 시작을 알리는 대표적인 꽃이에요.", speech: ["노란색", "노랑"] },
+      { id: "green", group: "basic", eng: "green", name: "초록색", label: "초록색 · 녹색", alt: "초록", bg: "#4f9160", example: "초록색 송편", object: "송편", image: "assets/color-icons/green-songpyeon.png?v=2", culture: "송편은 추석에 먹는 떡이에요.", speech: ["초록색", "녹색", "초록"] },
+      { id: "blue", group: "basic", eng: "blue", name: "파란색", label: "파란색", alt: "파랑", bg: "#4b78c8", example: "파란 제주 바다", object: "제주 바다", image: "assets/color-icons/blue-jeju-sea.png?v=2", culture: "제주는 한국의 섬이에요.", speech: ["파란색", "파랑"] },
+      { id: "navy", group: "basic", eng: "navy", name: "남색", label: "남색", alt: "", bg: "#374d78", example: "남색 한복", object: "한복", image: "assets/color-icons/navy-hanbok.png?v=2", culture: "한복은 한국의 전통 옷이에요.", speech: ["남색"] },
+      { id: "purple", group: "basic", eng: "purple", name: "보라색", label: "보라색", alt: "보라", bg: "#8b67a7", example: "보라색 아미봉", object: "아미봉", image: "assets/color-icons/purple-army-bomb.png?v=2", culture: "아미봉은 방탄소년단의 응원봉이에요.", speech: ["보라색", "보라"] },
+      { id: "pink", group: "basic", eng: "pink", name: "분홍색", label: "분홍색", alt: "분홍", bg: "#e7a8b8", example: "분홍색 진달래", object: "진달래", image: "assets/color-icons/pink-azalea.png?v=2", culture: "진달래는 봄에 피는 분홍색 꽃이에요. 잎보다 꽃이 먼저 피어요.", speech: ["분홍색", "분홍"] },
+      { id: "brown", group: "basic", eng: "brown", name: "갈색", label: "갈색", alt: "", bg: "#99654e", example: "갈색 장독", object: "장독", image: "assets/color-icons/brown-jangdok.png?v=2", culture: "장독에는 된장이나 간장 등을 담아요.", speech: ["갈색"] },
+      { id: "white", group: "basic", eng: "white", name: "흰색", label: "흰색 · 하얀색", alt: "하양", bg: "#ffffff", example: "하얀 떡", object: "떡", image: "assets/color-icons/white-tteok.png?v=2", culture: "떡은 쌀로 만드는 쫀득쫀득한 한국 음식이에요.", speech: ["흰색", "하얀색", "하양"] },
+      { id: "gray", group: "basic", eng: "gray", name: "회색", label: "회색", alt: "", bg: "#8e938f", example: "회색 돌하르방", object: "돌하르방", image: "assets/color-icons/gray-dolhareubang.png?v=2", culture: "돌하르방은 제주도의 거친 현무암으로 만든 전통 석상이에요. 제주도의 상징이에요.", speech: ["회색"] },
+      { id: "black", group: "basic", eng: "black", name: "검은색", label: "검은색 · 검정", alt: "까만색", bg: "#202522", example: "검은 갓", object: "갓", image: "assets/color-icons/black-gat-v2.png?v=3", culture: "갓은 옛날 한국 남자들이 쓰던 모자예요.", speech: ["검은색", "검정", "까만색"] },
+      { id: "lightgreen", group: "extra", eng: "light green", name: "연두색", label: "연두색", alt: "연두", bg: "#b7d66d", example: "연두색 새싹", speech: ["연두색", "연두"] },
+      { id: "turquoise", group: "extra", eng: "turquoise", name: "청록색", label: "청록색", alt: "", bg: "#40999a", example: "청록색 가방", speech: ["청록색"] },
+      { id: "skyblue", group: "extra", eng: "sky blue", name: "하늘색", label: "하늘색", alt: "", bg: "#8dc9df", example: "하늘색 우산", speech: ["하늘색"] },
+      { id: "gold", group: "extra", eng: "gold", name: "금색", label: "금색", alt: "", bg: "#d5ae48", example: "금색 반지", speech: ["금색"] },
+      { id: "silver", group: "extra", eng: "silver", name: "은색", label: "은색", alt: "", bg: "#c8cdce", example: "은색 숟가락", speech: ["은색"] }
     ];
 
-    const questions = [
-      ['🍅 토마토는 무슨 색이에요?','red',['빨간색','파란색','초록색','노란색']],
-      ['🍌 바나나는 무슨 색이에요?','yellow',['보라색','노란색','주황색','갈색']],
-      ['🍇 포도는 무슨 색이에요?','purple',['보라색','빨간색','하늘색','은색']],
-      ['🍃 잎은 무슨 색이에요?','green',['남색','초록색','분홍색','갈색']],
-      ['☁️ 눈은 무슨 색이에요?','white',['회색','흰색','검은색','금색']],
-      ['🌊 바다는 무슨 색이에요?','blue',['파란색','노란색','갈색','분홍색']],
-      ['🥄 숟가락은 무슨 색으로 자주 보여요?','silver',['은색','주황색','보라색','연두색']],
-      ['🏅 메달은 무슨 색이에요?','gold',['회색','금색','남색','분홍색']],
-      ['🌸 꽃은 무슨 색이에요?','pink',['분홍색','갈색','검은색','초록색']],
-      ['🥕 당근은 무슨 색이에요?','orange',['하늘색','주황색','보라색','흰색']],
-    ];
+    const basicColors = colors.filter((color) => color.group === "basic");
+    let activeGroup = "basic";
+    let activeColor = colors.find((color) => color.id === "red");
+    let practiceOrder = shuffle([...basicColors]);
+    let practiceIndex = 0;
+    let quizColors = [];
+    let quizIndex = 0;
+    let quizScore = 0;
+    let quizAnswered = false;
+    let quizHadWrongAttempt = false;
+    let personalColor = colors.find((color) => color.id === "blue");
 
-    const lookup = Object.fromEntries(colorsData.map(c => [c.id, c]));
-
-    const synth = window.speechSynthesis;
-    let voices = [];
-
-    function loadVoices(){
-      voices = synth.getVoices();
-    }
-
-    loadVoices();
-    if (speechSynthesis.onvoiceschanged !== undefined) {
-      speechSynthesis.onvoiceschanged = loadVoices;
-    }
-
-    function getPreferredKoreanVoice(){
-      const koreanVoices = voices.filter(v =>
-        v.lang && v.lang.toLowerCase().startsWith('ko')
-      );
-
-      return (
-        koreanVoices.find(v => /female|woman|yuna|sunhi|sora|nari|google 한국의|heami|sera/i.test(v.name)) ||
-        koreanVoices.find(v => v.lang.toLowerCase() === 'ko-kr') ||
-        koreanVoices[0] ||
-        null
-      );
-    }
-
-    function speakText(text){
-      const utter = new SpeechSynthesisUtterance(text);
-      utter.lang = 'ko-KR';
-      utter.rate = 0.95;
-      utter.pitch = 1.15;
-      utter.volume = 1;
-
-      const selectedVoice = getPreferredKoreanVoice();
-      if (selectedVoice) {
-        utter.voice = selectedVoice;
+    function shuffle(items) {
+      const copy = [...items];
+      for (let index = copy.length - 1; index > 0; index -= 1) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [copy[index], copy[randomIndex]] = [copy[randomIndex], copy[index]];
       }
+      return copy;
+    }
+    function setColorVisual(element, color, { revealColor = false, decorative = false } = {}) {
+      element.replaceChildren();
+      element.classList.remove("has-object-image");
+      element.style.background = color.bg;
+      if (!color.image) return;
 
-      synth.cancel();
-      synth.speak(utter);
+      element.classList.add("has-object-image");
+      const image = document.createElement("img");
+      image.className = "color-object";
+      image.src = color.image;
+      image.alt = decorative ? "" : `${revealColor ? color.example : color.object} 그림`;
+      image.decoding = "async";
+      image.loading = element.classList.contains("mini-swatch") ? "lazy" : "eager";
+      image.addEventListener("error", () => {
+        image.remove();
+        element.classList.remove("has-object-image");
+        element.style.background = color.bg;
+      }, { once: true });
+      element.append(image);
     }
 
-    function buildCards(){
-      const cards = document.getElementById('cards');
-      colorsData.forEach(c => {
-        const speak = `${c.formal}. ${c.common}.`;
-        const el = document.createElement('div');
-        el.className = 'color-card';
-        el.style.background = c.bg;
-        el.style.color = c.text;
-        el.innerHTML = `
-          <button class="listen">🔊</button>
-          <div class="top">
-            <div class="eng">${c.eng}</div>
-            <div class="formal">${c.formal}</div>
-            <div class="common">→ ${c.common}</div>
-          </div>
-          <div class="examples">예: ${c.examples.join(' · ')}</div>
-        `;
-        el.onclick = () => speakText(speak);
-        el.querySelector('.listen').onclick = (e) => { e.stopPropagation(); speakText(speak); };
-        cards.appendChild(el);
+    function renderPalette() {
+      const grid = document.querySelector("#paletteGrid");
+      grid.innerHTML = "";
+      colors.filter((color) => color.group === activeGroup).forEach((color) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = `palette-button${activeColor.id === color.id ? " active" : ""}`;
+        button.setAttribute("aria-label", color.label);
+        button.setAttribute("aria-pressed", String(activeColor.id === color.id));
+        const swatch = document.createElement("span");
+        swatch.className = "mini-swatch color-visual";
+        swatch.setAttribute("aria-hidden", "true");
+        setColorVisual(swatch, color, { decorative: true });
+        const name = document.createElement("span");
+        name.className = "palette-name";
+        name.textContent = color.label;
+        button.append(swatch, name);
+        button.addEventListener("click", () => selectStudyColor(color));
+        grid.append(button);
       });
     }
-
-    function buildFlipCards(){
-      const box = document.getElementById('flipGrid');
-      colorsData.slice(0, 12).forEach(c => {
-        const el = document.createElement('div');
-        el.className = 'flip';
-        el.innerHTML = `
-          <div class="flip-inner">
-            <div class="flip-face" style="background:${c.bg};color:${c.text}">
-              <div style="font-size:42px">🎨</div>
-              <div style="font-size:18px;margin-top:8px">이건 무슨 색일까요?</div>
-            </div>
-            <div class="flip-face flip-back">
-              <div style="font-size:28px">${c.formal}</div>
-              <div style="font-size:18px;color:#4b5563;margin-top:6px">→ ${c.common}</div>
-              <div style="font-size:15px;margin-top:12px">예: ${c.examples.join(' · ')}</div>
-            </div>
-          </div>
-        `;
-        el.onclick = () => {
-          el.classList.toggle('flipped');
-          speakText(`${c.formal}.`);
-        };
-        box.appendChild(el);
-      });
+    function selectStudyColor(color) {
+      activeColor = color;
+      setColorVisual(document.querySelector("#focusSwatch"), color, { revealColor: true });
+      document.querySelector("#focusEnglish").textContent = color.eng;
+      document.querySelector("#focusWord").textContent = color.label;
+      const alternate = document.querySelector("#focusAlternate");
+      alternate.textContent = color.alt ? `다른 표현 · ${color.alt}` : "다른 표현 없음";
+      alternate.hidden = !color.alt;
+      document.querySelector("#focusExample").textContent = `명사와 함께 · ${color.example}`;
+      const cultureLine = document.querySelector("#focusCulture");
+      cultureLine.textContent = color.culture || "";
+      cultureLine.hidden = !color.culture;
+      renderPalette();
     }
 
-    let score = 0;
-    function buildQuiz(){
-      const area = document.getElementById('quizArea');
-      questions.forEach((q, i) => {
-        const [question, qid, options] = q;
-        const sw = lookup[qid];
-        const el = document.createElement('div');
-        el.className = 'mcq-card';
-        el.dataset.answer = sw.formal;
-        el.innerHTML = `
-          <div style="font-weight:800;font-size:20px">Q${i+1}. ${question}</div>
-          <div class="swatch" style="background:${sw.bg};"></div>
-          <div class="options">
-            ${options.map(opt => `<button class="opt">${opt}</button>`).join('')}
-          </div>
-        `;
-        el.querySelectorAll('.opt').forEach(btn => {
-          btn.onclick = () => checkAnswer(btn, sw.formal);
-        });
-        area.appendChild(el);
-      });
+    function renderPractice() {
+      const color = practiceOrder[practiceIndex];
+      setColorVisual(document.querySelector("#practiceSwatch"), color);
+      document.querySelector("#practiceProgress").textContent = `${practiceIndex + 1} / ${practiceOrder.length}`;
+      document.querySelector("#practiceWord").textContent = color.label;
+      document.querySelector("#practiceSentence").textContent = `${color.name}이에요.`;
+      document.querySelector("#practiceAnswer").hidden = true;
+      document.querySelector("#revealPractice").hidden = false;
+    }
+    function revealPractice() {
+      const color = practiceOrder[practiceIndex];
+      document.querySelector("#practiceAnswer").hidden = false;
+      document.querySelector("#revealPractice").hidden = true;
+    }
+    function nextPractice() {
+      practiceIndex = (practiceIndex + 1) % practiceOrder.length;
+      if (practiceIndex === 0) practiceOrder = shuffle([...basicColors]);
+      renderPractice();
     }
 
-    function checkAnswer(btn, answer){
-      const card = btn.closest('.mcq-card');
-      if(card.dataset.done === '1') return;
-      card.dataset.done = '1';
-      const buttons = card.querySelectorAll('.opt');
-      buttons.forEach(b => {
-        if(b.textContent === answer) b.classList.add('correct');
-        if(b === btn && b.textContent !== answer) b.classList.add('wrong');
-        b.disabled = true;
-      });
-      if(btn.textContent === answer){
-        score += 1;
-        document.getElementById('score').textContent = score;
-        speakText(answer + '이에요.');
+    function buildQuiz() {
+      quizColors = shuffle([...basicColors]).slice(0, 8);
+      quizIndex = 0;
+      quizScore = 0;
+      quizAnswered = false;
+      document.querySelector("#score").textContent = "0";
+      renderQuiz();
+    }
+    function renderQuiz() {
+      const content = document.querySelector("#quizContent");
+      if (quizIndex >= quizColors.length) {
+        document.querySelector("#quizProgress").textContent = "완료";
+        document.querySelector("#progressFill").style.width = "100%";
+        content.innerHTML = `<div class="result"><strong>${quizScore} / ${quizColors.length}</strong><p>헷갈린 색은 위에서 다시 확인해 보세요.</p><button class="primary-button" id="restartQuiz" type="button">다시 풀기</button></div>`;
+        document.querySelector("#restartQuiz").addEventListener("click", buildQuiz);
+        return;
       }
+      if (!document.querySelector("#quizSwatch")) {
+        content.innerHTML = `<div class="quiz-body"><h3 class="quiz-question">무슨 색이에요?</h3><div class="quiz-swatch color-visual" id="quizSwatch"></div><div class="options" id="quizOptions"></div></div><div class="quiz-footer"><p class="feedback" id="feedback" aria-live="polite">정답을 골라 보세요.</p><button class="primary-button" id="nextQuestion" type="button" hidden>다음 문제</button></div>`;
+        document.querySelector("#nextQuestion").addEventListener("click", nextQuizQuestion);
+      }
+      quizAnswered = false;
+      quizHadWrongAttempt = false;
+      const answer = quizColors[quizIndex];
+      const distractors = shuffle(basicColors.filter((color) => color.id !== answer.id)).slice(0, 3);
+      const options = shuffle([answer, ...distractors]);
+      document.querySelector("#quizProgress").textContent = `${quizIndex + 1} / ${quizColors.length}`;
+      document.querySelector("#progressFill").style.width = `${((quizIndex + 1) / quizColors.length) * 100}%`;
+      setColorVisual(document.querySelector("#quizSwatch"), answer);
+      document.querySelector("#feedback").textContent = "정답을 골라 보세요.";
+      document.querySelector("#nextQuestion").hidden = true;
+      const optionsElement = document.querySelector("#quizOptions");
+      optionsElement.innerHTML = "";
+      options.forEach((color) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option-button";
+        button.textContent = color.label;
+        button.dataset.colorId = color.id;
+        button.addEventListener("click", () => checkQuizAnswer(button, color, answer));
+        optionsElement.append(button);
+      });
     }
+    function checkQuizAnswer(button, selected, answer) {
+      if (quizAnswered) return;
+      const correct = selected.id === answer.id;
+      if (!correct) {
+        quizHadWrongAttempt = true;
+        button.disabled = true;
+        button.classList.add("wrong");
+        document.querySelector("#feedback").textContent = "아니에요. 다른 색 이름을 골라 보세요.";
+        return;
+      }
+      quizAnswered = true;
+      document.querySelectorAll(".option-button").forEach((option) => {
+        option.disabled = true;
+        if (option.dataset.colorId === answer.id) option.classList.add("correct");
+      });
+      if (!quizHadWrongAttempt) {
+        quizScore += 1;
+        document.querySelector("#score").textContent = quizScore;
+      }
+      document.querySelector("#feedback").textContent = `맞아요. ${answer.name}이에요.`;
+      const nextButton = document.querySelector("#nextQuestion");
+      nextButton.textContent = quizIndex === quizColors.length - 1 ? "결과 보기" : "다음 문제";
+      nextButton.hidden = false;
+    }
+    function nextQuizQuestion() { quizIndex += 1; renderQuiz(); }
 
-    function resetQuiz(){
-      score = 0;
-      document.getElementById('score').textContent = '0';
-      document.querySelectorAll('.mcq-card').forEach(card => {
-        card.dataset.done = '0';
-        card.querySelectorAll('.opt').forEach(b => {
-          b.disabled = false;
-          b.classList.remove('correct', 'wrong');
+    function renderPersonalPalette() {
+      const palette = document.querySelector("#personalPalette");
+      palette.innerHTML = "";
+      basicColors.forEach((color) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = `personal-color${personalColor.id === color.id ? " active" : ""}`;
+        button.style.background = color.bg;
+        button.setAttribute("aria-label", color.label);
+        button.setAttribute("aria-pressed", String(personalColor.id === color.id));
+        button.addEventListener("click", () => {
+          personalColor = color;
+          document.querySelector("#personalSentence").textContent = `저는 ${color.name}을 좋아해요.`;
+          renderPersonalPalette();
         });
+        palette.append(button);
       });
     }
 
-    buildCards();
-    buildFlipCards();
+    document.querySelectorAll(".tab-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        activeGroup = button.dataset.group;
+        document.querySelectorAll(".tab-button").forEach((tab) => {
+          const selected = tab === button;
+          tab.classList.toggle("active", selected);
+          tab.setAttribute("aria-selected", String(selected));
+        });
+        selectStudyColor(colors.find((color) => color.group === activeGroup));
+      });
+    });
+    document.querySelector("#revealPractice").addEventListener("click", revealPractice);
+    document.querySelector("#nextPractice").addEventListener("click", nextPractice);
+    document.querySelector("#nextQuestion").addEventListener("click", nextQuizQuestion);
+    document.querySelector("#englishToggle").addEventListener("click", (event) => {
+      const hidden = document.body.classList.toggle("hide-english");
+      event.currentTarget.setAttribute("aria-pressed", String(hidden));
+      event.currentTarget.textContent = hidden ? "영어 보기" : "영어 숨기기";
+    });
+
+    const indexLinks = [...document.querySelectorAll(".lesson-index a")];
+    const sections = indexLinks.map((link) => document.querySelector(link.getAttribute("href")));
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        indexLinks.forEach((link) => link.classList.toggle("active", link.getAttribute("href") === `#${visible.target.id}`));
+      }, { rootMargin: "-20% 0px -60%", threshold: [0, .2, .5] });
+      sections.forEach((section) => observer.observe(section));
+    }
+
+    selectStudyColor(activeColor);
+    renderPractice();
+    renderPersonalPalette();
     buildQuiz();
   </script>
 </body>
