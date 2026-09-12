@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korean Pronunciation Contrasts — Vowels and Nasal Sounds</title>
+<style>
+  :root {
+    --bg: #faf7f2;
+    --paper: #fff;
+    --ink: #2d2a26;
+    --ink-soft: #5c574f;
+    --accent: #c97b4f;
+    --accent-soft: #f4dcc8;
+    --blue: #4a6fa5;
+    --blue-bg: #e8eef6;
+    --green: #4a8a3e;
+    --green-bg: #e6f0e2;
+    --purple: #7757a5;
+    --purple-bg: #efe8f6;
+    --gold: #d4a253;
+    --gold-bg: #fdf2e3;
+    --rose: #b76054;
+    --rose-bg: #f6e4df;
+    --note: #fefbf3;
+    --line: #e5dfd3;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Pretendard Variable', 'Pretendard', 'Gowun Dodum', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 50px 36px 80px;
+  }
+  header {
+    text-align: center;
+    padding-bottom: 28px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--line);
+  }
+  h1 {
+    margin: 0 0 10px;
+    font-size: 38px;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+  }
+  h1 .han { color: var(--accent); }
+  .subtitle {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 16px;
+    font-style: italic;
+  }
+  .tag {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--accent);
+    font: 700 12px/1.3 'Helvetica Neue', 'Apple SD Gothic Neo', sans-serif;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  h2 {
+    display: inline-block;
+    margin: 60px 0 22px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    font-size: 26px;
+  }
+  h2 .num {
+    margin-right: 10px;
+    color: var(--accent);
+    font: 800 22px/1 'Helvetica Neue', sans-serif;
+  }
+  h3 { margin: 0 0 9px; font-size: 20px; }
+  p { margin: 0 0 14px; }
+  .lead { margin-bottom: 24px; color: var(--ink-soft); font-size: 17px; }
+  .principle {
+    margin: 20px 0 30px;
+    padding: 18px 22px;
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    background: #fffaf5;
+    text-align: center;
+  }
+  .principle strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--accent);
+    font: 800 18px/1.3 'Helvetica Neue', 'Apple SD Gothic Neo', sans-serif;
+  }
+  .principle p { margin: 0; color: var(--ink-soft); font-size: 14px; }
+  .contrast-stack { display: grid; gap: 22px; }
+  .contrast-card {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: var(--paper);
+    box-shadow: 0 10px 28px rgba(75,57,38,.07);
+  }
+  .contrast-head {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    min-height: 150px;
+  }
+  .vowel-side {
+    display: grid;
+    grid-template-columns: 112px 1fr;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 24px;
+  }
+  .vowel-side.a { background: linear-gradient(145deg, #fff, var(--blue-bg)); color: var(--blue); }
+  .vowel-side.b { background: linear-gradient(145deg, #fff, var(--green-bg)); color: var(--green); }
+  .vowel-side.purple { background: linear-gradient(145deg, #fff, var(--purple-bg)); color: var(--purple); }
+  .vowel-side.rose { background: linear-gradient(145deg, #fff, var(--rose-bg)); color: var(--rose); }
+  .vowel {
+    color: currentColor;
+    font: 800 64px/1 'Apple SD Gothic Neo', 'Noto Serif KR', serif;
+    text-align: center;
+  }
+  .side-copy strong {
+    display: block;
+    margin-bottom: 6px;
+    color: currentColor;
+    font: 800 14px/1.3 'Helvetica Neue', 'Apple SD Gothic Neo', sans-serif;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .side-copy span { display: block; color: var(--ink-soft); font-size: 14px; }
+  .versus {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    color: var(--ink-soft);
+    background: #fff;
+    font: 800 13px/1 'Helvetica Neue', sans-serif;
+    letter-spacing: .08em;
+  }
+  .contrast-body {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 24px;
+    padding: 22px 26px 25px;
+    border-top: 1px solid var(--line);
+  }
+  .ear-box {
+    padding: 15px 17px;
+    border-left: 4px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    background: var(--note);
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+  .ear-box strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--gold);
+    font: 800 12px/1.3 'Helvetica Neue', sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .steady {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px 9px;
+    border-radius: 999px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    font: 800 11px/1.3 'Helvetica Neue', sans-serif;
+    letter-spacing: .06em;
+  }
+  .practice-title {
+    margin: 34px 0 14px;
+    padding-bottom: 6px;
+    border-bottom: 1px dotted var(--accent);
+    color: var(--accent);
+    font-size: 18px;
+  }
+  .pair-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 8px;
+    padding: 17px 14px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: #fff;
+  }
+  .word { text-align: center; }
+  .word .ko {
+    display: block;
+    font: 800 26px/1.2 'Apple SD Gothic Neo', 'Noto Serif KR', serif;
+  }
+  .word:first-child .ko { color: var(--accent); }
+  .word:last-child .ko { color: var(--green); }
+  .word .en { display: block; margin-top: 3px; color: var(--ink-soft); font-size: 12px; font-style: italic; }
+  .arrow { color: var(--ink-soft); }
+  .sequence {
+    margin: 16px 0 0;
+    padding: 18px 22px;
+    border: 1.5px dashed var(--gold);
+    border-radius: 10px;
+    background: var(--gold-bg);
+    text-align: center;
+  }
+  .sequence .ko {
+    display: block;
+    color: var(--ink);
+    font: 800 30px/1.55 'Apple SD Gothic Neo', 'Noto Serif KR', serif;
+    letter-spacing: .04em;
+  }
+  .sequence .instruction { color: var(--ink-soft); font-size: 13px; }
+  .why-shell {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 10px 28px rgba(75,57,38,.07);
+  }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .why-card { padding: 25px 26px; }
+  .why-card + .why-card { border-left: 1px solid var(--line); }
+  .why-card.m { background: linear-gradient(145deg, #fff, var(--blue-bg)); }
+  .why-card.n { background: linear-gradient(145deg, #fff, var(--purple-bg)); }
+  .sound-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .sound-circle {
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    border: 3px solid currentColor;
+    border-radius: 50%;
+    background: rgba(255,255,255,.78);
+    font: 800 36px/1 'Apple SD Gothic Neo', sans-serif;
+  }
+  .why-card.m .sound-circle { color: var(--blue); }
+  .why-card.n .sound-circle { color: var(--purple); }
+  .same-place {
+    color: var(--ink-soft);
+    font: 800 11px/1.3 'Helvetica Neue', sans-serif;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .air-path {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 15px 0;
+  }
+  .air {
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,.8);
+    color: var(--ink-soft);
+    font-size: 13px;
+    text-align: center;
+  }
+  .air strong { display: block; color: var(--ink); font-size: 15px; }
+  .variation-note {
+    padding: 20px 24px;
+    border-top: 1px solid var(--line);
+    background: var(--note);
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+  .variation-note strong { color: var(--accent); }
+  .feel-test {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 22px 0 0;
+  }
+  .test-card {
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--green);
+    border-radius: 0 0 9px 9px;
+    background: #fff;
+  }
+  .test-card b { display: block; margin-bottom: 7px; color: var(--green); font-size: 15px; }
+  .test-card p { margin: 0; color: var(--ink-soft); font-size: 13px; }
+  .routine {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .step {
+    position: relative;
+    padding: 20px 17px 18px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+  }
+  .step-num {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    color: white;
+    background: var(--accent);
+    font: 800 13px/1 'Helvetica Neue', sans-serif;
+  }
+  .step b { display: block; margin-bottom: 6px; font-size: 15px; }
+  .step p { margin: 0; color: var(--ink-soft); font-size: 13px; }
+  .tutor-note {
+    margin: 25px 0 0;
+    padding: 18px 22px;
+    border-left: 4px solid var(--ink-soft);
+    border-radius: 0 8px 8px 0;
+    background: var(--note);
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+  .tutor-note strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--ink);
+    font: 800 12px/1.3 'Helvetica Neue', sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  footer {
+    margin-top: 70px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-size: 13px;
+    font-style: italic;
+    text-align: center;
+  }
+  *, *::before, *::after {
+    font-family: 'Pretendard Variable', 'Pretendard', 'Gowun Dodum', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif !important;
+  }
+  @media (max-width: 820px) {
+    .wrap { padding: 32px 18px 50px; }
+    h1 { font-size: 29px; }
+    .contrast-head, .contrast-body, .why-grid { grid-template-columns: 1fr; }
+    .contrast-head .versus { width: 100%; min-height: 38px; }
+    .why-card + .why-card { border-left: 0; border-top: 1px solid var(--line); }
+    .feel-test, .routine { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .vowel-side { grid-template-columns: 92px 1fr; padding: 18px; }
+    .pair-grid, .feel-test, .routine { grid-template-columns: 1fr; }
+  }
+  @media print {
+    body { background: #fff; }
+    .wrap { max-width: 100%; padding: 20px; }
+    h2 { page-break-after: avoid; }
+    .contrast-card, .why-shell, .pair, .test-card, .step { break-inside: avoid; }
+  }
+
+  /* Refined editorial system */
+  :root {
+    --bg: #f4f0e8;
+    --paper: #fffdfa;
+    --ink: #24241f;
+    --ink-soft: #616159;
+    --accent: #c86f42;
+    --accent-soft: #f4dfd0;
+    --line: #ddd7cb;
+    --line-soft: #ebe6dc;
+    --note: #fbf6eb;
+    --blue: #3f6f9d;
+    --blue-bg: #f1f5f9;
+    --green: #477c52;
+    --green-bg: #f1f6f0;
+    --purple: #725b96;
+    --purple-bg: #f5f1f8;
+    --rose: #a9574f;
+    --rose-bg: #faf1ef;
+    --gold: #b88432;
+  }
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+  }
+  body {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .wrap {
+    max-width: 1160px;
+    padding: 64px 44px 96px;
+  }
+  header {
+    position: relative;
+    margin-bottom: 62px;
+    padding: 0 0 32px 24px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+  }
+  header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 5px;
+    height: 74px;
+    border-radius: 99px;
+    background: var(--accent);
+  }
+  h1 {
+    max-width: 780px;
+    margin-bottom: 12px;
+    font-size: clamp(38px, 5vw, 57px);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -.045em;
+  }
+  .subtitle {
+    max-width: 700px;
+    color: var(--ink-soft);
+    font-size: 16px;
+    font-style: normal;
+  }
+  .tag {
+    margin-top: 18px;
+    padding: 6px 10px;
+    border: 1px solid #dfc3b2;
+    border-radius: 999px;
+    background: #fbf3ed;
+    font-size: 10px;
+    letter-spacing: .14em;
+  }
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    margin: 72px 0 18px;
+    padding: 0;
+    border: 0;
+    font-size: clamp(25px, 3vw, 32px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -.025em;
+  }
+  h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    margin-left: 5px;
+    background: var(--line);
+  }
+  h2 .num {
+    display: inline-grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    margin: 0;
+    border: 1px solid #debba8;
+    border-radius: 10px;
+    background: #fbf2ec;
+    font-size: 13px;
+    letter-spacing: .08em;
+  }
+  .lead {
+    max-width: 900px;
+    margin-bottom: 28px;
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+  .principle {
+    display: grid;
+    grid-template-columns: minmax(210px, .7fr) 1.3fr;
+    align-items: center;
+    gap: 24px;
+    margin: 0 0 34px;
+    padding: 18px 22px;
+    border: 0;
+    border-left: 4px solid var(--accent);
+    border-radius: 0;
+    background: #fffaf4;
+    text-align: left;
+  }
+  .principle strong {
+    margin: 0;
+    font-size: 15px;
+    letter-spacing: -.01em;
+  }
+  .principle p {
+    padding-left: 24px;
+    border-left: 1px solid #ead9cc;
+    font-size: 13px;
+  }
+  .contrast-stack { gap: 28px; }
+  .contrast-card {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--paper);
+    box-shadow: 0 14px 36px rgba(58, 48, 35, .055);
+  }
+  .pair-caption {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 24px;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--ink-soft);
+    font-size: 11px;
+    letter-spacing: .045em;
+  }
+  .pair-caption b {
+    color: var(--accent);
+    font-size: 10px;
+    letter-spacing: .14em;
+  }
+  .pair-caption b::after {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 1px;
+    margin-left: 12px;
+    vertical-align: middle;
+    background: #d7c4b7;
+  }
+  .contrast-head {
+    display: grid;
+    grid-template-columns: 1fr 34px 1fr;
+    align-items: stretch;
+    gap: 14px;
+    min-height: 0;
+    padding: 24px 24px 18px;
+  }
+  .vowel-side {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    align-items: center;
+    gap: 18px;
+    padding: 21px;
+    border: 1px solid var(--line-soft);
+    border-radius: 13px;
+    background: var(--wash);
+    color: var(--tone);
+  }
+  .vowel-side.a { --tone: var(--blue); --wash: var(--blue-bg); background: var(--wash); color: var(--tone); }
+  .vowel-side.b { --tone: var(--green); --wash: var(--green-bg); background: var(--wash); color: var(--tone); }
+  .vowel-side.purple { --tone: var(--purple); --wash: var(--purple-bg); background: var(--wash); color: var(--tone); }
+  .vowel-side.rose { --tone: var(--rose); --wash: var(--rose-bg); background: var(--wash); color: var(--tone); }
+  .vowel-token {
+    display: grid;
+    place-items: center;
+    width: 68px;
+    height: 68px;
+    border: 1px solid currentColor;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .72);
+  }
+  .vowel {
+    font-size: 42px;
+    font-weight: 750;
+    line-height: 1;
+    letter-spacing: -.06em;
+    transform: translateX(-1px);
+  }
+  .side-copy strong {
+    margin-bottom: 7px;
+    font-size: 13px;
+    line-height: 1.35;
+    letter-spacing: .045em;
+  }
+  .side-copy span {
+    color: #595b54;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .versus {
+    position: relative;
+    width: auto;
+    min-width: 34px;
+    background: transparent;
+    font-size: 0;
+  }
+  .versus::before {
+    content: "↔";
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--paper);
+    color: #8c887f;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .contrast-body {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    padding: 0 24px 24px;
+    border: 0;
+  }
+  .feature-board {
+    overflow: hidden;
+    border: 1px solid var(--line-soft);
+    border-radius: 12px;
+    background: #fff;
+  }
+  .feature-head,
+  .feature-row {
+    display: grid;
+    grid-template-columns: 1fr 100px 1fr;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+  }
+  .feature-head {
+    min-height: 34px;
+    padding: 6px 16px;
+    border-bottom: 1px solid var(--line-soft);
+    background: #faf8f3;
+    color: #8a867c;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .feature-head span:first-child { color: var(--left-tone, var(--blue)); }
+  .feature-head span:last-child { color: var(--right-tone, var(--green)); }
+  .feature-row {
+    min-height: 46px;
+    padding: 9px 16px;
+    color: var(--ink-soft);
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  .feature-row + .feature-row { border-top: 1px solid var(--line-soft); }
+  .feature-row b {
+    color: var(--ink);
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .ear-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 18px 19px;
+    border: 0;
+    border-top: 3px solid var(--gold);
+    border-radius: 10px;
+    background: var(--note);
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    line-height: 1.58;
+  }
+  .ear-box strong {
+    margin-bottom: 8px;
+    color: var(--gold);
+    font-size: 9px;
+    letter-spacing: .13em;
+  }
+  .ear-box p {
+    margin: 0;
+  }
+  .steady {
+    align-self: flex-start;
+    margin-top: 11px;
+    padding: 5px 9px;
+    background: #f4e1d3;
+    font-size: 9px;
+    letter-spacing: .055em;
+  }
+  .practice-title {
+    margin: 38px 0 15px;
+    padding: 0 0 8px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-size: 16px;
+    font-weight: 750;
+  }
+  .pair-grid { gap: 11px; }
+  .pair {
+    padding: 15px 13px;
+    border-color: var(--line-soft);
+    border-radius: 11px;
+    background: var(--paper);
+  }
+  .pair:hover { border-color: #d7bba9; }
+  .word .ko { font-size: 25px; font-weight: 750; }
+  .word .en { font-style: normal; }
+  .sequence {
+    border: 1px solid #e6d5b7;
+    border-radius: 12px;
+    background: #fdf8ef;
+  }
+  .why-shell {
+    border-radius: 18px;
+    background: var(--paper);
+    box-shadow: 0 14px 36px rgba(58, 48, 35, .045);
+  }
+  .why-card { padding: 28px; }
+  .why-card.m { background: #f5f7fa; }
+  .why-card.n { background: #f7f4f9; }
+  .sound-circle {
+    width: 66px;
+    height: 66px;
+    border-width: 1px;
+    border-radius: 15px;
+    font-size: 31px;
+  }
+  .same-place { font-size: 9px; }
+  .air {
+    border: 1px solid rgba(100, 95, 83, .1);
+    border-radius: 9px;
+  }
+  .variation-note {
+    background: #fffaf1;
+  }
+  .test-card {
+    border-color: var(--line-soft);
+    border-top-width: 2px;
+    border-radius: 10px;
+    background: var(--paper);
+  }
+  .routine { gap: 11px; }
+  .step {
+    border-color: var(--line-soft);
+    border-radius: 11px;
+    background: var(--paper);
+  }
+  .step-num {
+    border-radius: 9px;
+    background: var(--accent);
+  }
+  .tutor-note {
+    border-left-width: 3px;
+    background: #fffaf1;
+  }
+  footer { font-style: normal; }
+
+  @media (max-width: 820px) {
+    .wrap { padding: 38px 20px 64px; }
+    header { margin-bottom: 48px; padding-left: 18px; }
+    header::before { height: 62px; }
+    h1 { font-size: 37px; }
+    h2 { margin-top: 58px; }
+    .principle { grid-template-columns: 1fr; gap: 8px; }
+    .principle p { padding: 0; border: 0; }
+    .contrast-head { grid-template-columns: 1fr; gap: 10px; }
+    .contrast-head .versus { width: 100%; min-height: 24px; }
+    .versus::before { width: 28px; height: 28px; transform: rotate(90deg); }
+    .contrast-body { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .vowel-side { grid-template-columns: 56px 1fr; padding: 16px; }
+    .vowel-token { width: 56px; height: 56px; border-radius: 13px; }
+    .vowel { font-size: 35px; }
+    .feature-head, .feature-row { grid-template-columns: 1fr 72px 1fr; gap: 6px; }
+    .feature-row { padding: 9px 8px; font-size: 11px; }
+    .pair-caption { padding: 11px 18px; }
+    .contrast-head { padding: 18px 18px 14px; }
+    .contrast-body { padding: 0 18px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Korean Pronunciation <span class="han">Contrast Lab</span></h1>
+    <p class="subtitle">See the mouth shape. Feel the airflow. Listen for one difference at a time.</p>
+    <div class="tag">For Hanim's Students</div>
+  </header>
+
+  <section>
+    <h2><span class="num">01</span>Three Vowel Contrasts</h2>
+    <p class="lead">Do not memorize these vowels as English spellings. Build a new mouth shape for each Korean vowel, then keep that shape steady from beginning to end.</p>
+    <div class="principle">
+      <strong>One vowel = one steady target</strong>
+      <p>English vowels often move. Korean ㅗ, ㅜ, and ㅓ should not slide into a second vowel.</p>
+    </div>
+
+    <div class="contrast-stack">
+      <article class="contrast-card" style="--left-tone: var(--blue); --right-tone: var(--green);">
+        <div class="pair-caption"><b>PAIR 01</b><span>Back vowels · rounding and tongue height</span></div>
+        <div class="contrast-head">
+          <div class="vowel-side a">
+            <div class="vowel-token"><div class="vowel">ㅗ</div></div>
+            <div class="side-copy"><strong>Rounded, medium opening</strong><span>Lips are rounded, but not squeezed into a tiny tube. The sound stays still.</span></div>
+          </div>
+          <div class="versus">VS</div>
+          <div class="vowel-side b">
+            <div class="vowel-token"><div class="vowel">ㅜ</div></div>
+            <div class="side-copy"><strong>Smaller, tighter rounding</strong><span>The tongue is higher and the lips are usually more narrowly rounded.</span></div>
+          </div>
+        </div>
+        <div class="contrast-body">
+          <div class="feature-board">
+            <div class="feature-head"><span>ㅗ</span><span>Compare</span><span>ㅜ</span></div>
+            <div class="feature-row"><span>rounded, medium</span><b>Lips</b><span>smaller, tighter</span></div>
+            <div class="feature-row"><span>mid-high</span><b>Tongue</b><span>higher</span></div>
+            <div class="feature-row"><span>smooth + steady</span><b>Air</b><span>smooth + steady</span></div>
+          </div>
+          <div class="ear-box">
+            <strong>Listening point</strong>
+            <p>English <em>oo</em> is normally much closer to ㅜ than ㅗ. English <em>go</em> often ends with a glide, and spellings such as <em>ou</em> can tempt the mouth to move. Korean ㅗ should stay on one clean target.</p>
+            <span class="steady">ㅗ — no oo, no o→u glide</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="contrast-card" style="--left-tone: var(--rose); --right-tone: var(--green);">
+        <div class="pair-caption"><b>PAIR 02</b><span>Open versus rounded · the fastest visual check</span></div>
+        <div class="contrast-head">
+          <div class="vowel-side rose">
+            <div class="vowel-token"><div class="vowel">ㅓ</div></div>
+            <div class="side-copy"><strong>Relaxed and unrounded</strong><span>Let the jaw open. Keep the lips neutral—do not make a circle.</span></div>
+          </div>
+          <div class="versus">VS</div>
+          <div class="vowel-side b">
+            <div class="vowel-token"><div class="vowel">ㅗ</div></div>
+            <div class="side-copy"><strong>Clearly rounded</strong><span>Bring the lip corners inward and make a round opening.</span></div>
+          </div>
+        </div>
+        <div class="contrast-body">
+          <div class="feature-board">
+            <div class="feature-head"><span>ㅓ</span><span>Compare</span><span>ㅗ</span></div>
+            <div class="feature-row"><span>neutral</span><b>Lips</b><span>clearly rounded</span></div>
+            <div class="feature-row"><span>open + relaxed</span><b>Jaw</b><span>medium opening</span></div>
+            <div class="feature-row"><span>unrounded target</span><b>Finish</b><span>round target</span></div>
+          </div>
+          <div class="ear-box">
+            <strong>Listening point</strong>
+            <p>First listen for lip rounding: ㅗ has the compact, round resonance; ㅓ sounds more open. If you hear a moving English <em>oh</em>, the speaker has probably added a glide.</p>
+            <span class="steady">ㅓ = open / ㅗ = round</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="contrast-card" style="--left-tone: var(--purple); --right-tone: var(--green);">
+        <div class="pair-caption"><b>PAIR 03</b><span>Same quick y-start · different final vowel</span></div>
+        <div class="contrast-head">
+          <div class="vowel-side purple">
+            <div class="vowel-token"><div class="vowel">ㅕ</div></div>
+            <div class="side-copy"><strong>Quick y + ㅓ</strong><span>Start with a very short y-glide, then arrive at relaxed, unrounded ㅓ.</span></div>
+          </div>
+          <div class="versus">VS</div>
+          <div class="vowel-side b">
+            <div class="vowel-token"><div class="vowel">ㅛ</div></div>
+            <div class="side-copy"><strong>Quick y + ㅗ</strong><span>Start with the same short y-glide, then arrive at rounded ㅗ.</span></div>
+          </div>
+        </div>
+        <div class="contrast-body">
+          <div class="feature-board">
+            <div class="feature-head"><span>ㅕ</span><span>Compare</span><span>ㅛ</span></div>
+            <div class="feature-row"><span>quick y-glide</span><b>Start</b><span>quick y-glide</span></div>
+            <div class="feature-row"><span>ㅓ · unrounded</span><b>Finish</b><span>ㅗ · rounded</span></div>
+            <div class="feature-row"><span>short → target</span><b>Timing</b><span>short → target</span></div>
+          </div>
+          <div class="ear-box">
+            <strong>Listening point</strong>
+            <p>Ignore the shared y-start for a moment. Listen to the end: does the mouth finish open and unrounded (ㅕ), or round (ㅛ)?</p>
+            <span class="steady">same start — different finish</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span>Vowel Contrast Practice</h2>
+    <p class="lead">Tutor says one item. Student points left or right. Then switch roles. Keep the first round slow and the second round natural.</p>
+
+    <h3 class="practice-title">ㅗ ↔ ㅜ · Real-word contrasts</h3>
+    <div class="pair-grid">
+      <div class="pair"><div class="word"><span class="ko">공</span><span class="en">ball</span></div><div class="arrow">↔</div><div class="word"><span class="ko">궁</span><span class="en">palace</span></div></div>
+      <div class="pair"><div class="word"><span class="ko">소리</span><span class="en">sound</span></div><div class="arrow">↔</div><div class="word"><span class="ko">수리</span><span class="en">repair</span></div></div>
+      <div class="pair"><div class="word"><span class="ko">논</span><span class="en">rice paddy</span></div><div class="arrow">↔</div><div class="word"><span class="ko">눈</span><span class="en">eye; snow</span></div></div>
+      <div class="pair"><div class="word"><span class="ko">모기</span><span class="en">mosquito</span></div><div class="arrow">↔</div><div class="word"><span class="ko">무기</span><span class="en">weapon</span></div></div>
+      <div class="pair"><div class="word"><span class="ko">볼</span><span class="en">cheek</span></div><div class="arrow">↔</div><div class="word"><span class="ko">불</span><span class="en">fire</span></div></div>
+      <div class="pair"><div class="word"><span class="ko">고리</span><span class="en">ring; loop</span></div><div class="arrow">↔</div><div class="word"><span class="ko">구리</span><span class="en">copper</span></div></div>
+    </div>
+
+    <h3 class="practice-title">ㅓ ↔ ㅗ · Sound and word contrasts</h3>
+    <div class="pair-grid">
+      <div class="pair"><div class="word"><span class="ko">어</span><span class="en">sound target</span></div><div class="arrow">↔</div><div class="word"><span class="ko">오</span><span class="en">sound target</span></div></div>
+      <div class="pair"><div class="word"><span class="ko">벌</span><span class="en">bee; punishment</span></div><div class="arrow">↔</div><div class="word"><span class="ko">볼</span><span class="en">cheek</span></div></div>
+      <div class="pair"><div class="word"><span class="ko">선</span><span class="en">line</span></div><div class="arrow">↔</div><div class="word"><span class="ko">손</span><span class="en">hand</span></div></div>
+      <div class="pair"><div class="word"><span class="ko">덕</span><span class="en">virtue; benefit</span></div><div class="arrow">↔</div><div class="word"><span class="ko">독</span><span class="en">poison</span></div></div>
+    </div>
+
+    <h3 class="practice-title">ㅕ ↔ ㅛ · Same y-start, different finish</h3>
+    <div class="sequence">
+      <span class="ko">여 ↔ 요　·　겨 ↔ 교　·　며 ↔ 묘　·　셔 ↔ 쇼</span>
+      <span class="instruction">Round 1: exaggerate the final mouth shape. Round 2: keep the y-glide short and say each syllable naturally.</span>
+    </div>
+    <div class="sequence">
+      <span class="ko">여기 · 여자 · 여름　/　요리 · 요즘 · 교실</span>
+      <span class="instruction">Listen only. Raise one finger for ㅕ and two fingers for ㅛ.</span>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span>Why ㅁ Can Sound Like ㅂ—and ㄴ Like ㄷ</h2>
+    <p class="lead">These pairs begin in nearly the same mouth place. The main difference is where the air goes and whether the sound continues or releases.</p>
+
+    <div class="why-shell">
+      <div class="why-grid">
+        <article class="why-card m">
+          <div class="sound-row"><span class="sound-circle">ㅁ</span><span class="same-place">same lip closure</span><span class="sound-circle">ㅂ</span></div>
+          <h3>Both sounds close the lips</h3>
+          <p>That shared lip closure makes the pair look similar. The airflow creates the useful difference.</p>
+          <div class="air-path">
+            <div class="air"><strong>ㅁ · nose</strong>Voice and air continue through the nose: mmm.</div>
+            <div class="air"><strong>ㅂ · mouth</strong>Air is held behind the lips, then released.</div>
+          </div>
+        </article>
+        <article class="why-card n">
+          <div class="sound-row"><span class="sound-circle">ㄴ</span><span class="same-place">same tongue area</span><span class="sound-circle">ㄷ</span></div>
+          <h3>Both sounds use the tongue tip</h3>
+          <p>The tongue tip closes near the gum ridge for both. Again, listen for airflow and continuity.</p>
+          <div class="air-path">
+            <div class="air"><strong>ㄴ · nose</strong>Voice and air continue through the nose: nnn.</div>
+            <div class="air"><strong>ㄷ · mouth</strong>Air is held in the mouth, then released.</div>
+          </div>
+        </article>
+      </div>
+      <div class="variation-note">
+        <strong>It is not always the learner's mistake.</strong> At the beginning of a word or phrase, some Korean speakers produce ㅁ or ㄴ with a weaker, shorter nasal cue. This is called partial initial denasalization. The result can sound a little like a voiced ㅂ or ㄷ to learners, even though the Korean speaker is using ㅁ or ㄴ. It varies by speaker and context, so do not imitate a full ㅂ or ㄷ. Keep a light nasal hum connected to the vowel.
+      </div>
+    </div>
+
+    <div class="feel-test">
+      <article class="test-card"><b>1 · Feel the vibration</b><p>Touch the side of your nose lightly. Hold ㅁ or ㄴ before the vowel. You should feel nasal vibration; ㅂ and ㄷ cannot be held that way.</p></article>
+      <article class="test-card"><b>2 · Keep it connected</b><p>Practice mmm-아 → 마 and nnn-아 → 나. Shorten the hum gradually, but do not replace it with a strong release.</p></article>
+      <article class="test-card"><b>3 · Compare positions</b><p>Listen to initial 모두 / 나도, then medial 어머니 / 언니. The nasal cue may be easier to hear in the middle.</p></article>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span>Consonant Contrast Practice</h2>
+    <p class="lead">The tutor should mix the order. The student identifies the sound first, then produces it. Nonsense items are useful when meaning starts giving away the answer.</p>
+
+    <h3 class="practice-title">ㅁ ↔ ㅂ · Lips closed, different airflow</h3>
+    <div class="pair-grid">
+      <div class="pair"><div class="word"><span class="ko">마</span><span class="en">ma</span></div><div class="arrow">↔</div><div class="word"><span class="ko">바</span><span class="en">ba</span></div></div>
+      <div class="pair"><div class="word"><span class="ko">말</span><span class="en">word; horse</span></div><div class="arrow">↔</div><div class="word"><span class="ko">발</span><span class="en">foot</span></div></div>
+      <div class="pair"><div class="word"><span class="ko">물</span><span class="en">water</span></div><div class="arrow">↔</div><div class="word"><span class="ko">불</span><span class="en">fire</span></div></div>
+      <div class="pair"><div class="word"><span class="ko">모자</span><span class="en">hat</span></div><div class="arrow">↔</div><div class="word"><span class="ko">보자</span><span class="en">let's see</span></div></div>
+    </div>
+
+    <h3 class="practice-title">ㄴ ↔ ㄷ · Tongue tip closed, different airflow</h3>
+    <div class="pair-grid">
+      <div class="pair"><div class="word"><span class="ko">나</span><span class="en">I; me</span></div><div class="arrow">↔</div><div class="word"><span class="ko">다</span><span class="en">all</span></div></div>
+      <div class="pair"><div class="word"><span class="ko">너</span><span class="en">you</span></div><div class="arrow">↔</div><div class="word"><span class="ko">더</span><span class="en">more</span></div></div>
+      <div class="pair"><div class="word"><span class="ko">노래</span><span class="en">song</span></div><div class="arrow">↔</div><div class="word"><span class="ko">도래</span><span class="en">arrival</span></div></div>
+      <div class="pair"><div class="word"><span class="ko">누구</span><span class="en">who</span></div><div class="arrow">↔</div><div class="word"><span class="ko">두구</span><span class="en">non-word</span></div></div>
+    </div>
+
+    <div class="tutor-note">
+      <strong>💡 Tutor Note</strong>
+      If a student says “I heard ㅂ” or “I heard ㄷ,” do not simply say they heard wrong. Replay or model the word in a short phrase, then exaggerate the nasal continuation once. Return immediately to a natural version so the student learns the range of real Korean speech.
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span>The Five-Minute Routine</h2>
+    <p class="lead">Use one contrast per day. Accuracy comes from short, repeated listening-and-speaking cycles.</p>
+    <div class="routine">
+      <article class="step"><span class="step-num">1</span><b>Watch</b><p>Make the two mouth shapes silently in a mirror.</p></article>
+      <article class="step"><span class="step-num">2</span><b>Listen</b><p>Tutor says ten mixed items. Student points left or right.</p></article>
+      <article class="step"><span class="step-num">3</span><b>Say</b><p>Student says five pairs slowly, then five in random order.</p></article>
+      <article class="step"><span class="step-num">4</span><b>Use</b><p>Choose two real words and put each into a short sentence.</p></article>
+    </div>
+  </section>
+
+  <footer>
+    Created for Hanim's Korean lessons · Korean pronunciation contrast guide 💛
+  </footer>
+</div>
+</body>
+</html>
