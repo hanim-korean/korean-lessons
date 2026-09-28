@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="한글 기본 자음 14개의 이름과 음절 속 자음의 자리를 배우는 자료입니다.">
+  <title>한글 자음의 이름 · Allbarun Korean</title>
+  <style>
+    :root{--paper:#fff;--field:#f4f7f6;--ink:#162924;--muted:#46635a;--green:#235c4b;--line:#cadbd4;--soft:#e7f0ec;--focus:#a45719}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Pretendard,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.58;word-break:keep-all}
+    ::selection{background:#b9dccb;color:var(--ink)}
+    a{color:inherit;text-underline-offset:.22em}
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+    .skip{position:absolute;top:-5rem;left:1rem;padding:.5rem .8rem;background:var(--ink);color:#fff;z-index:10}.skip:focus{top:1rem}
+    .wrap{width:calc(100% - 3rem);margin-inline:auto}
+    header{border-bottom:1px solid var(--line)}
+    .top{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .brand{font-size:1.12rem;font-weight:750;letter-spacing:-.025em;text-decoration:none}
+    .top span{color:var(--muted);font-size:.82rem}
+    main{padding-bottom:5rem}
+    .hero{margin-inline:-1.5rem;padding:2.9rem 1.5rem 2.6rem;background:#e4f0e8;border-bottom:2px solid var(--green)}
+    h1,h2,h3,p{margin-top:0}
+    h1{margin-bottom:1rem;font-size:clamp(2.25rem,6vw,4.7rem);line-height:1.1;letter-spacing:-.04em;font-weight:700;white-space:nowrap}
+    h2{margin-bottom:.75rem;font-size:clamp(1.8rem,3.2vw,2.35rem);line-height:1.18;letter-spacing:-.035em}
+    h3{font-size:1.18rem;letter-spacing:-.02em}
+    .lead{font-size:clamp(1rem,1.35vw,1.1rem);color:var(--muted);margin-bottom:0}
+    .section-nav{display:flex;flex-wrap:wrap;align-items:center;gap:.2rem 1.8rem;border-bottom:1px solid var(--line)}
+    .section-nav a{display:inline-block;padding:.85rem 0;color:var(--green);font-size:.9rem;font-weight:650;text-decoration:none;border-bottom:2px solid transparent}
+    .section-nav a:hover,.section-nav a:focus-visible{border-bottom-color:var(--green)}
+    .section{padding:3.8rem 0;border-bottom:1px solid var(--line)}
+    .section-head{margin-bottom:1.5rem}
+    .section-head h2{color:var(--green)}
+    .copy{width:100%}
+    .copy p{margin-bottom:1rem}
+    .en{color:var(--muted);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6;word-break:normal}
+    .principle{padding:1.4rem 1rem;background:var(--field);border-top:2px solid var(--green)}
+    .principle strong{color:var(--green)}
+    .principle p:last-child{margin-bottom:0}
+    .note{font-size:.92rem;color:var(--muted)}
+    .slot-demo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--line);margin:1.5rem 0 2.2rem}
+    .slot-demo div{text-align:center;padding:1rem .5rem;border-right:1px solid var(--line)}
+    .slot-demo div:last-child{border-right:0}
+    .slot-demo b{display:block;font-size:2.5rem;line-height:1.2;font-weight:550}
+    .slot-demo span{display:block;font-size:.85rem;color:var(--muted)}
+    .name-form{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.25rem 0}
+    .syllable{border-top:1px solid var(--ink);padding-top:1rem}
+    .syllable-header{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem;margin-bottom:1rem}
+    .syllable-header b{font-size:3.1rem;line-height:1;font-weight:600;color:var(--green)}
+    .syllable-header span{color:var(--muted);font-size:.88rem}
+    .parts{display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem}
+    .part{min-width:0;background:var(--field);padding:.6rem .25rem;text-align:center}
+    .part.emphasis{background:var(--soft)}
+    .part b{display:block;font-size:1.8rem;line-height:1.1;font-weight:550}
+    .part span{display:block;margin-top:.4rem;color:var(--muted);font-size:.75rem;line-height:1.25}
+    .formula{margin:1.35rem 0 0;padding:1rem 0;border-top:1px solid var(--line);font-size:1.08rem;font-weight:600}
+    .formula .en{display:block;font-size:.9rem;font-weight:400;margin-top:.3rem}
+    .list-intro{margin-bottom:1.3rem}
+    .alphabet{display:grid;grid-template-columns:1fr 1fr;column-gap:2rem;border-top:1px solid var(--ink)}
+    .letter{display:grid;grid-template-columns:3.2rem 1fr;align-items:center;gap:.8rem;min-height:3.9rem;border-bottom:1px solid var(--line)}
+    .letter b{font-size:1.8rem;font-weight:550;line-height:1}
+    .letter span{font-size:1.1rem}
+    .letter--different b,.letter--different span{font-weight:750;color:var(--green)}
+    .different{display:flex;gap:1.3rem;flex-wrap:wrap;margin:1.2rem 0 1.1rem}
+    .different span{font-size:1.4rem;font-weight:600;color:var(--green)}
+    details{margin-top:1.5rem;padding:1rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    summary{cursor:pointer;font-weight:600;color:var(--green)}
+    details p{margin:1rem 0 0}
+    .vowels{font-size:1.22rem;font-weight:600;letter-spacing:.015em;color:var(--green);margin:1.2rem 0}
+    .quiz{list-style:none;padding:0;margin:1.5rem 0 0;border-top:1px solid var(--ink)}
+    .quiz li{padding:1.1rem 0;border-bottom:1px solid var(--line)}
+    .quiz fieldset{border:0;margin:0;padding:0}
+    .quiz legend{font-size:1.08rem;font-weight:650;margin-bottom:.5rem;padding:0}
+    .choices{display:flex;flex-wrap:wrap;gap:.6rem;color:var(--muted)}
+    .choices label{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-width:5.8rem;padding:.3rem .7rem;border:1px solid var(--line);cursor:pointer}
+    .choices label:has(input:checked){border-color:var(--green);background:var(--soft);color:var(--ink)}
+    .choices input{accent-color:var(--green)}
+    .quiz-action{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:1.2rem}
+    .quiz-action button{border:1px solid var(--green);background:var(--green);color:#fff;padding:.55rem 1rem;font:inherit;font-weight:650;cursor:pointer}
+    .quiz-action button:hover{background:var(--ink)}
+    .quiz-result{margin:0;color:var(--green);font-weight:600}
+    .answer-key{margin:.9rem 0 0;padding-left:1.4rem}
+    .answer-key li{padding:.2rem 0}
+    .closing{margin-top:3.8rem;padding:2rem 0;border-top:2px solid var(--green)}
+    .closing h2{color:var(--green);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:-.035em}
+    .closing p{margin-bottom:.6rem}
+    .closing strong{color:var(--green)}
+    footer{border-top:1px solid var(--line);padding:1.3rem 0 2rem;color:var(--muted);font-size:.83rem}
+    @media(max-width:760px){.wrap{width:calc(100% - 2rem)}.hero{margin-inline:-1rem;padding:2.5rem 1rem 2.2rem}.section{padding:2.8rem 0}.alphabet{column-gap:1rem}}
+    @media(max-width:520px){.top{align-items:flex-start;justify-content:center;flex-direction:column;gap:.1rem;padding:.65rem 0}.top span{font-size:.75rem}h1{font-size:clamp(1.8rem,8vw,2.25rem)}.name-form{grid-template-columns:1fr}.alphabet{grid-template-columns:1fr}.parts{gap:.25rem}.part span{font-size:.73rem}.different{gap:.7rem 1rem}.different span{font-size:1.2rem}}
+    @media print{html{scroll-behavior:auto}body{color:#000;background:#fff;font-size:10pt}.wrap{width:100%;max-width:none}.top{min-height:0;padding:0 0 .7rem}.hero{margin:0;padding:1.4rem 0 1rem;background:#fff}h1{font-size:31pt}h2{font-size:17pt}.section-nav{display:none}.section{padding:1.3rem 0;break-inside:avoid}.section-head{margin-bottom:.5rem}.principle,.part{background:#fff!important}.principle{border:1px solid #888}.alphabet{column-gap:1rem}.letter{min-height:2.4rem}details:not([open])>*:not(summary){display:block}details summary{list-style:none}details summary::marker{display:none}footer{padding:.7rem 0}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+  <header><div class="wrap top"><a class="brand" href="#main">Allbarun Korean</a><span>by Hanim · 하님 만듦</span></div></header>
+  <main class="wrap" id="main">
+    <section class="hero" aria-labelledby="title">
+      <div><h1 id="title">한글 자음의 이름</h1><p class="lead">한글 자음에는 각각 이름이 있습니다. 이름을 알면 자음을 가리키고 발음을 이야기할 때 도움이 됩니다.</p></div>
+    </section>
+
+    <nav class="section-nav" aria-label="내용 바로가기"><a href="#why">이름과 소리</a><a href="#pattern">이름의 짜임</a><a href="#names">기본 자음 14개</a><a href="#quiz">미니 퀴즈</a></nav>
+
+    <section class="section" id="why" aria-labelledby="sound-title">
+      <div class="section-head"><h2 id="sound-title">이름과 소리</h2></div>
+      <div class="copy principle">
+        <p><strong>자음의 이름과 실제 단어 속 소리는 같지 않습니다.</strong></p><p>영어의 H는 이름이 ‘aitch’이지만, 단어에서는 ‘aitch’라고 읽지 않습니다.</p>
+        <p class="en" lang="en"><strong>A consonant’s name is different from the sound it makes in a word.</strong> It is similar to the English letter H: its name is “aitch,” but you do not say “aitch” every time you read H in a word.</p>
+      </div>
+    </section>
+
+    <section class="section" id="pattern" aria-labelledby="position-title">
+      <div class="section-head"><h2 id="position-title">자음 이름의 짜임</h2></div>
+      <div class="copy">
+        <p>한 음절에서 첫 자음은 <strong>초성</strong>, 모음은 <strong>중성</strong>, 끝 자음은 <strong>종성(받침)</strong>입니다. 아래의 ‘난’에는 ㄴ이 두 번 들어 있습니다.</p>
+        <p class="en" lang="en">In one syllable, the first consonant is the initial, the vowel is the medial, and the final consonant is the final. The syllable 난 contains ㄴ twice.</p>
+        <div class="slot-demo" aria-label="난: 초성 ㄴ, 중성 ㅏ, 종성 ㄴ"><div><b>ㄴ</b><span>초성 · initial</span></div><div><b>ㅏ</b><span>중성 · vowel</span></div><div><b>ㄴ</b><span>종성 · final</span></div></div>
+        <h3>ㄴ의 이름은 ‘니은’입니다.</h3>
+        <p class="en" lang="en">The name of ㄴ is 니은. It has two syllables: 니 and 은.</p>
+        <div class="name-form" aria-label="니은의 음절 구조">
+          <div class="syllable"><div class="syllable-header"><b>니</b><span>첫째 음절 · first syllable</span></div><div class="parts"><div class="part emphasis"><b>ㄴ</b><span>초성<br>initial</span></div><div class="part"><b>ㅣ</b><span>중성<br>vowel</span></div><div class="part"><b>—</b><span>종성 없음<br>no final</span></div></div></div>
+          <div class="syllable"><div class="syllable-header"><b>은</b><span>둘째 음절 · second syllable</span></div><div class="parts"><div class="part"><b>ㅇ</b><span>초성 자리<br>silent initial</span></div><div class="part"><b>ㅡ</b><span>중성<br>vowel</span></div><div class="part emphasis"><b>ㄴ</b><span>종성<br>final</span></div></div></div>
+        </div>
+        <p class="formula">ㄴ + ㅣ　/　ㅇ + ㅡ + ㄴ <span class="en" lang="en">The letter ㄴ appears as the initial of 니 and the final of 은.</span></p>
+        <p class="note">이름에서 자음이 놓인 자리를 볼 수 있습니다. 단, ‘이응’의 첫 ㅇ은 초성 자리에 있지만 소리가 나지 않습니다. 실제 자음 소리도 단어와 주변 소리에 따라 달라질 수 있습니다.</p>
+        <p class="note en" lang="en">The name shows where the letter appears. In 이응, the first ㅇ fills the initial position but is silent. A consonant’s sound in a word can also change with its position and neighboring sounds.</p>
+      </div>
+    </section>
+
+    <section class="section" id="names" aria-labelledby="all-title">
+      <div class="section-head"><h2 id="all-title">기본 자음 14개</h2></div>
+      <div><p class="list-intro">자음의 모양과 이름을 함께 보세요. ㄱ·ㄷ·ㅅ은 이름의 끝부분이 조금 달라서 아래에 따로 설명했습니다.</p>
+        <div class="alphabet" role="list" aria-label="기본 자음과 이름">
+          <div class="letter letter--different" role="listitem"><b>ㄱ</b><span>기역</span></div><div class="letter" role="listitem"><b>ㄴ</b><span>니은</span></div>
+          <div class="letter letter--different" role="listitem"><b>ㄷ</b><span>디귿</span></div><div class="letter" role="listitem"><b>ㄹ</b><span>리을</span></div>
+          <div class="letter" role="listitem"><b>ㅁ</b><span>미음</span></div><div class="letter" role="listitem"><b>ㅂ</b><span>비읍</span></div>
+          <div class="letter letter--different" role="listitem"><b>ㅅ</b><span>시옷</span></div><div class="letter" role="listitem"><b>ㅇ</b><span>이응</span></div>
+          <div class="letter" role="listitem"><b>ㅈ</b><span>지읒</span></div><div class="letter" role="listitem"><b>ㅊ</b><span>치읓</span></div>
+          <div class="letter" role="listitem"><b>ㅋ</b><span>키읔</span></div><div class="letter" role="listitem"><b>ㅌ</b><span>티읕</span></div>
+          <div class="letter" role="listitem"><b>ㅍ</b><span>피읖</span></div><div class="letter" role="listitem"><b>ㅎ</b><span>히읗</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="different-title">
+      <div class="section-head"><h2 id="different-title">이름의 형태가 다른 세 자음</h2></div>
+      <div class="copy"><p>대부분의 자음 이름은 ‘자음 + ㅣ / ㅇ + ㅡ + 자음’의 형태로 볼 수 있습니다. ㄱ, ㄷ, ㅅ의 이름은 끝부분의 형태가 다릅니다.</p>
+        <p class="en" lang="en">Most consonant names follow the pattern shown above. The names of ㄱ, ㄷ, and ㅅ have different endings.</p>
+        <div class="different" aria-label="ㄱ 기역, ㄷ 디귿, ㅅ 시옷"><span>ㄱ 기역</span><span>ㄷ 디귿</span><span>ㅅ 시옷</span></div>
+        <p class="note">‘기역’의 ‘역’, ‘디귿’의 ‘귿’, ‘시옷’의 ‘옷’은 각각 한 음절입니다. ‘역’과 ‘옷’의 초성 ㅇ은 소리가 나지 않습니다.</p>
+        <details><summary>더 알아보기 · Why are these names different?</summary><p>《한글 맞춤법》 제2장 제4항의 해설에 따르면, 예전에 자음 이름을 한자로 적을 때 ‘윽·읃·읏’에 맞는 한자음이 없었습니다. 그래서 ㄱ·ㄷ·ㅅ의 이름은 기역·디귿·시옷으로 정해졌습니다.</p><p class="en" lang="en">The explanation in the Korean spelling rules says that earlier writers used Chinese characters to record letter names. They could not find matching readings for 윽, 읃, and 읏, which is why these three names took different forms.</p></details>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="vowel-title">
+      <div class="section-head"><h2 id="vowel-title">모음은 간단합니다</h2></div>
+      <div class="copy"><p>모음은 자음처럼 별도의 긴 이름을 외울 부담이 적습니다. 예를 들어 ㅏ는 ‘아’, ㅓ는 ‘어’, ㅣ는 ‘이’라고 부릅니다.</p><p class="vowels">ㅏ 아　 ·　 ㅓ 어　 ·　 ㅣ 이</p><p class="en" lang="en">Vowel names are more direct. For example, ㅏ is called 아, ㅓ is called 어, and ㅣ is called 이.</p></div>
+    </section>
+
+    <section class="section" id="quiz" aria-labelledby="quiz-title">
+      <div class="section-head"><h2 id="quiz-title">미니 퀴즈</h2></div>
+      <div class="copy"><p>자음의 이름을 골라 보세요. 정답은 아래에서 확인할 수 있습니다.</p>
+        <form id="quiz-form"><ol class="quiz">
+          <li><fieldset><legend>1. ㄴ의 이름은 무엇인가요?</legend><div class="choices"><label><input type="radio" name="q1" value="1">니은</label><label><input type="radio" name="q1" value="0">엔</label></div></fieldset></li>
+          <li><fieldset><legend>2. ㅅ의 이름은 무엇인가요?</legend><div class="choices"><label><input type="radio" name="q2" value="1">시옷</label><label><input type="radio" name="q2" value="0">에스</label></div></fieldset></li>
+          <li><fieldset><legend>3. ㅎ의 이름은 무엇인가요?</legend><div class="choices"><label><input type="radio" name="q3" value="1">히읗</label><label><input type="radio" name="q3" value="0">에이치</label></div></fieldset></li>
+          <li><fieldset><legend>4. ㅅ을 영어로 “S sound”라고 불렀다면, 한글 자음 이름으로는 무엇인가요?</legend><div class="choices"><label><input type="radio" name="q4" value="1">시옷</label><label><input type="radio" name="q4" value="0">에스</label></div></fieldset></li>
+        </ol><div class="quiz-action"><button type="submit">정답 확인</button><p id="quiz-result" class="quiz-result" aria-live="polite"></p></div></form>
+        <details><summary>정답 보기 · Show answers</summary><ol class="answer-key"><li>ㄴ은 니은입니다.</li><li>ㅅ은 시옷입니다.</li><li>ㅎ은 히읗입니다.</li><li>ㅅ의 이름은 시옷입니다.</li></ol></details>
+      </div>
+    </section>
+
+    <div class="closing"><h2 lang="en">Hear Hangul as Hangul.</h2><p>처음에는 로마자가 도움이 될 수 있습니다. 한글에 익숙해지면 글자와 소리를 직접 연결해 보세요.</p><p class="en" lang="en">Romanization helps at first. Then read Hangul directly.</p></div>
+  </main>
+  <footer><div class="wrap">Allbarun Korean · by Hanim · 하님 만듦</div></footer>
+  <script>
+    const quizForm = document.getElementById('quiz-form');
+    quizForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const answers = ['q1', 'q2', 'q3', 'q4'].map((name) => quizForm.querySelector(`input[name="${name}"]:checked`));
+      const result = document.getElementById('quiz-result');
+      if (answers.some((answer) => !answer)) {
+        result.textContent = '네 문제에 모두 답을 고른 뒤 확인해 보세요.';
+        return;
+      }
+      const score = answers.filter((answer) => answer.value === '1').length;
+      result.textContent = `${score}개를 맞혔습니다. 아래에서 정답을 확인해 보세요.`;
+    });
+    quizForm.addEventListener('change', () => {
+      document.getElementById('quiz-result').textContent = '';
+    });
+  </script>
+</body>
+</html>
