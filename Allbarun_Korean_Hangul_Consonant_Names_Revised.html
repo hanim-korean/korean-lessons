@@ -21,7 +21,7 @@
     .brand{font-size:1.12rem;font-weight:750;letter-spacing:-.025em;text-decoration:none}
     .top span{color:var(--muted);font-size:.82rem}
     main{padding-bottom:5rem}
-    .hero{margin-inline:-1.5rem;padding:2.9rem 1.5rem 2.6rem;background:#e4f0e8;border-bottom:2px solid var(--green)}
+    .hero{padding:2.9rem 0 1rem;border-bottom:1px solid var(--line)}
     h1,h2,h3,p{margin-top:0}
     h1{margin-bottom:1rem;font-size:clamp(2.25rem,6vw,4.7rem);line-height:1.1;letter-spacing:-.04em;font-weight:700;white-space:nowrap}
     h2{margin-bottom:.75rem;font-size:clamp(1.8rem,3.2vw,2.35rem);line-height:1.18;letter-spacing:-.035em}
@@ -38,6 +38,7 @@
     .en{color:var(--muted);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6;word-break:normal}
     .principle{padding:1.4rem 1rem;background:var(--field);border-top:2px solid var(--green)}
     .principle strong{color:var(--green)}
+    .principle p:first-child{margin-bottom:.25rem}
     .principle p:last-child{margin-bottom:0}
     .note{font-size:.92rem;color:var(--muted)}
     .slot-demo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--line);margin:1.5rem 0 2.2rem}
@@ -88,7 +89,7 @@
     .closing p{margin-bottom:.6rem}
     .closing strong{color:var(--green)}
     footer{border-top:1px solid var(--line);padding:1.3rem 0 2rem;color:var(--muted);font-size:.83rem}
-    @media(max-width:760px){.wrap{width:calc(100% - 2rem)}.hero{margin-inline:-1rem;padding:2.5rem 1rem 2.2rem}.section{padding:2.8rem 0}.alphabet{column-gap:1rem}}
+    @media(max-width:760px){.wrap{width:calc(100% - 2rem)}.hero{padding:2.5rem 0 .8rem}.section{padding:2.8rem 0}.alphabet{column-gap:1rem}}
     @media(max-width:520px){.top{align-items:flex-start;justify-content:center;flex-direction:column;gap:.1rem;padding:.65rem 0}.top span{font-size:.75rem}h1{font-size:clamp(1.8rem,8vw,2.25rem)}.name-form{grid-template-columns:1fr}.alphabet{grid-template-columns:1fr}.parts{gap:.25rem}.part span{font-size:.73rem}.different{gap:.7rem 1rem}.different span{font-size:1.2rem}}
     @media print{html{scroll-behavior:auto}body{color:#000;background:#fff;font-size:10pt}.wrap{width:100%;max-width:none}.top{min-height:0;padding:0 0 .7rem}.hero{margin:0;padding:1.4rem 0 1rem;background:#fff}h1{font-size:31pt}h2{font-size:17pt}.section-nav{display:none}.section{padding:1.3rem 0;break-inside:avoid}.section-head{margin-bottom:.5rem}.principle,.part{background:#fff!important}.principle{border:1px solid #888}.alphabet{column-gap:1rem}.letter{min-height:2.4rem}details:not([open])>*:not(summary){display:block}details summary{list-style:none}details summary::marker{display:none}footer{padding:.7rem 0}}
   </style>
