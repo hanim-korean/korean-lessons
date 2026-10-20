@@ -83,7 +83,7 @@
         "support_languages": {
           "type": "array",
           "uniqueItems": true,
-          "items": { "enum": ["ko", "en", "es", "fr", "other"] }
+          "items": { "enum": ["ko", "en", "es", "fr", "pl", "other"] }
         },
         "series": { "type": "string" },
         "source_path": { "type": "string", "minLength": 1 },
