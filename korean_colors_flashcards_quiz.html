@@ -420,7 +420,13 @@
       letter-spacing: -.04em;
       white-space: nowrap;
     }
-    .quiz-swatch { height: 170px; margin: 0 auto 24px; border: 1px solid rgba(32, 52, 38, .2); }
+    .quiz-swatch {
+      width: min(100%, 288px);
+      height: auto;
+      aspect-ratio: 1;
+      margin: 0 auto 24px;
+      border: 1px solid rgba(32, 52, 38, .2);
+    }
     .options { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
     .option-button {
       min-height: 56px;
