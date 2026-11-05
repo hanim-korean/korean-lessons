@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "lesson": "잘 하고 있어",
+  "levels": [
+    "beginner",
+    "mid"
+  ],
+  "files": [
+    {
+      "path": "assets/growup-student-BIbgjXOW.css",
+      "bytes": 82442,
+      "sha256": "f5e454500b77068241df58dde0360eafbc7dd34eaeaaa5248feef3d4899dcd30"
+    },
+    {
+      "path": "assets/growup-student-CHrSbVjq.js",
+      "bytes": 233684,
+      "sha256": "464bfd475fd1d7fe13bf8dbdf4161b09a4169f50d0b7c8d5c88287c430037fb5"
+    },
+    {
+      "path": "brand/studio-mark.svg",
+      "bytes": 293,
+      "sha256": "954465f24381ee705f96b94004526eef0f1358017f325e6ea3466c43e4fabab8"
+    },
+    {
+      "path": "index.html",
+      "bytes": 560,
+      "sha256": "4aa8c3a7210e9cb0cb16e1561e28a8a5daa899fa387e5f9702d91fe532673d70"
+    }
+  ]
+}
