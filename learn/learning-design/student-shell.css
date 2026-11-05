@@ -1,0 +1,31 @@
+/* Student pages retain the approved learning design without the tutor workspace. */
+html { background: #fdfefd; }
+body.learning-material.student-library-page,
+body.learning-material.student-lesson { margin: 0; padding: 0; background: #fdfefd; color: #263c30; }
+.student-brand-header { width: 100%; background: #304027; color: #f8faf4; }
+.student-brand-inner { max-width: 1168px; margin-inline: auto; padding: 12px 24px; }
+.student-brand { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: #f8faf4; text-decoration: none; font-size: 19px; font-weight: 600; line-height: 1.4; }
+.student-brand img { display: block; flex: 0 0 28px; filter: brightness(0) invert(1); }
+.student-brand:focus-visible { outline: 2px solid #e4edcf; outline-offset: 4px; border-radius: 4px; }
+.student-library-page .student-library,
+.student-lesson .wrap.learning-body { width: 100%; max-width: 1168px; margin-inline: auto; padding: 32px 24px 56px; }
+.student-library h1 { margin: 0 0 28px; color: #263c30; font-size: 24px; font-weight: 600; line-height: 1.4; letter-spacing: -.025em; }
+.student-story-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.student-story-card { display: flex; flex-direction: column; gap: 20px; min-width: 0; padding: 24px; border: 1px solid #dfe6db; border-radius: 14px; background: #fff; color: #263c30; text-decoration: none; }
+.student-story-card:hover { padding: 24px; border-color: #c5d0bd; background: #f3f7ed; }
+.student-story-card:focus-visible { padding: 24px; outline: 2px solid #526c3d; outline-offset: 3px; }
+.student-story-card img { display: block; width: 100%; height: auto; aspect-ratio: 1680 / 944; object-fit: contain; border-radius: 8px; }
+.student-story-card h2 { margin: 0 0 8px; font-size: 22px; font-weight: 600; line-height: 1.4; }
+.student-story-card p { margin: 0; font-size: 17px; line-height: 1.65; }
+.student-story-card .student-story-level { margin-bottom: 8px; color: #52634f; font-size: 15px; }
+@media(max-width: 720px) {
+  .student-brand-header { background: #304027; color: #f8faf4; }
+  .student-brand-inner { padding: 12px 20px; }
+  .student-library-page .student-library,
+  .student-lesson .wrap.learning-body { padding: 24px 20px 40px; }
+  .student-library h1 { font-size: 22px; margin-bottom: 24px; }
+  .student-story-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .student-story-card,
+  .student-story-card:hover,
+  .student-story-card:focus-visible { padding: 20px; }
+}

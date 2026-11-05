@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#304027">
+<title>호랑이와 곶감 · Allbarun Korean</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--ink:#202327;--muted:#60656e;--line:#dfe2e7;--blue:#214dcc;--pale:#eef3ff;--paper:#f7f8fa;--warm:#fff6ea;--radius:14px;--font:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.65;word-break:keep-all}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* top bar */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0;border-bottom:1px solid var(--line)}
+.brand{font-weight:800;letter-spacing:-.01em}
+.brand small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:7px;padding:7px 12px;font-size:14px}
+.btn[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* hero */
+.hero{padding:44px 0 28px}
+.chip{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--blue);background:var(--pale);border-radius:999px;padding:4px 12px;margin-bottom:14px}
+h1{font-size:clamp(34px,5vw,56px);line-height:1.15;margin:0 0 10px;letter-spacing:-.02em}
+.sub{color:var(--muted);margin:0;font-size:19px}
+.sub .en{font-size:16px}
+
+/* level + chapter tabs */
+.label{font-size:13px;font-weight:700;color:var(--muted);margin:22px 0 8px}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.level-button{text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px 14px;color:var(--ink)}
+.level-button b{display:block;font-size:18px}
+.level-button span{display:block;font-size:13px;color:var(--muted);line-height:1.45;margin-top:2px}
+.level-button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.level-button[aria-selected=true] span{color:#c9ccd2}
+.chapters{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.scene-button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 8px;font-size:14px;color:var(--ink);line-height:1.35}
+.scene-button small{display:block;color:var(--muted);font-size:12px}
+.scene-button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.scene-button[aria-selected=true] small{color:#c9ccd2}
+
+/* lesson grid */
+.lesson{display:grid;grid-template-columns:1.4fr .8fr;gap:22px;margin:26px 0 40px;align-items:start}
+.conversation{border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.scene-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}
+.scene-head h2{margin:0;font-size:26px;letter-spacing:-.01em}
+.scene-head p{margin:2px 0 0;color:var(--muted);font-size:15px}
+.line{margin:0 0 14px}
+.narr{padding:2px 0}
+.ko{display:block}
+.en{display:block;color:var(--muted);font-size:15px;line-height:1.5}
+body.hide-en .en{display:none}
+.bubble{box-sizing:border-box;width:100%;max-width:100%;border-radius:12px;padding:12px 14px}
+.who{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bottom:2px}
+.say .bubble{background:var(--paper)}
+.say.me{display:flex;justify-content:flex-end}
+.say.me .bubble{background:var(--pale);color:#17377f}
+.think .bubble{background:var(--warm);border:1px dashed #e7c79a;font-style:normal}
+.think .who::after{content:" · 속마음";font-weight:500}
+.play{border:0;background:none;color:var(--blue);font-size:13px;padding:2px 0;margin-top:2px}
+.play:hover{text-decoration:underline}
+
+/* sidebar */
+.side{display:grid;gap:16px}
+.resource,.note{border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.resource h3,.note h3,.practice h3{margin:0 0 10px;font-size:18px}
+.words{width:100%;border-collapse:collapse;font-size:15px}
+.words td{padding:7px 4px;border-top:1px solid var(--line);vertical-align:top}
+.words tr:first-child td{border-top:0}
+.words td:first-child{font-weight:700;white-space:nowrap;padding-right:12px}
+.words td:last-child{color:var(--muted)}
+.gram{border-top:1px solid var(--line);padding:12px 0}
+.gram:first-of-type{border-top:0;padding-top:0}
+.gram b{color:var(--blue);font-size:17px}
+.gram p{margin:4px 0;font-size:15px}
+.gram .ex{background:var(--paper);border-radius:8px;padding:8px 10px;font-size:15px;margin-top:6px}
+.practice{background:var(--paper);border-radius:var(--radius);padding:18px}
+.reveal{display:block;width:100%;text-align:left;margin-top:10px;background:var(--pale);border:1px dashed #b0bfdf;border-radius:12px;padding:10px 12px;color:#17377f;font-size:15px}
+.answer{display:none;margin-top:10px;font-size:15px}
+.answer.open{display:block}
+
+/* overview */
+.overview{border:1px solid var(--line);border-radius:var(--radius);margin:0 0 48px}
+.overview summary{padding:16px 20px;font-weight:700;cursor:pointer}
+.overview .inner{padding:0 20px 20px;overflow-x:auto}
+.ov{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
+.ov th,.ov td{border-top:1px solid var(--line);padding:10px 8px;text-align:left;vertical-align:top}
+.ov th{font-size:13px;color:var(--muted)}
+.ov td:first-child{font-weight:700;white-space:nowrap}
+
+footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:14px}
+
+@media (max-width:900px){
+  .chapters{grid-template-columns:repeat(3,1fr)}
+  .lesson{grid-template-columns:1fr}
+}
+@media (max-width:580px){
+  body{font-size:16px}
+  .wrap{padding:0 16px}
+  .levels{grid-template-columns:1fr}
+  .conversation{padding:18px}
+  .bubble{max-width:100%}
+  .top{flex-direction:column;align-items:flex-start}
+}
+@media print{
+  .top .tools,.levels,.chapters,.label,.play,.reveal,.overview{display:none!important}
+  h1{font-size:28px}
+  .hero{padding:12px 0}
+  .lesson{grid-template-columns:1fr;margin:10px 0}
+  .answer{display:block}
+}
+
+:root{--ink:#263c30;--muted:#52634f;--line:#dfe6db;--blue:#526c3d;--pale:#edf3e3;--paper:#fdfefd;--warm:#f3f7ed}body{background:#fdfefd}.top{background:#fdfefd}button:focus-visible{outline:2px solid #526c3d;outline-offset:3px}
+
+.wrap{max-width:none;padding:0}h1{font-size:30px;font-weight:600;line-height:1.35;letter-spacing:-.025em;color:#263c30}@media(max-width:720px){h1{font-size:26px}}
+
+.reading-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0;margin:0 0 12px;border:0}
+.reading-title{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;color:#72806c}.reading-title a{font-size:15px;color:#52634f;text-decoration:none}.reading-title a:hover{text-decoration:underline}.reading-title h1{margin:0;font-size:30px;font-weight:600;line-height:1.35;letter-spacing:-.025em}
+.reading-actions{display:flex;gap:8px;flex-shrink:0}.reading-actions .btn{min-height:44px;padding:8px 12px;background:transparent;border:1px solid #c5d0bd;border-radius:6px;font-size:14px;color:#263c30}
+.reading-level-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 24px}.reading-level-row p{margin:0;font-size:14px;color:#52634f}.reading-level-row select{width:144px;min-height:44px;padding:8px 12px;border:1px solid #c5d0bd;border-radius:6px;background:#fff;color:#263c30;font:inherit;font-size:16px;flex-shrink:0}
+:focus-visible{outline:2px solid #526c3d;outline-offset:3px}.chapters{margin-top:8px}
+@media(max-width:720px){.reading-heading{flex-wrap:wrap;gap:12px}.reading-title h1{font-size:26px}.reading-title{gap:8px}.reading-actions{width:100%;justify-content:flex-end}.reading-level-row{align-items:flex-start;margin-bottom:20px}.reading-level-row p{font-size:13px}.reading-level-row select{width:112px}.wrap{padding:0}}
+@media print{.reading-actions,.reading-level-row select,.reading-title>a,.reading-title>span{display:none}.reading-heading{display:block}}
+
+.story-scene-image{display:block;width:100%;height:auto;aspect-ratio:1680/944;object-fit:contain;border-radius:8px;margin:0 0 22px}
+@media print{.story-scene-image{max-height:240px;break-inside:avoid}}
+
+.reading-level-row select{appearance:none;-webkit-appearance:none;box-sizing:border-box;padding:10px 42px 10px 16px;background-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23263c30' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;background-size:16px 16px;line-height:1.5;}
+.reading-level-row select:focus-visible{outline:2px solid #526c3d;outline-offset:-3px}
+.reading-title{align-items:center;column-gap:12px;row-gap:4px}
+.reading-title :is(a,h1){font-size:24px;font-weight:600;line-height:1.4;letter-spacing:-.025em;color:#263c30;margin:0}
+.reading-title>span{font-size:22px;font-weight:400;line-height:1.4}
+@media(max-width:720px){.reading-title :is(a,h1){font-size:22px}.reading-title>span{font-size:20px}}
+
+/* Reading activities share the standalone lesson's content and the site's palette. */
+[hidden]{display:none!important}
+.lesson > *{min-width:0}
+.chapters{grid-template-columns:repeat(4,minmax(0,1fr))}
+.after{margin:26px 0 32px;padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--warm)}
+.after h2{margin:0 0 6px;font-size:24px}
+.after p{margin:6px 0}
+.after .reveal{max-width:460px;min-height:44px;background:#fff;color:var(--ink);border-color:#9bab8e}
+.after-activities{margin-top:18px;padding-top:12px;border-top:1px solid var(--line)}
+.after-activities h3{font-size:18px;margin:0 0 8px}
+.after-activities label{display:flex;align-items:center;gap:8px;padding:8px 0;min-height:44px;font-size:16px}
+.after-activities input{margin:0;accent-color:var(--blue)}
+.after-activities .feedback{font-size:15px;margin:8px 0 0}
+.scene-img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;margin:12px 0 18px;border-radius:8px}
+#gotgamInfo .scene-img{max-width:720px}
+.ch-nav{display:flex;justify-content:space-between;gap:12px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.ch-nav button{min-height:44px;border:1px solid #c5d0bd;background:transparent;border-radius:6px;padding:10px 14px;color:var(--ink);font-size:16px}
+@media(max-width:580px){.chapters{grid-template-columns:repeat(2,minmax(0,1fr))}.after{padding:16px}.ch-nav{flex-wrap:wrap}}
+@media print{.ch-nav,.reading-level-row,.reading-actions{display:none!important}.after{border:0;padding:0;background:#fff}.after .scene-img{max-height:240px;break-inside:avoid}}
+
+/* Dialogue shading and the original word/grammar annotation layer. */
+.say .bubble{background:#f5f7f0;border:1px solid #e1e6d9;box-shadow:var(--learning-shadow)}
+.think .bubble{background:#f6f7ee;border:1px dashed #b5c19e;box-shadow:var(--learning-shadow)}
+.kw{text-decoration:underline;text-decoration-color:#62803a;text-decoration-thickness:2px;text-underline-offset:4px;cursor:help}
+.kg{text-decoration:underline dashed;text-decoration-color:#958c47;text-decoration-thickness:2px;text-underline-offset:4px;cursor:help}
+body.no-ul .kw,body.no-ul .kg{text-decoration:none;cursor:auto}
+.ul-legend{display:flex;gap:8px 14px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin:0 0 18px}
+body.no-ul .ul-legend{display:none}
+.ul-legend .kw,.ul-legend .kg{color:var(--ink);cursor:auto}
+.ul-tip{position:absolute;z-index:20;max-width:280px;background:#33402a;color:#fff;font-size:14px;line-height:1.5;padding:8px 10px;border-radius:8px;box-shadow:0 4px 14px rgb(38 60 48 / 16%);pointer-events:none}
+.reading-actions{flex-wrap:wrap}
+@media print{.ul-legend,.ul-tip{display:none!important}.say .bubble,.think .bubble{box-shadow:none}}
+</style>
+<link rel="stylesheet" href="../../learning-design/learning-theme.css">
+<link rel="stylesheet" href="../../learning-design/student-shell.css">
+</head>
+<body class="learning-material learning-story student-lesson">
+<header class="student-brand-header"><div class="student-brand-inner"><a class="student-brand" href="../../index.html" aria-label="Allbarun Korean 이야기 목록"><img src="../../brand/studio-mark.svg" width="28" height="28" alt=""><span>Allbarun Korean</span></a></div></header>
+<div class="wrap learning-body">
+  <header class="learning-header">
+    <div class="learning-heading"><a class="learning-back" href="../index.html">이야기로 배우는 한국어</a><h1>호랑이와 곶감</h1></div>
+    <div class="learning-tools reading-actions"><button class="btn learning-button" id="toggleEn" aria-pressed="false">영어 숨기기</button><button class="btn learning-button" id="toggleUl" aria-pressed="false">밑줄 숨기기</button></div>
+  </header>
+  <div class="reading-level-row"><p id="levelDescription" aria-live="polite"></p><select id="levels" aria-label="수업 수준" aria-describedby="levelDescription"></select></div>
+  <p id="levelStyleNote" style="margin:-12px 0 20px;font-size:14px;color:var(--muted)">이야기를 들려주는 문장은 해요체예요. 등장인물의 말에는 반말도 나와요.</p>
+
+  <div class="label chapter-label">장면 · Chapter</div>
+  <label class="learning-mobile-scene-picker">장면 선택<select id="scenePicker" aria-label="장면 선택"></select></label>
+  <div class="chapters" role="tablist" id="chapters"></div>
+
+  <main class="lesson" id="lesson">
+    <section class="conversation" id="story"></section>
+    <aside class="side" id="side"></aside>
+  </main>
+
+  <section class="after" id="after" hidden>
+    <h2>다 읽고 나서</h2>
+    <div class="after-activities" id="afterActivities"></div>
+    <div class="after-activities" id="gotgamInfo">
+      <h3>곶감은 이렇게 만들어요</h3>
+      <p>호랑이는 끝까지 몰랐지만, 곶감은 무서운 녀석이 아니라 감을 말린 간식이에요.</p>
+      <span class="en">The tiger never found out, but gotgam isn't a scary creature. It's a dried persimmon snack.</span>
+      <img class="scene-img" src="images/gotgam.webp" alt="처마 밑에 매달아 말리는 곶감" width="1280" height="720" loading="lazy" decoding="async" onerror="this.remove()">
+      <p>가을에 감 껍질을 벗기고 줄에 매달아 말려요. 몇 주 동안 말리면 쫀득해지고 겉에 하얀 가루가 생겨요. 겨울에 먹는 달콤한 간식이에요.</p>
+      <span class="en">In autumn, people peel persimmons and hang them on strings to dry. After a few weeks they turn chewy, with a white powder on the outside. It's a sweet winter snack.</span>
+    </div>
+  </section>
+
+  <details class="overview" id="overview">
+    <summary>이 등급에서 배우는 단어와 문법 한눈에 보기</summary>
+    <div class="inner" id="ovInner"></div>
+  </details>
+
+  
+</div>
+
+<script>
+const LEVELS = [
+  {id:"b", name:"초급", desc:"짧은 문장, 해요체 현재형", en:"Beginner", rate:0.8},
+  {id:"i", name:"중급", desc:"해요체 과거형, 연결 어미, 의성어·의태어", en:"Intermediate", rate:0.9},
+  {id:"a", name:"고급", desc:"글말(-았다), 관용 표현, 고급 문법", en:"Advanced", rate:0.95}
+];
+// line: [type, who, ko, en]  type: n=narration, s=speech, t=thought
+const STORY = {
+b:[
+ {t:["배고픈 호랑이","The hungry tiger"],
+  lines:[
+   ["n","","옛날 옛날, 깊은 산속에 큰 호랑이가 살아요.","Long, long ago, a big tiger lives deep in the mountains."],
+   ["n","","호랑이는 힘이 아주 세요.","The tiger is very strong."],
+   ["s","호랑이","어흥!","Roar!"],
+   ["n","","호랑이가 큰 소리를 내요. 동물들이 모두 도망가요.","The tiger makes a loud sound. All the animals run away."],
+   ["n","","호랑이는 웃어요.","The tiger laughs."],
+   ["s","호랑이","하하! 모두 나를 무서워해!","Ha ha! Everyone is afraid of me!"],
+   ["n","","어느 추운 겨울날이에요.","It's a cold winter day."],
+   ["n","","눈이 많이 와요. 호랑이는 배가 아주 고파요.","It snows a lot. The tiger is very hungry."],
+   ["n","","그런데 산에는 먹을 것이 없어요.","But there is nothing to eat on the mountain."],
+   ["s","호랑이","아이고, 배고파! 마을에 가자!","Oh, I'm hungry! Let's go to the village!"],
+   ["n","","호랑이는 산 아래 마을로 내려가요.","The tiger goes down to the village below the mountain."]],
+  words:[["산속","deep in the mountains"],["힘이 세다","to be strong"],["소리를 내다","to make a sound"],["도망가다","to run away"],["웃다","to laugh"],["겨울날","winter day"],["배가 고프다","to be hungry"],["먹을 것","something to eat"],["마을","village"],["내려가다","to go down"]],
+  core:["-아요/어요 (현재형)","지금 일어나는 일을 말해요. 이 이야기는 눈앞에서 일어나는 것처럼 현재형으로 들려줘요.","present tense, polite style","호랑이는 웃어요. / 눈이 많이 와요."],
+  extra:[
+   ["세다 → 세요","‘힘이 세다’를 해요체로 말하면 ‘힘이 세요’가 돼요. ‘가세요’의 ‘-세요’와는 달라요.","Here, 세요 is the polite form of 세다 (to be strong), not the honorific ending -(으)세요.","호랑이는 힘이 아주 세요."],
+   ["N(으)로","가는 방향을 말해요. 받침이 없거나 ㄹ 받침이면 로, 그 밖의 받침이면 으로를 써요.","toward","마을로 내려가요. / 산으로 가요."]],
+  q:["호랑이는 어디로 가요? 왜요?","마을로 내려가요. 배가 아주 고파요. 산에는 먹을 것이 없어요."]},
+ {t:["우는 아기","The crying baby"],
+  lines:[
+   ["n","","마을 끝에 집이 하나 있어요.","At the end of the village, there is a house."],
+   ["n","","집 옆에는 외양간이 있어요. 외양간에는 큰 소가 한 마리 있어요.","Next to the house, there is a cowshed. In the cowshed, there is one big cow."],
+   ["t","호랑이","와! 큰 소야! 맛있겠다!","Wow! A big cow! It looks delicious!"],
+   ["n","","호랑이는 외양간으로 가요.","The tiger heads to the cowshed."],
+   ["n","","그때 집 안에서 아기가 울어요.","Just then, a baby cries inside the house."],
+   ["s","아기","으앙! 으앙!","Waah! Waah!"],
+   ["n","","엄마가 말해요.","The mother says,"],
+   ["s","엄마","아가, 울지 마! 호랑이가 온다!","Baby, don't cry! The tiger is coming!"],
+   ["n","","호랑이는 깜짝 놀라요.","The tiger is startled."],
+   ["t","호랑이","어? 내가 온 걸 어떻게 알았지?","Huh? How did she know I came?"],
+   ["n","","그런데 아기는 계속 울어요.","But the baby keeps crying."],
+   ["n","","엄마가 다시 말해요.","The mother speaks again."],
+   ["s","엄마","호랑이가 바로 밖에 있어! 그만 울어!","The tiger is right outside! Stop crying!"],
+   ["s","아기","으아앙!","Waaah!"],
+   ["n","","아기는 더 크게 울어요.","The baby cries even louder."],
+   ["n","","호랑이는 화가 나요.","The tiger gets angry."],
+   ["t","호랑이","뭐야? 저 아기는 나를 안 무서워해!","What? That baby isn't afraid of me!"]],
+  words:[["마을 끝","the end of the village"],["외양간","cowshed (a small barn for cows)"],["소","cow"],["한 마리","one (animal)"],["맛있겠다!","It looks delicious!"],["울다","to cry"],["깜짝 놀라다","to be startled"],["계속","continuously"],["그만","stop (doing)"],["화가 나다","to get angry"]],
+  core:["안 + 동사","동사 앞에 안을 넣어 하지 않는다는 뜻을 말해요. 대사에서는 반말로 나와요.","not ~","저 아기는 나를 안 무서워해!"],
+  extra:[
+   ["N이/가 있어요","무엇이 어디에 있는지 말해요.","there is N","외양간에는 큰 소가 한 마리 있어요."]],
+  q:["엄마가 \"울지 마!\"라고 해요. 아기는 울음을 그쳐요?","아니요. 아기는 계속 울어요. 더 크게 울어요."]},
+ {t:["곶감이 누구지?","Who is Gotgam?"],
+  lines:[
+   ["n","","엄마가 다시 말해요.","The mother speaks again."],
+   ["s","엄마","자, 곶감이다!","Here, gotgam!"],
+   ["n","","아기가 울음을 뚝 그쳐요.","The baby stops crying at once."],
+   ["n","","호랑이는 깜짝 놀라요.","The tiger is startled."],
+   ["t","호랑이","곶감? 곶감이 누구지?","Gotgam? Who is Gotgam?"],
+   ["n","","호랑이는 생각해요.","The tiger thinks."],
+   ["t","호랑이","저 아기는 나를 안 무서워해. 그런데 곶감은 무서워해! 곶감이 나보다 더 무서워?","That baby isn't afraid of me. But it's afraid of Gotgam! Is Gotgam scarier than me?"],
+   ["n","","호랑이는 겁이 나요.","The tiger gets scared."],
+   ["t","호랑이","무서워! 빨리 숨어야 해!","I'm scared! I have to hide, quickly!"],
+   ["n","","호랑이는 얼른 외양간으로 들어가요.","The tiger quickly goes into the cowshed."],
+   ["n","","그리고 외양간 구석에 숨어요.","And it hides in a corner of the cowshed."]],
+  words:[["곶감","dried persimmon"],["울음을 그치다","to stop crying"],["뚝","all of a sudden (stopping)"],["생각하다","to think"],["겁이 나다","to get scared"],["숨다","to hide"],["얼른","quickly"],["들어가다","to go in"],["구석","corner"]],
+  core:["N보다 더","두 가지를 비교할 때 써요.","more ~ than N","곶감이 나보다 더 무서워?"],
+  extra:[
+   ["-아/어야 해","꼭 해야 하는 일을 말해요. 해요체로는 -아/어야 해요라고 해요.","have to ~","빨리 숨어야 해!"],
+   ["그런데","앞의 말과 다른 내용이나 새로운 사실, 생각하지 못한 사실을 이어 말할 때 써요.","but (here: adds a new or surprising fact); also by the way (when changing the topic)","저 아기는 나를 안 무서워해. 그런데 곶감은 무서워해!"],
+   ["무섭다 / 무서워하다","호랑이가 자기 마음을 말해요. ‘곶감이 무서워요.’ 이야기하는 사람이 호랑이의 마음을 설명해요. ‘호랑이는 곶감을 무서워해요.’","I'm scared of gotgam. / The tiger is afraid of gotgam.","곶감이 무서워요. / 호랑이는 곶감을 무서워해요."]],
+  q:["아기는 언제 울음을 그쳐요?","엄마가 \"자, 곶감이다!\"라고 말해요. 그때 울음을 뚝 그쳐요."]},
+ {t:["소도둑이 왔어요!","The cattle thief is here!"],
+  lines:[
+   ["n","","그때 소도둑이 와요.","Then a cattle thief comes."],
+   ["n","","소도둑은 소를 훔치고 싶어요.","The cattle thief wants to steal a cow."],
+   ["s","소도둑","큰 소가 어디 있지?","Where's a big cow?"],
+   ["n","","외양간 안은 아주 어두워요.","It's very dark in the cowshed."],
+   ["n","","소도둑은 앞이 잘 안 보여요.","The thief can't see well."],
+   ["n","","손으로 여기저기 만져요.","He feels around here and there with his hands."],
+   ["n","","그때 호랑이의 등을 만져요.","Then he touches the tiger's back."],
+   ["s","소도둑","오! 큰 소네!","Oh! A big cow!"],
+   ["n","","소도둑은 호랑이 등에 올라타요.","The thief climbs onto the tiger's back."],
+   ["n","","호랑이는 깜짝 놀라요.","The tiger is startled."],
+   ["s","호랑이","으악! 곶감이다! 곶감이 내 등에 있어!","Aaah! It's Gotgam! Gotgam is on my back!"]],
+  words:[["소도둑","cattle thief"],["훔치다","to steal"],["어둡다","to be dark"],["앞이 안 보이다","can't see ahead"],["손","hand"],["여기저기","here and there"],["만지다","to touch"],["등","back"],["올라타다","to climb on"]],
+  core:["-고 싶어요","하고 싶은 일을 말해요.","want to ~","소도둑은 소를 훔치고 싶어요."],
+  extra:[
+   ["보이다","눈에 들어올 때 써요. 내가 무엇을 볼 때는 보다를 써요.","to be seen, visible","앞이 잘 안 보여요."],
+   ["어둡다 → 어두워요","어둡다는 어두워요가 돼요. 이렇게 바뀌는 낱말이 따로 있어요.","to be dark","외양간 안은 아주 어두워요."]],
+  q:["외양간 안은 어때요? 소도둑은 무엇을 만져요?","아주 어두워요. 소도둑은 호랑이의 등을 만져요."]},
+ {t:["달려라, 호랑이!","Run, tiger!"],
+  lines:[
+   ["s","호랑이","살려 줘!","Help me!"],
+   ["n","","호랑이는 무서워서 달려요.","The tiger is so scared that it runs."],
+   ["n","","소도둑도 깜짝 놀라요.","The thief is startled too."],
+   ["s","소도둑","뭐야? 이 소는 왜 이렇게 빨라?","What? Why is this cow so fast?"],
+   ["n","","소도둑은 호랑이의 등을 꽉 잡아요.","The thief holds onto the tiger's back tightly."],
+   ["s","소도둑","으악! 떨어지겠어!","Aaah! I'm going to fall!"],
+   ["n","","호랑이는 더 겁이 나요.","The tiger gets even more scared."],
+   ["s","호랑이","곶감이 나를 꽉 잡았어!","Gotgam is holding me tight!"],
+   ["n","","호랑이는 더 빨리 달려요.","The tiger runs even faster."],
+   ["n","","달리고 또 달려요.","It runs and runs."],
+   ["n","","산을 넘어요. 또 달려요.","It goes over a mountain. It runs again."],
+   ["n","","그렇게 밤새 달려요.","It runs like that all night."]],
+  words:[["살려 줘!","Help me! (Save me!)"],["달리다","to run"],["빠르다","to be fast"],["꽉","tightly"],["잡다","to hold, grab"],["떨어지다","to fall"],["넘다","to go over"],["밤새","all night"]],
+  core:["-아서/어서 (이유)","앞의 일이 뒤의 일의 이유일 때 써요.","because ~, so ~","호랑이는 무서워서 달려요."],
+  extra:[
+   ["왜 이렇게","생각보다 아주 그럴 때 놀라서 물어요.","why so ~?","이 소는 왜 이렇게 빨라?"],
+   ["-겠어","곧 그렇게 될 것 같을 때 써요.","going to ~ (it seems)","떨어지겠어!"]],
+  q:["소도둑은 무엇을 꽉 잡아요?","호랑이의 등을 꽉 잡아요."]},
+ {t:["아침이 밝아요","Morning comes"],
+  lines:[
+   ["n","","아침이에요. 날이 밝아요.","It's morning. It's getting light."],
+   ["n","","소도둑은 호랑이의 검은 줄무늬를 봐요.","The thief sees the tiger's black stripes."],
+   ["s","소도둑","으악! 소가 아니야! 호랑이야!","Aaah! It's not a cow! It's a tiger!"],
+   ["n","","소도둑은 깜짝 놀라요.","The thief is startled."],
+   ["n","","그때 큰 나무가 보여요.","Then he sees a big tree."],
+   ["n","","소도둑은 나뭇가지를 꽉 잡고 나무에 매달려요.","The thief grabs a branch tightly and hangs from the tree."],
+   ["s","소도둑","휴! 살았어!","Phew! I'm saved!"],
+   ["n","","하지만 호랑이는 몰라요. 계속 달려요.","But the tiger doesn't know. It keeps running."],
+   ["s","호랑이","곶감아, 나 좀 살려 줘!","Gotgam, please spare me!"],
+   ["n","","호랑이는 깊은 산속으로 도망가요.","The tiger runs away deep into the mountains."],
+   ["n","","그 뒤로 호랑이는 다시는 마을에 오지 않아요.","After that, the tiger never comes to the village again."]],
+  words:[["날이 밝다","to get light (morning)"],["줄무늬","stripes"],["나무","tree"],["나뭇가지","branch"],["매달리다","to hang from"],["살았어!","Phew, I'm saved!"],["그 뒤로","after that"],["다시는","never again (with a negative)"]],
+  core:["-고 (동작 연결)","두 동작을 이어 말해요. 앞의 일을 하고 뒤의 일을 해요.","and then; linking actions","나뭇가지를 꽉 잡고 나무에 매달려요."],
+  extra:[
+   ["다시는 + 부정","앞으로 한 번도 하지 않을 때 써요.","never again","다시는 마을에 오지 않아요."]],
+  q:["아침에 소도둑은 무엇을 봐요?","호랑이의 검은 줄무늬를 봐요."]}
+],
+i:[
+ {t:["배고픈 호랑이","The hungry tiger"],
+  lines:[
+   ["n","","옛날 옛날, 깊은 산속에 덩치가 크고 힘센 호랑이가 살았어요.","Long, long ago, a big, strong tiger lived deep in the mountains."],
+   ["s","호랑이","어흥!","Roar!"],
+   ["n","","호랑이가 나타나면 토끼들은 깡충깡충 도망가고, 새들은 푸드덕 날아갔어요.","Whenever the tiger appeared, rabbits hopped away and birds flapped off."],
+   ["n","","동물들이 자기를 무서워하는 모습을 보면 호랑이는 늘 우쭐했지요.","Seeing the animals afraid of it always made the tiger proud."],
+   ["s","호랑이","하하! 이 산에서 나보다 무서운 동물이 어디 있겠어?","Ha ha! What animal on this mountain is scarier than me?"],
+   ["n","","그런데 어느 해 겨울, 며칠 동안 눈이 펑펑 내렸어요.","But one winter, snow fell heavily for days."],
+   ["n","","동물들이 모두 숨어 버려서 호랑이는 먹이를 구할 수 없었어요.","All the animals hid away, so the tiger couldn't find food."],
+   ["s","호랑이","아이고, 배고파라! 이러다가는 굶어 죽겠어!","Oh, I'm so hungry! At this rate I'll starve!"],
+   ["n","","결국 호랑이는 먹이를 찾아 마을로 내려가기로 했어요.","In the end, the tiger decided to go down to the village to find food."],
+   ["t","호랑이","마을에 가면 소라도 한 마리 있겠지?","There'll be at least a cow in the village, right?"],
+   ["n","","호랑이는 어슬렁어슬렁 산을 내려갔어요.","The tiger prowled down the mountain."]],
+  words:[["덩치","body size, build"],["힘세다","to be strong"],["깡충깡충","hopping"],["푸드덕","flapping"],["우쭐하다","to feel proud of oneself"],["펑펑","heavily (snow)"],["먹이","food (for animals)"],["굶어 죽다","to starve to death"],["어슬렁어슬렁","prowling slowly"]],
+  core:["-기로 하다","무엇을 하겠다고 결정할 때 써요.","to decide to ~","마을로 내려가기로 했어요."],
+  extra:[
+   ["-아/어 버리다","어떤 일이 완전히 끝났을 때 써요.","~ (completely, all the way)","동물들이 모두 숨어 버려서"],
+   ["이러다가는","지금처럼 계속되면 나쁜 일이 생길 것 같을 때 써요.","at this rate","이러다가는 굶어 죽겠어!"]],
+  q:["호랑이는 왜 먹이를 구할 수 없었어요?","눈이 펑펑 내려서 동물들이 모두 숨어 버렸기 때문이에요."]},
+ {t:["우는 아기","The crying baby"],
+  lines:[
+   ["n","","마을에 도착한 호랑이는 먹이를 찾아 이리저리 돌아다녔어요.","Arriving in the village, the tiger wandered around looking for food."],
+   ["n","","그러다가 마을 끝에 있는 집 한 채를 발견했어요.","Then it found a house at the end of the village."],
+   ["n","","집 옆 외양간에는 커다란 소가 한 마리 있었어요.","In the cowshed next to the house, there was one big cow."],
+   ["t","호랑이","옳지! 저 소를 잡아먹어야겠다!","Aha! I'll eat that cow!"],
+   ["n","","호랑이가 입맛을 다시며 외양간으로 다가가는데, 어디선가 아기 울음소리가 들렸어요.","As the tiger licked its lips and crept toward the cowshed, it heard a baby crying."],
+   ["s","아기","으앙! 으아앙!","Waah! Waaah!"],
+   ["n","","집 안에서 엄마가 아기를 달래고 있었어요.","Inside the house, the mother was trying to calm the baby."],
+   ["s","엄마","아가, 뚝! 그만 울어! 호랑이가 온다!","Hush, baby! Stop crying! The tiger is coming!"],
+   ["n","","호랑이는 깜짝 놀랐어요.","The tiger was startled."],
+   ["t","호랑이","어? 내가 온 걸 어떻게 알았지?","Huh? How did she know I came?"],
+   ["n","","호랑이는 몸을 낮추고 집 안의 소리에 귀를 기울였어요.","The tiger crouched low and listened to the sounds inside."],
+   ["s","엄마","호랑이가 바로 밖에 있다니까! 이제 그만 울어!","I told you, the tiger is right outside! Stop crying now!"],
+   ["n","","호랑이는 더욱 놀랐어요.","The tiger was even more surprised."],
+   ["t","호랑이","뭐야? 내가 밖에 있는 것까지 알아?","What? She even knows I'm outside?"],
+   ["n","","하지만 아기는 울음을 그치지 않았어요. 오히려 더 크게 울었어요.","But the baby didn't stop crying. Instead, it cried even louder."],
+   ["s","아기","으아아앙!","Waaaah!"],
+   ["n","","호랑이는 슬슬 화가 났어요.","The tiger started to get angry."],
+   ["t","호랑이","아니, 나도 안 무서워하는 아기가 있다니!","What! A baby that isn't even afraid of me!"]],
+  words:[["돌아다니다","to wander around"],["발견하다","to find"],["입맛을 다시다","to lick one's lips"],["다가가다","to approach"],["달래다","to soothe, calm"],["몸을 낮추다","to crouch low"],["귀를 기울이다","to listen carefully"],["오히려","instead, rather"],["슬슬","gradually"]],
+  core:["-는데 (배경)","뒤의 일이 일어날 때의 상황을 먼저 말해요.","as ~, while ~ (background)","외양간으로 다가가는데, 아기 울음소리가 들렸어요."],
+  extra:[
+   ["-다니까","이미 한 말을 다시 강하게 말할 때 써요.","I told you ~","호랑이가 바로 밖에 있다니까!"],
+   ["-다니!","믿기 어렵거나 놀라울 때 써요.","I can't believe ~!","나도 안 무서워하는 아기가 있다니!"]],
+  q:["엄마의 말을 듣고 호랑이는 왜 놀랐어요?","엄마가 호랑이가 온 것을 아는 것 같았기 때문이에요."]},
+ {t:["곶감이 누구지?","Who is Gotgam?"],
+  lines:[
+   ["n","","그때 엄마가 다시 말했어요.","Then the mother spoke again."],
+   ["s","엄마","자, 곶감이다!","Here, gotgam!"],
+   ["n","","그러자 신기한 일이 벌어졌어요.","Then something strange happened."],
+   ["n","","조금 전까지 크게 울던 아기가 울음을 뚝 그친 거예요.","The baby who had been crying loudly a moment ago suddenly stopped."],
+   ["t","호랑이","응? 곶감?","Huh? Gotgam?"],
+   ["n","","호랑이는 깜짝 놀랐어요.","The tiger was startled."],
+   ["t","호랑이","저 아기는 나도 안 무서워하는데, 곶감은 무서워한다고?","That baby isn't even afraid of me, but it's afraid of Gotgam?"],
+   ["n","","호랑이는 고개를 갸웃거렸어요.","The tiger tilted its head."],
+   ["t","호랑이","곶감이 대체 누구길래 저 아기가 울음을 그친 거지? 분명 나보다 훨씬 무서운 녀석일 거야!","Who on earth is Gotgam, to make that baby stop crying? It must be much scarier than me!"],
+   ["n","","호랑이는 갑자기 겁이 났어요.","Suddenly the tiger got scared."],
+   ["t","호랑이","큰일 났네! 곶감이 나오기 전에 빨리 숨어야겠어!","This is bad! I'd better hide before Gotgam comes out!"],
+   ["n","","호랑이는 슬금슬금 뒷걸음질 쳤어요.","The tiger slowly backed away."],
+   ["n","","그리고 옆에 있는 외양간으로 들어가 구석에 숨었어요.","Then it went into the cowshed next door and hid in the corner."]],
+  words:[["곶감","dried persimmon"],["신기하다","strange, amazing"],["벌어지다","to happen"],["울음을 그치다","to stop crying"],["고개를 갸웃거리다","to tilt one's head"],["대체","on earth"],["녀석","guy, fellow (casual)"],["슬금슬금","stealthily"],["뒷걸음질 치다","to back away"]],
+  core:["-길래","보고 들은 상황을 근거로 까닭을 말할 때 써요. 이 이야기의 ‘누구길래?’처럼 이유가 궁금할 때도 써요.","based on what one observed; what/who is it that ~?","곶감이 대체 누구길래 저 아기가 울음을 그친 거지?"],
+  extra:[
+   ["-던","전에 계속하던 일로 뒤의 명사를 꾸며요.","that had been ~ing","크게 울던 아기"],
+   ["-(으)ㄹ 거야","혼잣말이나 반말로 추측을 말해요. 해요체로는 -(으)ㄹ 거예요라고 해요.","must be, will probably","나보다 훨씬 무서운 녀석일 거야!"]],
+  q:["호랑이는 곶감을 어떤 녀석이라고 생각했어요?","자기보다 훨씬 무서운 녀석이라고 생각했어요."]},
+ {t:["소도둑이 왔어요!","The cattle thief is here!"],
+  lines:[
+   ["n","","바로 그때, 외양간에 소도둑이 들어왔어요.","Right then, a cattle thief came into the cowshed."],
+   ["s","소도둑","흐흐, 어디 큰 소가 있나 보자.","Heh heh, let's see if there's a big cow."],
+   ["n","","외양간 안은 캄캄해서 앞이 잘 보이지 않았어요.","It was pitch dark in the cowshed, so he couldn't see well."],
+   ["n","","도둑은 손으로 이리저리 더듬으며 소를 찾았어요.","The thief felt around with his hands, looking for a cow."],
+   ["n","","호랑이는 누군가 들어오는 소리를 듣고 바짝 긴장했어요.","Hearing someone come in, the tiger tensed up."],
+   ["t","호랑이","설마 곶감이 나를 잡으러 온 건가?","Surely Gotgam hasn't come to catch me?"],
+   ["n","","호랑이는 숨을 죽이고 가만히 있었어요.","The tiger held its breath and stayed still."],
+   ["n","","그때 도둑의 손이 호랑이 등에 닿았어요.","Then the thief's hand touched the tiger's back."],
+   ["s","소도둑","오호! 이 녀석, 아주 튼튼하겠는데?","Oho! This one looks really sturdy!"],
+   ["n","","도둑은 호랑이를 소인 줄 알았어요.","The thief thought the tiger was a cow."],
+   ["s","소도둑","좋아! 이 소를 타고 나가야겠다!","Good! I'll ride this cow out of here!"],
+   ["n","","도둑은 냉큼 호랑이 등에 올라탔어요.","The thief quickly hopped onto the tiger's back."],
+   ["s","호랑이","으아악! 곶감이다! 곶감이 내 등에 올라탔어!","Aaargh! It's Gotgam! Gotgam is on my back!"],
+   ["n","","호랑이는 너무 놀라 펄쩍 뛰었어요.","The tiger was so shocked it leapt up."]],
+  words:[["캄캄하다","pitch dark"],["더듬다","to feel around"],["바짝 긴장하다","to get very tense"],["설마","surely not"],["숨을 죽이다","to hold one's breath"],["닿다","to touch, reach"],["튼튼하다","sturdy, strong"],["냉큼","quickly, promptly"],["펄쩍 뛰다","to leap up"]],
+  core:["-(으)ㄴ/는 줄 알다","과거형(-줄 알았어요)으로 쓰면 사실과 다르게 생각했다는 뜻으로 자주 써요.","thought (wrongly) that ~","도둑은 호랑이를 소인 줄 알았어요."],
+  extra:[
+   ["-(으)러 오다/가다","오거나 가는 목적을 말해요.","come/go to ~","곶감이 나를 잡으러 온 건가?"],
+   ["-(으)며","두 가지 일을 같이 할 때 써요.","while ~ing","이리저리 더듬으며 소를 찾았어요."]],
+  q:["도둑은 왜 호랑이 등에 올라탔어요?","외양간이 캄캄해서 호랑이를 소인 줄 알았기 때문이에요."]},
+ {t:["달려라, 호랑이!","Run, tiger!"],
+  lines:[
+   ["n","","호랑이는 곶감이 자기를 잡으러 온 줄 알고 겁에 질렸어요.","Thinking Gotgam had come to catch it, the tiger was terrified."],
+   ["s","호랑이","살려 줘!","Help me!"],
+   ["n","","호랑이는 외양간 밖으로 뛰쳐나가 정신없이 달리기 시작했어요.","The tiger dashed out of the cowshed and started running frantically."],
+   ["n","","도둑도 깜짝 놀랐어요.","The thief was startled too."],
+   ["s","소도둑","어어? 이 소가 왜 이래? 멈춰! 멈추라고!","Whoa? What's wrong with this cow? Stop! I said stop!"],
+   ["n","","하지만 호랑이는 더 빠르게 달렸어요.","But the tiger ran even faster."],
+   ["n","","도둑은 떨어질까 봐 호랑이의 등을 꽉 붙잡았어요.","Afraid of falling, the thief held tight to the tiger's back."],
+   ["s","소도둑","으악! 이러다 떨어지겠어!","Aaah! I'm going to fall at this rate!"],
+   ["n","","도둑이 더 세게 붙잡자 호랑이는 더욱 겁을 먹었어요.","When the thief held on harder, the tiger got even more scared."],
+   ["s","호랑이","아이고! 곶감이 나를 놓아주지 않네!","Oh no! Gotgam won't let me go!"],
+   ["n","","호랑이는 등에 올라탄 곶감을 떼어 내려고 이리저리 뛰었어요.","The tiger jumped around trying to shake Gotgam off its back."],
+   ["n","","산길을 달리고, 언덕을 넘고, 또 달렸어요.","It ran along mountain paths, over hills, and on and on."],
+   ["n","","도둑은 떨어지지 않으려고 꼭 매달려 있었어요.","The thief hung on tight so he wouldn't fall."],
+   ["n","","그렇게 호랑이는 밤새 달리고 또 달렸답니다.","And so the tiger ran and ran all night long."]],
+  words:[["겁에 질리다","to be terrified"],["뛰쳐나가다","to dash out"],["정신없이","frantically"],["멈추다","to stop"],["붙잡다","to hold onto"],["겁을 먹다","to get scared"],["놓아주다","to let go"],["떼어 내다","to shake off"],["언덕","hill"],["매달리다","to hang on"]],
+  core:["-(으)ㄹ까 봐","걱정되는 일이 생길 것 같아서 무엇을 할 때 써요.","afraid that ~, in case ~","도둑은 떨어질까 봐 호랑이의 등을 꽉 붙잡았어요."],
+  extra:[
+   ["-자","앞의 일이 일어나고 곧바로 뒤의 일이 일어날 때 써요.","when, as soon as","도둑이 더 세게 붙잡자 호랑이는 더욱 겁을 먹었어요."],
+   ["-(으)려고","무엇을 하려는 목적을 말해요.","in order to ~","곶감을 떼어 내려고 이리저리 뛰었어요."]],
+  q:["도둑은 왜 호랑이의 등을 꽉 붙잡았어요?","떨어질까 봐 꽉 붙잡았어요."]},
+ {t:["아침이 밝아요","Morning comes"],
+  lines:[
+   ["n","","밤새 달리다 보니 어느새 아침이 되었어요.","After running all night, before long it was morning."],
+   ["n","","날이 밝자 도둑은 자기가 탄 동물을 자세히 볼 수 있었어요.","When it got light, the thief could see the animal he was riding clearly."],
+   ["n","","노란 털에 검은 줄무늬, 커다란 발과 날카로운 발톱!","Yellow fur with black stripes, big paws and sharp claws!"],
+   ["s","소도둑","으악! 소가 아니라 호랑이잖아!","Aaah! It's not a cow, it's a tiger!"],
+   ["n","","도둑은 깜짝 놀랐어요.","The thief was startled."],
+   ["s","소도둑","큰일 났다! 이대로 있다가는 잡아먹히겠어!","Oh no! If I stay like this, I'll get eaten!"],
+   ["n","","마침 호랑이가 커다란 나무 아래를 지나가고 있었어요.","Just then, the tiger was passing under a big tree."],
+   ["n","","도둑은 머리 위에 있는 나뭇가지를 발견했어요.","The thief spotted a branch above his head."],
+   ["s","소도둑","지금이다!","Now!"],
+   ["n","","도둑은 나뭇가지를 힘껏 붙잡고 나무에 매달렸어요.","The thief grabbed the branch with all his might and hung from the tree."],
+   ["s","소도둑","휴! 살았다!","Phew! I'm saved!"],
+   ["n","","하지만 호랑이는 도둑이 사라진 줄도 몰랐어요.","But the tiger didn't even know the thief was gone."],
+   ["s","호랑이","곶감아, 제발 나 좀 살려 줘!","Gotgam, please spare me!"],
+   ["n","","호랑이는 뒤도 돌아보지 않고 깊은 산속으로 달아났어요.","The tiger fled deep into the mountains without looking back."],
+   ["n","","그 뒤로 호랑이는 마을에 내려오지 않았대요.","They say the tiger never came down to the village after that."]],
+  words:[["어느새","before one knew it"],["날이 밝다","to get light (morning)"],["줄무늬","stripes"],["발톱","claw"],["날카롭다","sharp"],["잡아먹히다","to be eaten"],["마침","just then"],["힘껏","with all one's might"],["달아나다","to run away"]],
+  core:["-다 보니","어떤 행동이나 상태가 이어지는 과정에서 새로운 상황을 겪거나 결과를 알게 될 때 써요.","as ~ continued; in the course of ~ing","밤새 달리다 보니 어느새 아침이 되었어요."],
+  extra:[
+   ["N이/가 아니라 N","앞의 것이 아니고 뒤의 것이 맞다고 말해요.","not A but B","소가 아니라 호랑이잖아!"],
+   ["-대요","다른 사람에게 들은 말을 전할 때 써요. 옛날이야기 끝에서 자주 들을 수 있어요.","they say ~","마을에 내려오지 않았대요."]],
+  q:["호랑이는 도둑이 나무에 매달린 것을 알았어요?","아니요. 도둑이 사라진 줄도 몰랐어요."]}
+],
+a:[
+ {t:["배고픈 호랑이","The hungry tiger"],
+  lines:[
+   ["n","","옛날 깊은 산속에 덩치가 크고 힘센 호랑이 한 마리가 살았다.","Long ago, a big, strong tiger lived deep in the mountains."],
+   ["s","호랑이","어흥!","Roar!"],
+   ["n","","호랑이가 나타나면 토끼들은 깡충깡충 달아나고, 새들은 푸드덕 날아올랐다. 산속 동물들은 호랑이만 보면 벌벌 떨었다.","Whenever the tiger appeared, rabbits hopped away and birds flapped into the sky. The mountain animals trembled at the mere sight of it."],
+   ["n","","호랑이는 그런 모습을 볼 때마다 어깨가 으쓱해졌다.","Every time it saw this, the tiger puffed up with pride."],
+   ["s","호랑이","하하! 이 산에서 나보다 무서운 놈이 어디 있겠어?","Ha ha! Who on this mountain is scarier than me?"],
+   ["n","","그러던 어느 겨울, 눈이 며칠째 펑펑 내렸다. 동물들이 모두 숨어 버리는 바람에 호랑이는 먹잇감을 구할 수 없었다.","Then one winter, snow fell heavily for days. Because all the animals had hidden away, the tiger couldn't find any prey."],
+   ["s","호랑이","아이고, 배고파라! 이러다가는 굶어 죽겠어.","Oh, I'm so hungry! At this rate I'll starve to death."],
+   ["n","","배고픔을 참다못한 호랑이는 마을로 내려가기로 했다.","Unable to bear the hunger any longer, the tiger decided to go down to the village."],
+   ["t","호랑이","마을에 가서 소라도 한 마리 잡아먹어야겠다.","I'll go to the village and eat a cow, at least."],
+   ["n","","호랑이는 어둠을 틈타 산 아래 마을로 내려갔다.","Under cover of darkness, the tiger went down to the village."]],
+  words:[["벌벌 떨다","to tremble"],["어깨가 으쓱해지다","to feel proud (lit. shoulders rise)"],["먹잇감","prey"],["참다못하다","to be unable to bear any longer"],["소라도","at least a cow"],["어둠을 틈타","under cover of darkness"]],
+  core:["-는 바람에","뒤의 일이 일어난 이유를 말해요. 주로 뜻하지 않은 나쁜 결과와 같이 써요.","because (unexpectedly) ~","동물들이 모두 숨어 버리는 바람에 먹잇감을 구할 수 없었다."],
+  extra:[
+   ["N만 보면","N을 보기만 해도 늘 그렇게 될 때 써요.","at the mere sight of N","호랑이만 보면 벌벌 떨었다."],
+   ["-(으)ㄹ 때마다","그런 일이 있을 때는 언제나 그렇다는 뜻이에요.","every time ~","그런 모습을 볼 때마다 어깨가 으쓱해졌다."]],
+  q:["호랑이가 먹잇감을 구할 수 없었던 이유는 뭐예요?","눈이 며칠째 내려서 동물들이 모두 숨어 버렸기 때문이에요."]},
+ {t:["우는 아기","The crying baby"],
+  lines:[
+   ["n","","마을에 내려온 호랑이는 먹잇감을 찾아 이 집 저 집 기웃거렸다.","In the village, the tiger peeked into house after house, looking for prey."],
+   ["n","","그러다가 마을 끝에 있는 집 한 채를 발견했다.","Then it found a house at the end of the village."],
+   ["n","","집 옆 외양간에는 커다란 소가 한 마리 있었다.","In the cowshed next to the house, there was one big cow."],
+   ["t","호랑이","옳거니! 오늘은 저 녀석으로 배를 채워야겠군.","Aha! Tonight that one will fill my belly."],
+   ["n","","호랑이가 입맛을 다시며 외양간으로 다가가려던 참이었다.","The tiger, licking its lips, was just about to approach the cowshed."],
+   ["s","아기","으아앙! 으아아앙!","Waaah! Waaaah!"],
+   ["n","","집 안에서 아기 울음소리가 들렸다.","A baby's cry came from inside the house."],
+   ["s","엄마","아가, 뚝 그치렴! 자꾸 울면 무서운 호랑이가 잡아간다!","Hush now, baby! If you keep crying, the scary tiger will take you away!"],
+   ["n","","엄마가 아기를 달래고 있었다.","The mother was soothing the baby."],
+   ["n","","호랑이는 깜짝 놀라 걸음을 멈췄다.","The tiger stopped in its tracks."],
+   ["t","호랑이","뭐야? 내가 온 걸 어떻게 알았지?","What? How did she know I came?"],
+   ["n","","호랑이는 몸을 낮추고 귀를 기울였다.","The tiger crouched low and listened."],
+   ["s","엄마","호랑이가 바로 밖에 와 있다니까! 이제 그만 울어!","I told you, the tiger is right outside! Stop crying now!"],
+   ["n","","호랑이는 더욱 놀랐다.","The tiger was even more astonished."],
+   ["t","호랑이","아니, 내가 어디 있는지까지 알고 있잖아?","What? She even knows where I am?"],
+   ["n","","그런데 아기는 호랑이가 왔다는 말에도 아랑곳하지 않고 울어 댔다.","But the baby paid no heed to the tiger warning and kept wailing."],
+   ["s","아기","으아아앙!","Waaaah!"],
+   ["n","","호랑이는 슬슬 화가 났다.","The tiger began to get angry."],
+   ["t","호랑이","감히 이 호랑이님을 무서워하지 않아? 대체 얼마나 간이 큰 녀석이야?","How dare it not fear me, the great tiger? Just how bold is that little one?"]],
+  words:[["기웃거리다","to peek around"],["배를 채우다","to fill one's belly"],["입맛을 다시다","to lick one's lips"],["걸음을 멈추다","to stop walking"],["아랑곳하지 않다","to pay no heed"],["감히","how dare"],["간이 크다","to be bold, fearless"]],
+  core:["-(으)려던 참이다","막 무엇을 하려고 하던 때를 말해요.","was just about to ~","외양간으로 다가가려던 참이었다."],
+  extra:[
+   ["-아/어 대다","어떤 행동을 심하게 되풀이할 때 써요.","keep ~ing (intensely)","아랑곳하지 않고 울어 댔다."],
+   ["-다는 말에도","그런 말을 들었는데도 그렇게 하지 않을 때 써요.","even at the words ~","호랑이가 왔다는 말에도 아랑곳하지 않고"]],
+  q:["엄마가 호랑이가 왔다고 했을 때 아기는 어떻게 했어요?","아랑곳하지 않고 계속 울어 댔어요."]},
+ {t:["곶감이 누구지?","Who is Gotgam?"],
+  lines:[
+   ["n","","그때 엄마가 다시 아기를 달랬다.","Then the mother soothed the baby again."],
+   ["s","엄마","자, 곶감이다!","Here, gotgam!"],
+   ["n","","그러자 조금 전까지 목청껏 울던 아기가 울음을 뚝 그쳤다.","At that, the baby who had been crying at the top of its lungs stopped at once."],
+   ["n","","호랑이는 자기 귀를 의심했다.","The tiger couldn't believe its ears."],
+   ["t","호랑이","뭐라고? 고, 곶감?","What? G-Gotgam?"],
+   ["n","","호랑이는 고개를 갸웃거렸다.","The tiger tilted its head."],
+   ["t","호랑이","나도 무서워하지 않던 아기가 곶감이라는 말에 울음을 그치다니! 대체 곶감이 어떤 놈이길래?","A baby that wasn't even afraid of me stopped crying at the word gotgam! What kind of creature is Gotgam?"],
+   ["n","","생각할수록 등골이 오싹했다.","The more it thought, the colder its spine grew."],
+   ["t","호랑이","혹시 나보다 덩치가 더 큰 놈인가? 이빨은 또 얼마나 날카로울까?","Could it be bigger than me? And how sharp must its teeth be?"],
+   ["n","","조금 전까지 큰소리치던 호랑이의 기세는 온데간데없었다.","The tiger’s earlier swagger had vanished."],
+   ["t","호랑이","아이고, 큰일 났네! 얼른 숨어야겠어!","Oh no, this is bad! I'd better hide, fast!"],
+   ["n","","호랑이는 슬금슬금 뒷걸음질 쳤다.","The tiger slowly backed away."],
+   ["n","","그러고는 옆에 있는 외양간으로 들어가 구석에 몸을 숨겼다.","Then it slipped into the cowshed next door and hid in the corner."]],
+  words:[["곶감","dried persimmon"],["목청껏","at the top of one's lungs"],["귀를 의심하다","to doubt one's ears"],["등골이 오싹하다","to feel a chill down one's spine"],["고개를 갸웃거리다","to tilt one's head in puzzlement"],["큰소리치다","to brag"],["기세","spirit, swagger"],["온데간데없다","to vanish without a trace"]],
+  core:["-(으)ㄹ수록","앞의 일이 더할수록 뒤의 일도 더해질 때 써요.","the more ~, the more ~","생각할수록 등골이 오싹했다."],
+  extra:[
+   ["-다니!","믿기 어렵거나 놀라울 때 써요.","I can't believe ~!","곶감이라는 말에 울음을 그치다니!"],
+   ["-길래","놀라거나 궁금한 마음으로 까닭을 물을 때 써요.","what is it, that ~?","대체 곶감이 어떤 놈이길래?"]],
+  q:["호랑이는 곶감을 어떤 모습으로 상상했어요?","자기보다 덩치가 더 크고 이빨이 날카로운 놈일 거라고 상상했어요."]},
+ {t:["소도둑이 나타났다!","The cattle thief appears!"],
+  lines:[
+   ["n","","바로 그때, 외양간 앞에 소도둑이 나타났다.","Right then, a cattle thief appeared in front of the cowshed."],
+   ["s","소도둑","흐흐, 오늘은 튼튼한 소를 한 마리 훔쳐 가야지.","Heh heh, tonight I'll steal a sturdy cow."],
+   ["n","","도둑은 사방을 살피더니 조심스럽게 외양간 안으로 들어갔다.","The thief looked all around, then carefully slipped into the cowshed."],
+   ["n","","외양간은 칠흑같이 어두웠다.","The cowshed was pitch-black."],
+   ["n","","도둑은 손을 뻗어 이리저리 더듬으며 소를 찾았다.","The thief reached out and felt around for a cow."],
+   ["n","","그때 인기척을 느낀 호랑이는 바짝 긴장했다.","Sensing someone there, the tiger tensed up."],
+   ["t","호랑이","설마 곶감이 나를 잡으러 온 건가?","Surely Gotgam hasn't come to catch me?"],
+   ["n","","호랑이는 숨을 죽이고 꼼짝도 하지 않았다.","The tiger held its breath and didn't move a muscle."],
+   ["n","","그런데 도둑이 어둠 속에서 더듬다가 호랑이의 등에 손을 얹었다.","Feeling around in the dark, the thief laid his hand on the tiger's back."],
+   ["s","소도둑","옳지! 이놈이 제법 실하구나!","Aha! This one's quite sturdy!"],
+   ["n","","도둑은 호랑이를 소라고 철석같이 믿었다.","The thief was absolutely sure the tiger was a cow."],
+   ["s","소도둑","좋아! 이 녀석을 타고 가야겠어.","Good! I'll ride this one away."],
+   ["n","","도둑은 냉큼 호랑이 등에 올라탔다.","The thief quickly hopped onto the tiger's back."],
+   ["s","호랑이","으아악! 곶감이다! 기어이 나를 찾아냈구나!","Aaargh! It's Gotgam! It found me after all!"],
+   ["n","","호랑이는 기절초풍할 만큼 놀랐다.","The tiger was frightened nearly out of its wits."]],
+  words:[["사방","all around"],["칠흑같이","pitch-black"],["인기척","sign of someone nearby"],["꼼짝도 하지 않다","to not move a muscle"],["실하다","sturdy, solid"],["철석같이 믿다","to believe firmly"],["기어이","after all, at last"],["기절초풍하다","to be frightened out of one's wits"]],
+  core:["-더니","앞의 행동을 지켜본 뒤 이어지는 일을 말할 때 써요.","~ and then","도둑은 사방을 살피더니 조심스럽게 외양간 안으로 들어갔다."],
+  extra:[
+   ["-다가","앞의 행동을 하는 도중에 다른 일이 생길 때 써요.","while ~ing","더듬다가 호랑이의 등에 손을 얹었다."],
+   ["-(으)ㄹ 만큼","어느 정도인지 말해요.","to the point of ~","기절초풍할 만큼 놀랐다."]],
+  q:["도둑은 왜 호랑이 등에 올라탔어요?","어둠 속에서 호랑이를 소라고 철석같이 믿었기 때문이에요."]},
+ {t:["달려라, 호랑이!","Run, tiger!"],
+  lines:[
+   ["s","호랑이","살려 다오! 곶감이 나를 잡았다!","Spare me! Gotgam has caught me!"],
+   ["n","","호랑이는 엉겁결에 외양간 밖으로 뛰쳐나갔다.","In a panic, the tiger burst out of the cowshed."],
+   ["n","","그리고 정신없이 달리기 시작했다.","And it started running frantically."],
+   ["n","","도둑도 깜짝 놀랐다.","The thief was startled too."],
+   ["s","소도둑","어어? 이 소가 왜 이래? 멈춰! 멈추란 말이야!","Whoa? What's wrong with this cow? Stop! I said stop!"],
+   ["n","","하지만 호랑이는 멈추기는커녕 더욱 빠르게 내달렸다.","But far from stopping, the tiger ran even faster."],
+   ["s","소도둑","으악! 이러다 떨어지겠어!","Aaah! I'm going to fall at this rate!"],
+   ["n","","도둑은 떨어지지 않으려고 호랑이의 등을 더 꽉 붙잡았다.","To keep from falling, the thief clung even tighter to the tiger's back."],
+   ["s","호랑이","아이고! 이놈의 곶감이 나를 놓아주지 않는구나!","Oh no! This wretched Gotgam won't let me go!"],
+   ["n","","호랑이는 있는 힘껏 달렸다.","The tiger ran with all its strength."],
+   ["n","","도둑이 꽉 매달릴수록 호랑이는 더 빨리 달렸다.","The tighter the thief clung, the faster the tiger ran."],
+   ["s","호랑이","아이고, 곶감아! 제발 나 좀 살려 다오!","Oh, Gotgam! Please, spare me!"],
+   ["n","","그렇게 호랑이는 밤새도록 산속을 달렸다.","And so the tiger ran through the mountains all night long."]],
+  words:[["엉겁결에","in a panic, without thinking"],["뛰쳐나가다","to burst out"],["내달리다","to dash"],["있는 힘껏","with all one's strength"],["이놈의","this wretched (scolding)"],["살려 다오","spare me (old-fashioned)"]],
+  core:["-기는커녕","앞의 일은 일어나지 않고 오히려 반대쪽 일이 일어날 때 써요.","far from ~ing","멈추기는커녕 더욱 빠르게 내달렸다."],
+  extra:[
+   ["-(으)ㄹ수록","앞의 일이 더할수록 뒤의 일도 더해질 때 써요. 3장에서도 나왔어요.","the more ~, the more ~","도둑이 꽉 매달릴수록 호랑이는 더 빨리 달렸다."],
+   ["-란 말이야","여기서는 ‘멈추라는 말이야’가 줄어든 형태예요. 명령을 강조하거나 재촉할 때 써요.","I said ~! (emphatic command here)","멈추란 말이야!"]],
+  q:["도둑이 꽉 매달릴수록 호랑이는 어떻게 했어요?","더 빨리 달렸어요."]},
+ {t:["날이 밝았다","Dawn breaks"],
+  lines:[
+   ["n","","어느새 동이 트기 시작했다.","Before long, dawn began to break."],
+   ["n","","날이 밝자 도둑은 자기가 타고 있는 짐승을 자세히 살펴봤다.","As it grew light, the thief took a close look at the beast he was riding."],
+   ["n","","노란 털에 검은 줄무늬, 커다란 발과 날카로운 발톱.","Yellow fur with black stripes, big paws and sharp claws."],
+   ["s","소도둑","으악! 소가 아니라 호랑이잖아!","Aaah! It's not a cow, it's a tiger!"],
+   ["n","","도둑은 간담이 서늘해졌다.","The thief's blood ran cold."],
+   ["t","소도둑","이대로 있다가는 영락없이 호랑이 밥이 되겠구나!","If I stay like this, I'll surely end up as tiger food!"],
+   ["n","","마침 호랑이가 커다란 나무 아래를 지나가고 있었다.","Just then, the tiger was passing under a big tree."],
+   ["n","","도둑은 머리 위로 길게 뻗은 나뭇가지를 발견했다.","The thief spotted a long branch stretching above his head."],
+   ["s","소도둑","지금이다!","Now!"],
+   ["n","","도둑은 나뭇가지를 힘껏 움켜잡고 나무에 매달렸다.","The thief seized the branch with all his might and hung from the tree."],
+   ["s","소도둑","휴우! 살았다!","Phew! I'm saved!"],
+   ["n","","하지만 호랑이는 도둑이 사라진 줄도 모르고 계속 달렸다.","But the tiger kept running, not even knowing the thief was gone."],
+   ["n","","호랑이는 뒤도 돌아보지 않고 깊은 산속으로 줄행랑을 쳤다.","Without looking back, the tiger fled deep into the mountains."],
+   ["n","","그 뒤로 호랑이는 마을 근처에 얼씬도 하지 않았다고 한다.","It is said that the tiger never showed its face near the village again."]],
+  words:[["동이 트다","dawn breaks"],["짐승","beast, animal"],["간담이 서늘하다","one's blood runs cold"],["영락없이","surely, without fail"],["호랑이 밥이 되다","to become tiger food"],["움켜잡다","to seize, clutch"],["줄행랑을 치다","to take to one's heels"],["얼씬도 하지 않다","to never show up"]],
+  core:["-다가는","지금 상태가 계속되면 나쁜 결과가 올 것 같을 때 써요.","if ~ keeps up, (bad result)","이대로 있다가는 영락없이 호랑이 밥이 되겠구나!"],
+  extra:[
+   ["-자","앞의 일이 일어나고 곧바로 뒤의 일이 일어날 때 써요.","as soon as, when","날이 밝자 도둑은 자기가 타고 있는 짐승을 자세히 살펴봤다."],
+   ["-다고 한다","들은 이야기를 전할 때 쓰는 글말이에요. 옛날이야기 끝에 자주 나와요.","it is said that ~","얼씬도 하지 않았다고 한다."]],
+  q:["도둑은 어떻게 살았어요?","나무 아래를 지날 때 나뭇가지를 움켜잡고 나무에 매달렸어요."]}
+]};
+
+
+let CH_TITLES = STORY.b.map(scene => scene.t);
+for(const scenes of Object.values(STORY)){
+  for(const scene of scenes)scene.grammar=[scene.core,...scene.extra];
+}
+
+/* Shareable location: public query values stay separate from internal scene indices. */
+const STORY_LEVEL_NAMES = Object.freeze({b:"beginner",i:"intermediate",a:"advanced"});
+function storyLevelFromQuery(value){
+  switch(value){
+    case "beginner": case "b": return "b";
+    case "intermediate": case "i": return "i";
+    case "advanced": case "a": return "a";
+    default: return "b";
+  }
+}
+function storyChapterFromQuery(value){
+  if(value==="all")return -1;
+  if(value==="activities")return -2;
+  return /^[1-6]$/.test(value||"")?Number(value)-1:0;
+}
+function readStoryLocation(){
+  const query=new URLSearchParams(window.location.search);
+  return {level:storyLevelFromQuery(query.get("level")),ch:storyChapterFromQuery(query.get("start"))};
+}
+let {level,ch}=readStoryLocation();
+function currentStoryLocation(){
+  return {level:STORY_LEVEL_NAMES[level],start:ch===-1?"all":ch===-2?"activities":String(ch+1)};
+}
+function syncStoryLocation(){
+  const current=currentStoryLocation();
+  const url=new URL(window.location.href);
+  url.searchParams.set("level",current.level);
+  url.searchParams.set("start",current.start);
+  const next=url.pathname+url.search+url.hash;
+  const previous=window.location.pathname+window.location.search+window.location.hash;
+  if(next!==previous)window.history.replaceState(window.history.state,"",next);
+  if(window.parent!==window){
+    window.parent.postMessage({type:"story-location",...current},window.location.origin);
+  }
+}
+const $ = s => document.querySelector(s);
+
+
+function renderTabs(){
+  $("#levelStyleNote").hidden=level!=="b";
+  CH_TITLES=STORY[level].map(scene=>scene.t);
+  $("#levels").innerHTML = LEVELS.map(l => `<option value="${l.id}" ${l.id===level?"selected":""}>${l.name}</option>`).join("");
+  const selectedLevel=LEVELS.find(l=>l.id===level);
+  $("#levelDescription").textContent = `${selectedLevel.name} · ${selectedLevel.desc}`;
+  $("#chapters").innerHTML = CH_TITLES.map((t,i) =>
+    `<button class="scene-button" role="tab" aria-selected="${i===ch}" data-c="${i}"><small>${i+1}장</small>${t[0]}</button>`).join("")
+    + `<button class="scene-button" role="tab" aria-selected="${ch===-1}" data-c="-1"><small>처음부터 끝까지</small>전체 이야기</button>`
+    + `<button class="scene-button" role="tab" aria-selected="${ch===-2}" data-c="-2"><small>다 읽고 나서</small>독후 활동</button>`;
+  $("#scenePicker").innerHTML = CH_TITLES.map((t,i)=>`<option value="${i}" ${i===ch?"selected":""}>${i+1}장 · ${t[0]}</option>`).join("") + `<option value="-1" ${ch===-1?"selected":""}>전체 이야기</option><option value="-2" ${ch===-2?"selected":""}>독후 활동</option>`;
+  $("#scenePicker").onchange = event => { ch=Number(event.target.value); render(); };
+  $("#levels").onchange = event => { level=event.target.value; render(); };
+  document.querySelectorAll(".scene-button").forEach(b => b.onclick = () => { ch = +b.dataset.c; render(); });
+}
+
+/* 본문 밑줄: w = 핵심 단어, g = 문법. 항목은 [찾을 말, 그중 밑줄 칠 부분(없으면 전체), 사이드에 있는 표제어] */
+const UL = {
+b:[
+ {w:[["힘이 아주 세요","","힘이 세다"],["도망가요","","도망가다"],["배가 아주 고파요","","배가 고프다"],["배고파","","배가 고프다"],["마을","","마을"],["내려가요","","내려가다"]],
+  g:[["웃어요","","-아요/어요 (현재형)"],["와요","","-아요/어요 (현재형)"],["마을로","로","N(으)로"]]},
+ {w:[["외양간","","외양간"],["큰 소가","소","소"],["큰 소야","소","소"],["울어요","","울다"],["울지","","울다"],["깜짝 놀라요","","깜짝 놀라다"],["화가 나요","","화가 나다"]],
+  g:[["안 무서워해","","안 + 동사"],["있어요","","N이/가 있어요"]]},
+ {w:[["곶감","","곶감"],["울음을 뚝 그쳐요","","울음을 그치다"],["겁이 나요","","겁이 나다"],["숨어요","","숨다"],["구석","","구석"]],
+  g:[["나보다 더","","N보다 더"],["숨어야 해","","-아/어야 해"],["그런데","","그런데"]]},
+ {w:[["소도둑","","소도둑"],["훔치고","훔치","훔치다"],["어두워요","","어둡다"],["등을","등","등"],["등에","등","등"],["올라타요","","올라타다"]],
+  g:[["훔치고 싶어요","고 싶어요","-고 싶어요"],["보여요","","보이다"]]},
+ {w:[["달려요","","달리다"],["달리고","","달리다"],["꽉","","꽉"],["잡아요","","잡다"],["잡았어","","잡다"],["떨어지겠어","떨어지","떨어지다"],["밤새","","밤새"]],
+  g:[["무서워서","","-아서/어서 (이유)"],["왜 이렇게","","왜 이렇게"],["떨어지겠어","겠어","-겠어"]]},
+ {w:[["날이 밝아요","","날이 밝다"],["줄무늬","","줄무늬"],["나뭇가지","","나뭇가지"],["매달려요","","매달리다"],["다시는","","다시는"]],
+  g:[["잡고 나무에","잡고","-고 (동작 연결)"],["오지 않아요","","다시는 + 부정"]]}
+],
+i:[
+ {w:[["우쭐했지요","","우쭐하다"],["펑펑","","펑펑"],["먹이","","먹이"],["굶어 죽겠어","","굶어 죽다"],["어슬렁어슬렁","","어슬렁어슬렁"]],
+  g:[["내려가기로 했어요","기로 했어요","-기로 하다"],["숨어 버려서","버려서","-아/어 버리다"],["이러다가는","","이러다가는"]]},
+ {w:[["입맛을 다시며","","입맛을 다시다"],["다가가는데","다가가","다가가다"],["달래고","","달래다"],["귀를 기울였어요","","귀를 기울이다"],["오히려","","오히려"]],
+  g:[["다가가는데","는데","-는데 (배경)"],["있다니까","다니까","-다니까"],["있다니!","다니","-다니!"]]},
+ {w:[["울음을 뚝 그친","","울음을 그치다"],["울음을 그친","","울음을 그치다"],["고개를 갸웃거렸어요","","고개를 갸웃거리다"],["대체","","대체"],["슬금슬금","","슬금슬금"],["뒷걸음질 쳤어요","","뒷걸음질 치다"]],
+  g:[["누구길래","길래","-길래"],["울던","던","-던"],["녀석일 거야","일 거야","-(으)ㄹ 거야"]]},
+ {w:[["캄캄해서","","캄캄하다"],["더듬으며","더듬","더듬다"],["숨을 죽이고","","숨을 죽이다"],["튼튼하겠는데","","튼튼하다"],["냉큼","","냉큼"]],
+  g:[["더듬으며","으며","-(으)며"],["잡으러 온","으러 온","-(으)러 오다/가다"],["소인 줄 알았어요","인 줄 알았어요","-(으)ㄴ/는 줄 알다"]]},
+ {w:[["겁에 질렸어요","","겁에 질리다"],["정신없이","","정신없이"],["붙잡았어요","","붙잡다"],["붙잡자","붙잡","붙잡다"],["떼어 내려고","떼어 내","떼어 내다"],["매달려","","매달리다"]],
+  g:[["떨어질까 봐","","-(으)ㄹ까 봐"],["붙잡자","자","-자"],["떼어 내려고","려고","-(으)려고"],["않으려고","으려고","-(으)려고"]]},
+ {w:[["어느새","","어느새"],["줄무늬","","줄무늬"],["발톱","","발톱"],["잡아먹히겠어","","잡아먹히다"],["달아났어요","","달아나다"]],
+  g:[["달리다 보니","다 보니","-다 보니"],["소가 아니라","가 아니라","N이/가 아니라 N"],["않았대요","대요","-대요"]]}
+],
+a:[
+ {w:[["벌벌 떨었다","","벌벌 떨다"],["어깨가 으쓱해졌다","","어깨가 으쓱해지다"],["먹잇감","","먹잇감"],["참다못한","","참다못하다"],["어둠을 틈타","","어둠을 틈타"]],
+  g:[["숨어 버리는 바람에","는 바람에","-는 바람에"],["호랑이만 보면","만 보면","N만 보면"],["볼 때마다","","-(으)ㄹ 때마다"]]},
+ {w:[["기웃거렸다","","기웃거리다"],["입맛을 다시며","","입맛을 다시다"],["아랑곳하지 않고","","아랑곳하지 않다"],["감히","","감히"],["간이 큰","","간이 크다"]],
+  g:[["다가가려던 참이었다","려던 참이었다","-(으)려던 참이다"],["울어 댔다","댔다","-아/어 대다"],["왔다는 말에도","다는 말에도","-다는 말에도"]]},
+ {w:[["귀를 의심했다","","귀를 의심하다"],["등골이 오싹했다","","등골이 오싹하다"],["고개를 갸웃거렸다","","고개를 갸웃거리다"],["기세","","기세"],["온데간데없었다","","온데간데없다"]],
+  g:[["생각할수록","할수록","-(으)ㄹ수록"],["그치다니","다니","-다니!"],["놈이길래","길래","-길래"]]},
+ {w:[["칠흑같이","","칠흑같이"],["인기척","","인기척"],["철석같이 믿었다","","철석같이 믿다"],["기어이","","기어이"],["기절초풍","","기절초풍하다"]],
+  g:[["살피더니","더니","-더니"],["더듬다가","다가","-다가"],["기절초풍할 만큼","할 만큼","-(으)ㄹ 만큼"]]},
+ {w:[["엉겁결에","","엉겁결에"],["내달렸다","","내달리다"],["있는 힘껏","","있는 힘껏"],["이놈의","","이놈의"],["살려 다오","","살려 다오"]],
+  g:[["멈추기는커녕","기는커녕","-기는커녕"],["매달릴수록","","-(으)ㄹ수록"],["멈추란 말이야","란 말이야","-란 말이야"]]},
+ {w:[["동이 트","","동이 트다"],["간담이 서늘해졌다","","간담이 서늘하다"],["영락없이","","영락없이"],["움켜잡고","","움켜잡다"],["줄행랑을 쳤다","","줄행랑을 치다"]],
+  g:[["있다가는","다가는","-다가는"],["밝자","자","-자"],["않았다고 한다","다고 한다","-다고 한다"]]}
+]};
+const escHTML = t => t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+function markKo(ko, ci){
+  const set = UL[level] && UL[level][ci]; if(!set) return ko;
+  const words = STORY[level][ci].words, ranges = [];
+  const add = (list, cls) => list.forEach(([ctx, tgt, key]) => {
+    const t = tgt || ctx, off = ctx.indexOf(t);
+    let from = 0, i;
+    while((i = ko.indexOf(ctx, from)) > -1){
+      const st = i + off, en = st + t.length;
+      if(!ranges.some(r => st < r.en && en > r.st)){
+        const gl = cls === "kw" ? ((words.find(w => w[0] === key) || [])[1] || "") : "";
+        ranges.push({st, en, cls, title: gl ? `${key} · ${gl}` : key});
+      }
+      from = i + ctx.length;
+    }
+  });
+  add(set.w, "kw"); add(set.g, "kg");
+  ranges.sort((a,b) => a.st - b.st);
+  let out = "", pos = 0;
+  ranges.forEach(r => { out += escHTML(ko.slice(pos, r.st)) + `<span class="${r.cls}" data-tip="${escHTML(r.title)}" tabindex="0">${escHTML(ko.slice(r.st, r.en))}</span>`; pos = r.en; });
+  return out + escHTML(ko.slice(pos));
+}
+function lineHTML([type, who, ko, en], ci){
+  const kd = ci === undefined ? ko : markKo(ko, ci);
+  if(type === "n") return `<p class="line"><span class="ko">${kd}</span><span class="en">${en}</span></p>`;
+  const cls = type === "t" ? "think" : "say";
+  return `<div class="line ${cls}"><div class="bubble"><span class="who">${who}</span><span class="ko">${kd}</span><span class="en">${en}</span></div></div>`;
+}
+
+const IMG_AT = {
+  b:[[0,6,9],[0,4,10],[2,3,7],[0,3,8],[0,4,8],[0,4,7]],
+  i:[[0,5,8],[0,4,10],[2,4,9],[0,2,11],[0,6,10],[0,6,11]],
+  a:[[0,5,7],[0,4,11],[2,3,9],[0,3,12],[0,6,9],[0,6,11]]
+};
+const IMG_ALT = [
+  ["산속에서 어흥 하고 소리치는 호랑이와 도망가는 동물들","눈 내리는 겨울 산에서 배고픈 호랑이","산 아래 마을로 내려가는 호랑이"],
+  ["마을 끝 초가집과 외양간의 소","집 밖에서 아기 울음소리를 듣고 놀란 호랑이","몸을 낮추고 귀를 기울이는 호랑이"],
+  ["아기에게 곶감을 내미는 엄마","고개를 갸웃거리며 곶감을 상상하는 호랑이","외양간 구석에 숨은 호랑이"],
+  ["어두운 외양간으로 들어오는 소도둑","어둠 속에서 손으로 더듬는 소도둑과 숨죽인 호랑이","호랑이 등에 올라탄 소도둑과, 등에 괴물이 탔다고 상상하는 호랑이"],
+  ["소도둑을 태우고 외양간 밖으로 뛰쳐나가는 호랑이","호랑이 등에 꽉 매달린 소도둑","밤새 달리는 호랑이와 소도둑. 호랑이는 등에 괴물이, 소도둑은 소를 탔다고 상상해요"],
+  ["날이 밝자 자기가 탄 것이 호랑이인 것을 알고 놀란 소도둑","나뭇가지를 붙잡고 나무에 매달린 소도둑","깊은 산속으로 달아나는 호랑이"]
+];
+const SITE_IMAGES = {
+  "1-1":"tiger-1-1.webp",
+  "3-1":"tiger-3-1.png",
+  "3-2":"tiger-3-2.png",
+  "5-1":"tiger-5-1.png",
+  "6-1":"tiger-6-1.png"
+};
+function storyImage(ci,slot){
+  const key=`${ci+1}-${slot+1}`;
+  const src=SITE_IMAGES[key]||`images/tiger-${key}.webp`;
+  const width=SITE_IMAGES[key]?1680:1280;
+  const height=SITE_IMAGES[key]?944:720;
+  return `<img class="story-scene-image" src="${src}" alt="${IMG_ALT[ci][slot]}" width="${width}" height="${height}" loading="${ci===0&&slot===0?"eager":"lazy"}" decoding="async">`;
+}
+function chapterBlock(i, withHead){
+  const scene=STORY[level][i];
+  const head=withHead?`<h3 style="margin:22px 0 10px;font-size:20px">${i+1}장 · ${CH_TITLES[i][0]}</h3>`:"";
+  const positions=IMG_AT[level][i];
+  return head+scene.lines.map((line,index)=>{
+    const slot=positions.indexOf(index);
+    return (slot===-1?"":storyImage(i,slot))+lineHTML(line,i);
+  }).join("");
+}
+function chapterNav(){
+  const previous=ch>0?`<button data-go="${ch-1}">이전 장</button>`:`<span></span>`;
+  const next=ch<STORY[level].length-1?`<button data-go="${ch+1}">다음 장</button>`:`<button data-go="-2">다 읽고 나서 · 독후 활동</button>`;
+  return `<nav class="ch-nav" aria-label="장면 이동">${previous}${next}</nav>`;
+}
+
+function render(){
+  renderTabs();
+  syncStoryLocation();
+  const lv = LEVELS.find(l => l.id === level);
+  tip.hidden=true;
+  const legend=`<div class="ul-legend"><span><span class="kw">밑줄</span> 핵심 단어</span><span><span class="kg">점선</span> 문법</span><span>밑줄 친 말을 누르면 뜻이 보여요</span></div>`;
+  $("#lesson").hidden=ch===-2;
+  $("#after").hidden=ch!==-2;
+  if(ch===-2){renderAfterActivities();renderOverview();return;}
+  if(ch === -1){
+    $("#story").innerHTML = `<div class="scene-head"><div><h2>전체 이야기</h2><p>${lv.name} · ${lv.en}</p></div></div>` + legend +
+      STORY[level].map((_,i) => chapterBlock(i, true)).join("");
+    $("#side").innerHTML = `<div class="note"><h3>읽기 전에</h3><p style="margin:0;font-size:15px">장면마다 나오는 단어와 문법은 위에서 장면을 하나씩 골라서 볼 수 있어요. 아래 ‘한눈에 보기’에는 이 등급에서 배우는 것을 장면별로 모아 두었어요.</p></div>`;
+  } else {
+    const c = STORY[level][ch];
+    $("#story").innerHTML = `<div class="scene-head"><div><h2>${ch+1}장 · ${CH_TITLES[ch][0]}</h2><p>${CH_TITLES[ch][1]} · ${lv.name}</p></div></div>` + legend + chapterBlock(ch, false) + chapterNav();
+    $("#side").innerHTML =
+      `<div class="resource"><h3>단어 · Words</h3><table class="words">${c.words.map(w=>`<tr><td>${w[0]}</td><td>${w[1]}</td></tr>`).join("")}</table></div>` +
+      `<div class="resource"><h3>문법 · Grammar</h3>${c.grammar.map(g=>`<div class="gram"><b>${g[0]}</b><p>${g[1]}</p><span class="en">${g[2]}</span><div class="ex">${g[3]}</div></div>`).join("")}</div>` +
+      `<div class="practice"><h3>읽고 답해요</h3><p style="margin:0">${c.q[0]}</p><button class="reveal" id="rev">답 보기</button><div class="answer" id="ans">${c.q[1]}</div></div>`;
+    $("#rev").onclick = () => { const a = $("#ans"); a.classList.toggle("open"); $("#rev").textContent = a.classList.contains("open") ? "답 가리기" : "답 보기"; };
+  }
+  document.querySelectorAll(".ch-nav [data-go]").forEach(button=>button.onclick=()=>{ch=Number(button.dataset.go);render();$("#chapters").scrollIntoView({block:"start"});});
+  renderOverview();
+}
+
+function renderOverview(){
+  const lv = LEVELS.find(l => l.id === level);
+  $("#ovInner").innerHTML = `<p style="margin:0 0 8px;color:var(--muted);font-size:15px">${lv.name} · ${lv.desc}</p><table class="ov"><thead><tr><th>장면</th><th>단어</th><th>문법</th></tr></thead><tbody>` +
+    STORY[level].map((c,i) => `<tr><td>${i+1}장 ${CH_TITLES[i][0]}</td><td>${c.words.map(w=>w[0]).join(", ")}</td><td>${c.grammar.map(g=>g[0]).join(", ")}</td></tr>`).join("") +
+    `</tbody></table>`;
+}
+
+function renderAfterActivities(){
+  const target=$("#afterActivities");
+  /* 독후 활동 조각: q = 질문(영어 한 줄), ans = 답 보기 버튼과 숨긴 답, opt = 고르기 항목, act = 활동 하나 */
+  const q=(t,en)=>`<p>${t}</p>`+(en?`<span class="en">${en}</span>`:"");
+  const ans=(id,label,text)=>`<button class="reveal" data-ans="${id}" aria-expanded="false" aria-controls="${id}">${label}</button><div id="${id}" class="answer">${text}</div>`;
+  const opt=(name,value,text)=>`<label><input type="radio" name="${name}" value="${value}"> ${text}</label>`;
+  const act=(title,body,first)=>`<div${first?"":` style="margin-top:28px"`}><h3>${title}</h3>${body}</div>`;
+  const bubbleImg=`<img class="scene-img" src="images/tiger-4-3.webp" alt="어두운 외양간에서 호랑이 등에 올라탄 소도둑과, 등에 괴물이 탔다고 상상하는 호랑이" width="1280" height="720" loading="lazy" decoding="async" onerror="this.remove()">`;
+  const data = {
+    b:
+      act("마음을 담아 읽어요",
+        q("호랑이의 처음 말과 나중 말을 읽어요. 목소리가 어떻게 달라요?","Read the tiger's first and last lines. How does its voice change?")+
+        `<p>처음: “하하! 모두 나를 무서워해!”</p><p>나중: “곶감아, 나 좀 살려 줘!”</p>`+
+        q("처음에 호랑이는 어때요? 나중에는 어때요?")+
+        ans("ansFeel","예시 답 보기","처음에는 기분이 좋아요. 나중에는 곶감을 무서워해요."),true)+
+      act("말풍선을 채워요",
+        q("외양간 안은 아주 어두워요. 소도둑과 호랑이는 무엇이라고 말해요? 알맞은 말을 골라요.","It's very dark in the cowshed. Choose what the thief and the tiger say.")+
+        bubbleImg+
+        `<p>소도둑의 말</p><div role="group" aria-label="소도둑의 말">${opt("thiefSays","cow","“오! 큰 소네!”")}${opt("thiefSays","tiger","“으악! 호랑이다!”")}</div>`+
+        `<p>호랑이의 말</p><div role="group" aria-label="호랑이의 말">${opt("tigerSays","gotgam","“으악! 곶감이다!”")}${opt("tigerSays","thief","“앗! 소도둑이다!”")}</div>`+
+        `<button class="reveal" id="checkBubble">정답 확인</button><p id="bubbleFeedback" class="feedback" role="status"></p>`+
+        q("고른 말을 큰 소리로 읽어요.","Read your choices out loud."))+
+      act("엄마의 말을 바꿔요 · 선택",
+        q("호랑이는 우유를 알아요. 엄마가 “자, 우유야!”라고 말해요.","The tiger knows what milk is. Mom says, “Here, milk!”")+
+        q("호랑이는 우유를 무서워해요?")+
+        ans("ansMilk","답 보기","아니요. 안 무서워해요."))+
+      act("골라 봐요",
+        q("곶감은 무엇이에요?")+
+        `<div role="group" aria-label="곶감은 무엇이에요?">${opt("afterChoice","person","사람이에요.")}${opt("afterChoice","animal","동물이에요.")}${opt("afterChoice","food","음식이에요.")}</div>`+
+        `<button class="reveal" id="checkChoice">정답 확인</button><p id="choiceFeedback" class="feedback" role="status"></p>`+
+        q("호랑이는 곶감을 알아요?","Does the tiger know what gotgam is?")+
+        ans("ansKnow","답 보기","아니요. 호랑이는 곶감을 몰라요.")+
+        `<p style="margin-top:12px">호랑이는 왜 도망가요?</p>`+
+        ans("ansRun","답 보기","곶감이 무서워서 도망가요.")),
+    i:
+      act("소도둑 인터뷰",
+        q("여러분은 소도둑이에요. 선생님의 질문에 대답해요.","You are the cattle thief. Answer your teacher's questions.")+
+        `<p>왜 외양간에 들어갔어요?</p><p>무엇을 탔다고 생각했어요?</p><p>왜 등을 꽉 잡았어요?</p><p>언제 호랑이라는 것을 알았어요?</p><p>어떻게 도망쳤어요?</p>`+
+        q("이제 어젯밤 일을 세 문장으로 말해 주세요.","Now tell what happened last night in three sentences.")+
+        ans("ansThief","예시 답 보기","어젯밤에 소를 훔치러 외양간에 들어갔어요. 너무 캄캄해서 호랑이가 소인 줄 알고 등에 올라탔어요. 아침에 호랑이라는 것을 알고 나뭇가지를 붙잡아서 겨우 살았어요."),true)+
+      act("무엇을 잘못 생각했어요?",
+        q("호랑이는 왜 곶감을 무서워했어요? 호랑이와 소도둑은 각각 무엇을 잘못 생각했어요?","Why was the tiger afraid of gotgam? What did the tiger and the thief each get wrong?")+
+        ans("ansWrong","예시 답 보기","호랑이는 곶감이 자기보다 무서운 존재라고 생각했어요. 소도둑은 호랑이가 소인 줄 알았고, 호랑이는 소도둑이 곶감인 줄 알았어요."))+
+      act("엄마의 말을 바꿔요 · 선택",
+        q("엄마가 “자, 곶감이다!” 대신 “자, 맛있는 곶감 먹자!”라고 말해요. 호랑이는 무엇을 알 수 있을까요?","What if Mom said, “Here, let's eat a yummy gotgam!”?")+
+        ans("ansMom","예시 답 보기","곶감이 먹는 것이라는 사실을 알 수 있어요."))+
+      act("호랑이에게 알려 줘요 · 선택",
+        q("여러분이 이야기 속에 들어가요. 호랑이에게 사실을 하나 알려 주고, 왜 무서워하지 않아도 되는지 말해요.","Step into the story. Tell the tiger one fact and why it doesn't need to be scared.")+
+        ans("ansTell","예시 답 보기","등에 탄 사람은 곶감이 아니라 소도둑이니까 무서워하지 마세요."))+
+      act("말투를 바꿔요 · 선택",
+        q("호랑이는 “살려 줘!”라고 외쳐요. 처음 만난 어른에게 같은 부탁을 하면 어떻게 말해요?","How would you say “Help me!” to an adult you just met?")+
+        ans("ansPolite","답 보기","처음 만난 어른에게는 “살려 주세요!”라고 말해요. 친구에게는 “살려 줘!”라고 할 수 있어요. 아주 급할 때도 “살려 줘!”라고 외쳐요.")),
+    a:
+      act("엄마의 두 말 · 선택",
+        q("엄마: “아가, 뚝 그치렴! 자꾸 울면 무서운 호랑이가 잡아간다!”","Mom: “Hush now, baby! If you keep crying, the scary tiger will take you away!”")+
+        q("엄마: “자, 곶감이다!”","Mom: “Here, gotgam!”")+
+        q("엄마의 두 말을 들었을 때 아기의 반응은 어떻게 달랐나요? 호랑이는 그 차이를 어떻게 해석했나요?","How did the baby react differently to Mom's two lines, and how did the tiger read that difference?")+
+        ans("ansTwo","예시 답 보기","아기는 호랑이라는 말을 듣고도 계속 울었어요. 곶감이라는 말을 듣자 울음을 그쳤어요. 호랑이는 그 이유가 두려움 때문이라고 생각했어요."),true)+
+      act("새 말풍선 · 선택",
+        bubbleImg+
+        q("그림의 말풍선에 새 대사를 넣어 보세요. 소도둑이 처음부터 “호랑이다!”라고 말했다면 뒤의 사건은 어떻게 달라질까요?","Write new lines for the picture. What if the thief had shouted “A tiger!” from the start?"))+
+      act("호랑이에게 알려 준다면",
+        q("어느 장면에서 호랑이에게 사실을 알려 주면 뒤의 사건이 가장 크게 달라질까요? ‘-았/었더라면’을 써서 말해 보세요.","At which point would telling the tiger the truth change the story most? Use -았/었더라면.")+
+        ans("ansIf","예시 답 보기","외양간에 숨기 전에 알려 줬더라면 호랑이는 숨지 않았을 수도 있어요. 예시는 가능한 답 중 하나예요. 앞뒤 사건이 자연스럽게 이어지면 다른 결과도 좋아요."))+
+      act("이야기 나누기 · 선택",
+        q("호랑이는 왜 곶감에 대해 잘못된 결론을 내렸을까요? 어떤 점에서 이 이야기가 우스꽝스럽다고 느껴지나요?")+
+        q("‘어깨가 으쓱해지다’, ‘등골이 오싹하다’, ‘줄행랑을 치다’ 중 두 표현을 써서 호랑이의 변화를 설명해 보세요.","Discuss the tiger's mistaken reasoning and the humor in the story. Use two expressions to describe its change."))+
+      act("호랑이의 변명 · 쓰기 숙제",
+        q("산으로 돌아온 호랑이가 동물들에게 마을에서 있었던 일을 이야기해요. 체면을 지키고 싶은 호랑이는 무엇이라고 말할까요?","Back on the mountain, the tiger tells the animals what happened, trying to save face. What would it say?")+
+        q("수업에서는 무슨 말을 할지 이야기해 보세요. 글은 숙제로 써 오세요.","Discuss your ideas in class. Write the excuse for homework.")+
+        q("호랑이는 등에 탔던 사람이 소도둑이었다는 사실을 아직 몰라요.","The tiger still doesn't know that the rider was a cattle thief.")+
+        `<p>실제로 일어난 일을 두 가지 이상 넣으세요.</p><p>호랑이의 체면을 지키는 설명을 덧붙이세요.</p><p>본문에서 배운 표현을 한두 개 쓰세요.</p>`+
+        `<p>도움말: -는 바람에, -(으)ㄹ 수밖에 없었다</p>`+
+        q("다 쓴 뒤에 생각해 보세요. 어디까지가 실제 사건이고, 어디부터가 호랑이의 변명인가요?"))
+  };
+  target.innerHTML=data[level];
+  target.querySelectorAll(".reveal[data-ans]").forEach(b=>{
+    const label=b.textContent;
+    b.onclick=()=>{
+      const open=document.getElementById(b.dataset.ans).classList.toggle("open");
+      b.textContent=open?"답 가리기":label;
+      b.setAttribute("aria-expanded",open);
+    };
+  });
+  const check=$("#checkChoice");
+  if(check)check.onclick=()=>{
+    const selected=document.querySelector('input[name="afterChoice"]:checked');
+    $("#choiceFeedback").textContent=!selected?"먼저 답을 하나 골라 보세요.":selected.value==="food"?"맞아요! 곶감은 감을 말린 음식이에요.":"다시 생각해 보세요. 곶감은 먹을 수 있는 걸까요?";
+  };
+  const bubble=$("#checkBubble");
+  if(bubble)bubble.onclick=()=>{
+    const t=document.querySelector('input[name="thiefSays"]:checked'), g=document.querySelector('input[name="tigerSays"]:checked');
+    if(!t||!g){
+      $("#bubbleFeedback").textContent="소도둑과 호랑이의 말을 하나씩 골라 보세요.";
+      return;
+    }
+    if(t.value==="cow"&&g.value==="gotgam"){
+      $("#bubbleFeedback").textContent="맞아요! 소도둑은 ‘소다!’라고 생각해요. 호랑이는 ‘곶감이다!’라고 생각해요.";
+      return;
+    }
+    const hints=[];
+    if(t.value!=="cow")hints.push("소도둑은 앞이 잘 안 보여요. 소도둑의 말을 다시 골라 보세요.");
+    if(g.value!=="gotgam")hints.push("호랑이는 곶감을 무서워해요. 호랑이의 말을 다시 골라 보세요.");
+    $("#bubbleFeedback").textContent=hints.join(" ");
+  };
+}
+
+
+$("#toggleEn").onclick = function(){
+  const on = document.body.classList.toggle("hide-en");
+  this.setAttribute("aria-pressed", on);
+  this.textContent = on ? "영어 보이기" : "영어 숨기기";
+};
+/* 밑줄 친 말: 누르거나 마우스를 올리면 뜻을 보여 줘요 */
+const tip = document.createElement("div"); tip.className = "ul-tip"; tip.hidden = true; document.body.appendChild(tip);
+function showTip(el){
+  if(document.body.classList.contains("no-ul")) return;
+  tip.textContent = el.dataset.tip; tip.hidden = false;
+  const r = el.getBoundingClientRect(), w = tip.offsetWidth;
+  const left = Math.min(Math.max(8, r.left + window.scrollX + r.width/2 - w/2), window.scrollX + document.documentElement.clientWidth - w - 8);
+  tip.style.left = left + "px"; tip.style.top = (r.bottom + window.scrollY + 6) + "px";
+}
+document.addEventListener("click", e => { const el = e.target.closest("[data-tip]"); if(el) showTip(el); else tip.hidden = true; });
+document.addEventListener("pointerover", e => { if(e.pointerType !== "mouse") return; const el = e.target.closest("[data-tip]"); if(el) showTip(el); });
+document.addEventListener("pointerout", e => { if(e.pointerType !== "mouse") return; if(e.target.closest("[data-tip]")) tip.hidden = true; });
+document.addEventListener("focusin", e => { const el = e.target.closest("[data-tip]"); if(el) showTip(el); });
+window.addEventListener("scroll", () => { tip.hidden = true; }, {passive:true});
+$("#toggleUl").onclick = function(){
+  const on = document.body.classList.toggle("no-ul");
+  tip.hidden=true;
+  this.setAttribute("aria-pressed", on);
+  this.textContent = on ? "밑줄 보이기" : "밑줄 숨기기";
+};
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape")tip.hidden=true;
+  if((event.key==="Enter"||event.key===" ")&&event.target.matches("[data-tip]")){
+    event.preventDefault();showTip(event.target);
+  }
+});
+
+window.addEventListener("popstate",()=>{
+  const current=readStoryLocation();
+  level=current.level;
+  ch=current.ch;
+  render();
+});
+render();
+const reportHeight=()=>parent.postMessage({type:"story-height",height:document.querySelector(".wrap").getBoundingClientRect().height+8},location.origin);
+new ResizeObserver(reportHeight).observe(document.querySelector(".wrap"));
+reportHeight();
+</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "entry": "stories/index.html",
+  "lesson": "stories/tiger-gotgam/index.html",
+  "files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "brand/studio-mark.svg",
+      "bytes": 293,
+      "sha256": "954465f24381ee705f96b94004526eef0f1358017f325e6ea3466c43e4fabab8"
+    },
+    {
+      "path": "index.html",
+      "bytes": 526,
+      "sha256": "a78a875a2a71cde7dac6928899fe551a8398c82905c87d5c880af56bec1dd941"
+    },
+    {
+      "path": "learning-design/learning-theme.css",
+      "bytes": 7447,
+      "sha256": "46bef1f12f1fd1f7d57945114f6fe1b4fde94b6087d661da660c586782a77f08"
+    },
+    {
+      "path": "learning-design/student-shell.css",
+      "bytes": 2492,
+      "sha256": "7fa84936a6e45dcd9dc0591cd6ed35b70d4f6d04495f9eddb612945f70a6e8b5"
+    },
+    {
+      "path": "stories/index.html",
+      "bytes": 1317,
+      "sha256": "3d9f50857823fecc0792582ab61795863797f3ddcf316139f95b12888f544921"
+    },
+    {
+      "path": "stories/tiger-gotgam/images/gotgam.webp",
+      "bytes": 230980,
+      "sha256": "42bb19cfb3e1b833a9e345ba6136bc652aa9a0f4b70af121a4fb20a51b160f6c"
+    },
+    {
+      "path": "stories/tiger-gotgam/images/tiger-1-2.webp",
+      "bytes": 188328,
+      "sha256": "74582cc7520717203387ad72238c46e214029c779a726326692e91cbcf13a42a"
+    },
+    {
+      "path": "stories/tiger-gotgam/images/tiger-1-3.webp",
+      "bytes": 241468,
+      "sha256": "d5957582820487f003f4a5413d8128dc526e49d2d5fb113edf74b8137b2a858b"
+    },
+    {
+      "path": "stories/tiger-gotgam/images/tiger-2-1.webp",
+      "bytes": 226110,
+      "sha256": "22916b23c8a2888c6d0885197c3d536b8305afce913cd91eebd8f4e5319e9ad7"
+    },
+    {
+      "path": "stories/tiger-gotgam/images/tiger-2-2.webp",
+      "bytes": 202200,
+      "sha256": "3473d11758b532095a7feac78717dc588682d1496d7ed081c64ee5b5556c8083"
+    },
+    {
+      "path": "stories/tiger-gotgam/images/tiger-2-3.webp",
+      "bytes": 183860,
+      "sha256": "3f57d03bf49e9a8dad808416ca06e7c3be28d60fe021518a35e81615fe17da07"
+    },
+    {
+      "path": "stories/tiger-gotgam/images/tiger-3-3.webp",
+      "bytes": 150364,
+      "sha256": "8c0dd596846e9e56513493d86455cee2e89c78522f2213f72a85bfb8ff3e1cd9"
+    },
+    {
+      "path": "stories/tiger-gotgam/images/tiger-4-1.webp",
+      "bytes": 209758,
+      "sha256": "9df337cdc8261361a463d7cc54f521ca7de81ea7f45be78f9f9d74ff9668deb9"
+    },
+    {
+      "path": "stories/tiger-gotgam/images/tiger-4-2.webp",
+      "bytes": 2308415,
+      "sha256": "99930bf402a929e20a411a63d9ea38bb8a52c2e959340659c9716ffc620e5ec2"
+    },
+    {
+      "path": "stories/tiger-gotgam/images/tiger-4-3.webp",
+      "bytes": 2333069,
+      "sha256": "d7745422d2142f58994eed177d372a3ca1f5710e6fb6c6334975dfa6c3ca7c5a"
+    },
+    {
+      "path": "stories/tiger-gotgam/images/tiger-5-2.webp",
+      "bytes": 206122,
+      "sha256": "76482a7815886f37121cd56bef2c31edca24833b1483c5a35502ebd20c3cf6db"
+    },
+    {
+      "path": "stories/tiger-gotgam/images/tiger-5-3.webp",
+      "bytes": 183664,
+      "sha256": "69529789056bd54d88029f71c2f4af802cf81b96eeba63b58fe108754f9f27b6"
+    },
+    {
+      "path": "stories/tiger-gotgam/images/tiger-6-2.webp",
+      "bytes": 194898,
+      "sha256": "789e6ce991d46aeeec18bcaf7c7fe77d71bc4a0fd06b2826236be6d222676569"
+    },
+    {
+      "path": "stories/tiger-gotgam/images/tiger-6-3.webp",
+      "bytes": 189004,
+      "sha256": "26f4afc1dd5ed0873ebd03b6da115ce19bf6ca11ec7adba56f8cd5e32732b90b"
+    },
+    {
+      "path": "stories/tiger-gotgam/index.html",
+      "bytes": 90859,
+      "sha256": "76272795c1099ac7f041657fb1fb08c843c38c57848ab1e29ede7361fe328d3b"
+    },
+    {
+      "path": "stories/tiger-gotgam/preview.webp",
+      "bytes": 3077642,
+      "sha256": "c6e2e31ddf117b5add6cda0c5f3231b659c2c065f45d679a0494c6fe624a2a82"
+    },
+    {
+      "path": "stories/tiger-gotgam/tiger-1-1.webp",
+      "bytes": 3077642,
+      "sha256": "c6e2e31ddf117b5add6cda0c5f3231b659c2c065f45d679a0494c6fe624a2a82"
+    },
+    {
+      "path": "stories/tiger-gotgam/tiger-3-1.png",
+      "bytes": 2801799,
+      "sha256": "ab72adb558684784f633632221aaf0e340cf6424b6f630767e725c86c7aaf7af"
+    },
+    {
+      "path": "stories/tiger-gotgam/tiger-3-2.png",
+      "bytes": 2873881,
+      "sha256": "daf35cfa9444e6ad1309cead1c83d467c1e514d4cc5b60aa3bccc846bc0c27de"
+    },
+    {
+      "path": "stories/tiger-gotgam/tiger-5-1.png",
+      "bytes": 3080376,
+      "sha256": "2b5ac13dab0484cc087f89bf86776135f7685afae6ed6625c81e8943cdf04000"
+    },
+    {
+      "path": "stories/tiger-gotgam/tiger-6-1.png",
+      "bytes": 3020983,
+      "sha256": "4c907df88fbf38b4407e06ebb343c0d2bf5e72e8a7ad2992974ce29f95969d6d"
+    }
+  ]
+}
