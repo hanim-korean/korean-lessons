@@ -123,20 +123,26 @@
     <div class="box g">
       <span class="sym">=</span>
       <div class="big">이에요 / 예요</div>
+      <p>무엇인지, 누구인지 말할 때 써요.<br><span class="en">Use 이에요/예요 to say what something is or who someone is.</span></p>
       <p>이게 뭐예요? 누구예요?<br><span class="en">What is it? Who is it?</span></p>
       <ul>
         <li><span class="ko">고양이예요.</span> <span class="en">It’s a cat.</span></li>
         <li><span class="ko">저는 학생이에요.</span> <span class="en">I’m a student.</span></li>
       </ul>
+      <p>사전 형태는 '이다'예요.<br>명사 뒤에 붙여 써요.<br>부정 표현은 '아니다'예요.</p>
+      <p class="en">이에요 and 예요 come from 이다.<br>Attach them directly to a noun, with no space: 학생이에요.<br>They work like am, is, and are before a noun, as in “I am a student.”<br>To say “is not,” use 아니에요: 학생이 아니에요.</p>
     </div>
     <div class="box b">
       <span class="sym">📍</span>
       <div class="big">있어요 / 없어요</div>
+      <p>무엇이 있는지, 없는지 말할 때 써요.<br>어디에 있는지도 말해요.<br>가지고 있는 것도 말해요.<br><span class="en">Use 있어요/없어요 to say whether something is there.<br>With 에, you can say where it is.<br>You can also say what someone has or doesn’t have: 시간이 있어요.</span></p>
       <p>고양이가 있어요? 어디에 있어요?<br><span class="en">Is there a cat? Where is the cat?</span></p>
       <ul>
         <li><span class="ko">고양이가 방에 있어요.</span> <span class="en">The cat is in the room.</span></li>
         <li><span class="ko">방에 고양이가 있어요.</span> <span class="en">There is a cat in the room.</span></li>
       </ul>
+      <p>사전 형태는 '있다'예요.<br>명사에 붙이지 않고 따로 써요.<br>반대말은 '없다'예요.</p>
+      <p class="en">있어요 and 없어요 come from 있다 and 없다.<br>Unlike 이에요/예요, they do not attach to the noun: 책이에요. / 책이 있어요.</p>
     </div>
   </div>
 </section>
@@ -394,12 +400,15 @@
     const opts = box.querySelector('.opts');
     const fb = box.querySelector('.fb');
     let done = false;
+    let solved = false;
     it.opts.forEach((o, j) => {
       const b = document.createElement('button');
       b.type = 'button';
       b.textContent = o;
       b.addEventListener('click', () => {
+        if (solved) return;
         if (j === it.a) {
+          solved = true;
           b.classList.add('right');
           fb.innerHTML = '<b>좋아요! Correct!</b> ' + it.fb;
           if (!done) { correct++; }
