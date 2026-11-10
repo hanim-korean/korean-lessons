@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#304027">
+<title>해님 달님 · Allbarun Korean</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--ink:#202327;--muted:#60656e;--line:#dfe2e7;--blue:#214dcc;--pale:#eef3ff;--paper:#f7f8fa;--warm:#fff6ea;--radius:14px;--font:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.65;word-break:keep-all}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* top bar */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0;border-bottom:1px solid var(--line)}
+.brand{font-weight:800;letter-spacing:-.01em}
+.brand small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:7px;padding:7px 12px;font-size:14px}
+.btn[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* hero */
+.hero{padding:44px 0 28px}
+.chip{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--blue);background:var(--pale);border-radius:999px;padding:4px 12px;margin-bottom:14px}
+h1{font-size:clamp(34px,5vw,56px);line-height:1.15;margin:0 0 10px;letter-spacing:-.02em}
+.sub{color:var(--muted);margin:0;font-size:19px}
+.sub .en{font-size:16px}
+
+/* level + chapter tabs */
+.label{font-size:13px;font-weight:700;color:var(--muted);margin:22px 0 8px}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.level-button{text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px 14px;color:var(--ink)}
+.level-button b{display:block;font-size:18px}
+.level-button span{display:block;font-size:13px;color:var(--muted);line-height:1.45;margin-top:2px}
+.level-button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.level-button[aria-selected=true] span{color:#c9ccd2}
+.chapters{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.scene-button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 8px;font-size:14px;color:var(--ink);line-height:1.35}
+.scene-button small{display:block;color:var(--muted);font-size:12px}
+.scene-button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.scene-button[aria-selected=true] small{color:#c9ccd2}
+
+/* lesson grid */
+.lesson{display:grid;grid-template-columns:1.4fr .8fr;gap:22px;margin:26px 0 40px;align-items:start}
+.conversation{border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.scene-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}
+.scene-head h2{margin:0;font-size:26px;letter-spacing:-.01em}
+.scene-head p{margin:2px 0 0;color:var(--muted);font-size:15px}
+.line{margin:0 0 14px}
+.narr{padding:2px 0}
+.ko{display:block}
+.en{display:block;color:var(--muted);font-size:15px;line-height:1.5}
+body.hide-en .en,body.hide-en .en-inline,body.hide-en .words td.gloss{display:none}
+.more-words{margin-top:10px}
+.more-words summary{cursor:pointer;color:var(--blue);font-size:15px;padding:6px 0}
+.gram.core{background:#fff;border:1px solid #c5d0bd;border-radius:10px;padding:12px}
+.core-tag{display:table;background:var(--green,#33402a);color:#fff;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;margin-bottom:6px}
+.gram-sub{margin:16px 0 4px;font-size:14px;font-weight:700;color:var(--muted)}
+.gram-sub+.gram{border-top:0;padding-top:4px}
+.bubble{box-sizing:border-box;width:100%;max-width:100%;border-radius:12px;padding:12px 14px}
+.who{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bottom:2px}
+.say .bubble{background:var(--paper)}
+.say.me{display:flex;justify-content:flex-end}
+.say.me .bubble{background:var(--pale);color:#17377f}
+.think .bubble{background:var(--warm);border:1px dashed #e7c79a;font-style:normal}
+.think .who::after{content:" · 속마음";font-weight:500}
+.play{border:0;background:none;color:var(--blue);font-size:13px;padding:2px 0;margin-top:2px}
+.play:hover{text-decoration:underline}
+
+/* sidebar */
+.side{display:grid;gap:16px}
+.resource,.note{border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.resource h3,.note h3,.practice h3{margin:0 0 10px;font-size:18px}
+.words{width:100%;border-collapse:collapse;font-size:15px}
+.words td{padding:7px 4px;border-top:1px solid var(--line);vertical-align:top}
+.words tr:first-child td{border-top:0}
+.words td:first-child{font-weight:700;white-space:nowrap;padding-right:12px}
+.words td:last-child{color:var(--muted)}
+.gram{border-top:1px solid var(--line);padding:12px 0}
+.gram:first-of-type{border-top:0;padding-top:0}
+.gram b{color:var(--blue);font-size:17px}
+.gram p{margin:4px 0;font-size:15px}
+.gram .ex{background:var(--paper);border-radius:8px;padding:8px 10px;font-size:15px;margin-top:6px}
+.practice{background:var(--paper);border-radius:var(--radius);padding:18px}
+.reveal{display:block;width:100%;text-align:left;margin-top:10px;background:var(--pale);border:1px dashed #b0bfdf;border-radius:12px;padding:10px 12px;color:#17377f;font-size:15px}
+.answer{display:none;margin-top:10px;font-size:15px}
+.answer.open{display:block}
+
+/* overview */
+.overview{border:1px solid var(--line);border-radius:var(--radius);margin:0 0 48px}
+.overview summary{padding:16px 20px;font-weight:700;cursor:pointer}
+.overview .inner{padding:0 20px 20px;overflow-x:auto}
+.ov{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
+.ov th,.ov td{border-top:1px solid var(--line);padding:10px 8px;text-align:left;vertical-align:top}
+.ov th{font-size:13px;color:var(--muted)}
+.ov td:first-child{font-weight:700;white-space:nowrap}
+
+footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:14px}
+
+@media (max-width:900px){
+  .chapters{grid-template-columns:repeat(3,1fr)}
+  .lesson{grid-template-columns:1fr}
+}
+@media (max-width:580px){
+  body{font-size:16px}
+  .wrap{padding:0 16px}
+  .levels{grid-template-columns:1fr}
+  .conversation{padding:18px}
+  .bubble{max-width:100%}
+  .top{flex-direction:column;align-items:flex-start}
+}
+@media print{
+  .top .tools,.levels,.chapters,.label,.play,.reveal,.overview{display:none!important}
+  h1{font-size:28px}
+  .hero{padding:12px 0}
+  .lesson{grid-template-columns:1fr;margin:10px 0}
+  .answer{display:block}
+}
+
+:root{--ink:#263c30;--muted:#52634f;--line:#dfe6db;--blue:#526c3d;--pale:#edf3e3;--paper:#fdfefd;--warm:#f3f7ed}body{background:#fdfefd}.top{background:#fdfefd}button:focus-visible{outline:2px solid #526c3d;outline-offset:3px}
+
+.wrap{max-width:none;padding:0}h1{font-size:30px;font-weight:600;line-height:1.35;letter-spacing:-.025em;color:#263c30}@media(max-width:720px){h1{font-size:26px}}
+
+.reading-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0;margin:0 0 12px;border:0}
+.reading-title{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;color:#72806c}.reading-title a{font-size:15px;color:#52634f;text-decoration:none}.reading-title a:hover{text-decoration:underline}.reading-title h1{margin:0;font-size:30px;font-weight:600;line-height:1.35;letter-spacing:-.025em}
+.reading-actions{display:flex;gap:8px;flex-shrink:0}.reading-actions .btn{min-height:44px;padding:8px 12px;background:transparent;border:1px solid #c5d0bd;border-radius:6px;font-size:14px;color:#263c30}
+.reading-level-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 24px}.reading-level-row p{margin:0;font-size:14px;color:#52634f}.reading-level-row select{width:144px;min-height:44px;padding:8px 12px;border:1px solid #c5d0bd;border-radius:6px;background:#fff;color:#263c30;font:inherit;font-size:16px;flex-shrink:0}
+:focus-visible{outline:2px solid #526c3d;outline-offset:3px}.chapters{margin-top:8px}
+@media(max-width:720px){.reading-heading{flex-wrap:wrap;gap:12px}.reading-title h1{font-size:26px}.reading-title{gap:8px}.reading-actions{width:100%;justify-content:flex-end}.reading-level-row{align-items:flex-start;margin-bottom:20px}.reading-level-row p{font-size:13px}.reading-level-row select{width:112px}.wrap{padding:0}}
+@media print{.reading-actions,.reading-level-row select,.reading-title>a,.reading-title>span{display:none}.reading-heading{display:block}}
+
+.story-scene-image{display:block;width:100%;height:auto;aspect-ratio:1680/944;object-fit:contain;border-radius:8px;margin:0 0 22px}
+@media print{.story-scene-image{max-height:240px;break-inside:avoid}}
+
+.reading-level-row select{appearance:none;-webkit-appearance:none;box-sizing:border-box;padding:10px 42px 10px 16px;background-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23263c30' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;background-size:16px 16px;line-height:1.5;}
+.reading-level-row select:focus-visible{outline:2px solid #526c3d;outline-offset:-3px}
+.reading-title{align-items:center;column-gap:12px;row-gap:4px}
+.reading-title :is(a,h1){font-size:24px;font-weight:600;line-height:1.4;letter-spacing:-.025em;color:#263c30;margin:0}
+.reading-title>span{font-size:22px;font-weight:400;line-height:1.4}
+@media(max-width:720px){.reading-title :is(a,h1){font-size:22px}.reading-title>span{font-size:20px}}
+
+/* Reading activities share the standalone lesson's content and the site's palette. */
+[hidden]{display:none!important}
+.lesson > *{min-width:0}
+.chapters{grid-template-columns:repeat(4,minmax(0,1fr))}
+.after{margin:26px 0 32px;padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--warm)}
+.after h2{margin:0 0 6px;font-size:24px}
+.after p{margin:6px 0}
+.after .reveal{max-width:460px;min-height:44px;background:#fff;color:var(--ink);border-color:#9bab8e}
+.after-activities{margin-top:18px;padding-top:12px;border-top:1px solid var(--line)}
+.after-activities h3{font-size:18px;margin:0 0 8px}
+.after-activities label{display:flex;align-items:center;gap:8px;padding:8px 0;min-height:44px;font-size:16px}
+.after-activities input{margin:0;accent-color:var(--blue)}
+.after-activities .feedback{font-size:15px;margin:8px 0 0}
+.scene-img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;margin:12px 0 18px;border-radius:8px}
+#cultureInfo .scene-img{max-width:720px}
+.ch-nav{display:flex;justify-content:space-between;gap:12px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.ch-nav button{min-height:44px;border:1px solid #c5d0bd;background:transparent;border-radius:6px;padding:10px 14px;color:var(--ink);font-size:16px}
+@media(max-width:580px){.chapters{grid-template-columns:repeat(2,minmax(0,1fr))}.after{padding:16px}.ch-nav{flex-wrap:wrap}}
+@media print{.ch-nav,.reading-level-row,.reading-actions{display:none!important}.after{border:0;padding:0;background:#fff}.after .scene-img{max-height:240px;break-inside:avoid}}
+
+/* Dialogue shading and the original word/grammar annotation layer. */
+.say .bubble{background:#f5f7f0;border:1px solid #e1e6d9;box-shadow:var(--learning-shadow)}
+.think .bubble{background:#f6f7ee;border:1px dashed #b5c19e;box-shadow:var(--learning-shadow)}
+.kw{text-decoration:underline;text-decoration-color:#62803a;text-decoration-thickness:2px;text-underline-offset:4px;cursor:help}
+.kg{text-decoration:underline dashed;text-decoration-color:#958c47;text-decoration-thickness:2px;text-underline-offset:4px;cursor:help}
+body.no-ul .kw,body.no-ul .kg{text-decoration:none;cursor:auto}
+.ul-legend{display:flex;gap:8px 14px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin:0 0 18px}
+body.no-ul .ul-legend{display:none}
+.ul-legend .kw,.ul-legend .kg{color:var(--ink);cursor:auto}
+.ul-tip{position:absolute;z-index:20;max-width:280px;background:#33402a;color:#fff;font-size:14px;line-height:1.5;padding:8px 10px;border-radius:8px;box-shadow:0 4px 14px rgb(38 60 48 / 16%);pointer-events:none}
+.reading-actions{flex-wrap:wrap}
+/* 제목 위 링크와 제목 사이, 등급 설명 두 줄 사이 간격 없애기 */
+.learning-material.learning-story .learning-heading .learning-back{display:block;min-height:0;margin:0;line-height:1.4}
+.learning-material.learning-story .learning-heading h1{margin-top:0}
+.reading-level-row .level-text{min-width:0}
+.reading-level-row #levelStyleNote{margin:2px 0 0}
+@media print{.ul-legend,.ul-tip{display:none!important}.say .bubble,.think .bubble{box-shadow:none}}
+</style>
+<link rel="stylesheet" href="../../learning-design/learning-theme.css">
+<link rel="stylesheet" href="../../learning-design/student-shell.css">
+</head>
+<body class="learning-material learning-story student-lesson">
+<header class="student-brand-header"><div class="student-brand-inner"><a class="student-brand" href="../../index.html" aria-label="Allbarun Korean 이야기 목록"><img src="../../brand/studio-mark.svg" width="28" height="28" alt=""><span>Allbarun Korean</span></a></div></header>
+<div class="wrap learning-body">
+  <header class="learning-header">
+    <div class="learning-heading"><a class="learning-back" href="../index.html">이야기로 배우는 한국어</a><h1>해님 달님</h1></div>
+    <div class="learning-tools reading-actions"><button class="btn learning-button" id="toggleEn" aria-pressed="false">영어 숨기기</button><button class="btn learning-button" id="toggleUl" aria-pressed="false">밑줄 숨기기</button></div>
+  </header>
+  <div class="reading-level-row"><div class="level-text"><p id="levelDescription" aria-live="polite"></p><p id="levelStyleNote">이야기를 들려주는 문장은 해요체예요. 등장인물의 말에는 반말도 나와요.</p></div><select id="levels" aria-label="수업 수준" aria-describedby="levelDescription"></select></div>
+
+  <div class="label chapter-label">장면 · Chapter</div>
+  <label class="learning-mobile-scene-picker">장면 선택<select id="scenePicker" aria-label="장면 선택"></select></label>
+  <div class="chapters" role="tablist" id="chapters"></div>
+
+  <main class="lesson" id="lesson">
+    <section class="conversation" id="story"></section>
+    <aside class="side" id="side"></aside>
+  </main>
+
+  <section class="after" id="after" hidden>
+    <h2>다 읽고 나서</h2>
+    <div class="after-activities" id="afterActivities"></div>
+    <div class="after-activities" id="cultureInfo">
+      <h3>떡 이야기</h3>
+      <p>떡은 쌀로 만든 한국 음식이에요. 잔치나 명절에 많이 먹어요. 엄마가 받은 찰떡은 찹쌀로 만들어서 쫀득쫀득해요.</p>
+      <span class="en">Tteok is a Korean food made from rice. People eat it at feasts and holidays. The chaltteok Mom received is made from sticky rice, so it is chewy.</span>
+      <p>옛날에는 일한 값(품삯)으로 돈 대신 곡식이나 떡 같은 음식을 받기도 했어요.</p>
+      <span class="en">Long ago, people were sometimes paid for their work with grain or food like rice cakes instead of money.</span>
+      <h3 style="margin-top:22px">왜 '남매'가 아니라 '오누이'일까요?</h3>
+      <p>오빠와 여동생, 누나와 남동생을 함께 부르는 말로 '남매'와 '오누이'가 있어요. 뜻은 같아요.</p>
+      <span class="en">Both 남매 and 오누이 mean "a brother and a sister" together.</span>
+      <p>'남매(男妹)'는 한자로 된 말이에요. '오누이'는 '오라비'와 '누이'를 합친 순우리말이에요. '오라비'는 여자가 남자 형제를 부르던 옛말이고, '누이'는 남자가 여자 형제를 부르는 말이에요. 이 이야기에 나오는 '누이'도 같은 말이에요.</p>
+      <span class="en">남매 comes from Chinese characters. 오누이 is a native Korean word made from 오라비 (an old word a girl used for her brother) and 누이 (a word a boy uses for his sister). The 누이 in this story is the same word.</span>
+      <p>요즘은 '남매'를 더 많이 쓰지만, '오누이'는 옛날 느낌이 나고 더 다정하게 들려요. 그래서 옛이야기에서는 '오누이'를 자주 써요.</p>
+      <span class="en">Today people say 남매 more often, but 오누이 sounds old-fashioned and warm, so folk tales often use it.</span>
+      <h3 style="margin-top:22px">'썩'이 두 번 나와요</h3>
+      <p>중급과 고급 4장의 ‘썩’과 5장의 ‘썩은’은 소리는 비슷하지만 전혀 다른 말이에요.</p>
+      <span class="en">The 썩 in chapter 4 (intermediate and advanced) and the 썩은 in chapter 5 look alike, but they are different words.</span>
+      <table class="words" style="margin-top:8px"><tr><td>썩 나오지 못해!</td><td>당장 나오너라! 강하게 명령하는 말이에요. 옛이야기 속 호랑이 말투라서 요즘 대화에서는 거의 쓰지 않아요.</td></tr><tr><td>썩은 동아줄</td><td>낡아서 썩은 줄이에요. ‘썩다’에서 온 말이에요.</td></tr></table>
+      <span class="en">썩 나오지 못해! = "Come out this instant!" (an old-style strong command; not used in everyday talk today). 썩은 동아줄 = a rotten rope, from 썩다 "to rot".</span>
+      <p style="margin-top:14px;font-size:14px;color:var(--muted)">수숫대가 빨간 이유, 해를 똑바로 보기 어려운 이유, 엄마가 구름이 된 이야기는 이 이야기에 전해 오는 옛이야기 속 설명이에요. 과학적인 설명이 아니고, 「해님 달님」의 모든 판본에 나오는 내용도 아니에요.</p>
+      <span class="en">Why sorghum stalks are red, why the sun is hard to look at, and the mother becoming a cloud are folk-tale explanations from this version of the story. They are not scientific, and not every version of the tale includes them.</span>
+    </div>
+  </section>
+
+  <details class="overview" id="overview">
+    <summary>이 등급에서 배우는 단어와 문법 한눈에 보기</summary>
+    <div class="inner" id="ovInner"></div>
+  </details>
+
+  
+</div>
+
+<script>
+const LEVELS = [
+  {id:"b", name:"초급", desc:"짧은 문장, 해요체 현재형", en:"Beginner", rate:0.8},
+  {id:"i", name:"중급", desc:"해요체 과거형, 연결 어미, 의성어·의태어", en:"Intermediate", rate:0.9},
+  {id:"a", name:"고급", desc:"글말(-았다), 관용 표현, 고급 문법", en:"Advanced", rate:0.95}
+];
+// line: [type, who, ko, en]  type: n=narration, s=speech, t=thought
+const STORY = {
+b:[
+ {t:["떡을 받은 엄마", "Mom gets rice cakes"],
+  lines:[
+   ["n", "", "옛날 옛날, 산골 마을에 엄마와 오누이가 살아요.", "Long, long ago, a mother and her two children lived in a mountain village."],
+   ["n", "", "오빠와 여동생이에요.", "An older brother and a younger sister."],
+   ["n", "", "엄마는 오늘 이웃 마을 잔칫집에서 일해요.", "Today Mom works at a house where a feast is being held in the neighboring village."],
+   ["s", "엄마", "얘들아, 문 꼭 잠가. 아무한테도 문 열어 주지 마.", "Kids, lock the door. Don't open it for anyone."],
+   ["s", "엄마", "저녁에 맛있는 떡을 가지고 올게.", "I'll bring you some tasty rice cakes this evening."],
+   ["s", "오누이", "네, 엄마! 빨리 오세요.", "Okay, Mom! Come back soon."],
+   ["n", "", "엄마는 하루 종일 열심히 일해요.", "Mom works hard all day."],
+   ["n", "", "일이 끝나요. 엄마는 품삯으로 떡을 받아요.", "The work is done. Mom gets rice cakes as her pay."],
+   ["t", "엄마", "아이들이 좋아하겠다. 빨리 가야지.", "The kids will love these. I should hurry."],
+   ["n", "", "엄마는 떡 소쿠리를 머리에 이고 집으로 가요.", "Mom carries the sokuri (a round, shallow basket) of rice cakes on her head and heads home."],
+   ["n", "", "집에 가는 길에는 높은 고개가 여러 개 있어요.", "On the way home there are several high mountain passes."]],
+  words:[["살다", "to live"], ["잔칫집", "a house holding a feast"], ["일하다", "to work"], ["떡", "rice cake"], ["고개", "mountain pass"], ["옛날", "long ago"], ["산골", "mountain village area"], ["마을", "village"], ["오누이", "brother and sister"], ["이웃", "neighboring"], ["문을 잠그다", "to lock the door"], ["맛있다", "to be tasty"], ["저녁", "evening"], ["하루 종일", "all day long"], ["끝나다", "to end"], ["품삯", "wages for labor"], ["소쿠리", "sokuri, a round shallow bamboo basket"], ["머리에 이다", "to carry on one's head"], ["길", "road, way"], ["높다", "to be high"], ["여러 개", "several"]],
+  core:["-아요/어요 (현재형)", "지금 일어나는 일을 말해요. 이 이야기는 눈앞에서 일어나는 것처럼 현재형으로 들려줘요.", "present tense, polite style", "엄마는 오늘 이웃 마을 잔칫집에서 일해요."],
+  extra:[["N에서", "일하는 곳, 무엇을 하는 곳을 말해요.", "at, in (place of action)", "잔칫집에서 일해요."], ["-지 마", "엄마가 아이들에게 하지 말라고 하는 말이에요. 듣고 이해하는 표현이에요.", "don't ~ (casual)", "아무한테도 문 열어 주지 마."]],
+  q:["엄마는 품삯으로 무엇을 받아요?", "떡을 받아요."]},
+ {t:["떡 하나 주면 안 잡아먹지", "Give me a rice cake, and I won't eat you"],
+  lines:[
+   ["n", "", "엄마가 첫 번째 고개에 와요.", "Mom comes to the first pass."],
+   ["n", "", "그런데 커다란 호랑이가 나타나요!", "But a huge tiger appears!"],
+   ["s", "호랑이", "어흥! 떡 하나 주면 안 잡아먹지!", "Roar! Give me a rice cake, and I won't eat you!"],
+   ["n", "", "엄마는 무서워요. 그래서 떡을 하나 줘요.", "Mom is scared. So she gives it one rice cake."],
+   ["n", "", "호랑이는 떡을 꿀꺽 먹어요.", "The tiger gulps it down."],
+   ["n", "", "두 번째 고개, 세 번째 고개… 호랑이가 또 나와요.", "The second pass, the third pass… the tiger shows up again."],
+   ["s", "호랑이", "떡 하나 주면 안 잡아먹지!", "Give me a rice cake, and I won't eat you!"],
+   ["n", "", "엄마는 고개마다 떡을 줘요.", "Mom gives it a rice cake at every pass."],
+   ["n", "", "엄마는 스무 고개를 넘어요. 이제 소쿠리에 떡이 하나도 없어요.", "Mom crosses twenty passes. Now there are no rice cakes left in the sokuri."],
+   ["s", "엄마", "떡이 없어요. 제발 집에 보내 주세요. 아이들이 기다려요.", "I have no more rice cakes. Please let me go home. My children are waiting."],
+   ["s", "호랑이", "떡이 없으면 너를 잡아먹지!", "If you have no rice cakes, I'll eat you!"],
+   ["n", "", "호랑이는 엄마를 꿀꺽 삼켜요.", "The tiger swallows Mom in one gulp."]],
+  words:[["나타나다", "to appear"], ["무섭다", "to be scary, scared"], ["잡아먹다", "to eat (prey)"], ["또", "again"], ["기다리다", "to wait"], ["첫 번째", "first"], ["커다랗다", "to be huge"], ["꿀꺽", "gulp"], ["고개마다", "at every pass"], ["스무", "twenty"], ["하나도 없다", "there is none at all"], ["제발", "please"], ["보내다", "to let go, send"], ["삼키다", "to swallow"]],
+  core:["-(으)면", "‘만약에 그렇게 하면’이라는 조건을 말해요.", "if ~", "떡 하나 주면 안 잡아먹지!"],
+  extra:[["안 + 동사", "동사 앞에 안을 넣어 하지 않는다는 뜻을 말해요.", "not ~", "안 잡아먹지!"], ["N마다", "하나하나 빠짐없이 모두라는 뜻이에요.", "every N", "엄마는 고개마다 떡을 줘요."]],
+  q:["왜 소쿠리에 떡이 하나도 없어요?", "엄마가 고개마다 호랑이에게 떡을 줬어요. 그래서 떡이 다 없어졌어요."]},
+ {t:["엄마 옷을 입은 호랑이", "The tiger in Mom's clothes"],
+  lines:[
+   ["n", "", "호랑이는 엄마 옷을 입어요.", "The tiger puts on Mom's clothes."],
+   ["n", "", "그리고 오누이의 집으로 가요.", "Then it goes to the children's house."],
+   ["s", "호랑이", "얘들아, 엄마 왔다. 문 열어라.", "Kids, Mom's home. Open the door."],
+   ["n", "", "오빠가 잘 들어요.", "The brother listens carefully."],
+   ["s", "오빠", "우리 엄마 목소리가 아니에요.", "That's not our mom's voice."],
+   ["s", "호랑이", "감기에 걸렸어. 그래서 목소리가 이상해.", "I caught a cold. That's why my voice sounds strange."],
+   ["s", "동생", "그럼 손을 보여 주세요.", "Then show us your hand."],
+   ["n", "", "문구멍으로 손이 들어와요. 손에 털이 많아요!", "A hand comes in through the hole in the paper door. It's very hairy!"],
+   ["s", "동생", "엄마 손은 털이 없어요!", "Mom's hands aren't hairy!"],
+   ["s", "호랑이", "일을 많이 했어. 그래서 손이 거칠어.", "I worked a lot. That's why my hands are rough."],
+   ["n", "", "오누이가 문구멍으로 밖을 봐요. 그런데 꼬리가 보여요!", "The children peek out through the hole. They see a tail!"],
+   ["t", "오빠", "엄마가 아니야. 호랑이야!", "That's not Mom. It's the tiger!"],
+   ["n", "", "호랑이가 문을 쾅쾅 흔들어요.", "The tiger shakes the door, bang bang."]],
+  words:[["옷을 입다", "to put on clothes"], ["목소리", "voice"], ["손", "hand"], ["털", "fur, hair"], ["꼬리", "tail"], ["얘들아", "hey, kids"], ["문을 열다", "to open the door"], ["감기에 걸리다", "to catch a cold"], ["이상하다", "to be strange"], ["문구멍", "hole in a paper door"], ["거칠다", "to be rough"], ["쾅쾅", "bang bang"], ["흔들다", "to shake"]],
+  core:["-아/어 주세요", "다른 사람에게 무엇을 해 달라고 부탁할 때 써요.", "please do ~ (for me)", "그럼 손을 보여 주세요."],
+  extra:[["그래서", "앞의 말이 뒤의 말의 이유일 때 써요.", "so, therefore", "감기에 걸렸어. 그래서 목소리가 이상해."], ["N이/가 아니에요", "무엇이 아니라고 말해요.", "is not N", "우리 엄마 목소리가 아니에요."]],
+  q:["오누이는 어떻게 호랑이인 걸 알았어요?", "목소리가 이상하고, 손에 털이 많고, 꼬리가 보였어요."]},
+ {t:["우물가 나무 위로", "Up the tree by the well"],
+  lines:[
+   ["s", "오빠", "엄마, 우리 뒷간에 갔다 올게요!", "Mom, we're going to the outhouse!"],
+   ["n", "", "오누이는 뒷문으로 살금살금 나가요.", "The children sneak out the back door."],
+   ["n", "", "우물 옆에 큰 나무가 있어요. 오누이는 나무 위로 올라가요.", "There is a big tree next to the well. The children climb up the tree."],
+   ["n", "", "호랑이가 문을 부수고 들어와요. 그런데 방에 아무도 없어요.", "The tiger breaks the door and comes in. But no one is in the room."],
+   ["s", "호랑이", "얘들아, 어디 있니? 빨리 나와!", "Kids, where are you? Come out now!"],
+   ["s", "동생", "까르르, 바보!", "Hee hee, silly!"],
+   ["n", "", "호랑이가 웃음소리를 들어요. 그리고 위를 봐요. 나무 위에 오누이가 있어요!", "The tiger hears the laughter and looks up. The children are up in the tree!"],
+   ["s", "호랑이", "너희 거기에 어떻게 올라갔어?", "How did you get up there?"],
+   ["s", "오빠", "손에 참기름을 바르고 올라왔지!", "I put sesame oil on my hands and climbed up!"],
+   ["n", "", "호랑이는 손에 참기름을 발라요. 그리고 나무를 꼭 잡아요.", "The tiger puts sesame oil on its paws. Then it grabs the tree tight."],
+   ["n", "", "그런데 쭈르르, 쿵! 손이 미끄러워요!", "But whoosh, thud! Its paws are slippery!"],
+   ["n", "", "호랑이는 나무에 올라갈 수 없어요.", "The tiger can't climb the tree."],
+   ["n", "", "동생은 웃다가 실수로 말해요.", "The sister is laughing and lets something slip by mistake."],
+   ["s", "동생", "바보! 도끼로 찍으면 되지!", "Silly! Just chop it with an axe!"],
+   ["n", "", "호랑이는 도끼로 나무를 쿵쿵 찍어요.", "The tiger chops the tree, thunk thunk, with the axe."],
+   ["n", "", "나무에 발을 올릴 곳이 생겨요.", "Now there are places on the tree to put its feet."],
+   ["n", "", "호랑이는 그곳을 밟고 한 걸음씩 올라와요.", "The tiger steps on them and climbs up, one step at a time."]],
+  words:[["올라가다", "to climb up"], ["참기름", "sesame oil"], ["바르다", "to apply, rub on"], ["미끄럽다", "to be slippery"], ["도끼", "axe"], ["뒷간", "outhouse (old word)"], ["갔다 오다", "to go and come back"], ["뒷문", "back door"], ["살금살금", "stealthily"], ["우물", "well"], ["부수다", "to break"], ["아무도 없다", "there is no one"], ["까르르", "hee hee (giggling)"], ["바보", "fool, silly"], ["웃음소리", "sound of laughter"], ["꼭 잡다", "to hold tight"], ["쭈르르", "whoosh (sliding)"], ["쿵", "thud"], ["실수로", "by mistake"], ["찍다", "to chop"], ["쿵쿵", "thunk thunk"], ["생기다", "to appear, come to be"], ["곳", "place, spot"], ["밟다", "to step on"], ["한 걸음씩", "one step at a time"]],
+  core:["-(으)ㄹ 수 있어요/없어요", "할 수 있는 일과 할 수 없는 일을 말해요.", "can / cannot ~", "호랑이는 나무에 올라갈 수 없어요."],
+  extra:[["N(으)로 (도구)", "무엇을 써서 하는지 말해요.", "with N (tool)", "도끼로 나무를 쿵쿵 찍어요."], ["어떻게", "방법을 물어볼 때 써요.", "how", "너희 거기에 어떻게 올라갔어?"]],
+  q:["호랑이는 처음에 왜 나무에 올라갈 수 없어요?", "손에 참기름을 발라서 손이 미끄러워요."]},
+ {t:["하늘에서 내려온 동아줄", "The rope from the sky"],
+  lines:[
+   ["n", "", "호랑이가 점점 가까이 와요.", "The tiger comes closer and closer."],
+   ["n", "", "오누이는 너무 무서워요.", "The children are very scared."],
+   ["n", "", "오누이는 하늘을 보고 빌어요.", "The children look up at the sky and pray."],
+   ["s", "오누이", "하느님, 저희를 살려 주세요. 튼튼한 동아줄을 내려 주세요.", "Lord of Heaven, please save us. Please send down a strong rope."],
+   ["n", "", "그때 하늘에서 동아줄이 내려와요.", "Just then, a rope comes down from the sky."],
+   ["n", "", "오누이는 동아줄을 꼭 잡고 하늘로 올라가요.", "The children hold the rope tight and go up to the sky."],
+   ["n", "", "호랑이도 하늘을 보고 빌어요.", "The tiger also looks up and prays."],
+   ["s", "호랑이", "하느님, 저에게도 동아줄을 내려 주세요!", "Lord of Heaven, send a rope down for me too!"],
+   ["n", "", "하늘에서 또 동아줄이 내려와요. 그런데 썩은 동아줄이에요.", "Another rope comes down. But it's a rotten rope."],
+   ["n", "", "호랑이는 동아줄을 잡고 올라가요.", "The tiger grabs the rope and climbs up."],
+   ["n", "", "그때, 툭! 동아줄이 끊어져요.", "Then, snap! The rope breaks."],
+   ["n", "", "호랑이는 수수밭으로 쿵 떨어져요.", "The tiger falls into a sorghum field with a thud."],
+   ["n", "", "그때 호랑이 피가 수숫대에 묻어요. 그래서 지금도 수숫대가 빨개요.", "The tiger's blood gets on the sorghum stalks. That's why sorghum stalks are still red today."]],
+  words:[["빌다", "to pray, beg"], ["동아줄", "thick rope"], ["튼튼하다", "to be strong, sturdy"], ["썩다", "to rot (썩은 동아줄 = a rotten rope)"], ["끊어지다", "to snap, break"], ["점점", "gradually"], ["가까이", "close, near"], ["하늘", "sky"], ["하느님", "the Lord of Heaven"], ["살리다", "to save"], ["내려오다", "to come down"], ["꼭 잡다", "to hold tight"], ["툭", "snap"], ["수수밭", "sorghum field"], ["쿵", "thud"], ["떨어지다", "to fall"], ["피", "blood"], ["수숫대", "sorghum stalk"], ["묻다", "to get stained"], ["빨갛다", "to be red"]],
+  core:["-고", "두 동작을 이어 줘요. 앞의 동작을 하고 다음 동작을 하거나, 앞의 동작을 한 채로 다음 동작을 해요.", "and (linking two actions; can also mean ‘while holding’)", "오누이는 동아줄을 꼭 잡고 하늘로 올라가요."],
+  extra:[["-아/어 주세요 다시 보기", "부탁할 때 써요. 오누이와 호랑이가 하늘에 부탁해요.", "please do ~ (for me)", "튼튼한 동아줄을 내려 주세요."], ["그때", "바로 그 순간을 말해요.", "at that moment", "그때 하늘에서 동아줄이 내려와요."]],
+  q:["왜 지금도 수숫대가 빨개요?", "호랑이 피가 수숫대에 묻었어요. 이 이야기에서는 그래서 수숫대가 빨갛다고 해요."]},
+ {t:["해와 달이 된 오누이", "The siblings who became the sun and moon"],
+  lines:[
+   ["n", "", "오누이는 하늘나라에 가요.", "The children arrive in the heavenly kingdom."],
+   ["s", "하느님", "오빠는 해가 되어라. 동생은 달이 되어라.", "Brother, become the sun. Sister, become the moon."],
+   ["n", "", "그런데 동생은 밤이 무서워요.", "But the sister is afraid of the night."],
+   ["s", "동생", "오빠, 밤은 너무 깜깜해. 무서워.", "Brother, the night is so dark. I'm scared."],
+   ["s", "오빠", "그럼 우리 바꾸자. 내가 달이 될게.", "Then let's switch. I'll be the moon."],
+   ["n", "", "그래서 동생은 해가 되고, 오빠는 달이 돼요.", "So the sister becomes the sun, and the brother becomes the moon."],
+   ["n", "", "사람들이 해를 쳐다봐요. 동생은 부끄러워요.", "People look up at the sun. The sister feels shy."],
+   ["n", "", "그래서 해는 아주 밝게 빛나요.", "So the sun shines very brightly."],
+   ["n", "", "사람들은 해를 오래 볼 수 없어요.", "People can't look at the sun for long."],
+   ["n", "", "그럼 엄마는요? 엄마는 구름이 돼요.", "And Mom? Mom becomes a cloud."],
+   ["n", "", "엄마 구름은 밤에도 낮에도 오누이를 지켜봐요.", "Cloud Mom watches over her children day and night."],
+   ["n", "", "하늘을 보세요. 해는 동생, 달은 오빠, 구름은 엄마예요.", "Look up at the sky. The sun is the sister, the moon is the brother, and the cloud is Mom."]],
+  words:[["해", "sun"], ["달", "moon"], ["되다", "to become"], ["바꾸다", "to switch"], ["부끄럽다", "to be shy"], ["하늘나라", "heavenly kingdom"], ["밤", "night"], ["깜깜하다", "to be pitch-dark"], ["쳐다보다", "to look up at"], ["밝다", "to be bright"], ["빛나다", "to shine"], ["오래", "for a long time"], ["구름", "cloud"], ["지켜보다", "to watch over"], ["낮", "daytime"]],
+  core:["N이/가 되다", "바뀌어서 그것이 돼요.", "to become N", "동생은 해가 되고, 오빠는 달이 돼요."],
+  extra:[["-(으)ㄹ게", "내가 하겠다고 약속하는 말이에요. 친한 사이에 써요. 듣고 이해하는 표현이에요.", "I'll ~ (promise, casual)", "내가 달이 될게."], ["-자", "같이 하자고 말해요. 친한 사이에 써요. 듣고 이해하는 표현이에요.", "let's ~ (casual)", "그럼 우리 바꾸자."]],
+  q:["동생은 왜 해가 되었어요?", "동생은 밤이 무서워요. 그래서 오빠와 바꿨어요."]}
+],
+i:[
+ {t:["떡을 받은 엄마", "Mom gets rice cakes"],
+  lines:[
+   ["n", "", "옛날 옛날 깊은 산골 마을에 엄마와 오누이가 살았어요.", "Long ago, a mother and her two children lived deep in a mountain village."],
+   ["n", "", "어느 날 엄마는 이웃 마을 잔칫집에 일을 도우러 가게 되었어요.", "One day, Mom had to go help out at a party in the next village."],
+   ["s", "엄마", "엄마가 없는 동안 문을 꼭꼭 잠그고 있어. 누가 와도 열어 주면 안 돼.", "While I'm gone, keep the door locked tight. Don't open it, no matter who comes."],
+   ["s", "엄마", "어두워지기 전에 너희가 좋아하는 떡을 가득 담아 올게.", "Before it gets dark, I'll bring back lots of the rice cakes you love."],
+   ["s", "오누이", "걱정 마세요, 엄마. 일찍 오세요!", "Don't worry, Mom. Come home early!"],
+   ["n", "", "엄마는 하루 종일 쉬지도 못하고 부지런히 일했어요.", "Mom worked hard all day without even a break."],
+   ["n", "", "일이 끝나자 잔칫집 주인이 품삯으로 떡을 한 소쿠리 싸 주었어요.", "As soon as the work was over, the host paid her with a sokuri full of rice cakes."],
+   ["t", "엄마", "아이들이 배가 고플 텐데… 얼른 가야겠다.", "The kids must be hungry… I'd better hurry."],
+   ["n", "", "엄마는 떡 소쿠리를 머리에 이고 서둘러 집으로 향했어요.", "Carrying the sokuri on her head, Mom hurried toward home."],
+   ["n", "", "집에 가려면 높은 고개를 여러 개 넘어야 했어요.", "To get home, she had to cross several high mountain passes."],
+   ["n", "", "해가 지자 산길은 금세 어둑어둑해졌어요.", "As soon as the sun set, the mountain path quickly grew dark."]],
+  words:[["돕다", "to help"], ["잠그다", "to lock"], ["부지런히", "diligently"], ["싸 주다", "to pack (for someone)"], ["서두르다", "to hurry"], ["깊다", "to be deep"], ["잔칫집", "a house holding a feast"], ["-는 동안", "while ~"], ["꼭꼭", "tightly"], ["가득", "full"], ["걱정 마세요", "don't worry"], ["품삯", "wages for labor"], ["소쿠리", "sokuri, a round shallow bamboo basket"], ["이다", "to carry on the head"], ["향하다", "to head toward"], ["고개", "mountain pass"], ["넘다", "to cross over"], ["금세", "in no time"], ["어둑어둑하다", "to be getting dark"]],
+  core:["-(으)면 안 되다", "하지 말아야 하는 일을 말해요.", "must not ~", "누가 와도 열어 주면 안 돼."],
+  extra:[["-자", "앞의 일이 일어나고 곧바로 뒤의 일이 일어날 때 써요.", "as soon as ~", "일이 끝나자 잔칫집 주인이 품삯으로 떡을 싸 주었어요."], ["-(으)러 가다", "가는 목적을 말해요.", "go to ~ (purpose)", "일을 도우러 가게 되었어요."]],
+  q:["엄마는 아이들에게 무엇을 하면 안 된다고 했어요?", "누가 와도 문을 열어 주면 안 된다고 했어요."]},
+ {t:["떡 하나 주면 안 잡아먹지", "Give me a rice cake, and I won't eat you"],
+  lines:[
+   ["n", "", "첫 번째 고개를 넘을 때였어요.", "It was when she was crossing the first pass."],
+   ["n", "", "갑자기 수풀 속에서 커다란 호랑이가 어슬렁어슬렁 나타났어요.", "Suddenly a huge tiger came prowling out of the bushes."],
+   ["s", "호랑이", "어흥! 떡 하나 주면 안 잡아먹지!", "Roar! Give me a rice cake, and I won't eat you!"],
+   ["n", "", "엄마는 너무 무서워서 다리가 후들후들 떨렸어요.", "Mom was so scared her legs were shaking."],
+   ["n", "", "엄마는 얼른 떡을 하나 던져 주었어요.", "She quickly tossed it a rice cake."],
+   ["n", "", "그런데 다음 고개에서도, 그다음 고개에서도 호랑이가 또 나타났어요.", "But at the next pass, and the one after that, the tiger appeared again."],
+   ["n", "", "고개를 넘을 때마다 떡이 하나씩 줄어들었어요.", "Every time she crossed a pass, there was one fewer rice cake."],
+   ["n", "", "스무 번째 고개에 이르렀을 때 소쿠리는 텅 비어 있었어요.", "By the time she reached the twentieth pass, the sokuri was completely empty."],
+   ["s", "엄마", "이제 떡이 하나도 없어요. 집에서 아이들이 기다리니까 제발 보내 주세요.", "I have no rice cakes left. My children are waiting at home, so please let me go."],
+   ["s", "호랑이", "떡이 없으면 너라도 먹어야지!", "If there are no rice cakes, then I'll just eat you!"],
+   ["n", "", "호랑이는 엄마를 한입에 꿀꺽 삼켜 버렸어요.", "The tiger swallowed Mom whole in one bite."]],
+  words:[["나타나다", "to appear"], ["떨리다", "to tremble"], ["줄어들다", "to decrease"], ["비다", "to be empty"], ["삼키다", "to swallow"], ["수풀", "bushes"], ["어슬렁어슬렁", "prowling"], ["후들후들", "trembling"], ["던지다", "to throw"], ["하나씩", "one by one"], ["이르다", "to reach"], ["텅", "completely (empty)"], ["제발", "please"], ["한입에", "in one bite"]],
+  core:["-(으)ㄹ 때마다", "그럴 때는 언제나 같은 일이 일어난다는 뜻이에요.", "every time ~", "고개를 넘을 때마다 떡이 하나씩 줄어들었어요."],
+  extra:[["-아서/어서 (이유)", "앞의 일이 뒤의 일의 이유일 때 써요.", "because ~, so ~", "엄마는 너무 무서워서 다리가 후들후들 떨렸어요."], ["-아/어 버리다", "어떤 일이 완전히 끝났다는 것을 강조해요. 상황에 따라 아쉬움이나 후회가 담기기도 하고, 시원한 마음이 담기기도 해요.", "to ~ completely / to end up ~ (stresses that it is done; can sound regretful or relieved)", "호랑이는 엄마를 한입에 꿀꺽 삼켜 버렸어요."]],
+  q:["고개를 넘을 때마다 무슨 일이 있었어요?", "호랑이가 나타나서 떡을 달라고 했어요. 그래서 떡이 하나씩 줄어들었어요."]},
+ {t:["엄마 옷을 입은 호랑이", "The tiger in Mom's clothes"],
+  lines:[
+   ["n", "", "호랑이는 엄마 옷을 입고 수건까지 쓰고 오누이의 집으로 갔어요.", "The tiger put on Mom's clothes, even her headscarf, and went to the children's house."],
+   ["s", "호랑이", "얘들아, 엄마 왔다. 어서 문 열어라.", "Kids, Mom's home. Hurry and open the door."],
+   ["n", "", "오빠는 목소리를 듣고 고개를 갸웃했어요.", "Hearing the voice, the brother tilted his head."],
+   ["s", "오빠", "우리 엄마 목소리는 이렇게 걸걸하지 않은데요?", "Our mom's voice isn't this rough, though."],
+   ["s", "호랑이", "찬 바람을 많이 맞아서 목이 쉬었어.", "I was out in the cold wind so long that my voice went hoarse."],
+   ["s", "동생", "그럼 손을 내밀어 보세요.", "Then try holding out your hand."],
+   ["n", "", "문구멍으로 들어온 손에는 누런 털이 수북했어요.", "The hand that came through the hole was covered in thick yellow fur."],
+   ["s", "동생", "엄마 손은 이렇게 털이 많지 않아요!", "Mom's hand isn't this hairy!"],
+   ["s", "호랑이", "하루 종일 일을 해서 손이 거칠어졌단다.", "I worked all day, so my hands got rough."],
+   ["n", "", "그 순간, 치마 아래로 줄무늬 꼬리가 살랑살랑 움직이는 게 보였어요.", "At that moment, they saw a striped tail swishing under the skirt."],
+   ["t", "오빠", "큰일 났다. 엄마가 아니라 호랑이야!", "Oh no. It's not Mom, it's the tiger!"],
+   ["n", "", "호랑이는 화가 나서 문을 쾅쾅 흔들기 시작했어요.", "The tiger got angry and started shaking the door, bang bang."]],
+  words:[["목소리", "voice"], ["쉬다", "to go hoarse"], ["털", "fur, hair"], ["거칠다", "to be rough"], ["꼬리", "tail"], ["수건을 쓰다", "to put on a head scarf"], ["갸웃하다", "to tilt one's head"], ["걸걸하다", "to be gruff"], ["내밀다", "to hold out"], ["문구멍", "hole in a paper door"], ["누렇다", "to be yellowish"], ["수북하다", "to be thick, heaped"], ["줄무늬", "stripes"], ["살랑살랑", "swishing"], ["큰일 나다", "to be in big trouble"]],
+  core:["-지 않다", "‘안’과 같은 부정이에요. 동사나 형용사 뒤에 붙여요.", "not ~ (long negation)", "엄마 손은 이렇게 털이 많지 않아요!"],
+  extra:[["-아/어 보다", "한번 해 보라고 할 때 써요.", "try ~ing", "그럼 손을 내밀어 보세요."], ["N이/가 아니라", "앞의 것이 아니고 뒤의 것이라고 바로잡아 말해요.", "not N but ~", "엄마가 아니라 호랑이야!"]],
+  q:["오누이는 무엇을 보고 호랑이인 걸 알았어요?", "걸걸한 목소리, 털이 수북한 손, 치마 아래 줄무늬 꼬리를 보고 알았어요."]},
+ {t:["우물가 나무 위로", "Up the tree by the well"],
+  lines:[
+   ["s", "오빠", "엄마, 뒷간에 좀 다녀올게요!", "Mom, we're just going to the outhouse!"],
+   ["n", "", "오누이는 뒷간에 가는 척하고 뒷문으로 살금살금 빠져나왔어요.", "The children pretended to go to the outhouse and slipped out the back door."],
+   ["n", "", "그리고 우물가에 있는 커다란 나무 위로 서로 손을 잡아 주며 올라갔어요.", "Then, helping each other, they climbed the big tree by the well."],
+   ["n", "", "한참을 기다리던 호랑이는 문을 부수고 들어왔지만 방은 텅 비어 있었어요.", "After waiting a long time, the tiger broke in, but the room was empty."],
+   ["s", "호랑이", "이 녀석들, 어디로 갔지? 썩 나오지 못해!", "Where did those brats go? Come out this instant!"],
+   ["n", "", "그 모습이 우스워서 동생이 그만 \"까르르, 바보!\" 하고 웃었어요.", "It looked so funny that the sister couldn't help laughing, \"Hee hee, silly!\""],
+   ["n", "", "호랑이가 웃음소리에 고개를 드니 나무 꼭대기에 오누이가 앉아 있었어요.", "When the tiger looked up at the laughter, there were the children at the top of the tree."],
+   ["s", "호랑이", "얘들아, 거기는 어떻게 올라갔니?", "Kids, how did you get up there?"],
+   ["s", "오빠", "손바닥에 참기름을 듬뿍 바르고 올라왔지요.", "I rubbed lots of sesame oil on my palms and climbed up."],
+   ["n", "", "호랑이는 냉큼 참기름을 바르고 나무를 붙잡았지만, 쭈르르 쿵! 쭈르르 쿵! 엉덩방아만 찧었어요.", "The tiger quickly put on the oil and grabbed the tree, but whoosh, thud! whoosh, thud! it just kept landing on its bottom."],
+   ["n", "", "깔깔 웃던 동생이 무심코 말했어요.", "The giggling sister blurted out without thinking."],
+   ["s", "동생", "에이, 바보! 도끼로 찍으면서 올라오면 되는데.", "Oh, silly! You could just chop your way up with an axe."],
+   ["n", "", "호랑이는 도끼를 가져와 나무를 쾅쾅 찍었어요.", "The tiger fetched an axe and chopped the tree, bang bang."],
+   ["n", "", "그리고 도끼 자국을 디디며 성큼성큼 올라오기 시작했어요.", "Then, stepping on the axe marks, it began to climb up in big strides."]],
+  words:[["빠져나오다", "to slip out"], ["붙잡다", "to grab hold of"], ["엉덩방아를 찧다", "to land on one's bottom"], ["무심코", "without thinking"], ["도끼", "axe"], ["뒷간", "outhouse (old word)"], ["우물가", "by the well"], ["한참", "for quite a while"], ["썩 나오다", "come out right now! (썩 = at once; a strong, old-style command — not 썩다 'to rot')"], ["우습다", "to be funny"], ["까르르", "hee hee (giggling)"], ["고개를 들다", "to raise one's head"], ["꼭대기", "top"], ["참기름", "sesame oil"], ["듬뿍", "plenty"], ["냉큼", "quickly"], ["쭈르르", "whoosh (sliding)"], ["깔깔", "ha ha (giggling)"], ["쾅쾅", "bang bang"], ["성큼성큼", "with long strides"], ["자국", "mark"], ["디디다", "to step on"]],
+  core:["-(으)면 되다", "그렇게 하면 충분하다, 그 방법이면 된다는 뜻이에요.", "all you have to do is ~", "도끼로 찍으면서 올라오면 되는데."],
+  extra:[["-는 척하다", "사실은 아닌데 그런 것처럼 행동해요.", "to pretend to ~", "오누이는 뒷간에 가는 척하고 뒷문으로 빠져나왔어요."], ["-(으)니", "앞의 행동을 하고 나서 새로 알게 된 것을 말해요.", "when (I) did ~, (I found)", "웃음소리에 고개를 드니 나무 꼭대기에 오누이가 앉아 있었어요."], ["-지만", "앞의 말과 반대되는 말을 이어요.", "but", "나무를 붙잡았지만 엉덩방아만 찧었어요."]],
+  q:["호랑이는 오누이가 어디 있는지 어떻게 알았어요?", "동생이 웃는 소리를 듣고 고개를 들어서 알았어요."]},
+ {t:["하늘에서 내려온 동아줄", "The rope from the sky"],
+  lines:[
+   ["n", "", "호랑이가 점점 가까이 올라오자 오누이는 오들오들 떨었어요.", "As the tiger climbed closer, the children trembled."],
+   ["n", "", "더 이상 도망갈 곳이 없었어요.", "There was nowhere left to run."],
+   ["n", "", "오누이는 두 손을 모으고 하늘에 빌었어요.", "The children put their hands together and prayed to the sky."],
+   ["s", "오누이", "하느님, 저희를 살려 주시려면 새 동아줄을 내려 주세요.", "Lord of Heaven, if you will save us, please send down a new rope."],
+   ["n", "", "그러자 하늘에서 새 동아줄이 스르르 내려왔어요.", "Then a new rope slid gently down from the sky."],
+   ["n", "", "오누이는 동아줄을 꼭 붙잡고 하늘로 올라갔어요.", "They held on tight and rose up into the sky."],
+   ["n", "", "이것을 본 호랑이도 흉내를 내며 빌었어요.", "Seeing this, the tiger copied them and prayed too."],
+   ["s", "호랑이", "하느님, 저도 살려 주시려면 동아줄을 내려 주세요!", "Lord of Heaven, if you will save me too, send me a rope!"],
+   ["n", "", "하늘에서 내려온 것은 낡고 썩은 동아줄이었어요.", "What came down was an old, rotten rope."],
+   ["n", "", "호랑이가 신이 나서 동아줄을 타고 오르는데, 갑자기 '툭' 하고 줄이 끊어졌어요.", "The tiger excitedly climbed the rope, but suddenly it snapped."],
+   ["n", "", "호랑이는 수수밭으로 곤두박질쳤어요.", "The tiger plunged headfirst into the sorghum field."],
+   ["n", "", "그때 호랑이 피가 묻어서 지금도 수숫대가 빨갛대요.", "They say the tiger's blood stained the stalks, and that's why sorghum is still red."]],
+  words:[["빌다", "to pray, beg"], ["동아줄", "thick rope"], ["붙잡다", "to grab hold of"], ["흉내를 내다", "to imitate"], ["끊어지다", "to snap, break"], ["오들오들", "shivering"], ["더 이상", "any more"], ["두 손을 모으다", "to put one's hands together"], ["살리다", "to save"], ["스르르", "smoothly, gently"], ["낡다", "to be old, worn"], ["썩다", "to rot (썩은 동아줄 = a rotten rope)"], ["신이 나다", "to be excited"], ["툭", "snap"], ["수수밭", "sorghum field"], ["곤두박질치다", "to plunge headfirst"], ["수숫대", "sorghum stalk"]],
+  core:["-는데 (배경)", "뒤의 일이 일어날 때의 상황을 먼저 말해요. 뒤에 뜻밖의 일이 자주 와요.", "as ~, (then suddenly)", "호랑이가 신이 나서 동아줄을 타고 오르는데, 갑자기 줄이 끊어졌어요."],
+  extra:[["-(으)려면", "앞의 일을 하고 싶을 때 필요한 조건을 말해요.", "if (you) want to ~", "저희를 살려 주시려면 새 동아줄을 내려 주세요."], ["-자 다시 보기", "앞의 일이 일어나고 곧바로 뒤의 일이 일어나요.", "as soon as ~", "호랑이가 점점 가까이 올라오자 오누이는 오들오들 떨었어요."]],
+  q:["오누이와 호랑이의 동아줄은 어떻게 달랐어요?", "오누이에게는 새 동아줄이, 호랑이에게는 낡고 썩은 동아줄이 내려왔어요."]},
+ {t:["해와 달이 된 오누이", "The siblings who became the sun and moon"],
+  lines:[
+   ["n", "", "하늘나라에 올라간 오누이에게 하느님이 말씀하셨어요.", "When the children reached the heavenly kingdom, the Lord of Heaven spoke to them."],
+   ["s", "하느님", "오빠는 해가 되어 낮을 밝히고, 누이는 달이 되어 밤을 비추어라.", "Brother, become the sun and light the day. Sister, become the moon and light the night."],
+   ["n", "", "그런데 겁이 많은 누이는 밤이 무서워서 울먹였어요.", "But the timid sister was so scared of the night that she nearly cried."],
+   ["s", "동생", "오빠, 캄캄한 밤하늘은 너무 무서워.", "Brother, the pitch-dark night sky is too scary."],
+   ["s", "오빠", "그럼 우리 바꾸자. 내가 달이 될게.", "Then let's switch. I'll be the moon."],
+   ["n", "", "그래서 누이는 해가 되고, 오빠는 달이 되었어요.", "So the sister became the sun, and the brother became the moon."],
+   ["n", "", "그런데 해가 된 누이는 사람들이 자기를 쳐다보는 것이 부끄러웠어요.", "But as the sun, the sister was shy about people looking at her."],
+   ["n", "", "그래서 눈이 부시도록 환한 빛을 내뿜었대요.", "So they say she gave off a light so bright it dazzled the eyes."],
+   ["n", "", "지금도 해를 똑바로 쳐다보기 어려운 건 그 때문이래요.", "They say that's why it's still hard to look straight at the sun."],
+   ["n", "", "그럼 호랑이에게 잡아먹힌 엄마는 어떻게 되었을까요?", "And what became of the mother the tiger ate?"],
+   ["n", "", "엄마는 구름이 되어 오누이가 잘 있는지 밤낮으로 지켜본대요.", "They say she became a cloud and watches day and night to see that her children are well."],
+   ["n", "", "낮에는 해가 된 누이가, 밤에는 달이 된 오빠가 우리를 비추고, 그 곁에서는 구름이 된 엄마가 오누이를 지켜보고 있어요.", "By day the sister shines as the sun, by night the brother as the moon, and beside them Mom, now a cloud, watches over her children."]],
+  words:[["밝히다", "to light up"], ["비추다", "to shine on"], ["겁이 많다", "to be timid"], ["바꾸다", "to switch"], ["부끄럽다", "to be shy"], ["하늘나라", "heavenly kingdom"], ["말씀하시다", "to speak (honorific)"], ["누이", "sister (old word)"], ["울먹이다", "to be on the verge of tears"], ["캄캄하다", "to be pitch-dark"], ["쳐다보다", "to look up at"], ["눈이 부시다", "to be dazzling"], ["환하다", "to be bright"], ["내뿜다", "to give off"], ["똑바로", "straight"], ["구름", "cloud"], ["밤낮으로", "day and night"], ["지켜보다", "to watch over"], ["곁", "side"]],
+  core:["-대요/-래요", "다른 사람에게 들은 이야기를 전할 때 써요. 옛이야기를 전할 때 자주 나와요. 동사는 -(ㄴ/는)대요, 형용사는 -대요, 명사는 -(이)래요, 지난 일은 -았/었대요예요.", "they say ~ (reported speech)", "엄마는 구름이 되어 오누이를 밤낮으로 지켜본대요."],
+  extra:[["-(으)ㄹ게", "내가 하겠다고 약속하는 말이에요. 친한 사이에 쓰는 반말이에요. 공손하게 말할 때는 -(으)ㄹ게요라고 해요.", "I'll ~ (promise)", "내가 달이 될게."], ["-도록", "뒤의 일이 어느 정도인지 말해요.", "so ~ that", "눈이 부시도록 환한 빛"]],
+  q:["오빠는 동생을 위해 무엇을 했어요?", "밤을 무서워하는 동생과 자리를 바꿔서 달이 되었어요."]}
+],
+a:[
+ {t:["떡을 받은 엄마", "Mom gets rice cakes"],
+  lines:[
+   ["n", "", "옛날 옛적 첩첩산중 외딴 마을에 홀어머니가 오누이를 데리고 살았다.", "Long ago, in a remote village deep in the mountains, a widowed mother lived with her son and daughter."],
+   ["n", "", "어머니는 남의 집 일을 거들어 주며 근근이 살림을 꾸려 갔다.", "She barely got by, helping out at other people's houses."],
+   ["n", "", "그날도 어머니는 고개 너머 부잣집 잔치에 일을 하러 가게 되었다.", "That day too, she had to work at a rich family's feast over the pass."],
+   ["s", "어머니", "엄마가 늦더라도 아무에게나 문을 열어 주면 안 된다.", "Even if I'm late, don't open the door for just anyone."],
+   ["s", "어머니", "깜깜해지기 전에 너희 좋아하는 떡을 가득 담아 오마.", "Before dark, I'll bring back plenty of the rice cakes you like."],
+   ["n", "", "어머니는 해가 질 때까지 허리 한 번 펴지 못하고 일했다.", "She worked until sunset without a moment's rest."],
+   ["n", "", "일을 마치자 주인은 수고했다며 품삯으로 찰떡을 넉넉히 싸 주었다.", "When she finished, the host thanked her and paid her with plenty of sticky rice cakes."],
+   ["t", "어머니", "배고픈 아이들이 목이 빠지게 기다리고 있겠구나.", "My hungry children must be waiting so anxiously."],
+   ["n", "", "어머니는 떡 소쿠리를 머리에 이고 발걸음을 재촉했다.", "Carrying the sokuri on her head, she quickened her steps."],
+   ["n", "", "집까지는 고개를 몇 개나 넘어야 했다.", "She had many passes to cross before reaching home."],
+   ["n", "", "어느새 사방이 어둑어둑해지고 산짐승 울음소리가 들려왔다.", "Before she knew it, darkness fell all around and wild animals could be heard crying."]],
+  words:[["첩첩산중", "deep in the mountains"], ["홀어머니", "widowed mother"], ["근근이", "barely"], ["거들다", "to help out"], ["재촉하다", "to hurry"], ["외딴", "remote"], ["살림을 꾸리다", "to run a household"], ["부잣집", "rich family's house"], ["품삯", "wages for labor"], ["찰떡", "sticky rice cake"], ["넉넉히", "plentifully"], ["소쿠리", "sokuri, a round shallow bamboo basket"], ["어느새", "before one knows it"], ["사방", "all around"], ["산짐승", "wild animals"], ["허리 한 번 펴지 못하다", "to not get a moment's rest"], ["목이 빠지게 기다리다", "to wait anxiously"]],
+  core:["-더라도", "앞의 일이 생겨도 뒤의 일은 꼭 그래야 한다는 뜻이에요.", "even if ~", "엄마가 늦더라도 아무에게나 문을 열어 주면 안 된다."],
+  extra:[["-다며", "누가 한 말을 짧게 옮기면서 그 사람이 동시에 한 행동을 이어 말해요. ‘-다고 하면서’의 줄임이에요.", "saying that ~ (while doing)", "주인은 수고했다며 품삯으로 찰떡을 넉넉히 싸 주었다."], ["-(으)마", "나이 많은 사람이 아랫사람에게 하는 옛 말투의 약속이에요. 듣고 이해하는 표현이에요.", "I'll ~ (old-fashioned promise)", "떡을 가득 담아 오마."], ["관용 표현", "목이 빠지게 기다리다: 아주 애타게 기다리다. 허리 한 번 펴지 못하다: 쉬지 못하고 계속 일하다.", "idioms", "배고픈 아이들이 목이 빠지게 기다리고 있겠구나."]],
+  q:["어머니는 어떻게 살림을 꾸려 갔나요?", "남의 집 일을 거들어 주며 근근이 살림을 꾸려 갔어요."]},
+ {t:["떡 하나 주면 안 잡아먹지", "Give me a rice cake, and I won't eat you"],
+  lines:[
+   ["n", "", "첫 번째 고갯마루에 다다랐을 때, 집채만 한 호랑이가 길을 가로막았다.", "When she reached the top of the first pass, a tiger as big as a house blocked her way."],
+   ["s", "호랑이", "어흥! 떡 하나 주면 안 잡아먹지!", "Roar! Give me a rice cake, and I won't eat you!"],
+   ["n", "", "어머니는 간이 콩알만 해졌지만 떨리는 손으로 떡 하나를 내주었다.", "Her heart shrank with fear, but with trembling hands she handed over a rice cake."],
+   ["n", "", "호랑이는 떡을 날름 받아먹더니 수풀 속으로 사라졌다.", "The tiger snapped it up and then vanished into the bushes."],
+   ["n", "", "그러나 안도의 한숨도 잠시, 다음 고개에서 호랑이는 또다시 나타났다.", "But her relief didn't last. At the next pass, the tiger appeared again."],
+   ["n", "", "고개를 하나 넘을 때마다 소쿠리는 점점 가벼워졌다.", "With every pass, the sokuri grew lighter."],
+   ["n", "", "마침내 스무 번째 고개에서 소쿠리는 텅 비고 말았다.", "At last, at the twentieth pass, the sokuri ended up empty."],
+   ["s", "어머니", "이제 남은 떡이 없습니다. 집에서 어린것들이 기다리니 제발 보내 주십시오.", "I have no rice cakes left. My little ones are waiting at home, so please let me go."],
+   ["s", "호랑이", "떡이 없으면 너라도 먹어야겠다!", "If there are no rice cakes, I'll have to eat you instead!"],
+   ["n", "", "어머니의 애원에도 아랑곳하지 않고, 호랑이는 어머니를 한입에 삼켜 버렸다.", "Ignoring her pleas, the tiger swallowed her in one bite."]],
+  words:[["가로막다", "to block"], ["내주다", "to hand over"], ["안도", "relief"], ["애원", "plea"], ["아랑곳하지 않다", "to pay no heed"], ["고갯마루", "top of a pass"], ["다다르다", "to arrive at"], ["집채만 하다", "as big as a house"], ["날름", "in a flash (snapping up)"], ["사라지다", "to disappear"], ["또다시", "once again"], ["가볍다", "to be light"], ["마침내", "finally"], ["어린것들", "little ones"], ["간이 콩알만 해지다", "to be scared stiff"]],
+  core:["-더니", "남이 하는 것을 지켜본 뒤에, 이어서 일어난 일이나 바뀐 상황을 말해요. 주로 다른 사람이나 사물이 주어예요.", "after (I watched someone do) ~, then", "호랑이는 떡을 날름 받아먹더니 수풀 속으로 사라졌다."],
+  extra:[["-고 말다", "끝내 아쉬운 결과가 되었다는 뜻이에요.", "to end up ~", "소쿠리는 텅 비고 말았다."], ["관용 표현", "간이 콩알만 해지다: 몹시 무섭거나 겁이 나다.", "idiom: to be scared stiff", "어머니는 간이 콩알만 해졌지만 떡 하나를 내주었다."]],
+  q:["어머니는 호랑이를 보고 어떤 마음이었나요?", "간이 콩알만 해질 만큼 무서웠지만 떨리는 손으로 떡을 내주었어요."]},
+ {t:["엄마 옷을 입은 호랑이", "The tiger in Mom's clothes"],
+  lines:[
+   ["n", "", "어머니의 옷을 걸치고 수건까지 뒤집어쓴 호랑이는 오누이의 집 앞에 이르렀다.", "Wearing the mother's clothes and even her headscarf, the tiger arrived at the children's house."],
+   ["s", "호랑이", "얘들아, 엄마 왔다. 어서 문 열어라.", "Kids, Mom's home. Hurry and open the door."],
+   ["n", "", "오빠는 낯선 목소리에 고개를 갸웃거렸다.", "The brother tilted his head at the unfamiliar voice."],
+   ["s", "오빠", "우리 엄마 목소리는 이렇게 걸걸하지 않은데요.", "Our mom's voice isn't this rough."],
+   ["s", "호랑이", "잔칫집에서 하도 소리를 질렀더니 목이 쉬었단다.", "I shouted so much at the party that my voice went hoarse."],
+   ["s", "동생", "그럼 손을 좀 내밀어 보세요.", "Then hold out your hand, please."],
+   ["n", "", "문구멍으로 쑥 들어온 손은 누런 털로 뒤덮여 있었다.", "The hand that slid through the hole was covered in yellow fur."],
+   ["s", "호랑이", "온종일 궂은일을 했더니 손이 거칠어졌구나.", "I did hard work all day, and my hands got rough."],
+   ["n", "", "호랑이는 능청스럽게 둘러댔지만 오누이는 끝내 문을 열지 않았다.", "The tiger made smooth excuses, but the children still would not open the door."],
+   ["n", "", "오누이가 문구멍으로 슬며시 밖을 내다보자, 치맛자락 사이로 얼룩덜룩한 꼬리가 삐죽 나와 있었다.", "When the children quietly peeked out through the hole, a striped tail was poking out from under the skirt."],
+   ["t", "오빠", "엄마가 아니다. 호랑이다!", "It's not Mom. It's the tiger!"],
+   ["n", "", "오누이는 등골이 오싹했다.", "A chill ran down the children's spines."],
+   ["n", "", "정체를 들킨 호랑이는 문이 부서져라 흔들어 댔다.", "Found out, the tiger shook the door as if to break it down."]],
+  words:[["걸치다", "to put on loosely"], ["낯설다", "to be unfamiliar"], ["뒤덮이다", "to be covered"], ["둘러대다", "to make excuses"], ["내다보다", "to look out"], ["뒤집어쓰다", "to pull over one's head"], ["갸웃거리다", "to keep tilting one's head"], ["걸걸하다", "to be gruff"], ["하도", "so much"], ["문구멍", "hole in a paper door"], ["쑥", "suddenly (pushing in)"], ["궂은일", "hard, dirty work"], ["능청스럽다", "to be sly, smooth"], ["끝내", "in the end"], ["슬며시", "quietly"], ["치맛자락", "hem of a skirt"], ["얼룩덜룩하다", "to be striped, mottled"], ["삐죽", "poking out"], ["정체", "true identity"], ["들키다", "to be found out"], ["부서지다", "to break"]],
+  core:["-았/었더니", "말하는 사람이 직접 한 일이나 겪은 일을 말하고, 그 뒤에 생긴 결과를 이어 말해요. 그래서 앞의 주어는 주로 ‘나’예요. 다른 사람을 지켜본 일을 말할 때는 주로 -더니를 써요. 다만 이것은 대체적인 경향이고, 예외도 있어요. 여기서는 호랑이가 자기가 한 일을 핑계로 말하고 있어요.", "I did ~, and as a result", "잔칫집에서 하도 소리를 질렀더니 목이 쉬었단다."],
+  extra:[["-자", "앞의 일이 일어나고 곧바로 뒤의 일이 일어나요.", "as soon as ~", "오누이가 문구멍으로 슬며시 밖을 내다보자 꼬리가 보였다."], ["-아/어 대다", "같은 행동을 세게, 자꾸 되풀이해요.", "to keep ~ing (intensely)", "문이 부서져라 흔들어 댔다."], ["관용 표현", "등골이 오싹하다: 몹시 무섭다.", "idiom: a chill runs down one's spine", "오누이는 등골이 오싹했다."]],
+  q:["호랑이는 목소리와 손을 어떻게 둘러댔나요?", "소리를 많이 질러서 목이 쉬었고, 궂은일을 해서 손이 거칠어졌다고 둘러댔어요."]},
+ {t:["우물가 나무 위로", "Up the tree by the well"],
+  lines:[
+   ["s", "오빠", "엄마, 뒷간에 좀 다녀올게요.", "Mom, we're just going to the outhouse."],
+   ["n", "", "오누이는 뒷간에 가는 척하며 뒷문으로 몰래 빠져나와 우물가에 선 늙은 나무 꼭대기로 기어올랐다.", "Pretending to go to the outhouse, the children slipped out the back door and clambered to the top of an old tree by the well."],
+   ["n", "", "기다리다 못한 호랑이는 문짝을 부수고 들이닥쳤지만 방은 텅 비어 있었다.", "Unable to wait any longer, the tiger burst through the door, but the room was empty."],
+   ["s", "호랑이", "이 녀석들이 어디로 갔지? 썩 나오지 못할까!", "Where did those brats go? Come out this instant!"],
+   ["n", "", "집 안팎을 샅샅이 뒤지며 씩씩거리는 호랑이의 꼴이 우스워 동생이 그만 \"까르르, 바보!\" 하고 웃음을 터뜨렸다.", "The tiger huffing around, searching every corner, looked so ridiculous that the sister burst out laughing, \"Hee hee, silly!\""],
+   ["n", "", "웃음소리에 고개를 든 호랑이의 눈에 나무 꼭대기의 오누이가 들어왔다.", "Looking up at the laughter, the tiger caught sight of the children at the treetop."],
+   ["s", "호랑이", "너희는 그 높은 데를 어떻게 올라갔느냐?", "How did you climb up so high?"],
+   ["s", "오빠", "손바닥에 참기름을 듬뿍 바르고 올라왔지요.", "I rubbed lots of sesame oil on my palms and climbed up."],
+   ["n", "", "호랑이는 냉큼 참기름을 바르고 나무에 매달렸지만, 오르려고 할수록 쭈르르 미끄러져 엉덩방아만 실컷 찧을 뿐이었다.", "The tiger hurriedly oiled up and clung to the tree, but the harder it tried, the more it slid down and landed on its bottom."],
+   ["n", "", "깔깔대던 동생이 무심코 입을 잘못 놀리고 말았다.", "Still giggling, the sister let something slip without thinking."],
+   ["s", "동생", "에이, 바보! 도끼로 찍으면서 올라오면 될 텐데.", "Oh, silly! You could just chop your way up with an axe."],
+   ["n", "", "호랑이는 무릎을 탁 치더니 득달같이 도끼를 가져와 나무를 찍으며 성큼성큼 올라오기 시작했다.", "The tiger slapped its knee, rushed to fetch an axe, and began striding up, chopping as it went."]],
+  words:[["들이닥치다", "to burst in"], ["매달리다", "to cling, hang"], ["엉덩방아를 찧다", "to land on one's bottom"], ["무심코", "without thinking"], ["득달같이", "at once, eagerly"], ["뒷간", "outhouse (old word)"], ["기어오르다", "to clamber up"], ["문짝", "door panel"], ["썩 나오다", "come out right now! (썩 = at once; a strong, old-style command — not 썩다 'to rot')"], ["안팎", "inside and out"], ["샅샅이", "thoroughly"], ["씩씩거리다", "to huff"], ["꼴", "sight, appearance (casual)"], ["웃음을 터뜨리다", "to burst out laughing"], ["눈에 들어오다", "to catch one's eye"], ["냉큼", "quickly"], ["실컷", "to one's heart's content"], ["깔깔대다", "to keep giggling"], ["입을 잘못 놀리다", "to let something slip"], ["무릎을 치다", "to slap one's knee"], ["성큼성큼", "with long strides"]],
+  core:["-(으)ㄹ수록", "앞의 일이 더할수록 뒤의 일도 더해질 때 써요.", "the more ~, the more ~", "오르려고 할수록 쭈르르 미끄러져 엉덩방아만 실컷 찧을 뿐이었다."],
+  extra:[["-는 척하다", "사실은 아닌데 그런 것처럼 행동해요.", "to pretend to ~", "오누이는 뒷간에 가는 척하며 뒷문으로 빠져나왔다."], ["-다(가) 못해", "참다가 더는 견디지 못할 때 써요.", "unable to keep ~ing any longer", "기다리다 못한 호랑이는 문짝을 부수고 들이닥쳤다."], ["-(으)ㄹ 뿐이다", "그것 말고는 다른 것이 없다는 뜻이에요. ‘엉덩방아만 찧을 뿐이었다’처럼 -만과 함께 쓰면 ‘그것 말고는 아무것도 하지 못했다’는 뜻이 더 강해져요.", "only ~, nothing but ~ (with -만, even stronger)", "엉덩방아만 실컷 찧을 뿐이었다."], ["관용 표현", "입을 잘못 놀리다: 하지 말아야 할 말을 해 버리다. 무릎을 치다: 좋은 생각이 떠올라 반가워하다.", "idioms", "동생이 무심코 입을 잘못 놀리고 말았다."]],
+  q:["오누이는 어떤 꾀를 내어 집을 빠져나갔나요?", "뒷간에 다녀오겠다고 하고, 가는 척하며 뒷문으로 빠져나갔어요."]},
+ {t:["하늘에서 내려온 동아줄", "The rope from the sky"],
+  lines:[
+   ["n", "", "도끼 자국을 디디며 호랑이가 코앞까지 다가오자 오누이는 더 이상 피할 데가 없었다.", "Stepping in the axe marks, the tiger came right up to them, and the children had nowhere left to hide."],
+   ["n", "", "오누이는 두 손을 모으고 하늘을 우러러 간절히 빌었다.", "They put their hands together, looked up to the sky, and prayed with all their hearts."],
+   ["s", "오누이", "하느님, 저희를 살리시려거든 새 동아줄을 내려 주시고, 죽이시려거든 썩은 동아줄을 내려 주세요.", "Lord of Heaven, if you mean to save us, send down a new rope. If you mean us to die, send a rotten one."],
+   ["n", "", "그러자 하늘에서 튼튼한 새 동아줄이 스르르 내려왔다.", "Then a strong new rope slid down from the sky."],
+   ["n", "", "오누이는 동아줄을 꼭 붙잡고 하늘 높이 올라갔다.", "The children held on tight and rose high into the sky."],
+   ["n", "", "닭 쫓던 개 지붕 쳐다보듯 멍하니 바라보던 호랑이도 똑같이 빌었다.", "The tiger, staring blankly like a dog that chased a chicken onto the roof, prayed the same prayer."],
+   ["s", "호랑이", "하느님, 저를 살리시려거든 새 동아줄을 내려 주십시오!", "Lord of Heaven, if you mean to save me, send down a new rope!"],
+   ["n", "", "하늘에서 내려온 것은 다 삭아 버린 썩은 동아줄이었다.", "What came down was a rope that had completely rotted."],
+   ["n", "", "그런 줄도 모르고 호랑이는 신이 나서 줄을 타고 올랐다.", "Not knowing this, the tiger eagerly climbed it."],
+   ["n", "", "중간쯤 올랐을 때 동아줄은 '뚝' 끊어지고 말았고, 호랑이는 수수밭으로 곤두박질쳤다.", "Halfway up, the rope snapped, and the tiger plunged headfirst into the sorghum field."],
+   ["n", "", "그때 묻은 호랑이 피 때문에 지금도 수숫대가 붉다고 한다.", "It is said that the tiger's blood is why sorghum stalks are still red today."]],
+  words:[["코앞", "right in front"], ["간절히", "earnestly"], ["우러러보다", "to look up to"], ["삭다", "to rot away"], ["곤두박질치다", "to plunge headfirst"], ["자국", "mark"], ["디디다", "to step on"], ["피하다", "to avoid, hide"], ["두 손을 모으다", "to put one's hands together"], ["스르르", "smoothly, gently"], ["멍하니", "blankly"], ["신이 나다", "to be excited"], ["뚝", "snap"], ["수수밭", "sorghum field"], ["수숫대", "sorghum stalk"], ["붉다", "to be red"]],
+  core:["-(으)려거든", "‘그렇게 할 생각이면’이라는 조건을 말해요. 옛이야기의 기도에 자주 나와요.", "if you mean to ~", "저희를 살리시려거든 새 동아줄을 내려 주시고, 죽이시려거든 썩은 동아줄을 내려 주세요."],
+  extra:[["속담 · -듯(이)", "닭 쫓던 개 지붕 쳐다보듯: 애쓰던 일이 실패해서 어찌할 수 없이 멍하니 바라보는 모습이에요.", "proverb: like a dog staring at the roof after chasing a chicken", "닭 쫓던 개 지붕 쳐다보듯 멍하니 바라보던 호랑이"], ["-(으)ㄴ 줄도 모르고", "사실을 전혀 모른 채로 무엇을 해요.", "without even knowing that ~", "그런 줄도 모르고 호랑이는 신이 나서 줄을 타고 올랐다."]],
+  q:["호랑이에게 썩은 동아줄이 내려온 까닭은 무엇일까요?", "이 이야기에서는 착한 오누이는 하늘의 도움을 받고, 나쁜 호랑이는 벌을 받아요."]},
+ {t:["해와 달이 된 오누이", "The siblings who became the sun and moon"],
+  lines:[
+   ["n", "", "하늘나라에 오른 오누이에게 하느님은 새로운 일을 맡기셨다.", "The Lord of Heaven gave the children who had risen to the sky a new task."],
+   ["s", "하느님", "오라비는 해가 되어 세상을 따뜻하게 하고, 누이는 달이 되어 어두운 밤을 밝혀라.", "Brother, become the sun and warm the world. Sister, become the moon and light the dark night."],
+   ["n", "", "그러나 겁 많은 누이는 밤이 무섭다며 울먹였다.", "But the timid sister, saying she was afraid of the night, was on the verge of tears."],
+   ["s", "동생", "오빠, 깜깜한 밤에 혼자 있기는 너무 무서워.", "Brother, being alone in the dark night is too scary."],
+   ["s", "오빠", "그럼 우리 서로 바꾸자. 내가 달이 될게.", "Then let's trade places. I'll be the moon."],
+   ["n", "", "그리하여 누이는 해가 되고 오라비는 달이 되었다.", "And so the sister became the sun and the brother the moon."],
+   ["n", "", "해가 된 누이는 사람들이 자기를 빤히 쳐다보는 것이 부끄러웠다.", "As the sun, the sister was embarrassed by people staring at her."],
+   ["n", "", "그래서 눈을 뜰 수 없을 만큼 밝은 빛을 쏘았다고 한다.", "So, it is said, she shone a light so bright no one could keep their eyes open."],
+   ["n", "", "지금도 우리가 해를 똑바로 바라볼 수 없는 것은 그 때문이라고 한다.", "They say that is why we still cannot look straight at the sun."],
+   ["n", "", "호랑이에게 목숨을 잃은 어머니는 구름이 되어, 오누이가 잘 있는지 밤낮으로 지켜본다고 한다.", "It is said the mother, who lost her life to the tiger, became a cloud and watches day and night over her children."]],
+  words:[["맡기다", "to entrust"], ["울먹이다", "to be on the verge of tears"], ["그리하여", "and so"], ["빤히", "staringly"], ["목숨을 잃다", "to lose one's life"], ["하늘나라", "heavenly kingdom"], ["오라비", "brother (old word)"], ["누이", "sister (old word)"], ["세상", "the world"], ["겁 많다", "timid"], ["쏘다", "to shoot (light)"], ["똑바로", "straight"], ["바라보다", "to look at"], ["밤낮으로", "day and night"]],
+  core:["-다고 하다", "전해 오는 이야기를 옮겨 말해요. 옛이야기의 끝에 자주 나와요.", "it is said that ~", "지금도 우리가 해를 똑바로 바라볼 수 없는 것은 그 때문이라고 한다."],
+  extra:[["-(으)ㄹ 만큼", "뒤의 일이 어느 정도인지 말해요.", "to the extent that ~", "눈을 뜰 수 없을 만큼 밝은 빛"], ["-다며 다시 보기", "말을 옮기면서 동시에 한 행동을 이어 말해요.", "saying that ~ (while doing)", "누이는 밤이 무섭다며 울먹였다."]],
+  q:["오라비는 왜 누이와 자리를 바꾸었을까요?", "밤을 무서워하는 누이를 아껴서 자기가 달이 되겠다고 했어요."]}
+]};
+
+let CH_TITLES = STORY.b.map(scene => scene.t);
+for(const scenes of Object.values(STORY)){
+  for(const scene of scenes)scene.grammar=[scene.core,...scene.extra];
+}
+
+/* Shareable location: public query values stay separate from internal scene indices. */
+const STORY_LEVEL_NAMES = Object.freeze({b:"beginner",i:"intermediate",a:"advanced"});
+function storyLevelFromQuery(value){
+  switch(value){
+    case "beginner": case "b": return "b";
+    case "intermediate": case "i": return "i";
+    case "advanced": case "a": return "a";
+    default: return "b";
+  }
+}
+function storyChapterFromQuery(value){
+  if(value==="all")return -1;
+  if(value==="activities")return -2;
+  return /^[1-6]$/.test(value||"")?Number(value)-1:0;
+}
+function readStoryLocation(){
+  const query=new URLSearchParams(window.location.search);
+  return {level:storyLevelFromQuery(query.get("level")),ch:storyChapterFromQuery(query.get("start"))};
+}
+let {level,ch}=readStoryLocation();
+function currentStoryLocation(){
+  return {level:STORY_LEVEL_NAMES[level],start:ch===-1?"all":ch===-2?"activities":String(ch+1)};
+}
+function syncStoryLocation(){
+  const current=currentStoryLocation();
+  const url=new URL(window.location.href);
+  url.searchParams.set("level",current.level);
+  url.searchParams.set("start",current.start);
+  const next=url.pathname+url.search+url.hash;
+  const previous=window.location.pathname+window.location.search+window.location.hash;
+  if(next!==previous){ try { window.history.replaceState(window.history.state,"",next); } catch(e) { /* 미리보기 창처럼 주소를 바꿀 수 없는 곳에서는 그냥 넘어가요 */ } }
+  if(window.parent!==window){
+    try { window.parent.postMessage({type:"story-location",...current},window.location.origin); } catch(e) {}
+  }
+}
+const $ = s => document.querySelector(s);
+
+
+function renderTabs(){
+  $("#levelStyleNote").hidden=level!=="b";
+  CH_TITLES=STORY[level].map(scene=>scene.t);
+  $("#levels").innerHTML = LEVELS.map(l => `<option value="${l.id}" ${l.id===level?"selected":""}>${l.name}</option>`).join("");
+  const selectedLevel=LEVELS.find(l=>l.id===level);
+  $("#levelDescription").textContent = `${selectedLevel.name} · ${selectedLevel.desc}`;
+  $("#chapters").innerHTML = CH_TITLES.map((t,i) =>
+    `<button class="scene-button" role="tab" aria-selected="${i===ch}" data-c="${i}"><small>${i+1}장</small>${t[0]}</button>`).join("")
+    + `<button class="scene-button" role="tab" aria-selected="${ch===-1}" data-c="-1"><small>처음부터 끝까지</small>전체 이야기</button>`
+    + `<button class="scene-button" role="tab" aria-selected="${ch===-2}" data-c="-2"><small>다 읽고 나서</small>독후 활동</button>`;
+  $("#scenePicker").innerHTML = CH_TITLES.map((t,i)=>`<option value="${i}" ${i===ch?"selected":""}>${i+1}장 · ${t[0]}</option>`).join("") + `<option value="-1" ${ch===-1?"selected":""}>전체 이야기</option><option value="-2" ${ch===-2?"selected":""}>독후 활동</option>`;
+  $("#scenePicker").onchange = event => { ch=Number(event.target.value); render(); };
+  $("#levels").onchange = event => { level=event.target.value; render(); };
+  document.querySelectorAll(".scene-button").forEach(b => b.onclick = () => { ch = +b.dataset.c; render(); });
+}
+
+/* 본문 밑줄: w = 핵심 단어, g = 문법. 항목은 [찾을 말, 그중 밑줄 칠 부분(없으면 전체), 사이드에 있는 표제어] */
+const UL = {
+b:[
+ {w:[["살아요", "살", "살다"], ["잔칫집에서", "잔칫집", "잔칫집"], ["일해요", "일", "일하다"], ["떡을", "", "떡"], ["고개가", "", "고개"]],
+  g:[["살아요", "아요", "-아요/어요 (현재형)"], ["일해요", "해요", "-아요/어요 (현재형)"], ["잔칫집에서", "에서", "N에서"], ["열어 주지 마", "", "-지 마"]]},
+ {w:[["나타나요", "", "나타나다"], ["무서워요", "", "무섭다"], ["잡아먹지", "잡아먹", "잡아먹다"], ["또", "", "또"], ["기다려요", "", "기다리다"]],
+  g:[["주면", "", "-(으)면"], ["없으면", "", "-(으)면"], ["안 잡아먹지", "안", "안 + 동사"], ["고개마다", "", "N마다"]]},
+ {w:[["옷을 입어요", "", "옷을 입다"], ["목소리가", "목소리", "목소리"], ["손을", "", "손"], ["털이", "", "털"], ["꼬리가", "", "꼬리"]],
+  g:[["보여 주세요", "", "-아/어 주세요"], ["그래서", "", "그래서"], ["목소리가 아니에요", "가 아니에요", "N이/가 아니에요"]]},
+ {w:[["올라가요", "", "올라가다"], ["참기름을", "", "참기름"], ["바르고", "", "바르다"], ["미끄러워요", "", "미끄럽다"], ["도끼로", "도끼", "도끼"]],
+  g:[["올라갈 수 없어요", "", "-(으)ㄹ 수 있어요/없어요"], ["도끼로", "로", "N(으)로 (도구)"], ["어떻게", "", "어떻게"]]},
+ {w:[["빌어요", "", "빌다"], ["동아줄을", "", "동아줄"], ["튼튼한", "", "튼튼하다"], ["썩은", "", "썩다"], ["끊어져요", "", "끊어지다"]],
+  g:[["하늘을 보고", "", "-고"], ["꼭 잡고", "", "-고"], ["살려 주세요", "", "-아/어 주세요 다시 보기"], ["그때", "", "그때"]]},
+ {w:[["해가", "해", "해"], ["달이", "달", "달"], ["되어라", "", "되다"], ["바꾸자", "바꾸", "바꾸다"], ["부끄러워요", "", "부끄럽다"]],
+  g:[["해가 되고", "가 되고", "N이/가 되다"], ["달이 돼요", "이 돼요", "N이/가 되다"], ["될게", "", "-(으)ㄹ게"], ["바꾸자", "자", "-자"]]}
+],
+i:[
+ {w:[["잠그고", "", "잠그다"], ["부지런히", "", "부지런히"], ["싸 주었어요", "", "싸 주다"], ["도우러", "도우", "돕다"], ["서둘러", "", "서두르다"]],
+  g:[["열어 주면 안 돼", "", "-(으)면 안 되다"], ["끝나자", "", "-자"], ["지자", "", "-자"], ["도우러", "러", "-(으)러 가다"]]},
+ {w:[["나타났어요", "", "나타나다"], ["떨렸어요", "", "떨리다"], ["줄어들었어요", "", "줄어들다"], ["비어", "", "비다"], ["삼켜", "삼켜", "삼키다"]],
+  g:[["넘을 때마다", "", "-(으)ㄹ 때마다"], ["무서워서", "", "-아서/어서 (이유)"], ["삼켜 버렸어요", "버렸어요", "-아/어 버리다"]]},
+ {w:[["목소리를", "", "목소리"], ["쉬었어", "", "쉬다"], ["털이", "", "털"], ["거칠어졌단다", "", "거칠다"], ["꼬리가", "", "꼬리"]],
+  g:[["걸걸하지 않은데요", "", "-지 않다"], ["많지 않아요", "", "-지 않다"], ["내밀어 보세요", "", "-아/어 보다"], ["엄마가 아니라", "", "N이/가 아니라"]]},
+ {w:[["빠져나왔어요", "", "빠져나오다"], ["붙잡았지만", "붙잡았", "붙잡다"], ["무심코", "", "무심코"], ["도끼로", "", "도끼"], ["엉덩방아만", "", "엉덩방아를 찧다"]],
+  g:[["올라오면 되는데", "", "-(으)면 되다"], ["가는 척하고", "", "-는 척하다"], ["고개를 드니", "", "-(으)니"], ["붙잡았지만", "지만", "-지만"]]},
+ {w:[["빌었어요", "", "빌다"], ["동아줄을", "", "동아줄"], ["붙잡고", "", "붙잡다"], ["흉내를 내며", "", "흉내를 내다"], ["끊어졌어요", "", "끊어지다"]],
+  g:[["오르는데", "", "-는데 (배경)"], ["살려 주시려면", "", "-(으)려면"], ["올라오자", "", "-자 다시 보기"]]},
+ {w:[["밝히고", "", "밝히다"], ["비추어라", "", "비추다"], ["겁이 많은", "", "겁이 많다"], ["바꾸자", "", "바꾸다"], ["부끄러웠어요", "", "부끄럽다"]],
+  g:[["될게", "", "-(으)ㄹ게"], ["내뿜었대요", "", "-대요/-래요"], ["그 때문이래요", "", "-대요/-래요"], ["지켜본대요", "", "-대요/-래요"], ["부시도록", "", "-도록"]]}
+],
+a:[
+ {w:[["첩첩산중", "", "첩첩산중"], ["홀어머니가", "", "홀어머니"], ["근근이", "", "근근이"], ["거들어", "", "거들다"], ["재촉했다", "", "재촉하다"]],
+  g:[["늦더라도", "", "-더라도"], ["수고했다며", "", "-다며"], ["담아 오마", "", "-(으)마"], ["목이 빠지게 기다리고", "", "관용 표현"], ["허리 한 번 펴지 못하고", "", "관용 표현"]]},
+ {w:[["가로막았다", "", "가로막다"], ["내주었다", "", "내주다"], ["안도의", "", "안도"], ["애원에도", "", "애원"], ["아랑곳하지 않고", "", "아랑곳하지 않다"]],
+  g:[["받아먹더니", "", "-더니"], ["비고 말았다", "", "-고 말다"], ["간이 콩알만 해졌지만", "", "관용 표현"]]},
+ {w:[["걸치고", "", "걸치다"], ["낯선", "", "낯설다"], ["뒤덮여", "", "뒤덮이다"], ["둘러댔지만", "", "둘러대다"], ["내다보자", "내다보", "내다보다"]],
+  g:[["질렀더니", "", "-았/었더니"], ["했더니", "", "-았/었더니"], ["내다보자", "자", "-자"], ["흔들어 댔다", "", "-아/어 대다"], ["등골이 오싹했다", "", "관용 표현"]]},
+ {w:[["들이닥쳤지만", "", "들이닥치다"], ["매달렸지만", "", "매달리다"], ["무심코", "", "무심코"], ["득달같이", "", "득달같이"], ["엉덩방아만", "", "엉덩방아를 찧다"]],
+  g:[["오르려고 할수록", "", "-(으)ㄹ수록"], ["가는 척하며", "", "-는 척하다"], ["기다리다 못한", "", "-다(가) 못해"], ["찧을 뿐이었다", "", "-(으)ㄹ 뿐이다"], ["입을 잘못 놀리고", "", "관용 표현"], ["무릎을 탁 치더니", "", "관용 표현"]]},
+ {w:[["코앞까지", "", "코앞"], ["간절히", "", "간절히"], ["우러러", "", "우러러보다"], ["삭아", "", "삭다"], ["곤두박질쳤다", "", "곤두박질치다"]],
+  g:[["살리시려거든", "", "-(으)려거든"], ["죽이시려거든", "", "-(으)려거든"], ["쳐다보듯", "", "속담 · -듯(이)"], ["그런 줄도 모르고", "", "-(으)ㄴ 줄도 모르고"]]},
+ {w:[["맡기셨다", "", "맡기다"], ["울먹였다", "", "울먹이다"], ["그리하여", "", "그리하여"], ["빤히", "", "빤히"], ["목숨을 잃은", "", "목숨을 잃다"]],
+  g:[["쏘았다고 한다", "", "-다고 하다"], ["때문이라고 한다", "", "-다고 하다"], ["뜰 수 없을 만큼", "", "-(으)ㄹ 만큼"], ["무섭다며", "", "-다며 다시 보기"]]}
+]
+};
+
+const escHTML = t => t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+function markKo(ko, ci){
+  const set = UL[level] && UL[level][ci]; if(!set) return ko;
+  const words = STORY[level][ci].words, ranges = [];
+  const add = (list, cls) => list.forEach(([ctx, tgt, key]) => {
+    const t = tgt || ctx, off = ctx.indexOf(t);
+    let from = 0, i;
+    while((i = ko.indexOf(ctx, from)) > -1){
+      const st = i + off, en = st + t.length;
+      if(!ranges.some(r => st < r.en && en > r.st)){
+        const gl = cls === "kw" ? ((words.find(w => w[0] === key) || [])[1] || "") : "";
+        ranges.push({st, en, cls, title: gl ? `${key} · ${gl}` : key});
+      }
+      from = i + ctx.length;
+    }
+  });
+  add(set.w, "kw"); add(set.g, "kg");
+  ranges.sort((a,b) => a.st - b.st);
+  let out = "", pos = 0;
+  ranges.forEach(r => { out += escHTML(ko.slice(pos, r.st)) + `<span class="${r.cls}" data-tip="${escHTML(r.title)}" tabindex="0">${escHTML(ko.slice(r.st, r.en))}</span>`; pos = r.en; });
+  return out + escHTML(ko.slice(pos));
+}
+function lineHTML([type, who, ko, en], ci){
+  const kd = ci === undefined ? ko : markKo(ko, ci);
+  if(type === "n") return `<p class="line"><span class="ko">${kd}</span><span class="en">${en}</span></p>`;
+  const cls = type === "t" ? "think" : "say";
+  return `<div class="line ${cls}"><div class="bubble"><span class="who">${who}</span><span class="ko">${kd}</span><span class="en">${en}</span></div></div>`;
+}
+
+const IMG_AT = {
+  b:[[3,7,9],[1,3,8],[2,7,10],[1,10,14],[2,5,11],[1,3,10]],
+  i:[[2,6,8],[1,4,7],[1,6,9],[1,9,12],[2,5,10],[1,2,11]],
+  a:[[3,6,8],[0,2,6],[1,6,9],[1,8,11],[1,4,10],[1,2,10]]
+};
+const IMG_ALT = [
+  ["오누이에게 문을 꼭 잠그라고 당부하는 엄마","부잣집 안주인에게 품삯으로 떡을 받는 엄마","떡 소쿠리를 머리에 이고 저녁 산길을 걷는 엄마"],
+  ["고개에서 엄마의 길을 막은 호랑이","엄마가 던져 준 떡을 날름 받아먹는 호랑이","빈 소쿠리를 보여 주는 엄마와 입맛을 다시는 호랑이"],
+  ["엄마 옷을 입고 문을 두드리는 호랑이","문구멍으로 들어온 털 난 손을 보고 놀란 오누이","치마 밑으로 나온 꼬리와 문구멍으로 내다보는 오누이"],
+  ["뒷문으로 빠져나와 우물가 나무에 오르는 오누이","엉덩방아를 찧은 호랑이와 나무 위에서 웃는 동생","도끼로 나무를 찍으며 올라오는 호랑이"],
+  ["나무 꼭대기에서 두 손을 모으고 비는 오누이","새 동아줄을 잡고 하늘로 올라가는 오누이","썩은 동아줄이 끊어져 수수밭으로 떨어지는 호랑이"],
+  ["하늘나라에서 하느님의 말씀을 듣는 오누이","밤이 무서워 우는 동생과 달래는 오빠","해가 된 동생, 달이 된 오빠, 구름이 된 엄마"]
+];
+/* 그림 파일: images/sunmoon-장-번호 + IMG_EXT. 파일 이름이나 확장자가 다르면 아래 두 줄만 고치면 돼요. */
+const IMG_DIR = "images/";
+const IMG_EXT = ".webp";
+function storyImage(ci,slot){
+  const key=`${ci+1}-${slot+1}`;
+  return `<img class="story-scene-image" src="${IMG_DIR}sunmoon-${key}${IMG_EXT}" alt="${IMG_ALT[ci][slot]}" loading="${ci===0&&slot===0?"eager":"lazy"}" decoding="async" onerror="this.remove()">`;
+}
+function chapterBlock(i, withHead){
+  const scene=STORY[level][i];
+  const head=withHead?`<h3 style="margin:22px 0 10px;font-size:20px">${i+1}장 · ${CH_TITLES[i][0]}</h3>`:"";
+  const positions=IMG_AT[level][i];
+  const tail=positions.indexOf(scene.lines.length);
+  return head+scene.lines.map((line,index)=>{
+    const slot=positions.indexOf(index);
+    return (slot===-1?"":storyImage(i,slot))+lineHTML(line,i);
+  }).join("")+(tail===-1?"":storyImage(i,tail));
+}
+function chapterNav(){
+  const previous=ch>0?`<button data-go="${ch-1}">이전 장</button>`:`<span></span>`;
+  const next=ch<STORY[level].length-1?`<button data-go="${ch+1}">다음 장</button>`:`<button data-go="-2">다 읽고 나서 · 독후 활동</button>`;
+  return `<nav class="ch-nav" aria-label="장면 이동">${previous}${next}</nav>`;
+}
+
+function render(){
+  renderTabs();
+  syncStoryLocation();
+  const lv = LEVELS.find(l => l.id === level);
+  tip.hidden=true;
+  const legend=`<div class="ul-legend"><span><span class="kw">밑줄</span> 핵심 단어</span><span><span class="kg">점선</span> 문법</span><span>밑줄 친 말을 누르면 뜻이 보여요</span></div>`;
+  $("#lesson").hidden=ch===-2;
+  $("#after").hidden=ch!==-2;
+  if(ch===-2){renderAfterActivities();renderOverview();return;}
+  if(ch === -1){
+    $("#story").innerHTML = `<div class="scene-head"><div><h2>전체 이야기</h2><p>${lv.name}<span class="en-inline"> · ${lv.en}</span></p></div></div>` + legend +
+      STORY[level].map((_,i) => chapterBlock(i, true)).join("");
+    $("#side").innerHTML = `<div class="note"><h3>읽기 전에</h3><p style="margin:0;font-size:15px">장면마다 나오는 단어와 문법은 위에서 장면을 하나씩 골라서 볼 수 있어요. 아래 ‘한눈에 보기’에는 이 등급에서 배우는 것을 장면별로 모아 두었어요.</p></div>`;
+  } else {
+    const c = STORY[level][ch];
+    $("#story").innerHTML = `<div class="scene-head"><div><h2>${ch+1}장 · ${CH_TITLES[ch][0]}</h2><p><span class="en-inline">${CH_TITLES[ch][1]} · </span>${lv.name}</p></div></div>` + legend + chapterBlock(ch, false) + chapterNav();
+    $("#side").innerHTML =
+      `<div class="resource"><h3>핵심 단어 · Key words</h3>${wordTable(c.words.slice(0,KEY_N))}` +
+      (c.words.length>KEY_N?`<details class="more-words"><summary>추가 표현 ${c.words.length-KEY_N}개 보기</summary>${wordTable(c.words.slice(KEY_N))}</details>`:"") + `</div>` +
+      `<div class="resource"><h3>문법 · Grammar</h3>${gramCard(c.core,true)}${c.extra.length?`<p class="gram-sub">함께 보기</p>${c.extra.map(g=>gramCard(g,false)).join("")}`:""}</div>` +
+      `<div class="practice"><h3>읽고 답해요</h3><p style="margin:0">${c.q[0]}</p><button class="reveal" id="rev">답 보기</button><div class="answer" id="ans">${c.q[1]}</div></div>`;
+    $("#rev").onclick = () => { const a = $("#ans"); a.classList.toggle("open"); $("#rev").textContent = a.classList.contains("open") ? "답 가리기" : "답 보기"; };
+  }
+  document.querySelectorAll(".ch-nav [data-go]").forEach(button=>button.onclick=()=>{ch=Number(button.dataset.go);render();$("#chapters").scrollIntoView({block:"start"});});
+  renderOverview();
+}
+
+const KEY_N = 5;
+const wordTable = list => `<table class="words">${list.map(w=>`<tr><td>${w[0]}</td><td class="gloss">${w[1]}</td></tr>`).join("")}</table>`;
+const gramCard = (g,core) => `<div class="gram${core?" core":""}">${core?`<span class="core-tag">핵심 문법</span>`:""}<b>${g[0]}</b><p>${g[1]}</p><span class="en">${g[2]}</span><div class="ex">${g[3]}</div></div>`;
+function renderOverview(){
+  const lv = LEVELS.find(l => l.id === level);
+  $("#ovInner").innerHTML = `<p style="margin:0 0 8px;color:var(--muted);font-size:15px">${lv.name} · ${lv.desc}</p><table class="ov"><thead><tr><th>장면</th><th>단어</th><th>문법</th></tr></thead><tbody>` +
+    STORY[level].map((c,i) => `<tr><td>${i+1}장 ${CH_TITLES[i][0]}</td><td>${c.words.map(w=>w[0]).join(", ")}</td><td>${c.grammar.map(g=>g[0]).join(", ")}</td></tr>`).join("") +
+    `</tbody></table>`;
+}
+
+function renderAfterActivities(){
+  const target=$("#afterActivities");
+  const q=(t,en)=>`<p>${t}</p>`+(en?`<span class="en">${en}</span>`:"");
+  const ans=(id,label,text)=>`<button class="reveal" data-ans="${id}" aria-expanded="false" aria-controls="${id}">${label}</button><div id="${id}" class="answer">${text}</div>`;
+  const opt=(name,value,text)=>`<label><input type="radio" name="${name}" value="${value}"> ${text}</label>`;
+  const act=(title,body,first)=>`<div${first?"":` style="margin-top:28px"`}><h3>${title}</h3>${body}</div>`;
+  const data = {
+    b:
+      act("골라 봐요",
+        q("호랑이는 처음에 왜 나무에 올라갈 수 없어요?","Why can't the tiger climb the tree at first?")+
+        `<div role="group" aria-label="호랑이는 왜 나무에 올라갈 수 없어요?">${opt("afterChoice","oil","손에 참기름을 발라서 손이 미끄러워요.")}${opt("afterChoice","high","나무가 너무 높아요.")}${opt("afterChoice","sleepy","호랑이가 졸려요.")}</div>`+
+        `<button class="reveal" id="checkChoice">정답 확인</button><p id="choiceFeedback" class="feedback" role="status"></p>`,true)+
+      act("마음을 담아 읽어요",
+        `<p>동생: “오빠, 밤은 너무 깜깜해. 무서워.”</p><p>오빠: “그럼 우리 바꾸자. 내가 달이 될게.”</p>`+
+        q("동생은 어떤 마음이에요? 오빠는 어떤 마음이에요?","How does the sister feel? How about the brother?")+
+        ans("ansFeel","예시 답 보기","동생은 무서워요. 오빠는 동생을 아껴요. 그래서 동생과 바꿔요."))+
+      act("하늘을 보고 말해요",
+        q("해, 달, 구름을 보면 누가 생각나요? 문장으로 말해요.","Who do you think of when you see the sun, the moon and a cloud? Say it in sentences.")+
+        ans("ansSky","예시 답 보기","해는 동생이에요. 달은 오빠예요. 구름은 엄마예요.")),
+    i:
+      act("두 동아줄",
+        q("왜 오누이에게는 새 동아줄이, 호랑이에게는 썩은 동아줄이 내려왔을까요?","Why did the children get a new rope, but the tiger a rotten one?")+
+        ans("ansRope","예시 답 보기","오누이는 착한 마음으로 빌었지만 호랑이는 엄마를 잡아먹고 오누이까지 잡아먹으려고 했어요. 그래서 하늘이 오누이는 살려 주고 호랑이에게는 벌을 줬어요."),true)+
+      act("오누이 인터뷰",
+        q("여러분은 오빠나 동생이에요. 선생님의 질문에 대답해요.","You are the brother or the sister. Answer your teacher's questions.")+
+        `<p>왜 문을 열지 않았어요?</p><p>집에서 어떻게 빠져나왔어요?</p><p>호랑이는 어떻게 나무 위까지 올라왔어요?</p>`+
+        q("이제 그날 밤 일을 세 문장으로 말해 주세요.","Now tell what happened that night in three sentences.")+
+        ans("ansInterview","예시 답 보기","목소리도 손도 이상해서 문을 열지 않았어요. 뒷간에 가는 척하고 뒷문으로 빠져나와 나무 위로 올라갔어요. 동생이 무심코 도끼 이야기를 해서 호랑이가 도끼로 나무를 찍으며 올라왔어요."))+
+      act("말투를 바꿔요 · 선택",
+        q("오빠는 동생에게 “내가 달이 될게.”라고 말해요. 처음 만난 어른에게 같은 약속을 하면 어떻게 말해요?","How would you make the same promise to an adult you just met?")+
+        ans("ansPolite","답 보기","“제가 달이 될게요.”라고 말해요.")),
+    a:
+      act("이야기 나누기",
+        q("오빠가 해와 달의 역할을 바꾼 행동은 어떤 의미를 가질까요?","What does the brother's choice to swap roles mean?")+
+        ans("ansSwap","예시 답 보기","무서워하는 누이를 먼저 생각하는 오라비의 마음을 보여 줘요. 어머니를 잃은 뒤에도 남매가 서로를 지키며 살아간다는 뜻으로 읽을 수도 있어요."),true)+
+      act("옛이야기 속 설명",
+        q("이 이야기는 해와 달, 수숫대, 구름에 대해 무엇을 설명하나요? 여러분 나라에도 해와 달이 생긴 이야기가 있나요? 비교해서 이야기해 보세요.","What does this tale explain about the sun, moon, sorghum and clouds? Does your culture have a similar origin story? Compare them.")+
+        ans("ansExplain","예시 답 보기","해는 부끄러움 많은 누이라서 눈부시게 빛나고, 달은 누이를 아끼는 오라비예요. 수숫대는 호랑이 피가 묻어 붉고, 어머니는 구름이 되어 남매를 지켜본다고 해요. 모두 이 판본에 전해 오는 옛이야기 속 설명이에요."))+
+      act("하늘을 보며 · 마무리",
+        `<p>“낮에 해를 보거든 겁 많던 누이를, 밤에 달을 보거든 누이를 아끼던 오라비를, 그리고 구름을 보거든 그 곁을 지키는 어머니를 떠올려 보자.”</p>`+
+        q("이제 해, 달, 구름을 보면 누가 떠오를 것 같나요? ‘-거든’을 써서 나만의 문장을 만들어 보세요. ‘-거든’은 ‘그럴 때에는’이라는 뜻이고, 뒤에 권하거나 시키는 말이 와요.","Who will you think of when you see the sun, moon and clouds? Make your own sentence with -거든 ('when/if ~, then do ~').")+
+        ans("ansGeodeun","예시 답 보기","비 오는 날 구름을 보거든 오누이를 지켜보는 어머니를 생각해 보세요."))+
+      act("호랑이의 입장에서 · 쓰기 숙제",
+        q("호랑이의 입장에서 첫 고개부터 동아줄이 끊어질 때까지를 다시 써 보세요.","Retell the story from the tiger's point of view, from the first pass until the rope snaps.")+
+        `<p>실제로 일어난 일을 세 가지 이상 넣으세요.</p><p>호랑이가 그때그때 무엇을 생각했는지 덧붙이세요.</p><p>본문에서 배운 표현을 한두 개 쓰세요.</p>`+
+        `<p>도움말: -더니, -았/었더니, -(으)ㄹ수록, -(으)ㄴ 줄도 모르고</p>`+
+        q("수업에서는 무슨 내용을 넣을지 이야기해 보세요. 글은 숙제로 써 오세요.","Discuss your ideas in class. Write it for homework."))
+  };
+  target.innerHTML=data[level];
+  target.querySelectorAll(".reveal[data-ans]").forEach(b=>{
+    const label=b.textContent;
+    b.onclick=()=>{
+      const open=document.getElementById(b.dataset.ans).classList.toggle("open");
+      b.textContent=open?"답 가리기":label;
+      b.setAttribute("aria-expanded",open);
+    };
+  });
+  const check=$("#checkChoice");
+  if(check)check.onclick=()=>{
+    const selected=document.querySelector('input[name="afterChoice"]:checked');
+    $("#choiceFeedback").textContent=!selected?"먼저 답을 하나 골라 보세요.":selected.value==="oil"?"맞아요! 손에 참기름을 발라서 손이 미끄러워요.":"다시 생각해 보세요. 호랑이는 손에 무엇을 발랐어요?";
+  };
+}
+
+
+$("#toggleEn").onclick = function(){
+  const on = document.body.classList.toggle("hide-en");
+  this.setAttribute("aria-pressed", on);
+  this.textContent = on ? "영어 보이기" : "영어 숨기기";
+};
+/* 밑줄 친 말: 누르거나 마우스를 올리면 뜻을 보여 줘요 */
+const tip = document.createElement("div"); tip.className = "ul-tip"; tip.hidden = true; document.body.appendChild(tip);
+function showTip(el){
+  if(document.body.classList.contains("no-ul")) return;
+  tip.textContent = document.body.classList.contains("hide-en") ? el.dataset.tip.split(" · ")[0] : el.dataset.tip; tip.hidden = false;
+  const r = el.getBoundingClientRect(), w = tip.offsetWidth;
+  const left = Math.min(Math.max(8, r.left + window.scrollX + r.width/2 - w/2), window.scrollX + document.documentElement.clientWidth - w - 8);
+  tip.style.left = left + "px"; tip.style.top = (r.bottom + window.scrollY + 6) + "px";
+}
+document.addEventListener("click", e => { const el = e.target.closest("[data-tip]"); if(el) showTip(el); else tip.hidden = true; });
+document.addEventListener("pointerover", e => { if(e.pointerType !== "mouse") return; const el = e.target.closest("[data-tip]"); if(el) showTip(el); });
+document.addEventListener("pointerout", e => { if(e.pointerType !== "mouse") return; if(e.target.closest("[data-tip]")) tip.hidden = true; });
+document.addEventListener("focusin", e => { const el = e.target.closest("[data-tip]"); if(el) showTip(el); });
+window.addEventListener("scroll", () => { tip.hidden = true; }, {passive:true});
+$("#toggleUl").onclick = function(){
+  const on = document.body.classList.toggle("no-ul");
+  tip.hidden=true;
+  this.setAttribute("aria-pressed", on);
+  this.textContent = on ? "밑줄 보이기" : "밑줄 숨기기";
+};
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape")tip.hidden=true;
+  if((event.key==="Enter"||event.key===" ")&&event.target.matches("[data-tip]")){
+    event.preventDefault();showTip(event.target);
+  }
+});
+
+window.addEventListener("popstate",()=>{
+  const current=readStoryLocation();
+  level=current.level;
+  ch=current.ch;
+  render();
+});
+render();
+const reportHeight=()=>{ try { parent.postMessage({type:"story-height",height:document.querySelector(".wrap").getBoundingClientRect().height+8},location.origin); } catch(e) {} };
+new ResizeObserver(reportHeight).observe(document.querySelector(".wrap"));
+reportHeight();
+</script>
+</body>
+</html>
