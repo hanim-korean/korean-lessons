@@ -74,26 +74,387 @@ h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
 .ex b{color:#1d4ed8}
 .ex .mid{color:#6b7280}
 </style>
+<style>/* Shared learning surface, extracted from the approved Tiger and Gotgam lesson. */
+.learning-material {
+  --learning-title-size:30px;
+  --learning-section-size:22px;
+  --learning-body-size:16px;
+  --page-heading-size:var(--learning-title-size);
+  --learning-ink: #263c30;
+  --learning-muted: #52634f;
+  --learning-accent: #526c3d;
+  --learning-line: #dfe6db;
+  --learning-control-line: #c5d0bd;
+  --learning-paper: #fdfefd;
+  --learning-sheet: #fff;
+  --learning-tint: #edf3e3;
+  --learning-warm: #f3f7ed;
+  --learning-selected: #e4edcf;
+  --learning-radius: 14px;
+  --learning-radius-control: 8px;
+  --learning-radius-small: 4px;
+  --learning-shadow: 0 3px 8px rgb(38 60 48 / 7%);
+  --learning-font: Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  --ink: var(--learning-ink);
+  --muted: var(--learning-muted);
+  --line: var(--learning-line);
+  --blue: var(--learning-accent);
+  --pale: var(--learning-tint);
+  --paper: var(--learning-paper);
+  --warm: var(--learning-warm);
+  --radius: var(--learning-radius);
+  margin: 0;
+  color: var(--learning-ink);
+  background: var(--learning-paper);
+  font-family: var(--learning-font);
+  font-size:var(--learning-body-size);
+  line-height: 1.65;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  -webkit-text-size-adjust: 100%;
+}
+.learning-material *, .learning-material *::before, .learning-material *::after { box-sizing: border-box; }
+.learning-material [hidden] { display: none !important; }
+.learning-material :is(button, input, select, textarea) { font-family: inherit; }
+.learning-material :is(button, select, summary) { cursor: pointer; }
+.learning-material :is(button, select, summary, input:not([type=checkbox]):not([type=radio])) { min-height: 44px; }
+.learning-material :is(button, input, select, textarea, summary, a, [tabindex]):focus-visible {
+  outline: 2px solid var(--learning-accent);
+  outline-offset: 3px;
+}
+.learning-material :is(input, textarea) { caret-color: var(--learning-accent); }
+.learning-material :is(input, textarea)::placeholder { color: var(--learning-muted); opacity: 1; }
+.learning-material ::selection { background: var(--learning-selected); color: var(--learning-ink); }
+.learning-material { scrollbar-color: var(--learning-control-line) var(--learning-paper); }
+.learning-material ::-webkit-scrollbar { width: 9px; height: 9px; }
+.learning-material ::-webkit-scrollbar-thumb { background: var(--learning-control-line); border: 2px solid var(--learning-paper); border-radius: 9px; }
+.learning-material a { text-underline-offset: 4px; }
+.learning-material .learning-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px 28px;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto 28px;
+  padding: 0 0 24px;
+  border: 0;
+  border-bottom: 1px solid var(--learning-line);
+  background: transparent;
+  text-align: left;
+}
+.learning-material .learning-heading { flex: 1 1 360px; min-width: 0; }
+.learning-material .learning-heading h1 {
+  margin: 0;
+  color: var(--learning-ink);
+  font-family: var(--learning-font);
+  font-weight: 600;
+  line-height: 1.4;
+  font-size:var(--learning-title-size);
+  letter-spacing: -.025em;
+  white-space: normal;
+  text-wrap: balance;
+}
+.learning-material .learning-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: -10px 0 6px;
+  color: var(--learning-muted);
+  font-size: 15px;
+  text-decoration: none;
+}
+.learning-material .learning-back:hover { text-decoration: underline; }
+.learning-material .learning-heading .learning-subtitle {
+  max-width: 70ch;
+  margin: 2px 0 0;
+  color: var(--learning-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.learning-material .learning-tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px 12px; }
+.learning-material .learning-tools label { display: grid; gap: 6px; color: var(--learning-muted); font-size: 14px; }
+.learning-material .learning-tools select {
+  min-width: 128px;
+  max-width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--learning-control-line);
+  border-radius: 6px;
+  background: var(--learning-sheet);
+  color: var(--learning-ink);
+  font-size: 16px;
+}
+.learning-material .learning-body { width: 100%; max-width: 1120px; min-width: 0; margin-inline: auto; }
+.learning-material .learning-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--learning-control-line);
+  border-radius: 6px;
+  background: var(--learning-sheet);
+  color: var(--learning-ink);
+  font: 500 15px/1.5 var(--learning-font);
+  text-decoration: none;
+}
+.learning-material .learning-button:hover { background: var(--learning-tint); border-color: var(--learning-accent); }
+.learning-material .learning-button[aria-pressed=true], .learning-material .learning-button-primary {
+  border-color: var(--learning-accent);
+  background: var(--learning-selected);
+  color: var(--learning-ink);
+}
+.learning-material button:disabled { opacity: .5; cursor: default; }
+body.learning-material { padding: 32px 24px 56px; }
+body.learning-material.learning-embedded { padding: 0 0 24px; min-height: 0; }
+.learning-material .learning-note { margin: 12px 0; color: var(--learning-muted); font-size: 15px; }
+.learning-material .learning-example { border: 1px solid var(--learning-line); border-radius: 12px; padding: 14px 16px; background: var(--learning-warm); }
+.learning-material .learning-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin: 0 0 28px; }
+.learning-material .learning-steps button {
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid var(--learning-line);
+  border-radius: 8px;
+  background: var(--learning-sheet);
+  color: var(--learning-muted);
+  font-size: 15px;
+  text-align: left;
+}
+.learning-material .learning-steps button[aria-current=step] { border-color: var(--learning-ink); background: var(--learning-ink); color: #fff; }
+/* A compact scene picker retains direct navigation on narrow screens. */
+.learning-material .learning-mobile-scene-picker { display: none; }
+@media (max-width: 720px) {
+  .learning-material .learning-mobile-scene-picker { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--learning-muted); }
+  .learning-material .learning-mobile-scene-picker select { flex: 1; min-width: 0; min-height: 44px; border: 1px solid var(--learning-control-line); border-radius: 6px; padding: 8px 12px; color: var(--learning-ink); background: #fff; font: inherit; }
+  .learning-story :is(#chapters, .chapter-label) { display: none; }
+
+  body.learning-material { padding: 24px 20px 40px; }
+  body.learning-material.learning-embedded { padding: 0 0 20px; }
+  .learning-material .learning-header { margin-bottom: 24px; padding-bottom: 20px; gap: 16px; }
+  .learning-material .learning-heading { flex-basis: 100%; }
+  .learning-material .learning-tools { width: 100%; }
+  .learning-material .learning-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .learning-material *, .learning-material *::before, .learning-material *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
+@media print {
+  body.learning-material { padding: 0; background: #fff; }
+  .learning-material .learning-header { margin-bottom: 20px; padding-bottom: 12px; }
+  .learning-material :is(.learning-back, .learning-tools, .learning-steps) { display: none !important; }
+}
+
+/* Five learning formats: shared geometry, selection, and terminal actions. */
+.learning-material .learning-action-row {
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  gap:16px; width:100%; margin-top:28px; padding-top:20px;
+  border-top:1px solid var(--learning-line);
+}
+.learning-material .learning-action-row > :last-child { margin-inline-start:auto; }
+.learning-material .learning-action-row .learning-button { min-width:160px; border-radius:var(--learning-radius-control); }
+.learning-material .learning-action-row .learning-button-primary {
+  background:var(--learning-ink); border-color:var(--learning-ink); color:#fff;
+}
+.learning-material .learning-action-row .learning-button-primary:hover { background:#354a30; }
+.learning-material.learning-story :is(button,select,.btn) { border-radius:var(--learning-radius-control); }
+.learning-material.learning-story :is(.bubble,.resource,.practice,.after,.overview,.note) { border-radius:var(--learning-radius); }
+.learning-material.learning-story :is(.story-scene-image,.scene-img) { border-radius:var(--learning-radius); }
+.learning-material.learning-story .ch-nav { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:stretch; width:100%; }
+.learning-material.learning-story .ch-nav button { width:100%; min-height:48px; }
+.learning-material.learning-story .ch-nav button:last-child { background:var(--learning-ink); border-color:var(--learning-ink); color:#fff; }
+.learning-material.learning-story .scene-button[aria-pressed=true] { border-color:var(--learning-ink); background:var(--learning-ink); color:#fff; font-weight:600; }
+.learning-material.learning-story .scene-button[aria-pressed=true] small { color:inherit; }
+.learning-material.learning-story .after-activities label:has(input:checked) { background:var(--learning-selected); outline:1px solid var(--learning-accent); outline-offset:-1px; border-radius:var(--learning-radius-control); }
+.learning-material.learning-story .after-activities label { padding:10px 12px; }
+.learning-material.learning-story .after .reveal { display:block; margin-inline-start:auto; min-width:160px; }
+.learning-material.learning-grammar :is(.learning-header,.learning-body) { max-width:740px; }
+.learning-material.learning-grammar :is(.box,.note,.photo) { border-radius:var(--learning-radius); }
+.learning-material.learning-grammar :is(.checker input,.opts button,.learning-button) { border-radius:var(--learning-radius-control); }
+.learning-material.learning-grammar .opts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); width:100%; }
+.learning-material.learning-grammar .opts button { width:100%; min-width:0; }
+.learning-material.learning-grammar .opts button[aria-pressed=true] { box-shadow:inset 0 0 0 1px currentColor; font-weight:600; }
+.learning-material.learning-grammar .tag { border-radius:var(--learning-radius-small); }
+.learning-material.learning-numbers :is(.learning-header,.learning-body) { max-width:640px; }
+.learning-material.learning-numbers :is(.mode-toggle,.cats,.progress-wrap,.card-scene,.nav) { width:100%; max-width:640px; margin-inline:auto; }
+.learning-material.learning-numbers :is(.mode-toggle,.card-face,.card-scene) { border-radius:var(--learning-radius); }
+.learning-material.learning-numbers :is(.mode-btn,.cat-btn,.nav-btn,.flip-btn,.learning-button) { border-radius:var(--learning-radius-control); }
+.learning-material.learning-numbers :is(.mode-btn,.cat-btn)[aria-pressed=true] { background:var(--learning-ink); border-color:var(--learning-ink); color:#fff; box-shadow:inset 0 0 0 1px var(--learning-ink); font-weight:600; }
+.learning-material.learning-numbers .nav { display:grid; grid-template-columns:48px minmax(0,1fr) minmax(0,1fr); align-items:stretch; }
+.learning-material.learning-numbers .nav > button { width:100%; min-width:0; min-height:54px; }
+.learning-material.learning-numbers .nav .nav-next { height:auto; font:inherit; font-size:15px; padding:7px 10px; }
+.learning-material.learning-numbers .card-tag { border-radius:var(--learning-radius-small); }
+.learning-material.learning-pronunciation :is(.learning-header,.learning-body) { max-width:1120px; }
+.learning-material.learning-pronunciation :is(.contrast-card,.why-shell,.test-card,.step,.sequence) { border-radius:var(--learning-radius); }
+.learning-material.learning-pronunciation :is(.feature-board,.ear-box,.pair,.air,.sound-circle,.learning-button) { border-radius:var(--learning-radius-control); }
+@media(max-width:620px) {
+  .learning-material .learning-action-row .learning-button-primary { width:100%; }
+  .learning-material.learning-grammar .opts { grid-template-columns:minmax(0,1fr); }
+  .learning-material.learning-story .ch-nav { gap:10px; }
+  .learning-material.learning-numbers .nav { gap:8px; }
+}
+
+.learning-material.learning-numbers .mode-toggle { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); padding:4px; }
+.learning-material.learning-numbers .mode-btn { width:100%; min-width:0; }
+
+/* Match the visible text and chevron insets while retaining the native select. */
+.learning-material select:not([multiple]):not([size]),
+.learning-material.learning-kpop select:not([multiple]):not([size]) {
+  --learning-select-inset:16px;
+  appearance:none;
+  -webkit-appearance:none;
+  padding-inline-start:var(--learning-select-inset);
+  padding-inline-end:44px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='m1 1.5 5 5 5-5' stroke='%23263c30' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right var(--learning-select-inset) center;
+  background-size:12px 8px;
+}
+@media(forced-colors:active) {
+  .learning-material select:not([multiple]):not([size]),
+  .learning-material.learning-kpop select:not([multiple]):not([size]) {
+    appearance:auto;
+    -webkit-appearance:auto;
+    background-image:none;
+    padding-inline-end:var(--learning-select-inset);
+  }
+}
+
+/* Compact phones retain the same title, section and body hierarchy. */
+@media(max-width:620px) {
+ .learning-material { --learning-title-size:26px; --learning-section-size:20px; }
+}
+
+/* Keep bilingual headings together across public learning materials. */
+.learning-material:is(.learning-grammar,.learning-numbers,.learning-pronunciation,.learning-word-order,.learning-colors,.learning-story,.learning-kpop) .learning-heading h1 { line-height:1.3; }
+.learning-material:is(.learning-grammar,.learning-numbers,.learning-pronunciation,.learning-word-order,.learning-colors,.learning-story,.learning-kpop) .learning-heading .learning-subtitle { margin-top:0; line-height:1.4; }
+.learning-material.learning-grammar h2:has(+ .en) { margin-bottom:0; line-height:1.3; }
+.learning-material.learning-grammar h2 + .en { margin-top:0; line-height:1.4; }
+.learning-material.learning-story .scene-head h2 { margin-bottom:0; line-height:1.3; }
+.learning-material.learning-story .scene-head h2 + p { margin-top:0; line-height:1.4; }
+
+/* Explanatory notes are plain text, without decorative rounded callouts. */
+.learning-material.learning-linking .note,
+.learning-material.learning-grammar .note,
+.learning-material.learning-story .note,
+.learning-material.learning-pronunciation :is(.ear-box,.variation-note,.tutor-note) {
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  padding:0;
+}
+
+/* Unified material title header. Body content and activity widths remain independent. */
+.learning-material.learning-material .learning-header {
+ display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:end; gap:16px 24px;
+ width:100%; margin:0 auto 28px; padding:0 0 24px; border:0; border-bottom:1px solid var(--learning-line,#dfe6db); text-align:left; background:transparent;
+}
+.learning-material.learning-material .learning-header .learning-heading { min-width:0; }
+.learning-material.learning-material .learning-header .learning-back { display:flex; align-items:center; width:fit-content; min-height:44px; margin:0 0 8px; padding:0; font-size:15px; font-weight:400; color:var(--learning-muted,#52634f); }
+.learning-material.learning-material .learning-header h1 { margin:0; padding:0; font:600 30px/1.3 var(--learning-font,Pretendard,sans-serif); letter-spacing:-.025em; color:var(--learning-ink,#263c30); text-align:left; }
+.learning-material.learning-material .learning-header .learning-subtitle { display:block; margin:0; padding:0; font:400 15px/1.4 var(--learning-font,Pretendard,sans-serif); color:var(--learning-muted,#52634f); }
+.learning-material.learning-material .learning-header .learning-tools { display:flex; flex-wrap:wrap; align-items:end; justify-content:flex-end; gap:8px; margin:0; }
+.learning-material.learning-material .learning-header .learning-tools:empty { display:none; }
+.learning-material.learning-material .learning-header .learning-tools :is(button,select,a) { min-height:44px; border-radius:8px; font-size:15px; }
+.learning-material.learning-material .learning-header .learning-tools button { display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:10px 14px; border:1px solid var(--learning-control-line,#c5d0bd); background:#fff; color:var(--learning-ink,#263c30); }
+.learning-material.learning-material .learning-header .learning-tools button:hover { background:var(--learning-warm,#f3f7ed); }
+@media(max-width:620px) {
+ .learning-material.learning-material .learning-header { grid-template-columns:minmax(0,1fr); gap:16px; margin-bottom:24px; padding-bottom:20px; }
+ .learning-material.learning-material .learning-header h1 { font-size:26px; }
+ .learning-material.learning-material .learning-header .learning-tools { justify-content:flex-end; width:100%; }
+}
+</style><style>.learning-material:is(.learning-heyo,.learning-past){padding:0;background:var(--learning-paper);background-image:none;font-family:var(--learning-font);font-size:16px;color:var(--learning-ink);--ink:var(--learning-ink);--ink-soft:var(--learning-muted)}
+.learning-heyo .wrap,.learning-past .wrap{max-width:960px;margin:auto;padding:32px 20px 48px}
+.learning-material:is(.learning-heyo,.learning-past) .learning-heading h1{line-height:1.3}
+.learning-material:is(.learning-heyo,.learning-past) .learning-heading .learning-subtitle{margin-top:0;line-height:1.4;font-style:normal;font-size:15px}
+.learning-material:is(.learning-heyo,.learning-past) .table-scroll{overflow-x:auto;margin:16px 0}
+.learning-material:is(.learning-heyo,.learning-past) table{font-size:16px;min-width:500px}
+.learning-heyo :is(.desc,.rule-box,.irr-rule,.note-box){background:transparent;border:0;border-radius:0;box-shadow:none;padding:0;margin-bottom:24px;font-size:16px;line-height:1.4}
+.learning-heyo .desc .en,.learning-heyo :is(.re,.irr-sub-en){font-size:15px;line-height:1.4;margin-top:0;color:var(--learning-muted)}
+.learning-heyo :is(.rk,.irr-sub,.ex,.qq){font-size:16px;line-height:1.4}
+.learning-heyo .irr-title{font-size:var(--learning-section-size);line-height:1.3;margin-bottom:4px}
+.learning-heyo .irr-rule+.irr-rule{padding-top:24px;border-top:1px solid var(--learning-line)}
+.learning-heyo .tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:8px}
+.learning-heyo .quiz-tabs{margin-bottom:24px}
+.learning-heyo .tab{font:inherit;font-size:14px;min-width:0;min-height:44px;padding:8px;border-radius:8px;background:white;color:var(--learning-ink);border-color:var(--learning-control-line)}
+@media(max-width:620px){.learning-heyo .tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.learning-heyo .quiz-tabs{margin-top:16px}}
+.learning-heyo .tab.active{background:var(--learning-selected);border-color:var(--learning-accent);text-decoration:underline;text-underline-offset:4px}
+.learning-heyo .card-area{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.learning-heyo .fc{font:inherit;min-width:0;min-height:110px;border-radius:14px;gap:0;border-color:var(--learning-control-line)}
+.learning-heyo .fc-en{font-size:14px;line-height:1.4;color:var(--learning-muted)}
+.learning-heyo .fc.flipped{background:var(--learning-selected);border-color:var(--learning-accent)}
+.learning-heyo .fc.flipped .fc-kr{color:var(--learning-ink)}
+.learning-heyo .opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.learning-heyo .opt{font:inherit;text-align:center;min-width:0;border-radius:8px}
+.learning-heyo .qcard{border-radius:14px;border-color:var(--learning-line)}
+.learning-heyo .reset-btn{font:inherit;border-radius:8px;background:white;padding:8px 12px}
+.learning-heyo .fb{padding:8px 0;border-radius:0;background:transparent}
+.learning-heyo .ex .en{font-size:14px;color:var(--learning-muted)}
+.learning-past section{padding:0;margin:0 0 32px;background:transparent;border:0;border-radius:0;box-shadow:none}
+.learning-past h2{display:block;font-family:var(--learning-font);font-size:var(--learning-section-size);line-height:1.3;margin:0;border:0;padding:0}
+.learning-past h3{font-size:20px;font-family:var(--learning-font)}
+.learning-past .section-en{font-size:15px;line-height:1.4;margin:0 0 16px;color:var(--learning-muted)}
+.learning-past :is(p,.lead){font-size:16px;line-height:1.5}
+.learning-past :is(.alert,.bilingual,.irregular-section,.irregular-card,.time-card){background:transparent;border:0;border-radius:0;box-shadow:none;padding:0}
+.learning-past :is(.alert,.bilingual){margin:20px 0}
+.learning-past .alert p{margin:0;font-size:16px;line-height:1.4}
+.learning-past .alert p+p{font-size:15px;font-style:normal!important}
+.learning-past :is(.bilingual .ko,.time-card .example-ko){font-size:16px;margin-bottom:0;line-height:1.4}
+.learning-past :is(.bilingual .en,.time-card .example-en,.time-card .word-en,.step-content .title-en){font-size:15px;line-height:1.4;font-style:normal;margin-top:0}
+.learning-past .rule-card{border:1px solid var(--learning-line);border-radius:14px;box-shadow:none;padding:20px;transform:none}
+.learning-past .rule-card:hover{transform:none;box-shadow:none}
+.learning-past .irregular-card{padding:20px 0;border-top:1px solid var(--learning-line)}
+.learning-past .quiz{border:1px solid var(--learning-line);border-radius:14px;box-shadow:none;background:white;padding:20px}
+.learning-past .quiz .q-text{font-size:16px}
+.learning-past .option{cursor:default;text-align:center;font-size:16px;border-radius:8px}
+.learning-past .answer-details{margin-top:16px}
+.learning-past .answer-details summary{display:flex;align-items:center;border:1px solid var(--learning-control-line);border-radius:8px;width:fit-content;padding:8px 16px;color:var(--learning-ink)}
+.learning-past .answer-details[open] summary{background:var(--learning-selected)}
+.learning-past .answer-text{margin-top:8px;line-height:1.4}
+@media(max-width:620px){.learning-heyo .wrap,.learning-past .wrap{padding:24px 16px 40px}.learning-heyo .card-area{grid-template-columns:repeat(2,minmax(0,1fr))}.learning-past :is(.rule-grid,.time-grid,.irregular-card .examples-grid){grid-template-columns:1fr}.learning-past .quiz{padding:16px}.learning-past .options{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style><style>/* Unified material title header. Body content and activity widths remain independent. */
+.learning-material.learning-material .learning-header {
+ display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:end; gap:16px 24px;
+ width:100%; margin:0 auto 28px; padding:0 0 24px; border:0; border-bottom:1px solid var(--learning-line,#dfe6db); text-align:left; background:transparent;
+}
+.learning-material.learning-material .learning-header .learning-heading { min-width:0; }
+.learning-material.learning-material .learning-header .learning-back { display:flex; align-items:center; width:fit-content; min-height:44px; margin:0 0 8px; padding:0; font-size:15px; font-weight:400; color:var(--learning-muted,#52634f); }
+.learning-material.learning-material .learning-header h1 { margin:0; padding:0; font:600 30px/1.3 var(--learning-font,Pretendard,sans-serif); letter-spacing:-.025em; color:var(--learning-ink,#263c30); text-align:left; }
+.learning-material.learning-material .learning-header .learning-subtitle { display:block; margin:0; padding:0; font:400 15px/1.4 var(--learning-font,Pretendard,sans-serif); color:var(--learning-muted,#52634f); }
+.learning-material.learning-material .learning-header .learning-tools { display:flex; flex-wrap:wrap; align-items:end; justify-content:flex-end; gap:8px; margin:0; }
+.learning-material.learning-material .learning-header .learning-tools:empty { display:none; }
+.learning-material.learning-material .learning-header .learning-tools :is(button,select,a) { min-height:44px; border-radius:8px; font-size:15px; }
+.learning-material.learning-material .learning-header .learning-tools button { display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:10px 14px; border:1px solid var(--learning-control-line,#c5d0bd); background:#fff; color:var(--learning-ink,#263c30); }
+.learning-material.learning-material .learning-header .learning-tools button:hover { background:var(--learning-warm,#f3f7ed); }
+@media(max-width:620px) {
+ .learning-material.learning-material .learning-header { grid-template-columns:minmax(0,1fr); gap:16px; margin-bottom:24px; padding-bottom:20px; }
+ .learning-material.learning-material .learning-header h1 { font-size:26px; }
+ .learning-material.learning-material .learning-header .learning-tools { justify-content:flex-end; width:100%; }
+}
+</style>
 </head>
-<body>
+<body class="learning-material learning-heyo">
 <div class="wrap">
-<h1>한국어 동사 활용 '해요'체<br><span class="h1-sub">-아요 / -어요 / -여요(해요)</span></h1>
-<p class="h1-en">Korean Verb Conjugation '해요' form — -아요 / -어요 / -여요(해요)</p>
+<header class="learning-header"><div class="learning-heading"><a class="learning-back" href="./learn/index.html" target="_top">자료 목록</a><h1>한국어 해요체 활용</h1><p class="learning-subtitle" lang="en">Korean Verb Conjugation · -아요 / -어요 / 해요</p></div></header>
 <div class="desc">
   '-아요/-어요/-여요'는 동사나 형용사에 붙어 동작이나 상태를 서술할 때 사용합니다.<br>
   <span class="en">'-아요/-어요/-여요(해요)' is attached to a verb or adjective and describes an action or state.</span>
 </div>
-<p class="subtitle">플래시카드를 클릭하면 활용형이 나와요. 퀴즈는 다시 하기를 누르면 문제가 섞여요!</p>
 
-<div class="tabs">
-  <div class="tab active" data-target="fc12">-아요 / -어요</div>
-  <div class="tab" data-target="fc3">-여요(해요)</div>
-  <div class="tab" data-target="comb">모음 축약 Combining Vowels</div>
-  <div class="tab" data-target="irr">불규칙 Irregular</div>
-  <div class="tab" data-target="q1">퀴즈 -아요</div>
-  <div class="tab" data-target="q2">퀴즈 -어요</div>
-  <div class="tab" data-target="q3">퀴즈 -여요(해요)</div>
-  <div class="tab" data-target="q4">퀴즈 불규칙</div>
+
+<div class="tabs" role="group" aria-label="학습 주제">
+  <button type="button" class="tab active" data-target="fc12" aria-pressed="true">-아요 / -어요</button>
+  <button type="button" class="tab" data-target="fc3" aria-pressed="false">-여요(해요)</button>
+  <button type="button" class="tab" data-target="comb" aria-pressed="false">모음 축약 Combining Vowels</button>
+  <button type="button" class="tab" data-target="irr" aria-pressed="false">불규칙 Irregular</button>
+</div>
+<div class="tabs quiz-tabs" role="group" aria-label="활용 퀴즈">
+  <button type="button" class="tab" data-target="q1" aria-pressed="false">퀴즈 -아요</button>
+  <button type="button" class="tab" data-target="q2" aria-pressed="false">퀴즈 -어요</button>
+  <button type="button" class="tab" data-target="q3" aria-pressed="false">퀴즈 -여요(해요)</button>
+  <button type="button" class="tab" data-target="q4" aria-pressed="false">퀴즈 불규칙</button>
 </div>
 
 <!-- ─────────── -아요 / -어요 (통합) ─────────── -->
@@ -200,10 +561,10 @@ h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
   <p class="legend"><span class="reg-tag">규칙 regular</span> = 모양은 비슷하지만 규칙 활용이에요 (헷갈리기 쉬운 단어!) &nbsp;·&nbsp; <span class="star">*</span> = 특별한 예외 special exception</p>
 
   <div class="irr-rule">
-    <div class="irr-title">ㅡ 탈락 <span class="rule-badge">ㅡ 탈락</span></div>
+    <div class="irr-title">ㅡ 탈락 <span class="rule-badge" lang="en">ㅡ Deletion</span></div>
     <div class="irr-sub">어간 끝 모음 <b>ㅡ</b>가 모음 어미 앞에서 사라져요. 앞 음절 모음이 ㅏ/ㅗ이면 -아요, 아니면 -어요를 붙여요.</div>
     <div class="irr-sub-en">The final vowel ㅡ drops before -아/어요. If the previous syllable has ㅏ/ㅗ, attach -아요; otherwise -어요.</div>
-    <table class="irr-table">
+    <div class="table-scroll" role="region" aria-label="활용 비교표" tabindex="0"><table class="irr-table">
       <tr><th>기본형</th><th>뜻</th><th>→ 활용형</th></tr>
       <tr><td>쓰다</td><td>to write / to use</td><td>써요</td></tr>
       <tr><td>끄다</td><td>to turn off</td><td>꺼요</td></tr>
@@ -214,15 +575,15 @@ h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
       <tr><td>고프다</td><td>to be hungry (adj)</td><td>고파요</td></tr>
       <tr><td>잠그다</td><td>to lock</td><td>잠가요</td></tr>
       <tr><td>따르다</td><td>to follow / to pour</td><td>따라요</td></tr>
-    </table>
+    </table></div>
     <div class="note-box">쓰다 → 쓰- → ㅡ 탈락 → 앞에 모음이 없으면 -어요 → <b>써요</b> / 바쁘다 → 바ㅃ(ㅏ) + 아요 → <b>바빠요</b><br>주의: <b>따르다</b>는 '르'로 끝나지만 르 불규칙이 아니라 ㅡ 탈락이에요 (따라요). 반대로 <b>빠르다, 다르다</b>는 르 불규칙!</div>
   </div>
 
   <div class="irr-rule">
-    <div class="irr-title">ㄷ 불규칙 <span class="rule-badge">ㄷ 불규칙</span></div>
+    <div class="irr-title">ㄷ 불규칙 <span class="rule-badge" lang="en">ㄷ Irregular</span></div>
     <div class="irr-sub">받침이 <b>ㄷ</b>인 일부 동사는 모음 앞에서 ㄷ이 <b>ㄹ</b>로 바뀌어요.</div>
     <div class="irr-sub-en">In some verbs with final consonant ㄷ, the ㄷ changes to ㄹ before a vowel.</div>
-    <table class="irr-table">
+    <div class="table-scroll" role="region" aria-label="활용 비교표" tabindex="0"><table class="irr-table">
       <tr><th>기본형</th><th>뜻</th><th>→ 활용형</th></tr>
       <tr><td>걷다</td><td>to walk</td><td>걸어요</td></tr>
       <tr><td>듣다</td><td>to listen / hear</td><td>들어요</td></tr>
@@ -235,15 +596,15 @@ h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
       <tr class="reg"><td>믿다</td><td>to believe</td><td>믿어요 <span class="reg-tag">규칙 regular</span></td></tr>
       <tr class="reg"><td>얻다</td><td>to get / gain</td><td>얻어요 <span class="reg-tag">규칙 regular</span></td></tr>
       <tr class="reg"><td>쏟다</td><td>to spill</td><td>쏟아요 <span class="reg-tag">규칙 regular</span></td></tr>
-    </table>
+    </table></div>
     <div class="note-box"><b>묻다</b>는 뜻이 중요해요! <b>묻다 = to ask</b>는 불규칙 → <b>물어요</b>. 하지만 <b>묻다 = to bury</b>는 규칙 → <b>묻어요</b>.</div>
   </div>
 
   <div class="irr-rule">
-    <div class="irr-title">ㅂ 불규칙 <span class="rule-badge">ㅂ 불규칙</span></div>
+    <div class="irr-title">ㅂ 불규칙 <span class="rule-badge" lang="en">ㅂ Irregular</span></div>
     <div class="irr-sub">받침이 <b>ㅂ</b>인 일부 형용사/동사는 모음 앞에서 ㅂ이 <b>우</b>(대부분) 또는 <b>오</b>(돕다·곱다)로 바뀌어요.</div>
     <div class="irr-sub-en">In some verbs and adjectives, final ㅂ changes to 우 (most) or 오 (only 돕다, 곱다) before a vowel.</div>
-    <table class="irr-table">
+    <div class="table-scroll" role="region" aria-label="활용 비교표" tabindex="0"><table class="irr-table">
       <tr><th>기본형</th><th>뜻</th><th>→ 활용형</th></tr>
       <tr><td>덥다</td><td>to be hot (adj)</td><td>더워요</td></tr>
       <tr><td>춥다</td><td>to be cold (adj)</td><td>추워요</td></tr>
@@ -262,15 +623,15 @@ h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
       <tr class="reg"><td>잡다</td><td>to hold / catch</td><td>잡아요 <span class="reg-tag">규칙 regular</span></td></tr>
       <tr class="reg"><td>접다</td><td>to fold</td><td>접어요 <span class="reg-tag">규칙 regular</span></td></tr>
       <tr class="reg"><td>좁다</td><td>to be narrow (adj)</td><td>좁아요 <span class="reg-tag">규칙 regular</span></td></tr>
-    </table>
+    </table></div>
     <div class="note-box"><span class="star">*</span> = 특별한 예외예요! special exceptions<br>대부분은 <b>우</b>로 바뀌지만 (더워요), <b><span class="star">*</span>돕다·<span class="star">*</span>곱다</b>만 <b>오</b>로 바뀌어요 (도와요·고와요). 날씨 어휘랑 함께 배우면 자연스러워요 — 오늘 너무 더워요!</div>
   </div>
 
   <div class="irr-rule">
-    <div class="irr-title">ㅅ 불규칙 <span class="rule-badge">ㅅ 불규칙</span></div>
+    <div class="irr-title">ㅅ 불규칙 <span class="rule-badge" lang="en">ㅅ Irregular</span></div>
     <div class="irr-sub">받침이 <b>ㅅ</b>인 일부 동사는 모음 앞에서 ㅅ이 <b>사라져요</b>. 단, ㅅ이 사라져도 모음은 합쳐지지 않아요!</div>
     <div class="irr-sub-en">In some verbs, final ㅅ drops before a vowel. Even after ㅅ drops, the vowels do NOT contract (지어요, not 져요).</div>
-    <table class="irr-table">
+    <div class="table-scroll" role="region" aria-label="활용 비교표" tabindex="0"><table class="irr-table">
       <tr><th>기본형</th><th>뜻</th><th>→ 활용형</th></tr>
       <tr><td>짓다</td><td>to build / make</td><td>지어요</td></tr>
       <tr><td>낫다</td><td>to recover / be better</td><td>나아요</td></tr>
@@ -280,15 +641,15 @@ h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
       <tr class="reg"><td>웃다</td><td>to laugh / smile</td><td>웃어요 <span class="reg-tag">규칙 regular</span></td></tr>
       <tr class="reg"><td>씻다</td><td>to wash</td><td>씻어요 <span class="reg-tag">규칙 regular</span></td></tr>
       <tr class="reg"><td>벗다</td><td>to take off</td><td>벗어요 <span class="reg-tag">규칙 regular</span></td></tr>
-    </table>
+    </table></div>
     <div class="note-box">짓다 → 지(ㅣ) + 어요 → <b>지어요</b> (져요 ✗) / 낫다 → 나(ㅏ) + 아요 → <b>나아요</b> (나요 ✗) — ㅅ은 사라져도 흔적을 남겨요!</div>
   </div>
 
   <div class="irr-rule">
-    <div class="irr-title">ㅎ 불규칙 <span class="rule-badge">ㅎ 불규칙</span></div>
+    <div class="irr-title">ㅎ 불규칙 <span class="rule-badge" lang="en">ㅎ Irregular</span></div>
     <div class="irr-sub">받침이 <b>ㅎ</b>인 일부 형용사는 ㅎ이 사라지고 어미와 합쳐져 <b>ㅐ/ㅒ/ㅔ</b>가 돼요.</div>
     <div class="irr-sub-en">In some adjectives, final ㅎ drops and the vowel combines with the ending into ㅐ/ㅒ/ㅔ.</div>
-    <table class="irr-table">
+    <div class="table-scroll" role="region" aria-label="활용 비교표" tabindex="0"><table class="irr-table">
       <tr><th>기본형</th><th>뜻</th><th>→ 활용형</th></tr>
       <tr><td>그렇다</td><td>to be so</td><td>그래요</td></tr>
       <tr><td>어떻다</td><td>to be how</td><td>어때요</td></tr>
@@ -299,15 +660,15 @@ h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
       <tr class="reg"><td>좋다</td><td>to be good (adj)</td><td>좋아요 <span class="reg-tag">규칙 regular</span></td></tr>
       <tr class="reg"><td>많다</td><td>to be many (adj)</td><td>많아요 <span class="reg-tag">규칙 regular</span></td></tr>
       <tr class="reg"><td>넣다</td><td>to put in</td><td>넣어요 <span class="reg-tag">규칙 regular</span></td></tr>
-    </table>
+    </table></div>
     <div class="note-box">그렇다 → 그러 + ㅐ요 → <b>그래요</b> / 하얗다 → 하야 + ㅐ요 → <b>하얘요</b> (ㅑ라서 ㅒ) / 누렇다 → 누러 + ㅐ요 → <b>누레요</b> (ㅓ라서 ㅔ)<br>주의: <b>좋다</b>는 규칙이에요! → 좋아요 (좋애요 ✗)</div>
   </div>
 
   <div class="irr-rule">
-    <div class="irr-title">르 불규칙 <span class="rule-badge">르 불규칙</span></div>
+    <div class="irr-title">르 불규칙 <span class="rule-badge" lang="en">르 Irregular</span></div>
     <div class="irr-sub">어간이 <b>르</b>로 끝나면 ㅡ가 빠지고 <b>ㄹ이 앞 음절 받침</b>으로 붙어서 <b>-라요/-러요</b>가 돼요.</div>
     <div class="irr-sub-en">When the stem ends in 르, ㅡ drops and an extra ㄹ attaches to the previous syllable — the ending becomes -라요/-러요.</div>
-    <table class="irr-table">
+    <div class="table-scroll" role="region" aria-label="활용 비교표" tabindex="0"><table class="irr-table">
       <tr><th>기본형</th><th>뜻</th><th>→ 활용형</th></tr>
       <tr><td>모르다</td><td>to not know</td><td>몰라요</td></tr>
       <tr><td>부르다</td><td>to call / to sing</td><td>불러요</td></tr>
@@ -315,16 +676,16 @@ h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
       <tr><td>빠르다</td><td>to be fast (adj)</td><td>빨라요</td></tr>
       <tr><td>자르다</td><td>to cut</td><td>잘라요</td></tr>
       <tr><td>흐르다</td><td>to flow</td><td>흘러요</td></tr>
-      <tr><td>따르다</td><td>to follow / to pour</td><td>따라요 (예외! ㅡ 탈락)</td></tr>
-    </table>
-    <div class="note-box">모르다 → 모르- → ㄹ이 앞으로 → 몰 + 라요 → <b>몰라요</b><br>주의: <b>따르다</b>는 르 불규칙이 아니라 ㅡ 탈락이에요 → <b>따라요</b> (딸라요 ✗)</div>
+      <tr class="star-row"><td><span class="star">*</span>따르다</td><td>to follow / to pour</td><td>따라요 (예외! ㅡ 탈락)</td></tr>
+    </table></div>
+    <div class="note-box">모르다 → 모르- → ㄹ이 앞으로 → 몰 + 라요 → <b>몰라요</b><br>주의: <b class="star"><span>*</span> 따르다</b>는 르 불규칙이 아니라 ㅡ 탈락이에요 → <b>따라요</b> (딸라요 ✗)</div>
   </div>
 </div>
 
-<div id="q1" class="section"><p class="sec-label">-아요 퀴즈 — 10문제</p><div class="score-row"><span class="score-lbl">점수</span><span class="score-num" id="s1">0</span><span class="score-lbl">/ 100</span><button class="reset-btn" type="button" data-reset="1">다시 하기</button></div><div id="q1-wrap"></div></div>
-<div id="q2" class="section"><p class="sec-label">-어요 퀴즈 — 10문제</p><div class="score-row"><span class="score-lbl">점수</span><span class="score-num" id="s2">0</span><span class="score-lbl">/ 100</span><button class="reset-btn" type="button" data-reset="2">다시 하기</button></div><div id="q2-wrap"></div></div>
-<div id="q3" class="section"><p class="sec-label">-여요(해요) 퀴즈 — 10문제</p><div class="score-row"><span class="score-lbl">점수</span><span class="score-num" id="s3">0</span><span class="score-lbl">/ 100</span><button class="reset-btn" type="button" data-reset="3">다시 하기</button></div><div id="q3-wrap"></div></div>
-<div id="q4" class="section"><p class="sec-label">불규칙 퀴즈 — 10문제 (규칙인 척하는 함정 단어도 있어요!)</p><div class="score-row"><span class="score-lbl">점수</span><span class="score-num" id="s4">0</span><span class="score-lbl">/ 100</span><button class="reset-btn" type="button" data-reset="4">다시 하기</button></div><div id="q4-wrap"></div></div>
+<div id="q1" class="section"><p class="sec-label">-아요 퀴즈 — 10문제</p><div class="score-row"><span class="score-lbl">점수</span><span class="score-num" id="s1">0</span><span class="score-lbl">/ 100</span><button class="reset-btn" type="button" data-reset="1">다시 <span aria-hidden="true">↻</span> Redo</button></div><div id="q1-wrap"></div></div>
+<div id="q2" class="section"><p class="sec-label">-어요 퀴즈 — 10문제</p><div class="score-row"><span class="score-lbl">점수</span><span class="score-num" id="s2">0</span><span class="score-lbl">/ 100</span><button class="reset-btn" type="button" data-reset="2">다시 <span aria-hidden="true">↻</span> Redo</button></div><div id="q2-wrap"></div></div>
+<div id="q3" class="section"><p class="sec-label">-여요(해요) 퀴즈 — 10문제</p><div class="score-row"><span class="score-lbl">점수</span><span class="score-num" id="s3">0</span><span class="score-lbl">/ 100</span><button class="reset-btn" type="button" data-reset="3">다시 <span aria-hidden="true">↻</span> Redo</button></div><div id="q3-wrap"></div></div>
+<div id="q4" class="section"><p class="sec-label">불규칙 퀴즈 — 10문제</p><div class="score-row"><span class="score-lbl">점수</span><span class="score-num" id="s4">0</span><span class="score-lbl">/ 100</span><button class="reset-btn" type="button" data-reset="4">다시 <span aria-hidden="true">↻</span> Redo</button></div><div id="q4-wrap"></div></div>
 
 </div>
 
@@ -464,6 +825,122 @@ h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
     ]
   };
 
+
+  // Distractors target mistakes in the same word, not unrelated vocabulary.
+  // Valid uncontracted forms (e.g. 보아요, 주어요, 하여요) are never distractors.
+  var quizPatterns = {
+    1: [
+      ['앉다','ending',['앉어요','앉다요','아나요']],
+      ['받다','ending',['받어요','발아요','받다요']],
+      ['닫다','ending',['닫어요','달아요','닫다요']],
+      ['놀다','ending',['놀어요','노아요','놀다요']],
+      ['잡다','ending',['잡어요','자워요','잡다요']],
+      ['알다','ending',['알어요','아아요','알다요']],
+      ['살다','ending',['살어요','사아요','살다요']],
+      ['좋다','ending',['좋어요','조와요','좋애요']],
+      ['많다','ending',['많어요','마나요','많다요']],
+      ['높다','ending',['높어요','노워요','높다요']],
+      ['팔다','ending',['팔어요','파아요','팔다요']],
+      ['찾다','ending',['찾어요','차아요','찾다요']],
+      ['가다','same-vowel',['가아요','가어요','가다요']],
+      ['자다','same-vowel',['자아요','자어요','자다요']],
+      ['사다','same-vowel',['사아요','사어요','사다요']],
+      ['만나다','same-vowel',['만나아요','만나어요','만나다요']],
+      ['나가다','same-vowel',['나가아요','나가어요','나가다요']],
+      ['타다','same-vowel',['타아요','타어요','타다요']],
+      ['오다','wa',['오어요','워요','오다요']],
+      ['보다','wa',['보어요','붜요','보다요']],
+      ['나오다','wa',['나오어요','나워요','나오다요']]
+    ],
+    2: [
+      ['먹다','ending',['먹아요','머어요','먹다요']],
+      ['읽다','ending',['읽아요','일어요','읽다요']],
+      ['열다','ending',['열아요','여어요','열다요']],
+      ['만들다','ending',['만들아요','만드러요','만들다요']],
+      ['입다','ending',['입아요','이워요','입다요']],
+      ['믿다','ending',['믿아요','밀어요','믿다요']],
+      ['묻다','ending',['묻아요','물어요','묻다요']],
+      ['씻다','ending',['씻아요','씨어요','씻다요']],
+      ['웃다','ending',['웃아요','우어요','웃다요']],
+      ['배우다','wo',['배우아요','배와요','배우다요']],
+      ['멈추다','wo',['멈추아요','멈촤요','멈추다요']],
+      ['바꾸다','wo',['바꾸아요','바꽈요','바꾸다요']],
+      ['주다','wo',['주아요','좌요','주다요']],
+      ['마시다','yeo',['마시아요','마샤요','마시다요']],
+      ['기다리다','yeo',['기다리아요','기다랴요','기다리다요']],
+      ['다니다','yeo',['다니아요','다냐요','다니다요']],
+      ['그리다','yeo',['그리아요','그랴요','그리다요']],
+      ['가르치다','yeo',['가르치아요','가르챠요','가르치다요']],
+      ['서다','same-vowel',['서아요','사요','서다요']],
+      ['보내다','same-vowel',['보내아요','보나여요','보내다요']],
+      ['켜다','same-vowel',['켜아요','캬요','켜다요']],
+      ['세다','same-vowel',['세아요','새요','세다요']]
+    ]
+  };
+  var quizPools = {};
+  [1,2].forEach(function(n){
+    quizPools[n] = quizPatterns[n].map(function(row){
+      var word = data[n].find(function(v){return v.kr===row[0];});
+      return Object.assign({},word,{group:row[1],w:row[2]});
+    });
+  });
+  quizPools[3] = data[3].map(function(v){
+    var base=v.kr.slice(0,-2);
+    return Object.assign({},v,{group:'ha',w:[base+'하요',base+'하아요',base+'하어요']});
+  });
+  quizPools[4] = data[4].map(function(v){
+    var group = v.en.includes('함정') ? 'regular' :
+      v.en.includes('예외') ? 'exception' :
+      v.en.includes('ㅡ 탈락') ? 'eu' :
+      v.en.includes('ㄷ 불규칙') ? 'd' :
+      v.en.includes('ㅂ 불규칙') ? 'b' :
+      v.en.includes('ㅅ 불규칙') ? 's' :
+      v.en.includes('ㅎ 불규칙') ? 'h' : 'reu';
+    return Object.assign({},v,{group:group,en:v.en.split(' · ')[0]});
+  });
+  var ruleFeedback = {
+    '1:ending':'어간의 마지막 모음이 ㅏ 또는 ㅗ여서 -아요를 붙여요. 받침은 그대로 써요.',
+    '1:same-vowel':'ㅏ 뒤에 아요가 오면 ㅏ를 한 번만 써요.',
+    '1:wa':'ㅗ와 ㅏ를 합치면 ㅘ가 돼요.',
+    '2:ending':'어간의 마지막 모음이 ㅏ나 ㅗ가 아니어서 -어요를 붙여요. 이 단어의 받침은 그대로 써요.',
+    '2:wo':'ㅜ와 ㅓ를 합치면 ㅝ가 돼요.',
+    '2:yeo':'ㅣ와 ㅓ를 합치면 ㅕ가 돼요.',
+    '2:same-vowel':'이 단어는 모음 뒤에 요를 붙여서 말해요.',
+    '3:ha':'하다에 -여요를 붙이면 하여요가 돼요. 줄이면 해요예요.',
+    '4:eu':'ㅡ가 빠져요. 앞 음절의 모음이 ㅏ나 ㅗ이면 -아요, 아니면 -어요를 써요. 앞 음절이 없으면 -어요를 써요.',
+    '4:d':'모음 앞에서 ㄷ이 ㄹ로 바뀌어요.',
+    '4:b':'ㅂ이 우로 바뀌어요. 우와 어를 합치면 워가 돼요.',
+    '4:s':'모음 앞에서 ㅅ이 빠져요. 남은 모음은 줄이지 않아요.',
+    '4:h':'ㅎ이 빠지고 모음이 바뀌어요.',
+    '4:reu':'ㅡ가 빠지고 앞 음절에 ㄹ 받침이 붙어요.',
+    '4:regular':'이 단어는 불규칙 활용을 하지 않아요. 받침을 그대로 써요.'
+  };
+  var previousPicks = {};
+  function pickQuestions(n){
+    var pool=quizPools[n], picked=[];
+    // Cover every rule family before filling the remaining slots at random.
+    Array.from(new Set(pool.map(function(v){return v.group;}))).forEach(function(group){
+      picked.push(shuffle(pool.filter(function(v){return v.group===group;}))[0]);
+    });
+    picked=picked.concat(shuffle(pool.filter(function(v){return !picked.includes(v);})).slice(0,10-picked.length));
+    // Redo changes at least one word as well as the order and answer positions.
+    var previous=previousPicks[n] || [];
+    if(picked.every(function(v){return previous.includes(v.kr);})){ 
+      var extra=shuffle(pool.filter(function(v){return !picked.includes(v);}))[0];
+      var replace=picked.findIndex(function(v){return v.group===extra.group;});
+      picked[replace]=extra;
+    }
+    previousPicks[n]=picked.map(function(v){return v.kr;});
+    return shuffle(picked);
+  }
+  function explanation(n,v){
+    if(n===4 && v.group==='exception'){
+      return v.kr==='따르다' ? '따르다는 르 불규칙이 아니에요. ㅡ가 빠져서 따라요가 돼요.' :
+        v.kr+'는 ㅂ이 오로 바뀌어요. 오와 아를 합치면 와가 돼요.';
+    }
+    return ruleFeedback[n+':'+v.group];
+  }
+
   var scores = {1:0,2:0,3:0,4:0};
   var answered = {1:{},2:{},3:{},4:{}};
   var tabMap = {'fc12':0,'fc3':1,'comb':2,'irr':3,'q1':4,'q2':5,'q3':6,'q4':7};
@@ -477,15 +954,16 @@ h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
     if(!el) return;
     el.innerHTML='';
     data[n].forEach(function(v){
-      var d=document.createElement('div');
+      var d=document.createElement('button');
+      d.type='button';d.setAttribute('aria-pressed','false');
       d.className='fc';
       d.innerHTML='<div class="fc-kr">'+v.kr+'</div><div class="fc-en">'+v.en+'</div>';
       d.addEventListener('click', function(){
         if(d.classList.contains('flipped')){
-          d.classList.remove('flipped');
+          d.classList.remove('flipped');d.setAttribute('aria-pressed','false');
           d.innerHTML='<div class="fc-kr">'+v.kr+'</div><div class="fc-en">'+v.en+'</div>';
         }else{
-          d.classList.add('flipped');
+          d.classList.add('flipped');d.setAttribute('aria-pressed','true');
           d.innerHTML='<div class="fc-kr">'+v.conj+'</div>';
         }
       });
@@ -495,19 +973,21 @@ h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
 
   function ans(n, qid, el, isCorrect){
     if(answered[n][qid]) return;
-    answered[n][qid]=true;
+    answered[n][qid]=true;el.setAttribute('aria-pressed','true');
     var opts=document.querySelectorAll('#'+qid+' .opt');
-    opts.forEach(function(o){ o.classList.add('disabled'); });
+    opts.forEach(function(o){ o.classList.add('disabled');o.setAttribute('aria-disabled','true'); });
     var fb = byId(qid+'-fb');
+    var question=byId(qid);
+    var detail='정답 Answer: '+question.dataset.answer+'. '+question.dataset.explanation;
     if(isCorrect){
       el.classList.add('correct');
       scores[n]+=10;
       safeSetHTML('s'+n, String(scores[n]));
-      if(fb){ fb.textContent='정답! +10점'; fb.className='fb show ok'; }
+      if(fb){ fb.textContent='정답! +10점 · '+detail; fb.className='fb show ok'; }
     }else{
       el.classList.add('wrong');
       opts.forEach(function(o){ if(o.getAttribute('data-correct')==='true') o.classList.add('correct'); });
-      if(fb){ fb.textContent='아쉬워요! 다시 기억해봐요.'; fb.className='fb show no'; }
+      if(fb){ fb.textContent=detail; fb.className='fb show no'; }
     }
   }
   window.ans = ans;
@@ -516,24 +996,23 @@ h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
     var wrap = byId('q'+n+'-wrap');
     if(!wrap) return;
     wrap.innerHTML='';
-    var pool=data[n];
-    var picked=shuffle(pool).slice(0,10);
+    var picked=pickQuestions(n);
     picked.forEach(function(v,i){
       var qid='c'+n+'q'+i;
-      var wrongs;
-      if(v.w){ wrongs = shuffle(v.w).slice(0,3); }
-      else { wrongs = shuffle(pool.filter(function(x){return x.kr!==v.kr && x.conj!==v.conj;})).slice(0,3).map(function(x){return x.conj;}); }
+      var wrongs = shuffle(v.w).slice(0,3);
       var opts=shuffle([v.conj].concat(wrongs));
       var div=document.createElement('div');
       div.className='qcard';
       div.id=qid;
+      div.dataset.answer=v.conj;
+      div.dataset.explanation=explanation(n,v);
       var optHtml=opts.map(function(o){
         var isC=(o===v.conj);
-        return '<div class="opt" data-correct="'+isC+'" onclick="ans('+n+',\''+qid+'\',this,'+isC+')">'+o+'</div>';
+        return '<button type="button" aria-pressed="false" class="opt" data-correct="'+isC+'" onclick="ans('+n+',\''+qid+'\',this,'+isC+')">'+o+'</button>';
       }).join('');
       div.innerHTML='<p class="qnum">문제 '+(i+1)+'/10</p>'+
         '<p class="qq">'+v.kr+' <span style="font-size:12px;font-weight:400;color:#6b7280">('+v.en+')</span> 의 -요 형태는?</p>'+
-        '<div class="opts">'+optHtml+'</div><div class="fb" id="'+qid+'-fb"></div>';
+        '<div class="opts">'+optHtml+'</div><div class="fb" aria-live="polite" id="'+qid+'-fb"></div>';
       wrap.appendChild(div);
     });
   }
@@ -548,7 +1027,7 @@ h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
 
   function switchTab(id){
     document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
-    document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+    document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active');t.setAttribute('aria-pressed',String(t.dataset.target===id)); });
     var section = byId(id);
     if(section) section.classList.add('active');
     var tabs = document.querySelectorAll('.tab');
@@ -571,3 +1050,4 @@ h1 .h1-sub{font-size:15px;font-weight:600;color:#374151}
 </script>
 </body>
 </html>
+
