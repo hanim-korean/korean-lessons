@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Korean Numbers – Flashcards</title>
+<title>한국어 숫자 카드 · Allbarun Korean</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=DM+Mono&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -76,7 +75,7 @@
   /* progress */
   .progress-wrap { width: 100%; max-width: 540px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .progress-bar { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
-  .progress-fill { height: 100%; border-radius: 3px; background: var(--coral); transition: width .4s ease; }
+  .progress-fill { height: 100%; border-radius: 3px; background: var(--coral); transition: none; }
   .progress-label { font-size: 13px; font-weight: 600; color: var(--muted); white-space: nowrap; font-family: 'DM Mono', monospace; }
 
   /* card */
@@ -119,47 +118,485 @@
   .kbd-hint { margin-top: 18px; font-size: 12px; color: var(--muted); text-align: center; }
   kbd { background: var(--border); padding: 2px 6px; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 11px; }
 </style>
+<style>
+/* Number-card learning material: preserve the recall activity within the common learning shell. */
+body.learning-material {
+  --coral:#b84835; --teal:#247867; --slate:#44583d;
+  --gold:#906115; --purple:#7252ad; --bg:#f7f7f2;
+  --card-bg:#fffef9; --text:#263c30; --muted:#5d6c58; --border:#dce2d4;
+  display:block; padding:0; color:var(--text);
+  font-family:Pretendard,"Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;
+  font-size:16px; line-height:1.65;
+}
+.learning-material .learning-header { text-align:left; margin-bottom:0; }
+.learning-material .learning-header h1 { color:var(--text); letter-spacing:-.025em; }
+.learning-material .learning-header p { font-size:15px; margin-top:0; }
+.learning-material .learning-tools button { font-family:inherit; min-height:44px; }
+.learning-material .learning-body { width:min(1120px,calc(100% - 40px)); margin:0 auto; padding:28px 0 48px; }
+.learning-material .number-practice { max-width:680px; margin:0 auto; display:flex; flex-direction:column; align-items:center; }
+.learning-material .mode-toggle { margin:0 0 10px; border:1px solid var(--border); border-radius:12px; max-width:100%; flex-wrap:wrap; justify-content:center; }
+.learning-material .mode-btn { font-family:inherit; font-size:16px; min-height:44px; border-radius:8px; padding:8px 16px; }
+.learning-material .mode-btn.active { background:var(--slate); }
+.learning-material .mode-help { font-size:15px; color:var(--muted); text-align:center; margin:0 0 20px; }
+.learning-material .cats { gap:8px; margin-bottom:24px; }
+.learning-material .cat-btn { font-family:inherit; font-size:15px; min-height:44px; padding:7px 13px; border-width:1px; border-radius:9px; background:transparent; }
+.learning-material .cat-btn.active { color:#fff; }
+.learning-material .cat-btn[data-cat="ordinal"] { color:#22756e; border-color:#22756e; }
+.learning-material .cat-btn[data-cat="ordinal"].active { color:#fff; background:#22756e; }
+.learning-material .progress-wrap { max-width:640px; margin-bottom:16px; }
+.learning-material .progress-label { font-family:inherit; font-variant-numeric:tabular-nums; font-size:15px; }
+.learning-material .card-scene { max-width:640px; height:auto; min-height:360px; margin-bottom:24px; border-radius:12px; }
+.learning-material .card-inner { display:grid; height:auto; min-height:inherit; }
+.learning-material .card-face { grid-area:1 / 1; position:relative; inset:auto; min-width:0; min-height:360px; padding:66px 24px 40px; border:1px solid var(--border); border-radius:12px; box-shadow:0 3px 8px rgb(38 60 48 / 7%); overflow-wrap:anywhere; }
+.learning-material .card-tag { font-size:14px; line-height:1.5; letter-spacing:0; text-transform:none; padding:3px 10px; border-radius:6px; top:16px; left:18px; }
+.learning-material .card-hint { font-size:14px; top:20px; right:18px; }
+.learning-material .card-dir { font-family:inherit; font-size:14px; color:var(--muted); letter-spacing:0; }
+.learning-material .card-question,
+.learning-material .card-question.en,
+.learning-material .card-question.num { font-family:inherit; font-size:clamp(30px,7vw,56px); font-weight:650; line-height:1.3; white-space:pre-line; font-variant-numeric:tabular-nums; }
+.learning-material .card-answer-main,
+.learning-material .card-answer-main.en { font-family:inherit; font-size:clamp(28px,6.4vw,48px); font-weight:650; line-height:1.35; }
+.learning-material .card-sub { font-size:16px; line-height:1.65; white-space:pre-line; max-width:46ch; }
+.learning-material .card-answer-rom { font-family:inherit; font-size:16px; line-height:1.5; text-align:center; }
+.learning-material .card-answer-pron { font-size:16px; line-height:1.5; text-align:center; }
+.learning-material .card-answer-note { font-size:15px; line-height:1.65; max-width:48ch; }
+.learning-material .nav { max-width:100%; gap:12px; }
+.learning-material .nav-btn { min-width:48px; border:1px solid var(--border); border-radius:10px; color:var(--text); }
+.learning-material .nav-btn:hover { color:var(--slate); border-color:var(--slate); transform:none; }
+.learning-material .flip-btn { font-family:inherit; min-height:48px; font-size:16px; padding:10px 28px; border-radius:10px; }
+.learning-material .flip-btn:hover { background:#354a30; transform:none; }
+.learning-material .kbd-hint { font-size:15px; line-height:1.8; margin-top:20px; }
+.learning-material kbd { font-size:14px; }
+.learning-material :is(button,a,[tabindex]):focus-visible { outline:3px solid #5b7046; outline-offset:4px; }
+.learning-material ::selection { background:#dce6cc; color:#263c30; }
+@media(max-width:480px) {
+  .learning-material .learning-body { width:calc(100% - 32px); padding-top:22px; }
+  .learning-material .mode-toggle { width:100%; }
+  .learning-material .mode-btn { flex:1 1 130px; padding-inline:8px; }
+  .learning-material .card-scene,.learning-material .card-face { min-height:370px; }
+  .learning-material .card-face { padding:82px 18px 40px; }
+  .learning-material .card-tag { left:14px; top:14px; }
+  .learning-material .card-hint { top:47px; right:auto; left:14px; }
+  .learning-material .card-dir { right:14px; }
+  .learning-material .flip-btn { padding-inline:20px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .learning-material .card-inner,.learning-material .progress-fill { transition:none; }
+}
+@media print {
+  .learning-material .learning-tools,.learning-material .learning-back,.learning-material .kbd-hint { display:none; }
+  .learning-material .card-scene { perspective:none; }
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>/* Shared learning surface, extracted from the approved Tiger and Gotgam lesson. */
+.learning-material {
+  --learning-title-size:30px;
+  --learning-section-size:22px;
+  --learning-body-size:16px;
+  --page-heading-size:var(--learning-title-size);
+  --learning-ink: #263c30;
+  --learning-muted: #52634f;
+  --learning-accent: #526c3d;
+  --learning-line: #dfe6db;
+  --learning-control-line: #c5d0bd;
+  --learning-paper: #fdfefd;
+  --learning-sheet: #fff;
+  --learning-tint: #edf3e3;
+  --learning-warm: #f3f7ed;
+  --learning-selected: #e4edcf;
+  --learning-radius: 14px;
+  --learning-radius-control: 8px;
+  --learning-radius-small: 4px;
+  --learning-shadow: 0 3px 8px rgb(38 60 48 / 7%);
+  --learning-font: Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  --ink: var(--learning-ink);
+  --muted: var(--learning-muted);
+  --line: var(--learning-line);
+  --blue: var(--learning-accent);
+  --pale: var(--learning-tint);
+  --paper: var(--learning-paper);
+  --warm: var(--learning-warm);
+  --radius: var(--learning-radius);
+  margin: 0;
+  color: var(--learning-ink);
+  background: var(--learning-paper);
+  font-family: var(--learning-font);
+  font-size:var(--learning-body-size);
+  line-height: 1.65;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  -webkit-text-size-adjust: 100%;
+}
+.learning-material *, .learning-material *::before, .learning-material *::after { box-sizing: border-box; }
+.learning-material [hidden] { display: none !important; }
+.learning-material :is(button, input, select, textarea) { font-family: inherit; }
+.learning-material :is(button, select, summary) { cursor: pointer; }
+.learning-material :is(button, select, summary, input:not([type=checkbox]):not([type=radio])) { min-height: 44px; }
+.learning-material :is(button, input, select, textarea, summary, a, [tabindex]):focus-visible {
+  outline: 2px solid var(--learning-accent);
+  outline-offset: 3px;
+}
+.learning-material :is(input, textarea) { caret-color: var(--learning-accent); }
+.learning-material :is(input, textarea)::placeholder { color: var(--learning-muted); opacity: 1; }
+.learning-material ::selection { background: var(--learning-selected); color: var(--learning-ink); }
+.learning-material { scrollbar-color: var(--learning-control-line) var(--learning-paper); }
+.learning-material ::-webkit-scrollbar { width: 9px; height: 9px; }
+.learning-material ::-webkit-scrollbar-thumb { background: var(--learning-control-line); border: 2px solid var(--learning-paper); border-radius: 9px; }
+.learning-material a { text-underline-offset: 4px; }
+.learning-material .learning-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px 28px;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto 28px;
+  padding: 0 0 24px;
+  border: 0;
+  border-bottom: 1px solid var(--learning-line);
+  background: transparent;
+  text-align: left;
+}
+.learning-material .learning-heading { flex: 1 1 360px; min-width: 0; }
+.learning-material .learning-heading h1 {
+  margin: 0;
+  color: var(--learning-ink);
+  font-family: var(--learning-font);
+  font-weight: 600;
+  line-height: 1.4;
+  font-size:var(--learning-title-size);
+  letter-spacing: -.025em;
+  white-space: normal;
+  text-wrap: balance;
+}
+.learning-material .learning-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: -10px 0 6px;
+  color: var(--learning-muted);
+  font-size: 15px;
+  text-decoration: none;
+}
+.learning-material .learning-back:hover { text-decoration: underline; }
+.learning-material .learning-heading .learning-subtitle {
+  max-width: 70ch;
+  margin: 2px 0 0;
+  color: var(--learning-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.learning-material .learning-tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px 12px; }
+.learning-material .learning-tools label { display: grid; gap: 6px; color: var(--learning-muted); font-size: 14px; }
+.learning-material .learning-tools select {
+  min-width: 128px;
+  max-width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--learning-control-line);
+  border-radius: 6px;
+  background: var(--learning-sheet);
+  color: var(--learning-ink);
+  font-size: 16px;
+}
+.learning-material .learning-body { width: 100%; max-width: 1120px; min-width: 0; margin-inline: auto; }
+.learning-material .learning-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--learning-control-line);
+  border-radius: 6px;
+  background: var(--learning-sheet);
+  color: var(--learning-ink);
+  font: 500 15px/1.5 var(--learning-font);
+  text-decoration: none;
+}
+.learning-material .learning-button:hover { background: var(--learning-tint); border-color: var(--learning-accent); }
+.learning-material .learning-button[aria-pressed=true], .learning-material .learning-button-primary {
+  border-color: var(--learning-accent);
+  background: var(--learning-selected);
+  color: var(--learning-ink);
+}
+.learning-material button:disabled { opacity: .5; cursor: default; }
+body.learning-material { padding: 32px 24px 56px; }
+body.learning-material.learning-embedded { padding: 0 0 24px; min-height: 0; }
+.learning-material .learning-note { margin: 12px 0; color: var(--learning-muted); font-size: 15px; }
+.learning-material .learning-example { border: 1px solid var(--learning-line); border-radius: 12px; padding: 14px 16px; background: var(--learning-warm); }
+.learning-material .learning-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin: 0 0 28px; }
+.learning-material .learning-steps button {
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid var(--learning-line);
+  border-radius: 8px;
+  background: var(--learning-sheet);
+  color: var(--learning-muted);
+  font-size: 15px;
+  text-align: left;
+}
+.learning-material .learning-steps button[aria-current=step] { border-color: var(--learning-ink); background: var(--learning-ink); color: #fff; }
+/* A compact scene picker retains direct navigation on narrow screens. */
+.learning-material .learning-mobile-scene-picker { display: none; }
+@media (max-width: 720px) {
+  .learning-material .learning-mobile-scene-picker { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--learning-muted); }
+  .learning-material .learning-mobile-scene-picker select { flex: 1; min-width: 0; min-height: 44px; border: 1px solid var(--learning-control-line); border-radius: 6px; padding: 8px 12px; color: var(--learning-ink); background: #fff; font: inherit; }
+  .learning-story :is(#chapters, .chapter-label) { display: none; }
+
+  body.learning-material { padding: 24px 20px 40px; }
+  body.learning-material.learning-embedded { padding: 0 0 20px; }
+  .learning-material .learning-header { margin-bottom: 24px; padding-bottom: 20px; gap: 16px; }
+  .learning-material .learning-heading { flex-basis: 100%; }
+  .learning-material .learning-tools { width: 100%; }
+  .learning-material .learning-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .learning-material *, .learning-material *::before, .learning-material *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
+@media print {
+  body.learning-material { padding: 0; background: #fff; }
+  .learning-material .learning-header { margin-bottom: 20px; padding-bottom: 12px; }
+  .learning-material :is(.learning-back, .learning-tools, .learning-steps) { display: none !important; }
+}
+
+/* Five learning formats: shared geometry, selection, and terminal actions. */
+.learning-material .learning-action-row {
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  gap:16px; width:100%; margin-top:28px; padding-top:20px;
+  border-top:1px solid var(--learning-line);
+}
+.learning-material .learning-action-row > :last-child { margin-inline-start:auto; }
+.learning-material .learning-action-row .learning-button { min-width:160px; border-radius:var(--learning-radius-control); }
+.learning-material .learning-action-row .learning-button-primary {
+  background:var(--learning-ink); border-color:var(--learning-ink); color:#fff;
+}
+.learning-material .learning-action-row .learning-button-primary:hover { background:#354a30; }
+.learning-material.learning-story :is(button,select,.btn) { border-radius:var(--learning-radius-control); }
+.learning-material.learning-story :is(.bubble,.resource,.practice,.after,.overview,.note) { border-radius:var(--learning-radius); }
+.learning-material.learning-story :is(.story-scene-image,.scene-img) { border-radius:var(--learning-radius); }
+.learning-material.learning-story .ch-nav { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:stretch; width:100%; }
+.learning-material.learning-story .ch-nav button { width:100%; min-height:48px; }
+.learning-material.learning-story .ch-nav button:last-child { background:var(--learning-ink); border-color:var(--learning-ink); color:#fff; }
+.learning-material.learning-story .scene-button[aria-pressed=true] { border-color:var(--learning-ink); background:var(--learning-ink); color:#fff; font-weight:600; }
+.learning-material.learning-story .scene-button[aria-pressed=true] small { color:inherit; }
+.learning-material.learning-story .after-activities label:has(input:checked) { background:var(--learning-selected); outline:1px solid var(--learning-accent); outline-offset:-1px; border-radius:var(--learning-radius-control); }
+.learning-material.learning-story .after-activities label { padding:10px 12px; }
+.learning-material.learning-story .after .reveal { display:block; margin-inline-start:auto; min-width:160px; }
+.learning-material.learning-grammar :is(.learning-header,.learning-body) { max-width:740px; }
+.learning-material.learning-grammar :is(.box,.note,.photo) { border-radius:var(--learning-radius); }
+.learning-material.learning-grammar :is(.checker input,.opts button,.learning-button) { border-radius:var(--learning-radius-control); }
+.learning-material.learning-grammar .opts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); width:100%; }
+.learning-material.learning-grammar .opts button { width:100%; min-width:0; }
+.learning-material.learning-grammar .opts button[aria-pressed=true] { box-shadow:inset 0 0 0 1px currentColor; font-weight:600; }
+.learning-material.learning-grammar .tag { border-radius:var(--learning-radius-small); }
+.learning-material.learning-numbers :is(.learning-header,.learning-body) { max-width:640px; }
+.learning-material.learning-numbers :is(.mode-toggle,.cats,.progress-wrap,.card-scene,.nav) { width:100%; max-width:640px; margin-inline:auto; }
+.learning-material.learning-numbers :is(.mode-toggle,.card-face,.card-scene) { border-radius:var(--learning-radius); }
+.learning-material.learning-numbers :is(.mode-btn,.cat-btn,.nav-btn,.flip-btn,.learning-button) { border-radius:var(--learning-radius-control); }
+.learning-material.learning-numbers :is(.mode-btn,.cat-btn)[aria-pressed=true] { background:var(--learning-ink); border-color:var(--learning-ink); color:#fff; box-shadow:inset 0 0 0 1px var(--learning-ink); font-weight:600; }
+.learning-material.learning-numbers .nav { display:grid; grid-template-columns:48px minmax(0,1fr) minmax(0,1fr); align-items:stretch; }
+.learning-material.learning-numbers .nav > button { width:100%; min-width:0; min-height:54px; }
+.learning-material.learning-numbers .nav .nav-next { height:auto; font:inherit; font-size:15px; padding:7px 10px; }
+.learning-material.learning-numbers .card-tag { border-radius:var(--learning-radius-small); }
+.learning-material.learning-pronunciation :is(.learning-header,.learning-body) { max-width:1120px; }
+.learning-material.learning-pronunciation :is(.contrast-card,.why-shell,.test-card,.step,.sequence) { border-radius:var(--learning-radius); }
+.learning-material.learning-pronunciation :is(.feature-board,.ear-box,.pair,.air,.sound-circle,.learning-button) { border-radius:var(--learning-radius-control); }
+@media(max-width:620px) {
+  .learning-material .learning-action-row .learning-button-primary { width:100%; }
+  .learning-material.learning-grammar .opts { grid-template-columns:minmax(0,1fr); }
+  .learning-material.learning-story .ch-nav { gap:10px; }
+  .learning-material.learning-numbers .nav { gap:8px; }
+}
+
+.learning-material.learning-numbers .mode-toggle { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); padding:4px; }
+.learning-material.learning-numbers .mode-btn { width:100%; min-width:0; }
+
+/* Match the visible text and chevron insets while retaining the native select. */
+.learning-material select:not([multiple]):not([size]),
+.learning-material.learning-kpop select:not([multiple]):not([size]) {
+  --learning-select-inset:16px;
+  appearance:none;
+  -webkit-appearance:none;
+  padding-inline-start:var(--learning-select-inset);
+  padding-inline-end:44px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='m1 1.5 5 5 5-5' stroke='%23263c30' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right var(--learning-select-inset) center;
+  background-size:12px 8px;
+}
+@media(forced-colors:active) {
+  .learning-material select:not([multiple]):not([size]),
+  .learning-material.learning-kpop select:not([multiple]):not([size]) {
+    appearance:auto;
+    -webkit-appearance:auto;
+    background-image:none;
+    padding-inline-end:var(--learning-select-inset);
+  }
+}
+
+/* Compact phones retain the same title, section and body hierarchy. */
+@media(max-width:620px) {
+ .learning-material { --learning-title-size:26px; --learning-section-size:20px; }
+}
+
+/* Keep bilingual headings together across public learning materials. */
+.learning-material:is(.learning-grammar,.learning-numbers,.learning-pronunciation,.learning-word-order,.learning-colors,.learning-story,.learning-kpop) .learning-heading h1 { line-height:1.3; }
+.learning-material:is(.learning-grammar,.learning-numbers,.learning-pronunciation,.learning-word-order,.learning-colors,.learning-story,.learning-kpop) .learning-heading .learning-subtitle { margin-top:0; line-height:1.4; }
+.learning-material.learning-grammar h2:has(+ .en) { margin-bottom:0; line-height:1.3; }
+.learning-material.learning-grammar h2 + .en { margin-top:0; line-height:1.4; }
+.learning-material.learning-story .scene-head h2 { margin-bottom:0; line-height:1.3; }
+.learning-material.learning-story .scene-head h2 + p { margin-top:0; line-height:1.4; }
+
+/* Explanatory notes are plain text, without decorative rounded callouts. */
+.learning-material.learning-linking .note,
+.learning-material.learning-grammar .note,
+.learning-material.learning-story .note,
+.learning-material.learning-pronunciation :is(.ear-box,.variation-note,.tutor-note) {
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  padding:0;
+}
+</style>
+<style>
+/* Bilingual support: keep each English line directly below its Korean label. */
+.learning-numbers .bi-label { display:flex; flex-direction:column; align-items:inherit; gap:0; margin:0; padding:0; line-height:1.35; }
+.learning-numbers .bi-label > :is(span,small) { display:block; margin:0; padding:0; line-height:1.35; color:inherit; font-style:normal; letter-spacing:0; }
+.learning-numbers .bi-label > span { font-size:16px; }
+.learning-numbers .bi-label > small { font-size:14px; font-weight:400; opacity:1; }
+.learning-numbers .learning-back { align-items:center; }
+.learning-numbers .learning-heading .learning-subtitle { margin:0; font-size:14px; line-height:1.35; }
+.learning-numbers .learning-back .bi-label > span { font-size:15px; }
+.learning-numbers .learning-tools .learning-button { padding:7px 14px; }
+.learning-numbers .mode-toggle { margin-bottom:8px; }
+.learning-numbers .mode-btn { padding:7px 14px; min-height:54px; }
+.learning-numbers .mode-help { margin-bottom:18px; max-width:58ch; }
+.learning-numbers .mode-help .bi-label > span { font-size:15px; }
+.learning-numbers .mode-help .bi-label > small { font-size:14px; }
+.learning-numbers .cats { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:8px; width:100%; margin-bottom:22px; }
+.learning-numbers .cat-btn { display:flex; align-items:center; justify-content:center; min-width:0; min-height:58px; padding:6px 7px; }
+.learning-numbers .cat-btn .bi-label { width:100%; align-items:center; }
+.learning-numbers .cat-btn .bi-label > small { overflow-wrap:normal; word-break:normal; }
+.learning-numbers .cat-btn.active .bi-label > :is(span,small) { color:#fff; opacity:1; }
+.learning-numbers .card-face { padding:88px 24px 72px; }
+.learning-numbers .card-tag { top:14px; left:16px; max-width:calc(50% - 24px); padding:4px 9px; }
+.learning-numbers .card-tag .bi-label { text-align:left; }
+.learning-numbers .card-tag .bi-label > span { font-size:15px; }
+.learning-numbers .card-tag .bi-label > small { font-size:14px; }
+.learning-numbers .card-hint { top:17px; right:16px; left:auto; max-width:calc(50% - 24px); text-align:right; }
+.learning-numbers .card-hint .bi-label > span { font-size:15px; }
+.learning-numbers .card-hint .bi-label > small { font-size:14px; }
+.learning-numbers .card-dir { bottom:14px; right:16px; }
+.learning-numbers .card-dir .bi-label { text-align:right; }
+.learning-numbers .card-dir .bi-label > span { font-size:15px; }
+.learning-numbers .card-dir .bi-label > small { font-size:14px; }
+.learning-numbers .nav { gap:10px; }
+.learning-numbers .flip-btn { padding:7px 24px; min-height:54px; }
+.learning-numbers .flip-btn .bi-label > span { font-size:16px; }
+.learning-numbers .flip-btn .bi-label > small { font-size:14px; }
+.learning-numbers .kbd-hint { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px 20px; margin-top:22px; max-width:100%; }
+.learning-numbers .keyboard-shortcut { display:flex; align-items:center; justify-content:center; gap:6px; min-width:0; }
+.learning-numbers .keyboard-shortcut .bi-label { text-align:left; }
+.learning-numbers .keyboard-shortcut .bi-label > span { font-size:15px; }
+.learning-numbers .keyboard-shortcut .bi-label > small { font-size:14px; }
+@media(max-width:600px) {
+  .learning-numbers .cats { grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; }
+  .learning-numbers .cat-btn { min-height:62px; padding:5px; }
+  .learning-numbers .card-face { padding:90px 18px 72px; }
+  .learning-numbers .card-tag { top:14px; left:14px; }
+  .learning-numbers .card-hint { top:17px; right:14px; left:auto; }
+  .learning-numbers .kbd-hint { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px 18px; }
+  .learning-numbers .keyboard-shortcut { justify-content:flex-start; }
+}
+@media(max-width:360px) {
+  .learning-numbers .mode-btn { flex-basis:120px; padding-inline:6px; }
+  .learning-numbers .cat-btn .bi-label > span { font-size:15px; }
+  .learning-numbers .flip-btn { padding-inline:16px; }
+}
+</style>
+<style>
+/* Use the available reading width and keep keyboard-only help off the phone screen. */
+.learning-numbers.learning-embedded .learning-body { width:100%; padding-top:0; }
+@media(max-width:600px) {
+ .learning-numbers .card-scene,.learning-numbers .card-face { min-height:320px; }
+ .learning-numbers .kbd-hint { display:none; }
+ .learning-numbers .learning-header { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:start; gap:12px; margin-bottom:20px; }
+ .learning-numbers .learning-heading { min-width:0; }
+ .learning-numbers .learning-tools { width:auto; }
+ .learning-numbers .learning-tools .learning-button { padding-inline:10px; }
+ .learning-numbers .mode-help { margin:20px 0 0; }
+}
+</style>
+<style>
+.learning-material.learning-numbers .learning-header { margin-bottom:16px; padding-bottom:16px; }
+.learning-material.learning-numbers .learning-body { padding-top:0; }
+.learning-numbers .number-toolbar { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; width:100%; align-items:stretch; margin-bottom:16px; }
+.learning-numbers .number-toolbar .mode-toggle { margin:0; }
+.learning-numbers .number-toolbar .learning-tools { width:auto; }
+.learning-numbers .number-toolbar .learning-button { height:100%; }
+.learning-material.learning-numbers .nav { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.learning-material.learning-numbers .nav .flip-btn { grid-column:1 / -1; }
+.learning-material.learning-numbers .nav .nav-btn { height:auto; font:inherit; padding:7px 10px; }
+.learning-material.learning-numbers :is(.card-scene,.card-face) { min-height:280px; }
+@media(max-width:420px) {
+ .learning-numbers .number-toolbar { grid-template-columns:minmax(0,1fr); gap:8px; }
+ .learning-numbers .number-toolbar .learning-tools { justify-content:flex-end; }
+}
+</style>
 </head>
-<body>
+<body class="learning-material learning-numbers">
 
-<header>
-  <h1>🇰🇷 Korean Numbers</h1>
-  <div class="byline">by Hanim Lee</div>
-  <p>Click a card to reveal the answer</p>
+<header class="learning-header">
+  <div class="learning-heading">
+    <a class="learning-back" href="../learn/index.html" target="_top">자료 목록</a>
+    <h1>한국어 숫자 카드</h1>
+    <p class="learning-subtitle" lang="en">Korean Numbers · Flashcards</p>
+  </div>
+
 </header>
+<main class="learning-body">
+<section class="number-practice" aria-label="숫자 카드 연습">
 
-<div class="mode-toggle">
-  <button class="mode-btn active" id="mode-normal" onclick="setMode('normal')">Korean → Number</button>
-  <button class="mode-btn" id="mode-reverse" onclick="setMode('reverse')">Number → Korean</button>
+<div class="number-toolbar">
+<div class="mode-toggle" role="group" aria-label="카드 방향">
+  <button class="mode-btn active" id="mode-normal" aria-pressed="true" onclick="setMode('normal')"><span class="bi-label"><span lang="ko">숫자 → 한국어</span><small lang="en">Number → Korean</small></span></button>
+  <button class="mode-btn" id="mode-reverse" aria-pressed="false" onclick="setMode('reverse')"><span class="bi-label"><span lang="ko">한국어 → 숫자</span><small lang="en">Korean → Number</small></span></button>
+</div>
+  <div class="learning-tools">
+    <button type="button" class="learning-button" onclick="shuffle()"><span class="bi-label"><span lang="ko">순서 섞기</span><small lang="en">Shuffle</small></span></button>
+  </div>
 </div>
 
-<div class="cats">
-  <button class="cat-btn active" data-cat="all">All</button>
-  <button class="cat-btn" data-cat="sino">Sino-Korean</button>
-  <button class="cat-btn" data-cat="native">Native Korean</button>
-  <button class="cat-btn" data-cat="time">Time</button>
-  <button class="cat-btn" data-cat="age">Age</button>
-  <button class="cat-btn" data-cat="phone">Phone</button>
-  <button class="cat-btn" data-cat="ordinal">Ordinal</button>
+<div class="cats" role="group" aria-label="카드 종류">
+  <button class="cat-btn active" data-cat="all" aria-pressed="true"><span class="bi-label"><span lang="ko">전체</span><small lang="en">All</small></span></button>
+  <button class="cat-btn" data-cat="sino" aria-pressed="false"><span class="bi-label"><span lang="ko">한자 수</span><small lang="en">Sino-Korean</small></span></button>
+  <button class="cat-btn" data-cat="native" aria-pressed="false"><span class="bi-label"><span lang="ko">고유어 수</span><small lang="en">Native Korean</small></span></button>
+  <button class="cat-btn" data-cat="time" aria-pressed="false"><span class="bi-label"><span lang="ko">시간</span><small lang="en">Time</small></span></button>
+  <button class="cat-btn" data-cat="age" aria-pressed="false"><span class="bi-label"><span lang="ko">나이</span><small lang="en">Age</small></span></button>
+  <button class="cat-btn" data-cat="phone" aria-pressed="false"><span class="bi-label"><span lang="ko">전화번호</span><small lang="en">Phone</small></span></button>
+  <button class="cat-btn" data-cat="ordinal" aria-pressed="false"><span class="bi-label"><span lang="ko">순서</span><small lang="en">Ordinal</small></span></button>
 </div>
 
 <div class="progress-wrap">
   <div class="progress-bar"><div class="progress-fill" id="prog"></div></div>
-  <div class="progress-label" id="prog-label">1 / 1</div>
+  <div class="progress-label" id="prog-label" role="status" aria-live="polite" aria-atomic="true">1 / 1</div>
 </div>
 
-<div class="card-scene" id="card-scene" onclick="flipCard()">
+<div class="card-scene" id="card-scene" role="button" tabindex="0" onclick="flipCard()">
   <div class="card-inner" id="card-inner">
     <div class="card-face card-front">
       <span class="card-tag" id="card-tag-f"></span>
-      <span class="card-hint">tap to reveal</span>
+      <span class="card-hint"><span class="bi-label"><span lang="ko">정답</span><small lang="en">Answer</small></span></span>
       <div class="card-question" id="card-q"></div>
       <div class="card-sub" id="card-sub"></div>
       <div class="card-dir" id="card-dir-f"></div>
     </div>
     <div class="card-face card-back">
       <span class="card-tag" id="card-tag-b"></span>
-      <span class="card-hint">tap to flip back</span>
+      <span class="card-hint"><span class="bi-label"><span lang="ko">문제</span><small lang="en">Question</small></span></span>
       <div class="card-answer-main" id="card-ans"></div>
       <div class="card-answer-rom" id="card-rom"></div>
       <div class="card-answer-pron" id="card-pron"></div>
@@ -168,19 +605,24 @@
   </div>
 </div>
 
-<div class="nav">
-  <button class="nav-btn" onclick="prev()">←</button>
-  <button class="flip-btn" onclick="flipCard()">Flip Card</button>
-  <button class="nav-btn" onclick="next()">→</button>
+<div class="nav" role="group" aria-label="카드 이동">
+  <button class="nav-btn" aria-label="이전 카드 · Previous card" onclick="prev()"><span class="bi-label"><span lang="ko">이전 카드</span><small lang="en">Previous card</small></span></button>
+  <button class="nav-btn nav-next" aria-label="다음 카드 · Next card" onclick="next()"><span class="bi-label"><span lang="ko">다음 카드</span><small lang="en">Next card</small></span></button>
+  <button class="flip-btn" onclick="flipCard()"><span class="bi-label"><span lang="ko">카드 뒤집기</span><small lang="en">Flip card</small></span></button>
 </div>
 
-<div class="kbd-hint">
-  <kbd>Space</kbd> flip &nbsp;·&nbsp; <kbd>←</kbd><kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>S</kbd> shuffle &nbsp;·&nbsp; <kbd>R</kbd> reverse mode
+<div class="kbd-hint" aria-label="키보드 안내 · Keyboard shortcuts">
+  <span class="keyboard-shortcut"><kbd>Space</kbd><span class="bi-label"><span lang="ko">뒤집기</span><small lang="en">Flip</small></span></span>
+  <span class="keyboard-shortcut"><span><kbd>←</kbd><kbd>→</kbd></span><span class="bi-label"><span lang="ko">이동</span><small lang="en">Navigate</small></span></span>
+  <span class="keyboard-shortcut"><kbd>S</kbd><span class="bi-label"><span lang="ko">순서 섞기</span><small lang="en">Shuffle</small></span></span>
+  <span class="keyboard-shortcut"><kbd>R</kbd><span class="bi-label"><span lang="ko">방향 바꾸기</span><small lang="en">Reverse</small></span></span>
 </div>
 
+</section>
+</main>
 <script>
 // Cards: q/qs = front (normal mode), a/rom/pron/note = back (normal mode)
-// In reverse mode: front shows a (the number), back shows q (Korean word)
+// In reverse mode: front shows a (the Korean word), back shows q (number)
 const ALL_CARDS = [
   // ── SINO-KOREAN ──
   { cat:'sino', q:'1', qs:'What is 1 in Sino-Korean?', a:'일', rom:'il', pron:'[일]', note:'' },
@@ -257,13 +699,19 @@ let filtered = [...ALL_CARDS];
 let idx = 0;
 let isFlipped = false;
 let currentCat = 'all';
-let mode = 'normal'; // 'normal' = Korean→Number, 'reverse' = Number→Korean
+let mode = 'normal'; // 'normal' = Number→Korean, 'reverse' = Korean→Number
 
 function getColorForCat(cat) {
-  return { sino:'#E8604C', native:'#2E9E8A', time:'#3D4A5C', age:'#C8902A', phone:'#7C5CBF', ordinal:'#0EA5A0' }[cat] || '#3D4A5C';
+  return { sino:'#b84835', native:'#247867', time:'#44583d', age:'#906115', phone:'#7252ad', ordinal:'#22756e' }[cat] || '#44583d';
 }
 function getLabelForCat(cat) {
-  return { sino:'Sino-Korean', native:'Native Korean', time:'Time', age:'Age', phone:'Phone Numbers', ordinal:'Ordinal' }[cat] || cat;
+  return { sino:'한자 수', native:'고유어 수', time:'시간', age:'나이', phone:'전화번호', ordinal:'순서' }[cat] || cat;
+}
+function getEnglishLabelForCat(cat) {
+  return { sino:'Sino-Korean', native:'Native Korean', time:'Time', age:'Age', phone:'Phone', ordinal:'Ordinal' }[cat] || cat;
+}
+function setBilingualLabel(element, korean, english) {
+  element.innerHTML = '<span class="bi-label"><span lang="ko">' + korean + '</span><small lang="en">' + english + '</small></span>';
 }
 
 function renderCard() {
@@ -273,14 +721,14 @@ function renderCard() {
   const label = getLabelForCat(c.cat);
 
   // Determine front/back based on mode
-  // In 'normal' mode: front = q (Korean/concept), back = a (number/answer)
-  // In 'reverse' mode for sino/native: front = a (number), back = q (Korean)
+  // In 'normal' mode: front = q (number/concept), back = a (Korean/answer)
+  // In 'reverse' mode for sino/native: front = a (Korean), back = q (number)
   // For other cats (time/age/phone/ordinal): always normal direction
   const canReverse = (c.cat === 'sino' || c.cat === 'native');
   const useReverse = (mode === 'reverse' && canReverse);
 
   const frontText = useReverse ? c.a : c.q;
-  const frontSub  = useReverse ? ('What is ' + c.a + ' in ' + (c.cat === 'sino' ? 'Sino' : 'Native') + '-Korean?') : c.qs;
+  const frontSub  = useReverse ? ('What number is ' + c.a + '?') : c.qs;
   const backText  = useReverse ? c.q : c.a;
   const backRom   = useReverse ? '' : (c.rom || '');
   const backPron  = useReverse ? (c.rom ? c.rom : '') : (c.pron || '');
@@ -290,7 +738,7 @@ function renderCard() {
   // Tags
   ['card-tag-f','card-tag-b'].forEach(id => {
     const el = document.getElementById(id);
-    el.textContent = label;
+    setBilingualLabel(el, label, getEnglishLabelForCat(c.cat));
     el.className = 'card-tag tag-' + c.cat;
     el.style.background = color;
   });
@@ -302,7 +750,12 @@ function renderCard() {
   const isEn  = /^[a-zA-Z\s\d:,.\/\-'?]+$/.test(frontText.trim());
   qEl.className = 'card-question' + (isNum ? ' num' : (isEn ? ' en' : ''));
   document.getElementById('card-sub').textContent = frontSub || '';
-  document.getElementById('card-dir-f').textContent = useReverse ? '# → 한국어' : (canReverse ? '한국어 → #' : '');
+  const direction = document.getElementById('card-dir-f');
+  if (canReverse) {
+    setBilingualLabel(direction, useReverse ? '한국어 → 숫자' : '숫자 → 한국어', useReverse ? 'Korean → Number' : 'Number → Korean');
+  } else {
+    direction.textContent = '';
+  }
 
   // Back
   const ansEl = document.getElementById('card-ans');
@@ -325,18 +778,31 @@ function renderCard() {
 
   isFlipped = false;
   document.getElementById('card-inner').classList.remove('flipped');
+  updateCardAccessibility();
 }
 
 function setMode(m) {
   mode = m;
   document.getElementById('mode-normal').classList.toggle('active', m === 'normal');
   document.getElementById('mode-reverse').classList.toggle('active', m === 'reverse');
+  document.getElementById('mode-normal').setAttribute('aria-pressed', String(m === 'normal'));
+  document.getElementById('mode-reverse').setAttribute('aria-pressed', String(m === 'reverse'));
   renderCard();
+}
+
+function updateCardAccessibility() {
+  const front = document.querySelector('.card-front');
+  const back = document.querySelector('.card-back');
+  front.setAttribute('aria-hidden', String(isFlipped));
+  back.setAttribute('aria-hidden', String(!isFlipped));
+  const visible = isFlipped ? back : front;
+  document.getElementById('card-scene').setAttribute('aria-label', visible.textContent.replace(/\s+/g, ' ').trim());
 }
 
 function flipCard() {
   isFlipped = !isFlipped;
   document.getElementById('card-inner').classList.toggle('flipped', isFlipped);
+  updateCardAccessibility();
 }
 function next() { idx = (idx + 1) % filtered.length; renderCard(); }
 function prev() { idx = (idx - 1 + filtered.length) % filtered.length; renderCard(); }
@@ -350,17 +816,22 @@ function shuffle() {
 
 document.querySelectorAll('.cat-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.cat-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
     btn.classList.add('active');
+    btn.setAttribute('aria-pressed', 'true');
     currentCat = btn.dataset.cat;
     filtered = currentCat === 'all' ? [...ALL_CARDS] : ALL_CARDS.filter(c => c.cat === currentCat);
     idx = 0; renderCard();
   });
 });
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight') next();
-  else if (e.key === 'ArrowLeft') prev();
+document.getElementById('card-scene').addEventListener('keydown', e => {
+  if (e.altKey || e.ctrlKey || e.metaKey) return;
+  if (e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+  if (e.key === ' ' && e.target.closest('button, a')) return;
+  if (e.key === 'Enter' && e.target.id === 'card-scene') { e.preventDefault(); flipCard(); }
+  else if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
   else if (e.key === ' ') { e.preventDefault(); flipCard(); }
   else if (e.key === 's' || e.key === 'S') shuffle();
   else if (e.key === 'r' || e.key === 'R') setMode(mode === 'normal' ? 'reverse' : 'normal');
@@ -368,5 +839,6 @@ document.addEventListener('keydown', e => {
 
 renderCard();
 </script>
+
 </body>
 </html>
