@@ -359,18 +359,28 @@ body.learning-material.learning-embedded { padding: 0 0 24px; min-height: 0; }
  .learning-grammar .grammar-comparison .comparison-value { min-width:0; }
 }
 </style>
+
 <style>
-/* Share row heights across both explanations, including wrapped translations. */
-.learning-grammar .identity-comparison { grid-template-rows:repeat(6,auto); column-gap:16px; row-gap:0; }
-.learning-grammar .identity-comparison > .box { display:grid; grid-template-rows:subgrid; grid-row:1 / span 6; position:relative; }
-.learning-grammar .identity-comparison > .g { grid-column:1; }
-.learning-grammar .identity-comparison > .b { grid-column:2; }
-.learning-grammar .identity-comparison .sym { position:absolute; top:20px; right:20px; float:none; }
-.learning-grammar .identity-comparison > .box > * { min-width:0; }
+.learning-grammar .identity-table { width:calc(100% + 32px); margin:0 -16px; border-collapse:separate; border-spacing:16px 0; table-layout:fixed; }
+.learning-grammar .identity-table .compare-cell { width:50%; padding:0 20px 16px; border:0; vertical-align:top; font-size:16px; line-height:1.4; font-weight:400; position:relative; }
+.learning-grammar .identity-table .g { background:var(--identity-soft); }
+.learning-grammar .identity-table .b { background:var(--existence-soft); }
+.learning-grammar .identity-table tr:first-child .compare-cell { padding-top:20px; border-radius:14px 14px 0 0; }
+.learning-grammar .identity-table tr:last-child .compare-cell { padding-bottom:24px; border-radius:0 0 14px 14px; }
+.learning-grammar .identity-table .big { display:block; padding-right:32px; font-size:22px; line-height:1.45; font-weight:600; }
+.learning-grammar .identity-table .g .big,.learning-grammar .identity-table .g .sym { color:var(--identity); }
+.learning-grammar .identity-table .b .big,.learning-grammar .identity-table .b .sym { color:var(--existence); }
+.learning-grammar .identity-table .sym { position:absolute; top:20px; right:20px; width:28px; height:32px; font-size:30px; line-height:1.2; }
+.learning-grammar .identity-table p { margin:0; line-height:1.4; }
+.learning-grammar .identity-table .en { display:block; margin:0; line-height:1.4; }
+.learning-grammar .identity-table ul { padding-left:22px; margin:0; }
+.learning-grammar .identity-table li+li { margin-top:8px; }
 @media(max-width:620px) {
- .learning-grammar .identity-comparison { display:block; }
- .learning-grammar .identity-comparison > .box { display:block; }
- .learning-grammar .identity-comparison > .box + .box { margin-top:16px; }
+ .learning-grammar .identity-table { display:block; width:100%; margin:0; }
+ .learning-grammar .identity-table tbody { display:grid; grid-template-columns:minmax(0,1fr); }
+ .learning-grammar .identity-table tr { display:contents; }
+ .learning-grammar .identity-table .compare-cell { display:block; width:100%; order:var(--cell-order); }
+ .learning-grammar .identity-table tr:first-child .b { margin-top:16px; }
 }
 </style>
 </head>
@@ -382,32 +392,13 @@ body.learning-material.learning-embedded { padding: 0 0 24px; min-height: 0; }
 <section>
   <h2>무엇이에요? 있어요?</h2>
   <span class="en">What is it? Is there something there?</span>
-  <div class="two identity-comparison">
-    <div class="box g">
-      <span class="sym">=</span>
-      <div class="big">이에요 / 예요</div>
-      <p>무엇인지, 누구인지 말할 때 써요. <span class="en">Use 이에요/예요 to say what something is or who someone is.</span></p>
-      <p>이게 뭐예요? 누구예요? <span class="en">What is it? Who is it?</span></p>
-      <ul>
+  <table class="identity-table" aria-label="이에요·예요와 있어요·없어요 비교"><tbody><tr><th class="compare-cell g" style="--cell-order:0" scope="col"><span class="big">이에요 / 예요</span><span class="sym">=</span></th><th class="compare-cell b" style="--cell-order:5" scope="col"><span class="big">있어요 / 없어요</span><svg class="sym" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></th></tr><tr><td class="compare-cell g" style="--cell-order:1"><p>무엇인지, 누구인지 말할 때 써요. <span class="en">Use 이에요/예요 to say what something is or who someone is.</span></p></td><td class="compare-cell b" style="--cell-order:6"><p>무엇이 있는지, 없는지 말할 때 써요. 어디에 있는지도 말해요. 가지고 있는 것도 말해요. <span class="en">Use 있어요/없어요 to say whether something is there. With 에, you can say where it is. You can also say what someone has or doesn’t have: 시간이 있어요.</span></p></td></tr><tr><td class="compare-cell g" style="--cell-order:2"><p>이게 뭐예요? 누구예요? <span class="en">What is it? Who is it?</span></p></td><td class="compare-cell b" style="--cell-order:7"><p>고양이가 있어요? 어디에 있어요? <span class="en">Is there a cat? Where is the cat?</span></p></td></tr><tr><td class="compare-cell g" style="--cell-order:3"><ul>
         <li><span class="ko">고양이예요.</span> <span class="en">It’s a cat.</span></li>
         <li><span class="ko">저는 학생이에요.</span> <span class="en">I’m a student.</span></li>
-      </ul>
-      <p>사전 형태는 '이다'예요. 명사 뒤에 붙여 써요. 부정 표현은 '아니다'예요.</p>
-      <p class="en">이에요 and 예요 come from 이다. Attach them directly to a noun, with no space: 학생이에요. They work like am, is, and are before a noun, as in “I am a student.” To say “is not,” use 아니에요: 학생이 아니에요.</p>
-    </div>
-    <div class="box b">
-      <svg class="sym" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-      <div class="big">있어요 / 없어요</div>
-      <p>무엇이 있는지, 없는지 말할 때 써요. 어디에 있는지도 말해요. 가지고 있는 것도 말해요. <span class="en">Use 있어요/없어요 to say whether something is there. With 에, you can say where it is. You can also say what someone has or doesn’t have: 시간이 있어요.</span></p>
-      <p>고양이가 있어요? 어디에 있어요? <span class="en">Is there a cat? Where is the cat?</span></p>
-      <ul>
+      </ul></td><td class="compare-cell b" style="--cell-order:8"><ul>
         <li><span class="ko">고양이가 방에 있어요.</span> <span class="en">The cat is in the room.</span></li>
         <li><span class="ko">방에 고양이가 있어요.</span> <span class="en">There is a cat in the room.</span></li>
-      </ul>
-      <p>사전 형태는 '있다'예요. 명사에 붙이지 않고 따로 써요. 반대말은 '없다'예요.</p>
-      <p class="en">있어요 and 없어요 come from 있다 and 없다. Unlike 이에요/예요, they do not attach to the noun: 책이에요. / 책이 있어요.</p>
-    </div>
-  </div>
+      </ul></td></tr><tr><td class="compare-cell g" style="--cell-order:4"><p>사전 형태는 '이다'예요. 명사 뒤에 붙여 써요. 부정 표현은 '아니다'예요.</p><p class="en">이에요 and 예요 come from 이다. Attach them directly to a noun, with no space: 학생이에요. They work like am, is, and are before a noun, as in “I am a student.” To say “is not,” use 아니에요: 학생이 아니에요.</p></td><td class="compare-cell b" style="--cell-order:9"><p>사전 형태는 '있다'예요. 명사에 붙이지 않고 따로 써요. 반대말은 '없다'예요.</p><p class="en">있어요 and 없어요 come from 있다 and 없다. Unlike 이에요/예요, they do not attach to the noun: 책이에요. / 책이 있어요.</p></td></tr></tbody></table>
 </section>
 
 <section>
