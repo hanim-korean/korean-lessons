@@ -550,6 +550,12 @@ body.learning-material.learning-particles{padding:0;margin:0;--bg:#fdfefd;--ink:
 .learning-particles .feedback{font-size:15px;line-height:1.6;border-radius:8px}
 .learning-particles footer{font-family:inherit;font-size:14px;color:var(--soft)}
 @media(max-width:620px){.learning-particles .wrap{padding:24px 16px 40px}.learning-particles :is(.bigidea,.quiz,.card .body){padding:18px 16px}.learning-particles .card .head{padding:18px 16px;grid-template-columns:minmax(0,1fr)}.learning-particles .card .head .role{grid-column:1;grid-row:auto;justify-self:start;margin-top:8px}.learning-particles .bigidea .compare{grid-template-columns:1fr}.learning-particles .q{padding:16px 12px}.learning-particles .opts{grid-template-columns:repeat(2,minmax(0,1fr))}.learning-particles table.ex td{display:block;width:100%}.learning-particles table.ex .ko{width:100%;padding-bottom:0;border-bottom:0}.learning-particles table.ex .en{padding-top:0}}
+</style><style>
+.learning-particles .idea-english{display:block;font-size:14px;line-height:1.5;color:var(--soft);margin:0}
+.learning-particles .bigidea .compare,.learning-particles .batchim{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.learning-particles .bigidea .compare>*,.learning-particles .batchim>*{min-width:0;width:100%;margin:0}
+.learning-particles .card .body>table,.learning-particles .card .body>.batchim{width:100%}
+@media(max-width:620px){.learning-particles .bigidea .compare{grid-template-columns:minmax(0,1fr)}}
 </style></head>
 <body class="learning-material learning-particles">
 <div class="wrap">
@@ -560,7 +566,7 @@ body.learning-material.learning-particles{padding:0;margin:0;--bg:#fdfefd;--ink:
   <!-- BIG IDEA -->
   <section class="bigidea">
     <h2>🔑 가장 중요한 생각 · The One Big Idea</h2>
-    <p style="font-size:15.5px;color:var(--soft);">영어는 <b>단어 순서(word order)</b>로 역할을 정해요. 한국어는 <b>조사(particle)</b>로 역할을 정해요.</p>
+    <p style="font-size:15.5px;color:var(--soft);">영어는 <b>단어 순서(word order)</b>로 역할을 정해요. 한국어는 <b>조사(particle)</b>로 역할을 정해요.<span class="idea-english" lang="en">English mainly uses word order to show each word’s role. Korean uses particles to mark these roles.</span></p>
     <div class="compare">
       <div class="box en-box">
         <h3>English: order matters</h3>
