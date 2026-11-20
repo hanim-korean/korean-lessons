@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>페이지를 찾을 수 없어요 · Allbarun Korean</title>
+<script>
+(function(){
+  var base='/korean-lessons/';
+  var moved={"kr_ㄹguide.html":"korean_rieul_pronunciation_revised.html","ㄹpronunciaion.html":"korean_rieul_pronunciation_revised.html","past_tense.html":"past_tense_complet.html","verb_conjugation.html":"heyo_verb_conjugation.html","numbers/Korean-Numbers-Flashcards.html":"numbers/Korean-Numbers-Flashcards2.html","seoul-real-korean-guide.html":"seoul-real-korean-guide-revised.html","kr_basic_consonants_es.html":"kr_basic_consonants_es (1).html","kr_ieyo_vs_isseoyo.html":"kr_ieyo_vs_isseoyo_eng.html","Julia_6.html":"archive/students/Julia_6.html","Julia_6_A_v3.html":"archive/students/Julia_6_A_v3.html","Julia_6_B_v3.html":"archive/students/Julia_6_B_v3.html","Julia_bibimbap.html":"archive/students/Julia_bibimbap.html","julia_game2_whats_missing.html":"archive/students/julia_game2_whats_missing.html","julia_game3_vowel_song_hunt_1.html":"archive/students/julia_game3_vowel_song_hunt_1.html","julia_lesson7_ohmykimchi.html":"archive/students/julia_lesson7_ohmykimchi.html","julia_krfood/kimbap.jpg":"archive/students/julia_krfood/kimbap.jpg","julia_krfood/namdaemun.png":"archive/students/julia_krfood/namdaemun.png","julia_krfood/kimchi.png":"archive/students/julia_krfood/kimchi.png","julia_krfood/samgyeopsal.jpg":"archive/students/julia_krfood/samgyeopsal.jpg","julia_krfood/tteokbokki.png":"archive/students/julia_krfood/tteokbokki.png","julia_krfood/julia_game1_picture_reveal.html":"archive/students/julia_krfood/julia_game1_picture_reveal.html","Julia_html/skz_vowel_lesson_codepen_bundle.html":"archive/students/Julia_html/skz_vowel_lesson_codepen_bundle.html","Julia_html/julia_lesson5_slides.html":"archive/students/Julia_html/julia_lesson5_slides.html","Julia_html/index.html":"archive/students/Julia_html/index.html","Julia_html/julia_game_quiz_final (2).html":"archive/students/Julia_html/julia_game_quiz_final (2).html","Julia_html/pororo_flashcards_v5.html":"archive/students/Julia_html/pororo_flashcards_v5.html","Julia_html/images/hyunjin.png":"archive/students/Julia_html/images/hyunjin.png","Julia_html/images/felix.png":"archive/students/Julia_html/images/felix.png","Julia_html/images/han.png":"archive/students/Julia_html/images/han.png","Julia_html/images/leeknow.png":"archive/students/Julia_html/images/leeknow.png","Julia_html/images/in.png":"archive/students/Julia_html/images/in.png","Julia_html/images/changbin.png":"archive/students/Julia_html/images/changbin.png","Julia_html/images/seungmin.png":"archive/students/Julia_html/images/seungmin.png","Julia_html/images/bangchan.png":"archive/students/Julia_html/images/bangchan.png","Bonnie_skiz_name.html":"archive/students/Bonnie_skiz_name.html","maddie_index.html":"archive/students/maddie_index.html","maddie_맞춤한국어_6과.html":"archive/students/maddie_맞춤한국어_6과.html","maelys_index.html":"archive/students/maelys_index.html","maelys_정규수업4_맞춤한국어1_11과.html":"archive/students/maelys_정규수업4_맞춤한국어1_11과.html","Julia_html/":"archive/students/Julia_html/","julia_krfood/":"archive/students/julia_krfood/"};
+  var path=location.pathname;
+  try{path=decodeURIComponent(path);}catch(e){}
+  if(path.normalize) path=path.normalize('NFC');
+  if(path.indexOf(base)!==0) return;
+  var rel=path.slice(base.length);
+  var target=moved[rel];
+  if(!target){
+    for(var k in moved){ if(k.slice(-1)==='/' && rel.indexOf(k)===0){ target=moved[k]+rel.slice(k.length); break; } }
+  }
+  if(target) location.replace(base+encodeURI(target)+location.search+location.hash);
+})();
+</script>
+<style>
+body{margin:0;padding:48px 24px;background:#fdfefd;color:#263c30;font:16px/1.65 Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif}
+main{max-width:640px;margin:0 auto}
+h1{font-size:30px;font-weight:600;line-height:1.3;margin:0}
+p{margin:12px 0}
+.en{color:#52634f;font-size:15px;margin-top:0}
+a{color:#526c3d;text-underline-offset:4px}
+</style>
+</head>
+<body>
+<main>
+<h1>페이지를 찾을 수 없어요</h1>
+<p class="en">This page could not be found.</p>
+<p><a href="/korean-lessons/learn/index.html">자료 목록으로 가요</a></p>
+</main>
+</body>
+</html>
