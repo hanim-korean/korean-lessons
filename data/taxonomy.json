@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "categories": [
+    { "id": "hangul-pronunciation", "label_ko": "한글·발음", "label_en": "Hangul & Pronunciation" },
+    { "id": "grammar-sentences", "label_ko": "문법·문장", "label_en": "Grammar & Sentences" },
+    { "id": "vocabulary", "label_ko": "어휘", "label_en": "Vocabulary" },
+    { "id": "conversation-culture", "label_ko": "회화·문화", "label_en": "Conversation & Culture" },
+    { "id": "textbook-courses", "label_ko": "교재별 코스", "label_en": "Textbook Courses" }
+  ],
+  "non_library_categories": [
+    { "id": "studio-tools", "label_ko": "교사용 도구" },
+    { "id": "personalized", "label_ko": "개인화 자료" }
+  ],
+  "levels": [
+    { "id": "beginner", "label_ko": "초급", "cefr": ["A0", "A1", "A2"] },
+    { "id": "intermediate", "label_ko": "중급", "cefr": ["B1", "B2"] },
+    { "id": "advanced", "label_ko": "고급", "cefr": ["C1", "C2"] }
+  ],
+  "formats": [
+    "game",
+    "quiz",
+    "flashcards",
+    "slides",
+    "worksheet",
+    "role-play",
+    "guide",
+    "review",
+    "generator",
+    "probe"
+  ],
+  "skills": [
+    "speaking",
+    "listening",
+    "reading",
+    "writing",
+    "grammar",
+    "vocabulary",
+    "pronunciation",
+    "culture"
+  ],
+  "audiences": [
+    "adult",
+    "teen",
+    "child",
+    "all-ages",
+    "teacher",
+    "specific-student"
+  ],
+  "tag_aliases": {
+    "review": "복습",
+    "복습용": "복습",
+    "한글읽기": "한글 읽기",
+    "발음규칙": "발음 규칙",
+    "k-pop": "K-pop",
+    "kpop": "K-pop"
+  },
+  "homepage_defaults": {
+    "category": "all",
+    "level": "all",
+    "format": "all",
+    "include_personalized": false,
+    "include_studio_tools": false,
+    "sort": "title_ko"
+  }
+}
