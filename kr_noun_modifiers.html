@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>명사를 꾸미는 말 · Allbarun Korean</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+.learning-material{--ink:#263c30;--muted:#52634f;--accent:#526c3d;--line:#dfe6db;--control:#c5d0bd;--paper:#fdfefd;--tint:#edf3e3;--warm:#f3f7ed;--selected:#e4edcf;--retry:#934629;--retry-soft:#fff1e9;
+ margin:0;padding:32px 24px 56px;color:var(--ink);background:var(--paper);font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere;-webkit-text-size-adjust:100%}
+.learning-material *,.learning-material *::before,.learning-material *::after{box-sizing:border-box}
+.learning-material [hidden]{display:none!important}
+.learning-material :is(button,input,select,textarea){font-family:inherit;font-size:16px;color:var(--ink)}
+.learning-material :is(button,select){cursor:pointer;min-height:44px}
+.learning-material :is(button,input,select,textarea,a,summary):focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.learning-material a{color:var(--accent);text-underline-offset:4px}
+.learning-header{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:16px 24px;max-width:var(--page-width,780px);margin:0 auto 28px;padding:0 0 24px;border-bottom:1px solid var(--line)}
+.learning-back{display:flex;align-items:center;width:fit-content;min-height:44px;margin:0 0 8px;font-size:15px;color:var(--muted);text-decoration:none}
+.learning-back:hover{text-decoration:underline}
+.learning-header h1{margin:0;font-size:30px;font-weight:600;line-height:1.3;letter-spacing:-.025em}
+.learning-subtitle{display:block;margin:0;font-size:15px;line-height:1.4;color:var(--muted)}
+.learning-tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.learning-tools button{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 14px;border:1px solid var(--control);border-radius:8px;background:#fff}
+.learning-tools button:hover{background:var(--warm)}
+.learning-tools button[aria-pressed=true]{border-color:var(--accent);background:var(--selected)}
+.learning-body{max-width:var(--page-width,780px);margin:0 auto;min-width:0}
+.learning-body>section{padding:28px 0;border-top:1px solid var(--line)}
+.learning-body>section:first-child{border-top:0;padding-top:0}
+h2{font-size:22px;font-weight:600;line-height:1.45;letter-spacing:-.02em;margin:0}
+h2+.en{display:block;margin:0 0 18px}
+h3{font-size:18px;font-weight:600;margin:22px 0 6px;line-height:1.45}
+h3+.en{display:block;margin:0 0 10px}
+p{margin:10px 0}
+.en{font-size:15px;line-height:1.4;color:var(--muted)}
+p.en{margin-top:0}
+p:has(+p.en){margin-bottom:0}
+.ko{font-weight:600}
+.hl{color:var(--accent);font-weight:700}
+.chg{color:var(--retry);font-weight:700}
+.tag{display:inline-block;padding:1px 7px;border-radius:4px;font-size:14px;font-weight:600;background:var(--tint);color:var(--accent)}
+table{width:100%;border-collapse:collapse;table-layout:fixed;margin:8px 0 4px}
+th,td{padding:11px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;overflow-wrap:anywhere}
+th{font-size:15px;font-weight:600;color:var(--muted)}
+th:first-child,td:first-child{padding-left:0}
+td .en,th .en{display:block}
+th .en{font-weight:400;font-size:14px}
+.table-scroll{overflow-x:auto}
+ul.plain{list-style:none;padding:0;margin:8px 0}
+ul.plain>li{padding:10px 0;border-bottom:1px solid var(--line)}
+ul.plain>li:last-child{border-bottom:0}
+ul.plain .en{display:block}
+.panel{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:#fff}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin:0 0 20px}
+.seg button,.btn{min-height:44px;padding:10px 14px;border:1px solid var(--control);border-radius:8px;background:#fff;text-align:center}
+.seg button:hover,.btn:hover{background:var(--warm);border-color:var(--accent)}
+.seg button[aria-pressed=true]{border-color:var(--ink);background:var(--ink);color:#fff;font-weight:600}
+.learning-material .btn-primary{background:var(--ink);border-color:var(--ink);color:#fff}
+.learning-material .btn-primary:hover{background:#354a30;color:#fff}
+.learning-material .seg button[aria-pressed=true]{color:#fff}
+.quiz{display:grid;gap:24px}
+.q{padding:0 0 24px;border-bottom:1px solid var(--line)}
+.q:last-child{border-bottom:0;padding-bottom:0}
+.ask{font-weight:600;margin-bottom:12px}
+.ask .en{display:block;font-weight:400}
+.opts{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:10px}
+.opts button{min-height:44px;padding:10px 12px;border:1px solid var(--control);border-radius:8px;background:#fff;text-align:center}
+.opts button:hover{background:var(--warm);border-color:var(--accent)}
+.opts button.right{border-color:var(--accent);background:var(--tint);font-weight:600}
+.opts button.right::before{content:"✓ ";}
+.opts button.wrong{border-color:var(--retry);background:var(--retry-soft)}
+.opts button.wrong::before{content:"× ";}
+.fb{margin-top:10px;font-size:15px;line-height:1.6}
+.fb:empty{display:none}
+.score{font-weight:600;margin-top:20px;font-size:17px}
+.score:empty{display:none}
+.learning-action-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
+.learning-action-row>:last-child{margin-inline-start:auto}
+.learning-action-row .btn{min-width:160px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+body.hide-en .en{display:none!important}
+@media(max-width:620px){
+ .learning-material{padding:24px 18px 40px}
+ .learning-header{grid-template-columns:minmax(0,1fr);gap:16px}
+ .learning-header h1{font-size:26px}
+ h2{font-size:20px}
+ .two{grid-template-columns:1fr}
+ .opts,.seg{grid-auto-flow:row;grid-template-columns:1fr}
+ .seg.keep{grid-auto-flow:column;grid-template-columns:none}
+}
+@media(prefers-reduced-motion:reduce){.learning-material *{transition:none!important;animation:none!important}}
+
+.learning-material{--page-width:780px}
+
+.big{font-size:22px;font-weight:700;color:#526c3d;margin:6px 0 4px}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0 16px}
+.three .panel{text-align:center}
+.three .panel p{margin:4px 0}
+.order{display:grid;gap:10px;margin-top:8px}
+.order .row{display:grid;grid-template-columns:90px repeat(2,minmax(0,1fr));gap:10px;align-items:center}
+.order .lab{color:#52634f;font-size:15px}
+.order .cell{display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:8px;font-size:18px;font-weight:600;text-align:center;padding:6px}
+.order .noun{background:#edf3e3;color:#375d40}
+.order .desc{background:#edf3f7;color:#315e79}
+@media(max-width:620px){.three{grid-template-columns:1fr}.order .row{grid-template-columns:70px repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body class="learning-material learning-grammar">
+<main class="learning-page">
+<header class="learning-header"><div class="learning-heading"><a class="learning-back" href="./learn/index.html" target="_top">자료 목록</a><h1>명사를 꾸미는 말</h1><p class="learning-subtitle">-(으)ㄴ, -는, -(으)ㄹ · Describing nouns</p></div><div class="learning-tools"><button type="button" id="toggle-en" aria-pressed="false">영어 숨기기 Hide English</button></div></header>
+<div class="learning-body">
+
+<section>
+<h2>꾸미는 말은 명사 앞에 와요</h2><span class="en">The description comes before the noun</span>
+<p>영어는 꾸미는 말이 명사 뒤에 올 때가 많아요. 한국어는 꾸미는 말이 언제나 명사 앞에 와요.</p>
+<p class="en">In English, a describing clause often comes after the noun. In Korean, it always comes before the noun.</p>
+<div class="order">
+ <div class="row"><span class="lab">English</span><span class="cell noun">the bread</span><span class="cell desc">that I made</span></div>
+ <div class="row"><span class="lab">한국어</span><span class="cell desc">제가 만든</span><span class="cell noun">빵</span></div>
+</div>
+</section>
+
+<section>
+<h2>동사: 언제 한 일이에요?</h2><span class="en">Verbs: when does it happen?</span>
+<p>동사는 언제 한 일인지에 따라 모양이 달라요.</p>
+<p class="en">With verbs, the ending shows when the action happens.</p>
+<div class="time three">
+ <div class="panel"><span class="tag">지난 일 Past</span><p class="big">-(으)ㄴ</p><p class="ko">어제 본 영화</p><p class="en">the movie I saw yesterday</p></div>
+ <div class="panel"><span class="tag">지금 Now</span><p class="big">-는</p><p class="ko">지금 보는 영화</p><p class="en">the movie I'm watching now</p></div>
+ <div class="panel"><span class="tag">앞으로 Future</span><p class="big">-(으)ㄹ</p><p class="ko">내일 볼 영화</p><p class="en">the movie I'll see tomorrow</p></div>
+</div>
+<table><thead><tr><th>기본형</th><th>-(으)ㄴ<span class="en">Past</span></th><th>-는<span class="en">Now</span></th><th>-(으)ㄹ<span class="en">Future</span></th></tr></thead><tbody><tr><td><span class="ko">먹다</span><span class="en">to eat</span></td><td>먹은</td><td>먹는</td><td>먹을</td></tr><tr><td><span class="ko">보다</span><span class="en">to see</span></td><td>본</td><td>보는</td><td>볼</td></tr><tr><td><span class="ko">읽다</span><span class="en">to read</span></td><td>읽은</td><td>읽는</td><td>읽을</td></tr><tr><td><span class="ko">만들다</span><span class="en">to make</span></td><td>만든</td><td>만드는</td><td>만들</td></tr><tr><td><span class="ko">살다</span><span class="en">to live</span></td><td>산</td><td>사는</td><td>살</td></tr><tr><td><span class="ko">듣다</span><span class="en">to listen</span></td><td>들은</td><td>듣는</td><td>들을</td></tr></tbody></table>
+<ul class="plain">
+<li>받침 ㄹ로 끝나는 동사는 -(으)ㄴ과 -는 앞에서 ㄹ이 빠져요. -(으)ㄹ 앞에서는 그대로예요. 만들다는 ‘만든, 만드는, 만들’이에요.<span class="en">Stems ending in ㄹ drop it before -(으)ㄴ and -는: 만든, 만드는. With -(으)ㄹ it stays: 만들.</span></li>
+<li>듣다는 모음 앞에서만 ㄷ이 ㄹ로 바뀌어요. 그래서 ‘들은, 들을’이지만 ‘듣는’이에요.<span class="en">듣다 changes only before a vowel: 들은, 들을, but 듣는.</span></li>
+</ul>
+</section>
+
+<section>
+<h2>형용사: -(으)ㄴ</h2><span class="en">Adjectives: -(으)ㄴ</span>
+<p>형용사는 지금 모습을 말할 때 -(으)ㄴ을 써요. 받침이 있으면 -은, 없으면 -ㄴ이에요.</p>
+<p class="en">Adjectives take -(으)ㄴ to describe how something is now: -은 after a final consonant, -ㄴ after a vowel.</p>
+<table><thead><tr><th>기본형</th><th>꾸미는 모양<span class="en">Form</span></th><th>예<span class="en">Example</span></th></tr></thead><tbody><tr><td><span class="ko">크다</span><span class="en">big</span></td><td>큰</td><td><span class="ko">큰 가방</span></td></tr><tr><td><span class="ko">작다</span><span class="en">small</span></td><td>작은</td><td><span class="ko">작은 방</span></td></tr><tr><td><span class="ko">좋다</span><span class="en">good</span></td><td>좋은</td><td><span class="ko">좋은 사람</span></td></tr><tr><td><span class="ko">예쁘다</span><span class="en">pretty</span></td><td>예쁜</td><td><span class="ko">예쁜 꽃</span></td></tr><tr><td><span class="ko">길다</span><span class="en">long</span></td><td>긴</td><td><span class="ko">긴 머리</span></td></tr><tr><td><span class="ko">맵다</span><span class="en">spicy</span></td><td>매운</td><td><span class="ko">매운 음식</span></td></tr><tr><td><span class="ko">빨갛다</span><span class="en">red</span></td><td>빨간</td><td><span class="ko">빨간 모자</span></td></tr><tr><td><span class="ko">맛있다</span><span class="en">tasty</span></td><td>맛있는</td><td><span class="ko">맛있는 빵</span></td></tr><tr><td><span class="ko">재미있다</span><span class="en">fun</span></td><td>재미있는</td><td><span class="ko">재미있는 책</span></td></tr></tbody></table>
+<ul class="plain">
+<li>있다, 없다로 끝나는 말은 형용사라도 -는을 써요. ‘맛있는 빵, 재미있는 책’이에요. ‘맛있은’이라고 하지 않아요.<span class="en">Words ending in 있다/없다 take -는: 맛있는, 재미있는, 맛없는.</span></li>
+<li>맵다처럼 ㅂ이 바뀌는 말은 ‘매운’, 빨갛다처럼 ㅎ이 바뀌는 말은 ‘빨간’이에요.<span class="en">Irregulars change here too: 맵다 → 매운, 빨갛다 → 빨간.</span></li>
+</ul>
+</section>
+
+<section>
+<h2>자주 쓰는 말</h2><span class="en">Common uses</span>
+<ul class="plain">
+<li><span class="ko">안경을 쓴 사람, 모자를 쓴 사람</span><br>지금 안경을 쓰고 있는 모습이에요. 이미 쓴 다음의 모습이라서 -(으)ㄴ을 써요.<span class="en">the person wearing glasses / a hat. The putting-on is done, so it takes -(으)ㄴ.</span></li>
+<li><span class="ko">책을 읽는 사람, 커피를 마시는 사람</span><br>지금 하고 있는 일이에요.<span class="en">the person reading a book / drinking coffee (happening now)</span></li>
+<li><span class="ko">할 일이 많아요. 먹을 거 있어요?</span><br>앞으로 할 일, 앞으로 먹을 것이에요.<span class="en">I have a lot to do. Is there anything to eat?</span></li>
+<li><span class="ko">어릴 때, 밥을 먹을 때</span><br>‘때’ 앞에서는 보통 -(으)ㄹ을 써요. 지난 일은 ‘-았/었을 때’도 써요. ‘어렸을 때’처럼요.<span class="en">when I was young / when I eat. 때 usually takes -(으)ㄹ. For past events you'll also hear -았/었을 때: 어렸을 때.</span></li>
+</ul>
+</section>
+
+<section>
+<h2>연습해요</h2><span class="en">Practice</span>
+<div class="quiz" id="quiz-mod"></div>
+<div class="score" id="score-mod" aria-live="polite"></div>
+<div class="learning-action-row" style="border-top:0;margin-top:12px;padding-top:0"><span></span><button type="button" class="btn" id="redo-mod">다시 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg> Redo</button></div>
+</section>
+
+<section>
+<h2>말해 봐요</h2><span class="en">Let's talk</span>
+<ul class="plain"><li><span class="ko">요즘 자주 듣는 노래가 뭐예요?</span><span class="en">What song do you often listen to these days?</span></li><li><span class="ko">최근에 본 영화가 있어요? 어땠어요?</span><span class="en">Have you seen a movie recently? How was it?</span></li><li><span class="ko">이번 주말에 할 일이 많아요?</span><span class="en">Do you have a lot to do this weekend?</span></li><li><span class="ko">제일 좋아하는 계절이 뭐예요?</span><span class="en">What's your favorite season?</span></li><li><span class="ko">어렸을 때 좋아한 음식이 뭐예요?</span><span class="en">What food did you like when you were young?</span></li><li><span class="ko">방에 있는 물건 하나를 설명해 봐요.</span><span class="en">Describe one thing in your room. (책상 위에 있는 빨간 컵)</span></li></ul>
+</section>
+
+<footer class="learning-action-row"><span>Allbarun Korean · written by Hanim</span><a class="btn btn-primary" href="./learn/index.html" target="_top">자료 목록</a></footer>
+</div>
+</main>
+<script>
+function renderQuiz(items, root, scoreEl){
+  let solvedCount=0, firstTry=0;
+  items.forEach((it,i)=>{
+    const box=document.createElement('div'); box.className='q';
+    const ask=document.createElement('div'); ask.className='ask';
+    ask.innerHTML=(i+1)+'. '+it.q+(it.en?'<span class="en">'+it.en+'</span>':'');
+    const opts=document.createElement('div'); opts.className='opts';
+    const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+    let tried=false, solved=false;
+    it.opts.forEach((o,j)=>{
+      const b=document.createElement('button'); b.type='button'; b.textContent=o; b.setAttribute('aria-pressed','false');
+      b.addEventListener('click',()=>{
+        if(solved) return;
+        opts.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+        if(j===it.a){
+          solved=true; b.classList.add('right');
+          fb.innerHTML='<b>맞아요! Correct!</b> '+it.fb;
+          if(!tried) firstTry++;
+          solvedCount++;
+          if(solvedCount===items.length) scoreEl.textContent='처음에 맞힌 문제: '+firstTry+' / '+items.length+' · Right on the first try';
+        }else{
+          b.classList.add('wrong'); b.disabled=true;
+          fb.innerHTML='<b>다시 해 봐요. Try again.</b> '+(it.hint||'');
+        }
+        tried=true;
+      });
+      opts.appendChild(b);
+    });
+    box.append(ask,opts,fb); root.appendChild(box);
+  });
+}
+function resetQuiz(items, root, scoreEl){ root.innerHTML=''; scoreEl.textContent=''; renderQuiz(items, root, scoreEl); }
+
+
+(()=>{const b=document.getElementById('toggle-en'); if(!b) return;
+ b.addEventListener('click',()=>{const on=document.body.classList.toggle('hide-en'); b.setAttribute('aria-pressed',String(on)); b.textContent=on?'영어 보기 Show English':'영어 숨기기 Hide English';});})();
+
+
+const items_mod=[{"q": "어제 ______ 영화가 재미있었어요. (보다)", "en": "The movie I watched yesterday was fun.", "opts": ["보는", "본", "볼"], "a": 1, "hint": "‘어제’예요. 지난 일이에요.", "fb": "지난 일은 -(으)ㄴ이에요. 어제 본 영화."}, {"q": "내일 ______ 옷이 없어요. (입다)", "en": "I have no clothes to wear tomorrow.", "opts": ["입은", "입는", "입을"], "a": 2, "hint": "‘내일’이에요. 앞으로 할 일이에요.", "fb": "앞으로 할 일은 -(으)ㄹ이에요. 내일 입을 옷."}, {"q": "저는 ______ 음식을 좋아해요. (맵다)", "en": "I like spicy food.", "opts": ["맵은", "매운", "맵는"], "a": 1, "hint": "맵다는 ㅂ이 바뀌는 형용사예요.", "fb": "맵다 → 매운. ㅂ이 ‘우’로 바뀌어요."}, {"q": "여기는 정말 ______ 식당이에요. (맛있다)", "en": "This is a really good restaurant.", "opts": ["맛있은", "맛있는", "맛있을"], "a": 1, "hint": "‘있다’로 끝나는 말은 형용사라도 -는을 써요.", "fb": "맛있다 → 맛있는. 재미있는, 맛없는도 같아요."}, {"q": "서울에 ______ 친구가 있어요. (살다)", "en": "I have a friend who lives in Seoul.", "opts": ["살는", "사는", "살은"], "a": 1, "hint": "‘살’의 ㄹ 받침은 -는 앞에서 빠져요.", "fb": "살다 → 사는. ㄹ이 빠져요."}, {"q": "지금 ______ 노래가 뭐예요? (듣다)", "en": "What song are you listening to now?", "opts": ["듣는", "들는", "들은"], "a": 0, "hint": "‘지금’이에요. -는은 자음으로 시작해요.", "fb": "듣다 → 듣는. -는 앞에서는 ㄷ이 바뀌지 않아요."}, {"q": "제가 ______ 빵이에요. 드셔 보세요. (만들다)", "en": "This is bread I made. Please try some.", "opts": ["만들은", "만든", "만들는"], "a": 1, "hint": "만든 다음에 줘요. ㄹ 받침이 빠져요.", "fb": "만들다 → 만든. ㄹ이 빠지고 ㄴ이 붙어요."}, {"q": "______ 가방을 샀어요. (작다)", "en": "I bought a small bag.", "opts": ["작은", "작는", "작을"], "a": 0, "hint": "작다는 형용사예요.", "fb": "형용사는 -(으)ㄴ이에요. 작은 가방."}];
+renderQuiz(items_mod,document.getElementById('quiz-mod'),document.getElementById('score-mod'));
+document.getElementById('redo-mod').addEventListener('click',()=>resetQuiz(items_mod,document.getElementById('quiz-mod'),document.getElementById('score-mod')));
+</script>
+</body>
+</html>

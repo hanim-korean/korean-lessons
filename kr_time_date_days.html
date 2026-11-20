@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>시간, 날짜, 요일 · Allbarun Korean</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+.learning-material{--ink:#263c30;--muted:#52634f;--accent:#526c3d;--line:#dfe6db;--control:#c5d0bd;--paper:#fdfefd;--tint:#edf3e3;--warm:#f3f7ed;--selected:#e4edcf;--retry:#934629;--retry-soft:#fff1e9;
+ margin:0;padding:32px 24px 56px;color:var(--ink);background:var(--paper);font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere;-webkit-text-size-adjust:100%}
+.learning-material *,.learning-material *::before,.learning-material *::after{box-sizing:border-box}
+.learning-material [hidden]{display:none!important}
+.learning-material :is(button,input,select,textarea){font-family:inherit;font-size:16px;color:var(--ink)}
+.learning-material :is(button,select){cursor:pointer;min-height:44px}
+.learning-material :is(button,input,select,textarea,a,summary):focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.learning-material a{color:var(--accent);text-underline-offset:4px}
+.learning-header{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:16px 24px;max-width:var(--page-width,780px);margin:0 auto 28px;padding:0 0 24px;border-bottom:1px solid var(--line)}
+.learning-back{display:flex;align-items:center;width:fit-content;min-height:44px;margin:0 0 8px;font-size:15px;color:var(--muted);text-decoration:none}
+.learning-back:hover{text-decoration:underline}
+.learning-header h1{margin:0;font-size:30px;font-weight:600;line-height:1.3;letter-spacing:-.025em}
+.learning-subtitle{display:block;margin:0;font-size:15px;line-height:1.4;color:var(--muted)}
+.learning-tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.learning-tools button{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 14px;border:1px solid var(--control);border-radius:8px;background:#fff}
+.learning-tools button:hover{background:var(--warm)}
+.learning-tools button[aria-pressed=true]{border-color:var(--accent);background:var(--selected)}
+.learning-body{max-width:var(--page-width,780px);margin:0 auto;min-width:0}
+.learning-body>section{padding:28px 0;border-top:1px solid var(--line)}
+.learning-body>section:first-child{border-top:0;padding-top:0}
+h2{font-size:22px;font-weight:600;line-height:1.45;letter-spacing:-.02em;margin:0}
+h2+.en{display:block;margin:0 0 18px}
+h3{font-size:18px;font-weight:600;margin:22px 0 6px;line-height:1.45}
+h3+.en{display:block;margin:0 0 10px}
+p{margin:10px 0}
+.en{font-size:15px;line-height:1.4;color:var(--muted)}
+p.en{margin-top:0}
+p:has(+p.en){margin-bottom:0}
+.ko{font-weight:600}
+.hl{color:var(--accent);font-weight:700}
+.chg{color:var(--retry);font-weight:700}
+.tag{display:inline-block;padding:1px 7px;border-radius:4px;font-size:14px;font-weight:600;background:var(--tint);color:var(--accent)}
+table{width:100%;border-collapse:collapse;table-layout:fixed;margin:8px 0 4px}
+th,td{padding:11px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;overflow-wrap:anywhere}
+th{font-size:15px;font-weight:600;color:var(--muted)}
+th:first-child,td:first-child{padding-left:0}
+td .en,th .en{display:block}
+th .en{font-weight:400;font-size:14px}
+.table-scroll{overflow-x:auto}
+ul.plain{list-style:none;padding:0;margin:8px 0}
+ul.plain>li{padding:10px 0;border-bottom:1px solid var(--line)}
+ul.plain>li:last-child{border-bottom:0}
+ul.plain .en{display:block}
+.panel{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:#fff}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin:0 0 20px}
+.seg button,.btn{min-height:44px;padding:10px 14px;border:1px solid var(--control);border-radius:8px;background:#fff;text-align:center}
+.seg button:hover,.btn:hover{background:var(--warm);border-color:var(--accent)}
+.seg button[aria-pressed=true]{border-color:var(--ink);background:var(--ink);color:#fff;font-weight:600}
+.learning-material .btn-primary{background:var(--ink);border-color:var(--ink);color:#fff}
+.learning-material .btn-primary:hover{background:#354a30;color:#fff}
+.learning-material .seg button[aria-pressed=true]{color:#fff}
+.quiz{display:grid;gap:24px}
+.q{padding:0 0 24px;border-bottom:1px solid var(--line)}
+.q:last-child{border-bottom:0;padding-bottom:0}
+.ask{font-weight:600;margin-bottom:12px}
+.ask .en{display:block;font-weight:400}
+.opts{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:10px}
+.opts button{min-height:44px;padding:10px 12px;border:1px solid var(--control);border-radius:8px;background:#fff;text-align:center}
+.opts button:hover{background:var(--warm);border-color:var(--accent)}
+.opts button.right{border-color:var(--accent);background:var(--tint);font-weight:600}
+.opts button.right::before{content:"✓ ";}
+.opts button.wrong{border-color:var(--retry);background:var(--retry-soft)}
+.opts button.wrong::before{content:"× ";}
+.fb{margin-top:10px;font-size:15px;line-height:1.6}
+.fb:empty{display:none}
+.score{font-weight:600;margin-top:20px;font-size:17px}
+.score:empty{display:none}
+.learning-action-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
+.learning-action-row>:last-child{margin-inline-start:auto}
+.learning-action-row .btn{min-width:160px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+body.hide-en .en{display:none!important}
+@media(max-width:620px){
+ .learning-material{padding:24px 18px 40px}
+ .learning-header{grid-template-columns:minmax(0,1fr);gap:16px}
+ .learning-header h1{font-size:26px}
+ h2{font-size:20px}
+ .two{grid-template-columns:1fr}
+ .opts,.seg{grid-auto-flow:row;grid-template-columns:1fr}
+ .seg.keep{grid-auto-flow:column;grid-template-columns:none}
+}
+@media(prefers-reduced-motion:reduce){.learning-material *{transition:none!important;animation:none!important}}
+
+.learning-material{--page-width:780px}
+
+table.small td,table.small th{padding:8px 6px}
+.note{margin-bottom:0}
+.reader{text-align:center}
+.reader .show{font-size:44px;font-weight:700;letter-spacing:.02em;margin:4px 0;font-variant-numeric:tabular-nums}
+.reader .ans{font-size:22px;font-weight:600;color:#526c3d;margin:4px 0}
+.grid7{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin:8px 0 12px}
+.grid6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:8px 0 12px}
+.mcell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:64px;padding:8px 4px;border:1px solid #dfe6db;border-radius:8px;background:#fff;font-size:15px;color:#52634f;text-align:center}
+.mcell b{color:#263c30;font-size:16px}
+.mcell.hot{border-color:#934629;background:#fff1e9}
+#step{max-width:320px}
+@media(max-width:620px){.grid7{grid-template-columns:repeat(4,minmax(0,1fr))}.grid6{grid-template-columns:repeat(3,minmax(0,1fr))}.reader .show{font-size:36px}}
+</style>
+</head>
+<body class="learning-material learning-grammar">
+<main class="learning-page">
+<header class="learning-header"><div class="learning-heading"><a class="learning-back" href="./learn/index.html" target="_top">자료 목록</a><h1>시간, 날짜, 요일</h1><p class="learning-subtitle">Time, dates and days of the week</p></div><div class="learning-tools"><button type="button" id="toggle-en" aria-pressed="false">영어 숨기기 Hide English</button></div></header>
+<div class="learning-body">
+
+<section>
+<h2>시간: 숫자 두 가지</h2><span class="en">Time uses two number systems</span>
+<p>‘시’는 하나, 둘, 셋으로 세는 한국 숫자를 써요. ‘분’은 일, 이, 삼으로 세는 숫자를 써요.</p>
+<p class="en">Hours use native Korean numbers (하나, 둘, 셋). Minutes use Sino-Korean numbers (일, 이, 삼).</p>
+<div class="two">
+ <div><h3>시 · Hours</h3><table class="small"><thead><tr><th>시간</th><th>숫자</th><th>말하기</th></tr></thead><tbody><tr><td>1시</td><td>하나</td><td><span class="ko"><span class=chg>한</span> 시</span></td></tr><tr><td>2시</td><td>둘</td><td><span class="ko"><span class=chg>두</span> 시</span></td></tr><tr><td>3시</td><td>셋</td><td><span class="ko"><span class=chg>세</span> 시</span></td></tr><tr><td>4시</td><td>넷</td><td><span class="ko"><span class=chg>네</span> 시</span></td></tr><tr><td>5시</td><td>다섯</td><td><span class="ko">다섯 시</span></td></tr><tr><td>6시</td><td>여섯</td><td><span class="ko">여섯 시</span></td></tr><tr><td>7시</td><td>일곱</td><td><span class="ko">일곱 시</span></td></tr><tr><td>8시</td><td>여덟</td><td><span class="ko">여덟 시</span></td></tr><tr><td>9시</td><td>아홉</td><td><span class="ko">아홉 시</span></td></tr><tr><td>10시</td><td>열</td><td><span class="ko">열 시</span></td></tr><tr><td>11시</td><td>열하나</td><td><span class="ko"><span class=chg>열한</span> 시</span></td></tr><tr><td>12시</td><td>열둘</td><td><span class="ko"><span class=chg>열두</span> 시</span></td></tr></tbody></table>
+ <p class="note">하나, 둘, 셋, 넷, 열하나, 열둘은 ‘시’ 앞에서 모양이 바뀌어요.</p><p class="en">하나, 둘, 셋, 넷 (and 열하나, 열둘) get shorter before 시.</p></div>
+ <div><h3>분 · Minutes</h3><table class="small"><thead><tr><th>시간</th><th>말하기</th></tr></thead><tbody><tr><td>5분</td><td><span class="ko">오 분</span></td></tr><tr><td>10분</td><td><span class="ko">십 분</span></td></tr><tr><td>15분</td><td><span class="ko">십오 분</span></td></tr><tr><td>20분</td><td><span class="ko">이십 분</span></td></tr><tr><td>30분</td><td><span class="ko">삼십 분</span> <span class=tag>= 반</span></td></tr><tr><td>45분</td><td><span class="ko">사십오 분</span></td></tr></tbody></table>
+ <ul class="plain"><li><span class="ko">오전 / 오후</span><span class="en">a.m. / p.m.</span></li><li><span class="ko">아침, 점심, 저녁, 밤</span><span class="en">morning, midday, evening, night</span></li><li><span class="ko">세 시쯤</span><span class="en">around three</span></li><li><span class="ko">몇 시예요?</span><span class="en">What time is it?</span></li></ul></div>
+</div>
+</section>
+
+<section>
+<h2>시계를 읽어요</h2><span class="en">Read the clock</span>
+<div class="seg keep" id="step" role="group" aria-label="분 단위"><button type="button" data-step="5" aria-pressed="true">5분 단위</button><button type="button" data-step="1" aria-pressed="false">1분 단위</button></div>
+<div class="reader panel"><p class="show" id="clock" aria-live="polite"></p><p class="ans" id="clock-ans" hidden></p></div>
+<div class="learning-action-row" style="border-top:0;margin-top:12px;padding-top:0"><button type="button" class="btn" id="clock-reveal">정답 Answer</button><button type="button" class="btn btn-primary" id="clock-new">새 시간 New time</button></div>
+</section>
+
+<section>
+<h2>요일</h2><span class="en">Days of the week</span>
+<div class="grid7"><span class="mcell"><b>월요일</b>Monday</span><span class="mcell"><b>화요일</b>Tuesday</span><span class="mcell"><b>수요일</b>Wednesday</span><span class="mcell"><b>목요일</b>Thursday</span><span class="mcell"><b>금요일</b>Friday</span><span class="mcell"><b>토요일</b>Saturday</span><span class="mcell"><b>일요일</b>Sunday</span></div>
+<ul class="plain">
+<li><span class="ko">오늘은 무슨 요일이에요? 금요일이에요.</span><span class="en">What day is it today? It's Friday.</span></li>
+<li><span class="ko">주말 / 평일</span><span class="en">weekend / weekday</span></li>
+<li><span class="ko">지난주 · 이번 주 · 다음 주</span><span class="en">last week · this week · next week</span></li>
+</ul>
+</section>
+
+<section>
+<h2>날짜</h2><span class="en">Dates</span>
+<p>년, 월, 일은 모두 일, 이, 삼으로 세는 숫자를 써요. 6월과 10월은 소리가 바뀌어서 ‘유월, 시월’이라고 써요.</p>
+<p class="en">Years, months and days all use Sino-Korean numbers. June and October are spelled 유월 and 시월.</p>
+<div class="grid6"><span class="mcell"><b>1월</b>일월</span><span class="mcell"><b>2월</b>이월</span><span class="mcell"><b>3월</b>삼월</span><span class="mcell"><b>4월</b>사월</span><span class="mcell"><b>5월</b>오월</span><span class="mcell hot"><b>6월</b>유월</span><span class="mcell"><b>7월</b>칠월</span><span class="mcell"><b>8월</b>팔월</span><span class="mcell"><b>9월</b>구월</span><span class="mcell hot"><b>10월</b>시월</span><span class="mcell"><b>11월</b>십일월</span><span class="mcell"><b>12월</b>십이월</span></div>
+<ul class="plain">
+<li><span class="ko">2026년 → 이천이십육 년</span><span class="en">the year 2026</span></li>
+<li><span class="ko">몇 월 며칠이에요?</span><br>날짜를 물을 때는 ‘며칠’이라고 써요. ‘몇 일’이라고 쓰지 않아요.<span class="en">What's the date? Always write 며칠, never 몇 일.</span></li>
+<li><span class="ko">세 시에, 월요일에, 5월 3일에 만나요.</span><br>시간, 요일, 날짜 뒤에는 ‘에’를 써요. 그런데 오늘, 내일, 어제, 지금 뒤에는 ‘에’를 쓰지 않아요.<span class="en">Times, days and dates take 에. 오늘, 내일, 어제 and 지금 don't.</span></li>
+</ul>
+<h3>날짜를 읽어요</h3><span class="en">Read the date, then say the day of the week</span>
+<div class="reader panel"><p class="show" id="date" aria-live="polite"></p><p class="ans" id="date-ans" hidden></p></div>
+<div class="learning-action-row" style="border-top:0;margin-top:12px;padding-top:0"><button type="button" class="btn" id="date-reveal">정답 Answer</button><button type="button" class="btn btn-primary" id="date-new">새 날짜 New date</button></div>
+</section>
+
+<section>
+<h2>연습해요</h2><span class="en">Practice</span>
+<div class="quiz" id="quiz-time"></div>
+<div class="score" id="score-time" aria-live="polite"></div>
+<div class="learning-action-row" style="border-top:0;margin-top:12px;padding-top:0"><span></span><button type="button" class="btn" id="redo-time">다시 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg> Redo</button></div>
+</section>
+
+<section>
+<h2>말해 봐요</h2><span class="en">Let's talk</span>
+<ul class="plain"><li><span class="ko">보통 몇 시에 일어나요? 몇 시에 자요?</span><span class="en">What time do you usually get up? Go to bed?</span></li><li><span class="ko">생일이 몇 월 며칠이에요?</span><span class="en">When is your birthday?</span></li><li><span class="ko">무슨 요일을 제일 좋아해요? 왜요?</span><span class="en">Which day of the week do you like best? Why?</span></li><li><span class="ko">오늘은 몇 월 며칠, 무슨 요일이에요?</span><span class="en">What's today's date and day?</span></li><li><span class="ko">이번 주말에 몇 시쯤 뭐 할 거예요?</span><span class="en">What will you do this weekend, and around what time?</span></li></ul>
+</section>
+
+<footer class="learning-action-row"><span>Allbarun Korean · written by Hanim</span><a class="btn btn-primary" href="./learn/index.html" target="_top">자료 목록</a></footer>
+</div>
+</main>
+<script>
+function renderQuiz(items, root, scoreEl){
+  let solvedCount=0, firstTry=0;
+  items.forEach((it,i)=>{
+    const box=document.createElement('div'); box.className='q';
+    const ask=document.createElement('div'); ask.className='ask';
+    ask.innerHTML=(i+1)+'. '+it.q+(it.en?'<span class="en">'+it.en+'</span>':'');
+    const opts=document.createElement('div'); opts.className='opts';
+    const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+    let tried=false, solved=false;
+    it.opts.forEach((o,j)=>{
+      const b=document.createElement('button'); b.type='button'; b.textContent=o; b.setAttribute('aria-pressed','false');
+      b.addEventListener('click',()=>{
+        if(solved) return;
+        opts.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+        if(j===it.a){
+          solved=true; b.classList.add('right');
+          fb.innerHTML='<b>맞아요! Correct!</b> '+it.fb;
+          if(!tried) firstTry++;
+          solvedCount++;
+          if(solvedCount===items.length) scoreEl.textContent='처음에 맞힌 문제: '+firstTry+' / '+items.length+' · Right on the first try';
+        }else{
+          b.classList.add('wrong'); b.disabled=true;
+          fb.innerHTML='<b>다시 해 봐요. Try again.</b> '+(it.hint||'');
+        }
+        tried=true;
+      });
+      opts.appendChild(b);
+    });
+    box.append(ask,opts,fb); root.appendChild(box);
+  });
+}
+function resetQuiz(items, root, scoreEl){ root.innerHTML=''; scoreEl.textContent=''; renderQuiz(items, root, scoreEl); }
+
+
+(()=>{const b=document.getElementById('toggle-en'); if(!b) return;
+ b.addEventListener('click',()=>{const on=document.body.classList.toggle('hide-en'); b.setAttribute('aria-pressed',String(on)); b.textContent=on?'영어 보기 Show English':'영어 숨기기 Hide English';});})();
+
+
+const items_time=[{"q": "7:00", "en": "How do you say this time?", "opts": ["일곱 시", "칠 시", "일곱 분"], "a": 0, "hint": "‘시’는 하나, 둘, 셋으로 세는 숫자를 써요.", "fb": "시는 한국 숫자예요. 일곱 시."}, {"q": "10월", "en": "October", "opts": ["십월", "시월", "열월"], "a": 1, "hint": "10월은 소리가 조금 바뀌어요.", "fb": "10월은 ‘시월’이라고 써요."}, {"q": "6월", "en": "June", "opts": ["육월", "유월", "여섯월"], "a": 1, "hint": "6월도 소리가 바뀌어요.", "fb": "6월은 ‘유월’이라고 써요."}, {"q": "오늘이 ______?", "en": "What's the date today?", "opts": ["몇 일이에요", "며칠이에요", "몇 날이에요"], "a": 1, "hint": "날짜를 물을 때 쓰는 말은 따로 있어요.", "fb": "날짜는 ‘며칠’이라고 써요. ‘몇 일’이라고 쓰지 않아요."}, {"q": "4:30", "en": "How do you say this time?", "opts": ["네 시 반", "사 시 반", "넷 시 반"], "a": 0, "hint": "시는 한국 숫자예요. 30분은 ‘반’이라고도 해요.", "fb": "네 시 반. ‘네 시 삼십 분’도 맞아요."}, {"q": "______ 만나요!", "en": "See you tomorrow!", "opts": ["내일에", "내일", "내일을"], "a": 1, "hint": "내일, 오늘, 어제 뒤에는 ‘에’를 쓰지 않아요.", "fb": "내일 만나요. 세 시에, 월요일에는 ‘에’를 써요."}, {"q": "11:15", "en": "How do you say this time?", "opts": ["열한 시 십오 분", "십일 시 십오 분", "열한 시 열다섯 분"], "a": 0, "hint": "시는 한국 숫자, 분은 일, 이, 삼으로 세는 숫자예요.", "fb": "열한 시 십오 분."}, {"q": "2:00", "en": "How do you say this time?", "opts": ["둘 시", "두 시", "이 시"], "a": 1, "hint": "‘둘’ 뒤에 시가 오면 모양이 바뀌어요.", "fb": "둘 → 두. 두 시."}];
+renderQuiz(items_time,document.getElementById('quiz-time'),document.getElementById('score-time'));
+document.getElementById('redo-time').addEventListener('click',()=>resetQuiz(items_time,document.getElementById('quiz-time'),document.getElementById('score-time')));
+
+const SINO=['','일','이','삼','사','오','육','칠','팔','구'];
+function sino(n){if(n===0)return '영';let o='';[[1000,'천'],[100,'백'],[10,'십']].forEach(([u,name])=>{const d=Math.floor(n/u);if(d)o+=(d===1?'':SINO[d])+name;n%=u;});return o+SINO[n];}
+const HOUR={1:'한',2:'두',3:'세',4:'네',5:'다섯',6:'여섯',7:'일곱',8:'여덟',9:'아홉',10:'열',11:'열한',12:'열두'};
+const MONTH=m=>m===6?'유월':m===10?'시월':sino(m)+'월';
+const WEEK=['일요일','월요일','화요일','수요일','목요일','금요일','토요일'];
+let step=5;
+document.querySelectorAll('#step button').forEach(b=>b.addEventListener('click',()=>{step=+b.dataset.step;document.querySelectorAll('#step button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));newClock();}));
+const rand=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+function newClock(){
+  const HRS=[6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22]; const h24=HRS[rand(0,HRS.length-1)];
+  const m=step===5?rand(0,11)*5:rand(0,59);
+  const ampm=h24<12?'오전':'오후', h=h24%12;
+  document.getElementById('clock').textContent=`${String(h24).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+  let a=`${ampm} ${HOUR[h]} 시`+(m?` ${sino(m)} 분`:'');
+  if(m===30) a+=` · ${ampm} ${HOUR[h]} 시 반`;
+  const el=document.getElementById('clock-ans'); el.textContent=a; el.hidden=true;
+}
+function newDate(){
+  const y=rand(2025,2027), mo=rand(1,12), dim=new Date(y,mo,0).getDate(), d=rand(1,dim);
+  const w=WEEK[new Date(y,mo-1,d).getDay()];
+  document.getElementById('date').textContent=`${y}년 ${mo}월 ${d}일`;
+  const el=document.getElementById('date-ans'); el.textContent=`${sino(y)} 년 ${MONTH(mo)} ${sino(d)} 일 · ${w}`; el.hidden=true;
+}
+document.getElementById('clock-new').addEventListener('click',newClock);
+document.getElementById('date-new').addEventListener('click',newDate);
+document.getElementById('clock-reveal').addEventListener('click',()=>document.getElementById('clock-ans').hidden=false);
+document.getElementById('date-reveal').addEventListener('click',()=>document.getElementById('date-ans').hidden=false);
+newClock(); newDate();
+</script>
+</body>
+</html>

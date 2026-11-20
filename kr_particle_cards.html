@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>조사 카드 연습 · Allbarun Korean</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+.learning-material{--ink:#263c30;--muted:#52634f;--accent:#526c3d;--line:#dfe6db;--control:#c5d0bd;--paper:#fdfefd;--tint:#edf3e3;--warm:#f3f7ed;--selected:#e4edcf;--retry:#934629;--retry-soft:#fff1e9;
+ margin:0;padding:32px 24px 56px;color:var(--ink);background:var(--paper);font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere;-webkit-text-size-adjust:100%}
+.learning-material *,.learning-material *::before,.learning-material *::after{box-sizing:border-box}
+.learning-material [hidden]{display:none!important}
+.learning-material :is(button,input,select,textarea){font-family:inherit;font-size:16px;color:var(--ink)}
+.learning-material :is(button,select){cursor:pointer;min-height:44px}
+.learning-material :is(button,input,select,textarea,a,summary):focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.learning-material a{color:var(--accent);text-underline-offset:4px}
+.learning-header{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:16px 24px;max-width:var(--page-width,780px);margin:0 auto 28px;padding:0 0 24px;border-bottom:1px solid var(--line)}
+.learning-back{display:flex;align-items:center;width:fit-content;min-height:44px;margin:0 0 8px;font-size:15px;color:var(--muted);text-decoration:none}
+.learning-back:hover{text-decoration:underline}
+.learning-header h1{margin:0;font-size:30px;font-weight:600;line-height:1.3;letter-spacing:-.025em}
+.learning-subtitle{display:block;margin:0;font-size:15px;line-height:1.4;color:var(--muted)}
+.learning-tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.learning-tools button{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 14px;border:1px solid var(--control);border-radius:8px;background:#fff}
+.learning-tools button:hover{background:var(--warm)}
+.learning-tools button[aria-pressed=true]{border-color:var(--accent);background:var(--selected)}
+.learning-body{max-width:var(--page-width,780px);margin:0 auto;min-width:0}
+.learning-body>section{padding:28px 0;border-top:1px solid var(--line)}
+.learning-body>section:first-child{border-top:0;padding-top:0}
+h2{font-size:22px;font-weight:600;line-height:1.45;letter-spacing:-.02em;margin:0}
+h2+.en{display:block;margin:0 0 18px}
+h3{font-size:18px;font-weight:600;margin:22px 0 6px;line-height:1.45}
+h3+.en{display:block;margin:0 0 10px}
+p{margin:10px 0}
+.en{font-size:15px;line-height:1.4;color:var(--muted)}
+p.en{margin-top:0}
+p:has(+p.en){margin-bottom:0}
+.ko{font-weight:600}
+.hl{color:var(--accent);font-weight:700}
+.chg{color:var(--retry);font-weight:700}
+.tag{display:inline-block;padding:1px 7px;border-radius:4px;font-size:14px;font-weight:600;background:var(--tint);color:var(--accent)}
+table{width:100%;border-collapse:collapse;table-layout:fixed;margin:8px 0 4px}
+th,td{padding:11px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;overflow-wrap:anywhere}
+th{font-size:15px;font-weight:600;color:var(--muted)}
+th:first-child,td:first-child{padding-left:0}
+td .en,th .en{display:block}
+th .en{font-weight:400;font-size:14px}
+.table-scroll{overflow-x:auto}
+ul.plain{list-style:none;padding:0;margin:8px 0}
+ul.plain>li{padding:10px 0;border-bottom:1px solid var(--line)}
+ul.plain>li:last-child{border-bottom:0}
+ul.plain .en{display:block}
+.panel{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:#fff}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin:0 0 20px}
+.seg button,.btn{min-height:44px;padding:10px 14px;border:1px solid var(--control);border-radius:8px;background:#fff;text-align:center}
+.seg button:hover,.btn:hover{background:var(--warm);border-color:var(--accent)}
+.seg button[aria-pressed=true]{border-color:var(--ink);background:var(--ink);color:#fff;font-weight:600}
+.learning-material .btn-primary{background:var(--ink);border-color:var(--ink);color:#fff}
+.learning-material .btn-primary:hover{background:#354a30;color:#fff}
+.learning-material .seg button[aria-pressed=true]{color:#fff}
+.quiz{display:grid;gap:24px}
+.q{padding:0 0 24px;border-bottom:1px solid var(--line)}
+.q:last-child{border-bottom:0;padding-bottom:0}
+.ask{font-weight:600;margin-bottom:12px}
+.ask .en{display:block;font-weight:400}
+.opts{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:10px}
+.opts button{min-height:44px;padding:10px 12px;border:1px solid var(--control);border-radius:8px;background:#fff;text-align:center}
+.opts button:hover{background:var(--warm);border-color:var(--accent)}
+.opts button.right{border-color:var(--accent);background:var(--tint);font-weight:600}
+.opts button.right::before{content:"✓ ";}
+.opts button.wrong{border-color:var(--retry);background:var(--retry-soft)}
+.opts button.wrong::before{content:"× ";}
+.fb{margin-top:10px;font-size:15px;line-height:1.6}
+.fb:empty{display:none}
+.score{font-weight:600;margin-top:20px;font-size:17px}
+.score:empty{display:none}
+.learning-action-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
+.learning-action-row>:last-child{margin-inline-start:auto}
+.learning-action-row .btn{min-width:160px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+body.hide-en .en{display:none!important}
+@media(max-width:620px){
+ .learning-material{padding:24px 18px 40px}
+ .learning-header{grid-template-columns:minmax(0,1fr);gap:16px}
+ .learning-header h1{font-size:26px}
+ h2{font-size:20px}
+ .two{grid-template-columns:1fr}
+ .opts,.seg{grid-auto-flow:row;grid-template-columns:1fr}
+ .seg.keep{grid-auto-flow:column;grid-template-columns:none}
+}
+@media(prefers-reduced-motion:reduce){.learning-material *{transition:none!important;animation:none!important}}
+
+.learning-material{--page-width:880px}
+
+.flip{text-align:center}
+.flip .pic{font-size:44px;margin:4px 0;letter-spacing:.1em}
+.flip-ko{font-size:28px;font-weight:600;margin:4px 0}
+.flip-ko .d b{color:#2f6b5c}.flip-ko .t b{color:#315e79}
+.flip-ko span{padding:0 2px}
+.flip-note{min-height:1.6em;color:#526c3d;font-weight:600;margin:8px 0 0}
+#flip-pick{grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-flow:row}
+.stages{grid-template-columns:repeat(auto-fit,minmax(110px,1fr));grid-auto-flow:row}
+.stages button{font-size:15px;padding:8px 6px}
+.pcard{border:1px solid #dfe6db;border-radius:14px;background:#fff;padding:22px 22px 18px;margin-top:8px}
+.pcard .meta{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:start}
+.pcard .scene{font-size:40px;line-height:1}
+.pcard .sit{margin:0;font-weight:600}
+.pcard .count{color:#52634f;font-size:15px;font-variant-numeric:tabular-nums}
+.sentence{font-size:26px;font-weight:600;line-height:1.9;margin:18px 0 14px;padding:14px 0;border-top:1px solid #dfe6db;border-bottom:1px solid #dfe6db}
+.sentence .w{display:inline-block;margin-right:4px}
+.sentence .filled{color:#526c3d}
+.learning-material .slot{font-size:inherit;}
+.slot{font:inherit;font-weight:600;padding:2px 8px;min-height:44px;border:1px dashed #c5d0bd;border-radius:8px;background:#fdfefd;color:#263c30}
+.slot.on{border:2px solid #526c3d;background:#edf3e3}
+.slot .hole{color:#934629;margin-left:2px}
+.ask{font-weight:600;margin:6px 0 0}
+.choices{display:grid;gap:10px;margin-top:12px}
+.choices.roles{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.choices.forms{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
+.choices button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;padding:10px;border:1px solid #c5d0bd;border-radius:8px;background:#fff;text-align:center}
+.choices.forms button{font-size:22px;font-weight:600}
+.choices button:hover{background:#f3f7ed;border-color:#526c3d}
+.choices button .pp{color:#526c3d;font-weight:700}
+.choices button .en{font-size:13.5px}
+.choices button.right{border-color:#526c3d;background:#edf3e3}
+.choices button.wrong{border-color:#934629;background:#fff1e9}
+.choices button.wrong::before{content:"×";color:#934629;font-weight:700}
+.note{margin:10px 0 0;font-size:15px;line-height:1.6;color:#315e79}
+.note:empty{display:none}
+.full{font-size:26px;font-weight:700;color:#526c3d;margin:4px 0 10px}
+.nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.summary{margin-top:20px;padding-top:10px;border-top:1px solid #dfe6db}
+.teacher summary{cursor:pointer;font-weight:600;min-height:44px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.teacher .sample{background:#f3f7ed;border-radius:8px;padding:12px 14px;font:15px/1.6 ui-monospace,Menlo,monospace;white-space:pre-wrap;margin:8px 0}
+.teacher .ta{display:grid;gap:6px;color:#52634f;font-size:15px}
+.teacher textarea{width:100%;padding:10px 12px;border:1px solid #c5d0bd;border-radius:8px;font-size:17px;line-height:1.6;background:#fff}
+@media(max-width:620px){.sentence,.flip-ko,.full{font-size:22px}#flip-pick{grid-template-columns:1fr}.pcard{padding:18px 16px}}
+</style>
+</head>
+<body class="learning-material learning-grammar">
+<main class="learning-page">
+<header class="learning-header"><div class="learning-heading"><a class="learning-back" href="./learn/index.html" target="_top">자료 목록</a><h1>조사 카드 연습</h1><p class="learning-subtitle">Korean particle cards</p></div><div class="learning-tools"><button type="button" id="toggle-en" aria-pressed="false">영어 숨기기 Hide English</button></div></header>
+<div class="learning-body">
+
+<section>
+<h2>조사를 바꾸면 뜻이 바뀌어요</h2><span class="en">Change the particle, change the meaning</span>
+<p>한국어는 순서보다 조사가 역할을 정해요. 순서를 바꿔도 뜻은 그대로예요. 조사를 바꾸면 뜻이 바뀌어요.</p>
+<p class="en">In Korean, particles, not word order, decide who does what. Swap the order and the meaning stays. Swap the particles and the meaning flips.</p>
+<div class="seg keep" id="flip-pick" role="group" aria-label="예문 고르기"></div>
+<div class="flip panel">
+ <p class="pic" id="flip-pic" aria-hidden="true"></p>
+ <p class="flip-ko" id="flip-ko" aria-live="polite"></p>
+ <p class="en" id="flip-en"></p>
+ <p class="flip-note" id="flip-note" aria-live="polite"></p>
+</div>
+<div class="learning-action-row" style="border-top:0;margin-top:12px;padding-top:0"><button type="button" class="btn" id="flip-order">순서 바꾸기 Swap order</button><button type="button" class="btn btn-primary" id="flip-part">조사 바꾸기 Swap particles</button></div>
+</section>
+
+<section id="practice">
+<h2>조사 카드</h2><span class="en">Particle cards</span>
+<div class="seg stages" id="stages" role="group" aria-label="단계"><button type="button" data-stage="s1" aria-pressed="true">을/를</button><button type="button" data-stage="s2" aria-pressed="false">누가 · 무엇을</button><button type="button" data-stage="s3" aria-pressed="false">에 · 에서</button><button type="button" data-stage="s4" aria-pressed="false">에게 · 한테 · 께</button><button type="button" data-stage="s5" aria-pressed="false">은/는 · 이/가</button><button type="button" data-stage="s6" aria-pressed="false">섞어서</button><button type="button" data-stage="custom" aria-pressed="false" id="stage-custom" hidden>내 문장</button></div>
+<p id="stage-desc"></p><p class="en" id="stage-desc-en"></p>
+
+<article class="pcard" aria-live="polite">
+ <div class="meta"><span class="scene" id="scene" aria-hidden="true"></span><div><p class="sit" id="sit"></p><p class="en" id="sit-en"></p></div><span class="count" id="count"></span></div>
+ <p class="sentence" id="sentence"></p>
+ <div id="panel">
+  <p class="ask" id="ask"></p><p class="en" id="ask-en"></p>
+  <div class="choices" id="choices"></div>
+  <p class="fb" id="fb" aria-live="polite"></p>
+ </div>
+ <p class="note" id="note" aria-live="polite"></p>
+ <div id="done" hidden>
+  <p class="full" id="full"></p>
+  <p><b>소리 내어 읽어요.</b> <span id="say"></span></p>
+  <p class="en">Read it aloud. <span id="say-en"></span></p>
+ </div>
+</article>
+<div class="nav"><button type="button" class="btn" id="prev">이전 Previous</button><button type="button" class="btn" id="redo">다시 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg> Redo</button><button type="button" class="btn btn-primary" id="next">다음 Next</button></div>
+
+<div class="summary" id="summary" hidden>
+ <h3>오늘의 요약</h3><span class="en">Summary</span>
+ <ul class="plain" id="sum-list"></ul>
+ <div class="learning-action-row" style="border-top:0;margin-top:8px;padding-top:0"><button type="button" class="btn" id="sum-reset">요약 지우기 Clear</button><button type="button" class="btn" id="sum-copy">요약 복사 Copy</button></div>
+</div>
+<div class="learning-action-row" style="border-top:0;margin-top:8px;padding-top:0"><span></span><button type="button" class="btn" id="sum-show">요약 보기 Summary</button></div>
+</section>
+
+<section>
+<details class="teacher">
+<summary>선생님용: 내 문장으로 카드 만들기 <span class="en">Teacher tool: make cards from your own sentences</span></summary>
+<p>한 줄에 한 문장을 써요. 연습할 조사는 [ ] 안에, 그냥 보여 줄 조사는 { } 안에 넣어요. 상황은 | 뒤에 써요.</p>
+<p class="en">One sentence per line. Put practice particles in [ ], particles to show as they are in { }. Add a situation after |.</p>
+<pre class="sample">저[는] 카페[에서] 커피[를] 마셔요. | 친구를 만났어요.
+동생{이} 친구[한테] 책[을] 줬어요.</pre>
+<label class="ta">문장<textarea id="custom-text" rows="6" spellcheck="false"></textarea></label>
+<ul class="plain" id="custom-check"></ul>
+<div class="learning-action-row" style="border-top:0;margin-top:8px;padding-top:0"><button type="button" class="btn" id="custom-link">학생 링크 복사 Copy student link</button><button type="button" class="btn btn-primary" id="custom-make">카드 만들기 Make cards</button></div>
+<p class="fb" id="custom-fb" aria-live="polite"></p>
+</details>
+</section>
+
+<footer class="learning-action-row"><span>Allbarun Korean · written by Hanim</span><a class="btn btn-primary" href="./learn/index.html" target="_top">자료 목록</a></footer>
+</div>
+</main>
+<script>
+function renderQuiz(items, root, scoreEl){
+  let solvedCount=0, firstTry=0;
+  items.forEach((it,i)=>{
+    const box=document.createElement('div'); box.className='q';
+    const ask=document.createElement('div'); ask.className='ask';
+    ask.innerHTML=(i+1)+'. '+it.q+(it.en?'<span class="en">'+it.en+'</span>':'');
+    const opts=document.createElement('div'); opts.className='opts';
+    const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+    let tried=false, solved=false;
+    it.opts.forEach((o,j)=>{
+      const b=document.createElement('button'); b.type='button'; b.textContent=o; b.setAttribute('aria-pressed','false');
+      b.addEventListener('click',()=>{
+        if(solved) return;
+        opts.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+        if(j===it.a){
+          solved=true; b.classList.add('right');
+          fb.innerHTML='<b>맞아요! Correct!</b> '+it.fb;
+          if(!tried) firstTry++;
+          solvedCount++;
+          if(solvedCount===items.length) scoreEl.textContent='처음에 맞힌 문제: '+firstTry+' / '+items.length+' · Right on the first try';
+        }else{
+          b.classList.add('wrong'); b.disabled=true;
+          fb.innerHTML='<b>다시 해 봐요. Try again.</b> '+(it.hint||'');
+        }
+        tried=true;
+      });
+      opts.appendChild(b);
+    });
+    box.append(ask,opts,fb); root.appendChild(box);
+  });
+}
+function resetQuiz(items, root, scoreEl){ root.innerHTML=''; scoreEl.textContent=''; renderQuiz(items, root, scoreEl); }
+
+
+(()=>{const b=document.getElementById('toggle-en'); if(!b) return;
+ b.addEventListener('click',()=>{const on=document.body.classList.toggle('hide-en'); b.setAttribute('aria-pressed',String(on)); b.textContent=on?'영어 보기 Show English':'영어 숨기기 Hide English';});})();
+
+const STAGES=[{"id": "s1", "name": "을/를", "desc": "받침을 보고 을과 를 중에서 골라요.", "desc_en": "Pick 을 or 를 by looking at the final consonant.", "roleStep": false, "roles": ["target"], "items": [{"e": "📖", "sit": "도서관에 있어요.", "en": "You are at the library.", "t": "저{는} 책[을] 읽어요.", "say": "책 대신 다른 것을 넣어 말해요.", "say_en": "Swap 책 for something else you read.", "notes": {}}, {"e": "☕", "sit": "아침이에요.", "en": "It's morning.", "t": "저{는} 커피[를] 마셔요.", "say": "아침에 마시는 것을 넣어 말해요.", "say_en": "Say what you drink in the morning.", "notes": {}}, {"e": "🍚", "sit": "저녁 시간이에요.", "en": "It's dinner time.", "t": "동생{이} 밥[을] 먹어요.", "say": "동생 대신 다른 가족을 넣어 말해요.", "say_en": "Swap 동생 for another family member.", "notes": {}}, {"e": "🎧", "sit": "친구가 이어폰을 꼈어요.", "en": "A friend has earphones on.", "t": "친구{가} 음악[을] 들어요.", "say": "요즘 듣는 음악을 말해요.", "say_en": "Say what music you listen to these days.", "notes": {}}, {"e": "🎬", "sit": "주말이에요.", "en": "It's the weekend.", "t": "우리{는} 영화[를] 봐요.", "say": "주말에 보는 것을 말해요.", "say_en": "Say what you watch on weekends.", "notes": {}}, {"e": "🍎", "sit": "시장에 왔어요.", "en": "You're at the market.", "t": "저{는} 사과[를] 사요.", "say": "시장에서 사는 것을 말해요.", "say_en": "Say what you buy at the market.", "notes": {}}, {"e": "📺", "sit": "아빠가 소파에 앉았어요.", "en": "Dad sat down on the sofa.", "t": "아빠{가} 텔레비전[을] 봐요.", "say": "저녁에 하는 일을 말해요.", "say_en": "Say what you do in the evening.", "notes": {}}, {"e": "✉️", "sit": "친구 생일이에요.", "en": "It's a friend's birthday.", "t": "저{는} 카드[를] 써요.", "say": "생일에 하는 일을 하나 더 말해요.", "say_en": "Say one more thing you do on a birthday.", "notes": {}}]}, {"id": "s2", "name": "누가 · 무엇을", "desc": "누가 해요? 무엇을 해요? 역할을 먼저 생각해요.", "desc_en": "Who does it? What is it done to? Think about the role first.", "roleStep": true, "roles": ["doer", "target"], "items": [{"e": "🐱", "sit": "부엌에 생선이 있어요.", "en": "There's fish in the kitchen.", "t": "고양이[가] 생선[을] 먹어요.", "say": "다른 동물로 바꿔 말해요.", "say_en": "Say it with a different animal.", "notes": {}}, {"e": "🍲", "sit": "엄마가 부엌에 있어요.", "en": "Mom is in the kitchen.", "t": "엄마[가] 김치찌개[를] 만들어요.", "say": "다른 음식으로 바꿔 말해요.", "say_en": "Say it with a different dish.", "notes": {}}, {"e": "⚽", "sit": "운동장이에요.", "en": "At the sports field.", "t": "동생[이] 축구[를] 해요.", "say": "좋아하는 운동을 넣어 말해요.", "say_en": "Put in a sport you like.", "notes": {}}, {"e": "🐶", "sit": "공원이에요.", "en": "At the park.", "t": "강아지[가] 공[을] 가져와요.", "say": "강아지가 하는 일을 하나 더 말해요.", "say_en": "Say one more thing the puppy does.", "notes": {}}, {"e": "📷", "sit": "여행 중이에요.", "en": "On a trip.", "t": "친구[가] 사진[을] 찍어요.", "say": "여행에서 하는 일을 말해요.", "say_en": "Say what you do on a trip.", "notes": {}}, {"e": "🙋", "sit": "수업 시간이에요.", "en": "It's class time.", "t": "학생[이] 질문[을] 해요.", "say": "수업 시간에 하는 일을 말해요.", "say_en": "Say what happens in class.", "notes": {}}]}, {"id": "s3", "name": "에 · 에서", "desc": "그냥 있는 곳, 가는 곳, 시간에는 에를 써요. 무엇을 하는 곳에는 에서를 써요.", "desc_en": "Use 에 for where something is, where you go, and when. Use 에서 for where an action happens.", "roleStep": true, "roles": ["at", "doing", "target"], "items": [{"e": "🏠", "sit": "오늘은 밖에 안 나가요.", "en": "You're staying in today.", "t": "저{는} 집[에] 있어요.", "say": "지금 있는 곳을 말해요.", "say_en": "Say where you are right now.", "notes": {}}, {"e": "🏫", "sit": "아침 여덟 시예요.", "en": "It's 8 a.m.", "t": "학생들{이} 학교[에] 가요.", "say": "아침에 가는 곳을 말해요.", "say_en": "Say where you go in the morning.", "notes": {}}, {"e": "☕", "sit": "친구를 만났어요.", "en": "You met a friend.", "t": "카페[에서] 커피[를] 마셔요.", "say": "카페에서 하는 일을 하나 더 말해요.", "say_en": "Say one more thing you do at a café.", "notes": {}}, {"e": "📚", "sit": "시험이 있어요.", "en": "You have an exam.", "t": "도서관[에서] 공부해요.", "say": "공부하는 곳을 말해요.", "say_en": "Say where you study.", "notes": {}}, {"e": "🕒", "sit": "친구하고 약속했어요.", "en": "You made plans with a friend.", "t": "세 시[에] 만나요.", "say": "다른 시간으로 바꿔 말해요.", "say_en": "Change the time.", "notes": {}}, {"e": "🛒", "sit": "과일이 필요해요.", "en": "You need fruit.", "t": "마트[에서] 과일[을] 사요.", "say": "마트에서 사는 것을 말해요.", "say_en": "Say what you buy at the store.", "notes": {}}, {"e": "🛏️", "sit": "고양이를 찾아요.", "en": "You're looking for the cat.", "t": "고양이{가} 침대 위[에] 있어요.", "say": "고양이가 있는 곳을 바꿔 말해요.", "say_en": "Put the cat somewhere else.", "notes": {}}, {"e": "🏢", "sit": "평일이에요.", "en": "It's a weekday.", "t": "저{는} 회사[에서] 일해요.", "say": "일하거나 공부하는 곳을 말해요.", "say_en": "Say where you work or study.", "notes": {}}]}, {"id": "s4", "name": "에게 · 한테 · 께", "desc": "사람에게 줄 때, 말할 때는 에게나 한테를 써요. 높이는 사람에게는 께를 써요. 사람이 아니면 에를 써요.", "desc_en": "Use 에게/한테 for people you give or say something to, and 께 for people you show respect to. For things, use 에.", "roleStep": true, "roles": ["receiver", "at", "target"], "items": [{"e": "🎁", "sit": "친구 생일이에요.", "en": "It's a friend's birthday.", "t": "저{는} 친구[에게] 선물[을] 줘요.", "say": "누구에게 무엇을 주고 싶어요?", "say_en": "Who would you give what to?", "notes": {}}, {"e": "📱", "sit": "동생이 아직 집에 안 왔어요.", "en": "Your younger sibling isn't home yet.", "t": "동생[한테] 문자[를] 보내요.", "say": "누구한테 자주 문자를 보내요?", "say_en": "Who do you often text?", "notes": {}}, {"e": "💐", "sit": "할머니 생신이에요.", "en": "It's Grandma's birthday.", "t": "할머니[께] 꽃[을] 드려요.", "say": "할머니께 드리고 싶은 것을 말해요.", "say_en": "Say what you'd like to give her.", "notes": {}}, {"e": "🌱", "sit": "화분의 흙이 말랐어요.", "en": "The soil in the pot is dry.", "t": "저{는} 꽃[에] 물[을] 줘요.", "say": "물을 주는 것을 하나 더 말해요.", "say_en": "Name one more thing you water.", "notes": {}}, {"e": "☎️", "sit": "엄마가 걱정해요.", "en": "Mom is worried.", "t": "엄마[한테] 전화해요.", "say": "누구한테 자주 전화해요?", "say_en": "Who do you often call?", "notes": {}}, {"e": "📮", "sit": "외국에 사는 친구가 있어요.", "en": "You have a friend abroad.", "t": "친구[에게] 편지[를] 써요.", "say": "편지를 쓰고 싶은 사람을 말해요.", "say_en": "Who would you write a letter to?", "notes": {}}]}, {"id": "s5", "name": "은/는 · 이/가", "desc": "정답이 하나가 아닐 때도 있어요. 느낌의 차이를 봐요.", "desc_en": "Sometimes more than one answer works. Notice the difference in feeling.", "roleStep": true, "roles": ["topic", "doer", "target"], "items": [{"e": "🚪", "sit": "누가 왔어요? 이 질문에 대답해요.", "en": "Answer the question: Who came?", "t": "친구[가] 왔어요.", "say": "누가 왔는지 다른 사람으로 바꿔 말해요.", "say_en": "Answer with someone else.", "notes": {"0": {"topic": [false, "틀린 문장은 아니에요. 그런데 ‘누가?’의 대답으로는 이/가가 자연스러워요."]}}}, {"e": "🙋", "sit": "처음 만난 사람에게 나를 소개해요.", "en": "You introduce yourself to someone new.", "t": "저[는] 학생이에요.", "say": "직업으로 바꿔서 소개해요.", "say_en": "Introduce yourself with your job.", "notes": {"0": {"doer": [false, "‘제가 학생이에요’는 ‘누가 학생이에요?’라는 질문에 대답할 때 써요."]}}}, {"e": "☕", "sit": "커피와 차를 비교해요.", "en": "You compare coffee and tea.", "t": "커피[는] 좋아해요. 그런데 차[는] 안 좋아해요.", "say": "좋아하는 것과 안 좋아하는 것을 비교해서 말해요.", "say_en": "Compare something you like with something you don't.", "notes": {"0": {"target": [true, "‘커피를 좋아해요’도 맞아요. 하지만 비교하는 느낌은 은/는이 더 잘 살아요."]}, "1": {"target": [true, "‘차를 안 좋아해요’도 맞아요. 하지만 비교하는 느낌은 은/는이 더 잘 살아요."]}}}, {"e": "❄️", "sit": "계절에 대한 일반적인 사실이에요.", "en": "A general fact about a season.", "t": "겨울[은] 추워요.", "say": "다른 계절을 말해요.", "say_en": "Talk about another season.", "notes": {"0": {"doer": [false, "‘겨울이 추워요’는 ‘어느 계절이 추워요?’에 대답할 때 자연스러워요. 일반적인 사실은 보통 은/는으로 말해요."]}}}, {"e": "🌧️", "sit": "창밖을 봤어요. 지금 처음 봤어요.", "en": "You just looked outside and noticed something.", "t": "어? 비[가] 와요!", "say": "창밖에 보이는 것을 말해요.", "say_en": "Say what you see outside.", "notes": {"0": {"topic": [false, "‘비는 와요’는 다른 것과 비교하는 느낌이에요. 지금 처음 본 것은 보통 이/가로 말해요."]}}}, {"e": "🧍", "sit": "동생에 대해 이야기해요.", "en": "You talk about your younger sibling.", "t": "제 동생[은] 키[가] 커요.", "say": "가족 한 명을 이렇게 소개해요.", "say_en": "Describe a family member the same way.", "notes": {"0": {"doer": [false, "‘동생이 키가 커요’는 ‘누가 키가 커요?’에 대답할 때 써요. 동생에 대해 이야기를 시작할 때는 은/는이 자연스러워요."]}}}]}, {"id": "s6", "name": "섞어서", "desc": "여러 조사가 섞여 있어요.", "desc_en": "All kinds of particles, mixed together.", "roleStep": true, "roles": ["topic", "doer", "target", "at", "doing", "receiver", "with", "way", "owner", "also"], "items": [{"e": "🚇", "sit": "출근 시간이에요.", "en": "It's time to go to work.", "t": "저{는} 지하철[로] 회사[에] 가요.", "say": "무엇을 타고 가요? 바꿔 말해요.", "say_en": "How do you get there? Change it.", "notes": {}}, {"e": "🍽️", "sit": "점심시간이에요.", "en": "It's lunchtime.", "t": "친구[하고] 식당[에서] 점심[을] 먹었어요.", "say": "어제 점심을 누구하고 먹었어요?", "say_en": "Who did you have lunch with yesterday?", "notes": {}}, {"e": "👜", "sit": "가방을 찾았어요.", "en": "You found a bag.", "t": "이것{은} 언니[의] 가방이에요.", "say": "다른 사람의 물건을 말해요.", "say_en": "Say whose thing something is.", "notes": {}}, {"e": "🎂", "sit": "어제 생일이었어요.", "en": "Yesterday was your birthday.", "t": "동생[이] 저[에게] 케이크[를] 줬어요.", "say": "생일에 받은 선물을 말해요.", "say_en": "Say a present you got.", "notes": {}}, {"e": "🏖️", "sit": "방학 계획이에요.", "en": "Vacation plans.", "t": "여름[에] 바다[에] 가요.", "say": "방학에 가고 싶은 곳을 말해요.", "say_en": "Say where you want to go on vacation.", "notes": {}}, {"e": "✏️", "sit": "이름을 써야 해요.", "en": "You need to write your name.", "t": "연필[로] 이름[을] 써요.", "say": "무엇으로 써요? 바꿔 말해요.", "say_en": "What do you write with? Change it.", "notes": {}}, {"e": "⬅️", "sit": "길을 알려 줘요.", "en": "You're giving directions.", "t": "왼쪽[으로] 가세요.", "say": "오른쪽으로 바꿔 말해요.", "say_en": "Change it to the right.", "notes": {}}, {"e": "🍜", "sit": "친구가 배가 고파요. 저도 그래요.", "en": "Your friend is hungry, and so are you.", "t": "저[도] 라면[을] 먹고 싶어요.", "say": "먹고 싶은 것을 말해요.", "say_en": "Say what you want to eat.", "notes": {}}]}];
+const FLIPS=[{"a": "고양이", "ae": "🐱", "aen": "the cat", "b": "개", "be": "🐶", "ben": "the dog", "v": "물어요", "ven": "bites"}, {"a": "경찰", "ae": "👮", "aen": "the police officer", "b": "도둑", "be": "🦹", "ben": "the thief", "v": "잡아요", "ven": "catches"}, {"a": "토끼", "ae": "🐰", "aen": "the rabbit", "b": "거북이", "be": "🐢", "ben": "the turtle", "v": "이겨요", "ven": "beats"}];
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* ---------- Hangul ---------- */
+const jong=w=>{const c=w.charCodeAt(w.length-1)-0xAC00; return (c<0||c>11171)?-1:c%28;};
+const hasB=w=>jong(w)>0;
+function pick(noun,pair){ const j=jong(noun); if(pair[0]==='으로') return (j===0||j===8)?'로':'으로'; return j>0?pair[0]:pair[1]; }
+const FAMILY={'은':['은','는'],'는':['은','는'],'이':['이','가'],'가':['이','가'],'을':['을','를'],'를':['을','를'],'으로':['으로','로'],'로':['으로','로'],'과':['과','와'],'와':['과','와'],'이랑':['이랑','랑'],'랑':['이랑','랑']};
+const SPECIAL={'저':'제가','나':'내가','너':'네가','누구':'누가'};
+const ROLE_OF={'은':'topic','는':'topic','이':'doer','가':'doer','을':'target','를':'target','에':'at','에서':'doing','에게':'receiver','한테':'receiver','께':'receiver','과':'with','와':'with','이랑':'with','랑':'with','하고':'with','으로':'way','로':'way','의':'owner','도':'also','만':'only'};
+const ROLES={
+ topic:{ko:'주제 · 비교',p:'은/는',en:'topic / contrast',hint:'무엇에 대한 이야기예요? 다른 것과 비교해요?',fam:['은','는']},
+ doer:{ko:'누가 · 뭐가',p:'이/가',en:'who or what does it, or is it',hint:'누가 해요? 뭐가 있어요? 뭐가 어때요?',fam:['이','가']},
+ target:{ko:'무엇을 · 누구를',p:'을/를',en:'what the action is done to',hint:'무엇을 해요? 동사 앞에 ‘무엇을?’을 넣어 물어봐요.',fam:['을','를']},
+ at:{ko:'있는 곳 · 가는 곳 · 때',p:'에',en:'where it is, where to, when',hint:'거기에 있어요? 거기로 가요? 언제예요?',fam:null},
+ doing:{ko:'무엇을 하는 곳',p:'에서',en:'where the action happens',hint:'그곳에서 무엇을 해요? 행동이 일어나는 곳이에요?',fam:null},
+ receiver:{ko:'받는 사람',p:'에게/한테/께',en:'the person who receives',hint:'누구에게 줘요? 누구에게 말해요?',fam:['에게','한테','께']},
+ with:{ko:'같이 · 그리고',p:'하고/와/과/랑',en:'with / and',hint:'누구하고 같이 해요? 무엇과 무엇이에요?',fam:null},
+ way:{ko:'도구 · 방향',p:'(으)로',en:'by means of / toward',hint:'무엇으로 해요? 어느 쪽으로 가요?',fam:['으로','로']},
+ owner:{ko:'누구의 것',p:'의',en:"whose ('s)",hint:'누구의 것이에요?',fam:null},
+ also:{ko:'~도',p:'도',en:'too / also',hint:'다른 사람도 같아요?',fam:null},
+ only:{ko:'~만',p:'만',en:'only',hint:'그것 하나만이에요?',fam:null},
+};
+const PAIR_TIP={
+ 'at>doing':'‘에’는 그냥 있거나 가는 곳이에요. 여기에서는 그곳에서 무엇을 해요.',
+ 'doing>at':'‘에서’는 무엇을 하는 곳이에요. 여기에서는 그냥 있거나 가요.',
+ 'receiver>at':'에게와 한테는 사람이나 동물에게 써요. 사람이 아니면 ‘에’를 써요.',
+ 'at>receiver':'사람에게 줄 때는 에게나 한테를 써요.',
+ 'target>doer':'이 말이 행동을 해요? 아니면 행동을 받아요?',
+ 'doer>target':'이 말이 행동을 받아요? 아니면 행동을 해요?',
+};
+const PARTNER={topic:'doer',doer:'topic',target:'doer',at:'doing',doing:'at',receiver:'at',with:'target',way:'at',owner:'topic',also:'topic',only:'topic'};
+/* ---------- parsing ---------- */
+function parse(text){
+  return text.trim().split(/\s+/).map(tok=>{
+    let m=tok.match(/^(.*?)\[([^\]]+)\](.*)$/);
+    if(m) return {noun:m[1],p:m[2],rest:m[3],blank:true};
+    m=tok.match(/^(.*?)\{([^}]+)\}(.*)$/);
+    if(m) return {text:m[1]+m[2]+m[3]};
+    return {text:tok};
+  });
+}
+function correctForm(noun,p){
+  if(p==='가'&&SPECIAL[noun]) return SPECIAL[noun];
+  if(FAMILY[p]) return noun+pick(noun,FAMILY[p]);
+  return noun+p;
+}
+function formChoices(noun,p,role){
+  if(role==='doer'&&SPECIAL[noun]) return [noun+'가',SPECIAL[noun]];
+  if(role==='receiver') return ['에게','한테','께'].map(x=>noun+x);
+  if(FAMILY[p]) return FAMILY[p].map(x=>noun+x);
+  if(role==='topic'||role==='doer'||role==='target'||role==='way') return ROLES[role].fam.map(x=>noun+x);
+  return null; // invariant: no form step
+}
+/* ---------- state ---------- */
+let stage=STAGES[0], items=[], idx=0, blanks=[], cur=0, phase='role', chosenRole=null, roleTried=false;
+let custom=null;
+const log={role:{},form:{},nuance:0,first:0,total:0};
+function setStage(id){
+  stage = id==='custom'? custom : STAGES.find(s=>s.id===id);
+  document.querySelectorAll('#stages button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.stage===id)));
+  $('stage-desc').textContent=stage.desc; $('stage-desc-en').textContent=stage.desc_en;
+  items=stage.items; idx=0; loadItem();
+}
+function loadItem(){
+  const it=items[idx];
+  $('scene').textContent=it.e||'💬'; $('sit').textContent=it.sit||''; $('sit-en').textContent=it.en||'';
+  $('count').textContent=(idx+1)+' / '+items.length;
+  const toks=parse(it.t); blanks=[];
+  toks.forEach((t,k)=>{ if(t.blank){ t.bi=blanks.length; blanks.push({tok:t,filled:null,errors:0}); } });
+  it._toks=toks; cur=0; startBlank(); renderSentence();
+  $('done').hidden=true; $('panel').hidden=false; $('note').innerHTML='';
+}
+function renderSentence(){
+  const it=items[idx];
+  $('sentence').innerHTML=it._toks.map(t=>{
+    if(!t.blank) return '<span class="w">'+esc(t.text)+'</span>';
+    const b=blanks[t.bi];
+    if(b.filled) return '<span class="w filled">'+esc(b.filled)+esc(t.rest)+'</span>';
+    return '<span class="w"><button type="button" class="slot'+(t.bi===cur?' on':'')+'" data-bi="'+t.bi+'" aria-pressed="'+(t.bi===cur)+'">'+esc(t.noun)+'<span class="hole">＿</span></button>'+esc(t.rest)+'</span>';
+  }).join(' ');
+  $('sentence').querySelectorAll('.slot').forEach(s=>s.addEventListener('click',()=>{cur=+s.dataset.bi; startBlank(); renderSentence();}));
+}
+function startBlank(){
+  roleTried=false; chosenRole=null; $('fb').textContent='';
+  const b=blanks[cur]; const role=ROLE_OF[b.tok.p]||'only';
+  if(!stage.roleStep){ chosenRole=role; showForm(); return; }
+  phase='role';
+  $('ask').textContent='‘'+b.tok.noun+'’ 뒤에 어떤 조사가 와요? 먼저 역할을 골라요.';
+  $('ask-en').textContent='What comes after “'+b.tok.noun+'”? First, pick its role.';
+  let roles=stage.roles.slice(); if(!roles.includes(role)) roles.push(role);
+  if(roles.length<2) roles.push(PARTNER[role]);
+  const box=$('choices'); box.className='choices roles'; box.innerHTML='';
+  roles.forEach(r=>{ const btn=document.createElement('button'); btn.type='button'; btn.setAttribute('aria-pressed','false');
+    btn.innerHTML='<b>'+ROLES[r].ko+'</b><span class="pp">'+ROLES[r].p+'</span><span class="en">'+ROLES[r].en+'</span>';
+    btn.addEventListener('click',()=>chooseRole(r,btn)); box.appendChild(btn); });
+}
+function noteFor(r){ const it=items[idx]; const n=(it.notes||{})[blanks[cur].tok.bi]; return n&&n[r]; }
+function chooseRole(r,btn){
+  const b=blanks[cur]; const right=ROLE_OF[b.tok.p];
+  $('choices').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===btn)));
+  const note=noteFor(r);
+  if(r===right || (note&&note[0])){
+    chosenRole=r; btn.classList.add('right');
+    if(note&&note[0]){ b.altRole=r; $('note').innerHTML='<b>이것도 맞아요.</b> '+esc(note[1]); log.nuance++; }
+    else $('fb').innerHTML='';
+    setTimeout(()=>showForm(note&&note[0]?r:null), note&&note[0]?900:250);
+    return;
+  }
+  btn.classList.add('wrong'); btn.disabled=true; roleTried=true; b.errors++;
+  if(note){ log.nuance++; $('fb').innerHTML='<b>느낌이 달라요.</b> '+esc(note[1]); return; }
+  const key=ROLES[r].p+' ↔ '+ROLES[right].p; log.role[key]=(log.role[key]||0)+1;
+  const tip=PAIR_TIP[r+'>'+right]||ROLES[right].hint;
+  $('fb').innerHTML='<b>다시 생각해 봐요.</b> '+esc(tip);
+}
+function showForm(altRole){
+  const b=blanks[cur]; const role=altRole||ROLE_OF[b.tok.p];
+  let p=b.tok.p; if(altRole){ p=ROLES[altRole].fam[0]; }
+  const target = altRole ? correctForm(b.tok.noun, p) : correctForm(b.tok.noun,b.tok.p);
+  const choices=formChoices(b.tok.noun,p,role);
+  if(!choices){ fill(target); return; }
+  phase='form';
+  $('ask').textContent='모양을 골라요.'; $('ask-en').textContent='Now pick the right form.';
+  const box=$('choices'); box.className='choices forms'; box.innerHTML='';
+  const accepted=new Set([target]); const soft={};
+  if(role==='receiver'){
+    if(b.tok.p==='에게'||b.tok.p==='한테'){ accepted.add(b.tok.noun+'에게'); accepted.add(b.tok.noun+'한테'); }
+    if(b.tok.p==='께'){ soft[b.tok.noun+'에게']=soft[b.tok.noun+'한테']='맞아요. 그런데 높이는 사람에게는 ‘께’가 더 공손해요.'; }
+  }
+  choices.forEach(c=>{ const btn=document.createElement('button'); btn.type='button'; btn.textContent=c; btn.setAttribute('aria-pressed','false');
+    btn.addEventListener('click',()=>{
+      box.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===btn)));
+      if(accepted.has(c)||soft[c]){ btn.classList.add('right'); if(soft[c]) $('note').innerHTML='<b>좋아요.</b> '+esc(soft[c]); setTimeout(()=>fill(c), soft[c]?1100:250); return; }
+      btn.classList.add('wrong'); btn.disabled=true; b.errors++;
+      const fam=role==='receiver'?'에게/한테/께':(FAMILY[p]||[p]).join('/'); log.form[fam]=(log.form[fam]||0)+1;
+      $('fb').innerHTML='<b>'+(stage.roleStep?'역할은 맞았어요.':'다시 골라 봐요.')+'</b> '+esc(formTip(b.tok.noun,role,c));
+    }); box.appendChild(btn); });
+}
+function formTip(noun,role,chosen){
+  if(role==='doer'&&SPECIAL[noun]) return '‘'+noun+'’ 뒤에 ‘가’가 오면 모양이 바뀌어요.';
+  if(role==='receiver') return chosen.endsWith('께') ? '‘께’는 할머니, 선생님처럼 높이는 사람에게 써요.' : '높이는 사람에게는 다른 말을 써요.';
+  const last=noun[noun.length-1];
+  if(role==='way'&&jong(noun)===8) return '‘'+last+'’의 받침은 ㄹ이에요. ㄹ 받침은 받침이 없는 말과 같이 써요.';
+  return '‘'+last+'’에 받침이 '+(hasB(noun)?'있어요':'없어요')+'. 받침을 다시 봐요.';
+}
+function fill(form){
+  const b=blanks[cur]; b.filled=form; log.total++; if(!b.errors) log.first++;
+  const next=blanks.findIndex(x=>!x.filled);
+  if(next<0){ renderSentence(); finish(); return; }
+  cur=next; startBlank(); renderSentence();
+}
+function finish(){
+  const it=items[idx];
+  $('panel').hidden=true; $('done').hidden=false;
+  $('full').textContent=it._toks.map(t=>t.blank?blanks[t.bi].filled+t.rest:t.text).join(' ');
+  $('say').textContent=it.say||'단어 하나를 바꿔서 다시 말해요.'; $('say-en').textContent=it.say_en||'Change one word and say it again.';
+  if(idx===items.length-1) showSummary();
+}
+function showSummary(){
+  const ul=$('sum-list'); const lines=[];
+  Object.entries(log.role).forEach(([k,v])=>lines.push(['역할을 헷갈렸어요: '+k+' · '+v+'번','Mixed up roles']));
+  Object.entries(log.form).forEach(([k,v])=>lines.push(['모양을 다시 골랐어요: '+k+' · '+v+'번','Picked the wrong form']));
+  if(log.nuance) lines.push(['은/는과 이/가의 느낌을 비교했어요: '+log.nuance+'번','Compared nuance']);
+  lines.push(['한 번에 맞힌 조사: '+log.first+' / '+log.total,'Right on the first try']);
+  ul.innerHTML=lines.map(l=>'<li>'+esc(l[0])+'<span class="en">'+esc(l[1])+'</span></li>').join('');
+  $('summary').hidden=false;
+}
+$('next').addEventListener('click',()=>{ idx=(idx+1)%items.length; loadItem(); });
+$('prev').addEventListener('click',()=>{ idx=(idx-1+items.length)%items.length; loadItem(); });
+$('redo').addEventListener('click',loadItem);
+$('sum-show').addEventListener('click',showSummary);
+$('sum-reset').addEventListener('click',()=>{ log.role={}; log.form={}; log.nuance=0; log.first=0; log.total=0; showSummary(); });
+$('sum-copy').addEventListener('click',async()=>{ const txt=[...$('sum-list').querySelectorAll('li')].map(li=>li.firstChild.textContent).join('\n'); try{ await navigator.clipboard.writeText(txt); $('sum-copy').textContent='복사했어요 Copied'; }catch(e){ $('sum-copy').textContent='복사하지 못했어요'; } setTimeout(()=>$('sum-copy').textContent='요약 복사 Copy',1500); });
+document.querySelectorAll('#stages button').forEach(b=>b.addEventListener('click',()=>setStage(b.dataset.stage)));
+/* ---------- flip demo ---------- */
+let fi=0, aDoes=true, aFirst=true;
+FLIPS.forEach((f,k)=>{ const b=document.createElement('button'); b.type='button'; b.textContent=f.a+' · '+f.b; b.setAttribute('aria-pressed',String(k===0)); b.addEventListener('click',()=>{fi=k; aDoes=true; aFirst=true; $('flip-pick').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); drawFlip('');}); $('flip-pick').appendChild(b); });
+function drawFlip(note){
+  const f=FLIPS[fi];
+  const doer=aDoes?f.a:f.b, tgt=aDoes?f.b:f.a;
+  const dW=doer+pick(doer,['이','가']), tW=tgt+pick(tgt,['을','를']);
+  const words=(aFirst===aDoes)?[dW,tW]:[tW,dW];
+  $('flip-ko').innerHTML=words.map(w=>{const isD=w===dW; const n=isD?doer:tgt; return '<span class="'+(isD?'d':'t')+'">'+esc(n)+'<b>'+esc(w.slice(n.length))+'</b></span>';}).join(' ')+' '+esc(f.v);
+  $('flip-pic').textContent=(aDoes?f.ae:f.be)+' ➜ '+(aDoes?f.be:f.ae);
+  const de=aDoes?f.aen:f.ben, te=aDoes?f.ben:f.aen;
+  $('flip-en').textContent=de.charAt(0).toUpperCase()+de.slice(1)+' '+f.ven+' '+te+'.';
+  $('flip-note').textContent=note;
+}
+$('flip-order').addEventListener('click',()=>{ aFirst=!aFirst; drawFlip('순서가 바뀌었어요. 뜻은 그대로예요. The order changed, but the meaning is the same.'); });
+$('flip-part').addEventListener('click',()=>{ aDoes=!aDoes; drawFlip('조사가 바뀌었어요. 그래서 뜻도 바뀌었어요! The particles changed, so the meaning changed too.'); });
+drawFlip('');
+/* ---------- teacher tool ---------- */
+function buildCustom(text){
+  const lines=text.split('\n').map(l=>l.trim()).filter(Boolean);
+  const out=[], checks=[];
+  lines.forEach((line,n)=>{
+    const [t,sit]=line.split('|').map(x=>x&&x.trim());
+    const toks=parse(t); const bl=toks.filter(x=>x.blank);
+    if(!bl.length){ checks.push((n+1)+'번 문장: [ ] 안에 조사가 없어요.'); return; }
+    bl.forEach(x=>{
+      if(!ROLE_OF[x.p]) checks.push((n+1)+'번 문장: ‘'+x.p+'’'+pick(x.p,['은','는'])+' 이 도구가 모르는 조사예요.');
+      else { const want=correctForm(x.noun,x.p); const typed=x.noun+x.p; if(FAMILY[x.p]&&want!==typed) checks.push((n+1)+'번 문장: ‘'+typed+'’보다 ‘'+want+'’'+pick(want,['이','가'])+' 맞아요.'); }
+    });
+    out.push({e:'💬',sit:sit||'',en:'',t:t,say:'',say_en:'',notes:{}});
+  });
+  return {out,checks};
+}
+function useCustom(list){
+  const roles=[...new Set(list.flatMap(it=>parse(it.t).filter(x=>x.blank).map(x=>ROLE_OF[x.p]).filter(Boolean)))];
+  roles.slice().forEach(r=>{ if(!roles.includes(PARTNER[r])) roles.push(PARTNER[r]); });
+  custom={id:'custom',name:'내 문장',desc:'선생님이 만든 문장이에요.',desc_en:'Sentences made by your teacher.',roleStep:true,roles,items:list};
+  $('stage-custom').hidden=false; setStage('custom');
+}
+const enc=s=>btoa(String.fromCharCode(...new TextEncoder().encode(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const dec=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0)));
+$('custom-make').addEventListener('click',()=>{
+  const {out,checks}=buildCustom($('custom-text').value);
+  $('custom-check').innerHTML=checks.map(c=>'<li>'+esc(c)+'</li>').join('');
+  if(!out.length){ $('custom-fb').textContent='만들 문장이 없어요. No sentences to use.'; return; }
+  $('custom-fb').textContent=out.length+'개 카드를 만들었어요. '+out.length+' cards ready.'; useCustom(out);
+  document.getElementById('practice').scrollIntoView({behavior:'smooth'});
+});
+$('custom-link').addEventListener('click',async()=>{
+  const {out}=buildCustom($('custom-text').value);
+  if(!out.length){ $('custom-fb').textContent='먼저 문장을 써요. Write some sentences first.'; return; }
+  const url=location.origin+location.pathname+'#cards='+enc(JSON.stringify(out.map(o=>o.sit?o.t+' | '+o.sit:o.t)));
+  try{ await navigator.clipboard.writeText(url); $('custom-fb').textContent='링크를 복사했어요. Link copied.'; }catch(e){ $('custom-fb').textContent=url; }
+});
+(function fromHash(){
+  const m=location.hash.match(/cards=([^&]+)/); if(!m) return;
+  try{ const lines=JSON.parse(dec(m[1])); $('custom-text').value=lines.join('\n'); const {out}=buildCustom(lines.join('\n')); if(out.length){ useCustom(out); return; } }catch(e){}
+})();
+if(!custom) setStage('s1');
+</script>
+</body>
+</html>

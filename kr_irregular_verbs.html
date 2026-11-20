@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>불규칙 활용 · Allbarun Korean</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+.learning-material{--ink:#263c30;--muted:#52634f;--accent:#526c3d;--line:#dfe6db;--control:#c5d0bd;--paper:#fdfefd;--tint:#edf3e3;--warm:#f3f7ed;--selected:#e4edcf;--retry:#934629;--retry-soft:#fff1e9;
+ margin:0;padding:32px 24px 56px;color:var(--ink);background:var(--paper);font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere;-webkit-text-size-adjust:100%}
+.learning-material *,.learning-material *::before,.learning-material *::after{box-sizing:border-box}
+.learning-material [hidden]{display:none!important}
+.learning-material :is(button,input,select,textarea){font-family:inherit;font-size:16px;color:var(--ink)}
+.learning-material :is(button,select){cursor:pointer;min-height:44px}
+.learning-material :is(button,input,select,textarea,a,summary):focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.learning-material a{color:var(--accent);text-underline-offset:4px}
+.learning-header{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:16px 24px;max-width:var(--page-width,780px);margin:0 auto 28px;padding:0 0 24px;border-bottom:1px solid var(--line)}
+.learning-back{display:flex;align-items:center;width:fit-content;min-height:44px;margin:0 0 8px;font-size:15px;color:var(--muted);text-decoration:none}
+.learning-back:hover{text-decoration:underline}
+.learning-header h1{margin:0;font-size:30px;font-weight:600;line-height:1.3;letter-spacing:-.025em}
+.learning-subtitle{display:block;margin:0;font-size:15px;line-height:1.4;color:var(--muted)}
+.learning-tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.learning-tools button{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 14px;border:1px solid var(--control);border-radius:8px;background:#fff}
+.learning-tools button:hover{background:var(--warm)}
+.learning-tools button[aria-pressed=true]{border-color:var(--accent);background:var(--selected)}
+.learning-body{max-width:var(--page-width,780px);margin:0 auto;min-width:0}
+.learning-body>section{padding:28px 0;border-top:1px solid var(--line)}
+.learning-body>section:first-child{border-top:0;padding-top:0}
+h2{font-size:22px;font-weight:600;line-height:1.45;letter-spacing:-.02em;margin:0}
+h2+.en{display:block;margin:0 0 18px}
+h3{font-size:18px;font-weight:600;margin:22px 0 6px;line-height:1.45}
+h3+.en{display:block;margin:0 0 10px}
+p{margin:10px 0}
+.en{font-size:15px;line-height:1.4;color:var(--muted)}
+p.en{margin-top:0}
+p:has(+p.en){margin-bottom:0}
+.ko{font-weight:600}
+.hl{color:var(--accent);font-weight:700}
+.chg{color:var(--retry);font-weight:700}
+.tag{display:inline-block;padding:1px 7px;border-radius:4px;font-size:14px;font-weight:600;background:var(--tint);color:var(--accent)}
+table{width:100%;border-collapse:collapse;table-layout:fixed;margin:8px 0 4px}
+th,td{padding:11px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;overflow-wrap:anywhere}
+th{font-size:15px;font-weight:600;color:var(--muted)}
+th:first-child,td:first-child{padding-left:0}
+td .en,th .en{display:block}
+th .en{font-weight:400;font-size:14px}
+.table-scroll{overflow-x:auto}
+ul.plain{list-style:none;padding:0;margin:8px 0}
+ul.plain>li{padding:10px 0;border-bottom:1px solid var(--line)}
+ul.plain>li:last-child{border-bottom:0}
+ul.plain .en{display:block}
+.panel{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:#fff}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin:0 0 20px}
+.seg button,.btn{min-height:44px;padding:10px 14px;border:1px solid var(--control);border-radius:8px;background:#fff;text-align:center}
+.seg button:hover,.btn:hover{background:var(--warm);border-color:var(--accent)}
+.seg button[aria-pressed=true]{border-color:var(--ink);background:var(--ink);color:#fff;font-weight:600}
+.learning-material .btn-primary{background:var(--ink);border-color:var(--ink);color:#fff}
+.learning-material .btn-primary:hover{background:#354a30;color:#fff}
+.learning-material .seg button[aria-pressed=true]{color:#fff}
+.quiz{display:grid;gap:24px}
+.q{padding:0 0 24px;border-bottom:1px solid var(--line)}
+.q:last-child{border-bottom:0;padding-bottom:0}
+.ask{font-weight:600;margin-bottom:12px}
+.ask .en{display:block;font-weight:400}
+.opts{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:10px}
+.opts button{min-height:44px;padding:10px 12px;border:1px solid var(--control);border-radius:8px;background:#fff;text-align:center}
+.opts button:hover{background:var(--warm);border-color:var(--accent)}
+.opts button.right{border-color:var(--accent);background:var(--tint);font-weight:600}
+.opts button.right::before{content:"✓ ";}
+.opts button.wrong{border-color:var(--retry);background:var(--retry-soft)}
+.opts button.wrong::before{content:"× ";}
+.fb{margin-top:10px;font-size:15px;line-height:1.6}
+.fb:empty{display:none}
+.score{font-weight:600;margin-top:20px;font-size:17px}
+.score:empty{display:none}
+.learning-action-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
+.learning-action-row>:last-child{margin-inline-start:auto}
+.learning-action-row .btn{min-width:160px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+body.hide-en .en{display:none!important}
+@media(max-width:620px){
+ .learning-material{padding:24px 18px 40px}
+ .learning-header{grid-template-columns:minmax(0,1fr);gap:16px}
+ .learning-header h1{font-size:26px}
+ h2{font-size:20px}
+ .two{grid-template-columns:1fr}
+ .opts,.seg{grid-auto-flow:row;grid-template-columns:1fr}
+ .seg.keep{grid-auto-flow:column;grid-template-columns:none}
+}
+@media(prefers-reduced-motion:reduce){.learning-material *{transition:none!important;animation:none!important}}
+
+.learning-material{--page-width:780px}
+
+.big{font-size:20px;margin:8px 0 0}
+.demo .panel{text-align:center}
+.tabs{grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-flow:row}
+.conj td,.conj th{font-size:16px}
+.conj th:first-child{width:24%}
+@media(max-width:620px){.tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.conj{min-width:520px}}
+</style>
+</head>
+<body class="learning-material learning-grammar">
+<main class="learning-page">
+<header class="learning-header"><div class="learning-heading"><a class="learning-back" href="./learn/index.html" target="_top">자료 목록</a><h1>불규칙 활용</h1><p class="learning-subtitle">Irregular verbs and adjectives</p></div><div class="learning-tools"><button type="button" id="toggle-en" aria-pressed="false">영어 숨기기 Hide English</button></div></header>
+<div class="learning-body">
+
+<section>
+<h2>모음 앞에서 모양이 바뀌어요</h2><span class="en">Some verbs change shape before a vowel</span>
+<p>어떤 동사와 형용사는 -아요/어요, -았어요/었어요, -(으)면처럼 모음으로 시작하는 말 앞에서 모양이 바뀌어요. -고, -지만처럼 자음으로 시작하는 말 앞에서는 바뀌지 않아요.</p>
+<p class="en">Some verbs and adjectives change when the next ending starts with a vowel sound (-아요/어요, -았어요/었어요, -(으)면). Before an ending that starts with a consonant (-고, -지만), they stay the same.</p>
+<div class="two demo">
+ <div class="panel"><span class="tag">그대로 Same</span><p class="big">덥다 + 고 → <span class="ko">덥고</span></p></div>
+ <div class="panel"><span class="tag">바뀌어요 Changes</span><p class="big">덥다 + 어요 → <span class="chg">더워요</span></p></div>
+</div>
+</section>
+
+<section>
+<h2>여섯 가지 모양</h2><span class="en">Six types</span>
+<div class="seg tabs" role="tablist" aria-label="불규칙 종류"><button type="button" role="tab" aria-selected="true" aria-pressed="true" aria-controls="type-0" data-tab="0">ㅂ 받침</button><button type="button" role="tab" aria-selected="false" aria-pressed="false" aria-controls="type-1" data-tab="1">ㄷ 받침</button><button type="button" role="tab" aria-selected="false" aria-pressed="false" aria-controls="type-2" data-tab="2">ㅡ 모음</button><button type="button" role="tab" aria-selected="false" aria-pressed="false" aria-controls="type-3" data-tab="3">르</button><button type="button" role="tab" aria-selected="false" aria-pressed="false" aria-controls="type-4" data-tab="4">ㅅ 받침</button><button type="button" role="tab" aria-selected="false" aria-pressed="false" aria-controls="type-5" data-tab="5">ㅎ 받침</button></div>
+<div class="type-panel" id="type-0" role="tabpanel">
+<p>받침 ㅂ 뒤에 모음이 오면 ㅂ이 ‘우’로 바뀌어요. 그래서 -어요가 ‘워요’가 돼요. 돕다는 ‘도와요’가 돼요.</p><p class="en">Before a vowel, final ㅂ turns into 우. So -어요 becomes 워요. 돕다 is special: 도와요.</p>
+<div class="table-scroll"><table class="conj"><thead><tr><th>기본형<span class="en">Dictionary</span></th><th>-아요/어요<span class="en">Present</span></th><th>-았어요/었어요<span class="en">Past</span></th><th>-(으)면<span class="en">If</span></th><th>-고<span class="en">And</span></th></tr></thead><tbody><tr><td><span class="ko">덥다</span><span class="en">hot</span></td><td><span class="chg">더워요</span></td><td><span class="chg">더웠어요</span></td><td><span class="chg">더우면</span></td><td>덥고</td></tr><tr><td><span class="ko">춥다</span><span class="en">cold</span></td><td><span class="chg">추워요</span></td><td><span class="chg">추웠어요</span></td><td><span class="chg">추우면</span></td><td>춥고</td></tr><tr><td><span class="ko">맵다</span><span class="en">spicy</span></td><td><span class="chg">매워요</span></td><td><span class="chg">매웠어요</span></td><td><span class="chg">매우면</span></td><td>맵고</td></tr><tr><td><span class="ko">어렵다</span><span class="en">difficult</span></td><td>어<span class="chg">려워요</span></td><td>어<span class="chg">려웠어요</span></td><td>어<span class="chg">려우면</span></td><td>어렵고</td></tr><tr><td><span class="ko">쉽다</span><span class="en">easy</span></td><td><span class="chg">쉬워요</span></td><td><span class="chg">쉬웠어요</span></td><td><span class="chg">쉬우면</span></td><td>쉽고</td></tr><tr><td><span class="ko">돕다</span><span class="en">to help</span></td><td><span class="chg">도와요</span></td><td><span class="chg">도왔어요</span></td><td><span class="chg">도우면</span></td><td>돕고</td></tr></tbody></table></div>
+<p>입다 → 입어요, 잡다 → 잡아요, 좁다 → 좁아요는 바뀌지 않아요.</p><p class="en">Some ㅂ words stay regular: 입어요, 잡아요, 좁아요.</p></div><div class="type-panel" id="type-1" role="tabpanel" hidden>
+<p>받침 ㄷ 뒤에 모음이 오면 ㄷ이 ㄹ로 바뀌어요.</p><p class="en">Before a vowel, final ㄷ turns into ㄹ.</p>
+<div class="table-scroll"><table class="conj"><thead><tr><th>기본형<span class="en">Dictionary</span></th><th>-아요/어요<span class="en">Present</span></th><th>-았어요/었어요<span class="en">Past</span></th><th>-(으)면<span class="en">If</span></th><th>-고<span class="en">And</span></th></tr></thead><tbody><tr><td><span class="ko">듣다</span><span class="en">to listen</span></td><td><span class="chg">들어요</span></td><td><span class="chg">들었어요</span></td><td><span class="chg">들으면</span></td><td>듣고</td></tr><tr><td><span class="ko">걷다</span><span class="en">to walk</span></td><td><span class="chg">걸어요</span></td><td><span class="chg">걸었어요</span></td><td><span class="chg">걸으면</span></td><td>걷고</td></tr><tr><td><span class="ko">묻다</span><span class="en">to ask</span></td><td><span class="chg">물어요</span></td><td><span class="chg">물었어요</span></td><td><span class="chg">물으면</span></td><td>묻고</td></tr></tbody></table></div>
+<p>받다 → 받아요, 닫다 → 닫아요, 믿다 → 믿어요는 바뀌지 않아요.</p><p class="en">Some ㄷ words stay regular: 받아요, 닫아요, 믿어요.</p></div><div class="type-panel" id="type-2" role="tabpanel" hidden>
+<p>마지막 글자의 모음이 ㅡ이고 받침이 없으면, 뒤에 -아요/어요가 올 때 ㅡ가 빠져요. 앞 글자에 ㅏ나 ㅗ가 있으면 -아요, 없으면 -어요를 써요. 쓰다, 크다처럼 한 글자이면 -어요를 써요. ‘르’로 끝나는 말은 다음 탭에서 봐요.</p><p class="en">If the last vowel is ㅡ, it drops before -아요/어요. Look at the syllable before it: ㅏ or ㅗ → -아요, anything else → -어요. One-syllable stems (쓰다, 크다) take -어요.</p>
+<div class="table-scroll"><table class="conj"><thead><tr><th>기본형<span class="en">Dictionary</span></th><th>-아요/어요<span class="en">Present</span></th><th>-았어요/었어요<span class="en">Past</span></th><th>-(으)면<span class="en">If</span></th><th>-고<span class="en">And</span></th></tr></thead><tbody><tr><td><span class="ko">쓰다</span><span class="en">to write; to use</span></td><td><span class="chg">써요</span></td><td><span class="chg">썼어요</span></td><td>쓰<span class="chg">면</span></td><td>쓰고</td></tr><tr><td><span class="ko">크다</span><span class="en">big</span></td><td><span class="chg">커요</span></td><td><span class="chg">컸어요</span></td><td>크<span class="chg">면</span></td><td>크고</td></tr><tr><td><span class="ko">바쁘다</span><span class="en">busy</span></td><td>바<span class="chg">빠요</span></td><td>바<span class="chg">빴어요</span></td><td>바쁘<span class="chg">면</span></td><td>바쁘고</td></tr><tr><td><span class="ko">아프다</span><span class="en">sick; to hurt</span></td><td>아<span class="chg">파요</span></td><td>아<span class="chg">팠어요</span></td><td>아프<span class="chg">면</span></td><td>아프고</td></tr><tr><td><span class="ko">예쁘다</span><span class="en">pretty</span></td><td>예<span class="chg">뻐요</span></td><td>예<span class="chg">뻤어요</span></td><td>예쁘<span class="chg">면</span></td><td>예쁘고</td></tr><tr><td><span class="ko">슬프다</span><span class="en">sad</span></td><td>슬<span class="chg">퍼요</span></td><td>슬<span class="chg">펐어요</span></td><td>슬프<span class="chg">면</span></td><td>슬프고</td></tr></tbody></table></div>
+</div><div class="type-panel" id="type-3" role="tabpanel" hidden>
+<p>‘르’ 뒤에 -아요/어요가 오면 ‘르’가 ‘ㄹ라’나 ‘ㄹ러’로 바뀌어요. 앞 글자에 ㅏ나 ㅗ가 있으면 ‘ㄹ라’, 없으면 ‘ㄹ러’예요.</p><p class="en">르 becomes ㄹ라 or ㄹ러 before -아요/어요. An extra ㄹ goes under the syllable before it.</p>
+<div class="table-scroll"><table class="conj"><thead><tr><th>기본형<span class="en">Dictionary</span></th><th>-아요/어요<span class="en">Present</span></th><th>-았어요/었어요<span class="en">Past</span></th><th>-(으)면<span class="en">If</span></th><th>-고<span class="en">And</span></th></tr></thead><tbody><tr><td><span class="ko">모르다</span><span class="en">to not know</span></td><td><span class="chg">몰라요</span></td><td><span class="chg">몰랐어요</span></td><td>모르<span class="chg">면</span></td><td>모르고</td></tr><tr><td><span class="ko">빠르다</span><span class="en">fast</span></td><td><span class="chg">빨라요</span></td><td><span class="chg">빨랐어요</span></td><td>빠르<span class="chg">면</span></td><td>빠르고</td></tr><tr><td><span class="ko">다르다</span><span class="en">different</span></td><td><span class="chg">달라요</span></td><td><span class="chg">달랐어요</span></td><td>다르<span class="chg">면</span></td><td>다르고</td></tr><tr><td><span class="ko">고르다</span><span class="en">to choose</span></td><td><span class="chg">골라요</span></td><td><span class="chg">골랐어요</span></td><td>고르<span class="chg">면</span></td><td>고르고</td></tr><tr><td><span class="ko">부르다</span><span class="en">to sing; to call</span></td><td><span class="chg">불러요</span></td><td><span class="chg">불렀어요</span></td><td>부르<span class="chg">면</span></td><td>부르고</td></tr></tbody></table></div>
+</div><div class="type-panel" id="type-4" role="tabpanel" hidden>
+<p>받침 ㅅ 뒤에 모음이 오면 ㅅ이 빠져요. 그런데 모음이 하나로 줄지 않아요. ‘나요’가 아니라 ‘나아요’예요.</p><p class="en">Before a vowel, final ㅅ drops, but the vowels do not merge: 나아요, not 나요.</p>
+<div class="table-scroll"><table class="conj"><thead><tr><th>기본형<span class="en">Dictionary</span></th><th>-아요/어요<span class="en">Present</span></th><th>-았어요/었어요<span class="en">Past</span></th><th>-(으)면<span class="en">If</span></th><th>-고<span class="en">And</span></th></tr></thead><tbody><tr><td><span class="ko">낫다</span><span class="en">to get better</span></td><td><span class="chg">나아요</span></td><td><span class="chg">나았어요</span></td><td><span class="chg">나으면</span></td><td>낫고</td></tr><tr><td><span class="ko">짓다</span><span class="en">to build; to make (a name)</span></td><td><span class="chg">지어요</span></td><td><span class="chg">지었어요</span></td><td><span class="chg">지으면</span></td><td>짓고</td></tr><tr><td><span class="ko">붓다</span><span class="en">to swell; to pour</span></td><td><span class="chg">부어요</span></td><td><span class="chg">부었어요</span></td><td><span class="chg">부으면</span></td><td>붓고</td></tr></tbody></table></div>
+<p>웃다 → 웃어요, 씻다 → 씻어요, 벗다 → 벗어요는 바뀌지 않아요.</p><p class="en">Some ㅅ words stay regular: 웃어요, 씻어요, 벗어요.</p></div><div class="type-panel" id="type-5" role="tabpanel" hidden>
+<p>색깔 형용사와 ‘그렇다, 이렇다’ 같은 말은 -아요/어요 앞에서 ㅎ이 빠지고 모음이 ㅐ로 바뀌어요. 하얗다는 ‘하얘요’예요. -(으)면 앞에서는 ㅎ이 빠지고 ‘면’만 붙어요. 빨갛다는 ‘빨가면’이에요.</p><p class="en">Color adjectives and words like 그렇다 drop ㅎ and the vowel becomes ㅐ before -아요/어요 (하얗다 → 하얘요). Before -(으)면, ㅎ drops and only 면 is added: 빨가면.</p>
+<div class="table-scroll"><table class="conj"><thead><tr><th>기본형<span class="en">Dictionary</span></th><th>-아요/어요<span class="en">Present</span></th><th>-았어요/었어요<span class="en">Past</span></th><th>-(으)면<span class="en">If</span></th><th>-고<span class="en">And</span></th></tr></thead><tbody><tr><td><span class="ko">빨갛다</span><span class="en">red</span></td><td>빨<span class="chg">개요</span></td><td>빨<span class="chg">갰어요</span></td><td>빨<span class="chg">가면</span></td><td>빨갛고</td></tr><tr><td><span class="ko">노랗다</span><span class="en">yellow</span></td><td>노<span class="chg">래요</span></td><td>노<span class="chg">랬어요</span></td><td>노<span class="chg">라면</span></td><td>노랗고</td></tr><tr><td><span class="ko">파랗다</span><span class="en">blue</span></td><td>파<span class="chg">래요</span></td><td>파<span class="chg">랬어요</span></td><td>파<span class="chg">라면</span></td><td>파랗고</td></tr><tr><td><span class="ko">하얗다</span><span class="en">white</span></td><td>하<span class="chg">얘요</span></td><td>하<span class="chg">얬어요</span></td><td>하<span class="chg">야면</span></td><td>하얗고</td></tr><tr><td><span class="ko">그렇다</span><span class="en">to be so</span></td><td>그<span class="chg">래요</span></td><td>그<span class="chg">랬어요</span></td><td>그<span class="chg">러면</span></td><td>그렇고</td></tr></tbody></table></div>
+<p>좋다 → 좋아요, 놓다 → 놓아요, 넣다 → 넣어요는 바뀌지 않아요.</p><p class="en">좋다, 놓다, 넣다 stay regular.</p></div>
+</section>
+
+<section>
+<h2>같은 받침, 다른 결과</h2><span class="en">Same final consonant, different result</span>
+<p>받침만 보고 알 수는 없어요. 자주 쓰는 말을 하나씩 기억해요.</p>
+<p class="en">You can't tell from the final consonant alone. Remember the common words one by one.</p>
+<table><thead><tr><th>바뀌어요<span class="en">Irregular</span></th><th>바뀌지 않아요<span class="en">Regular</span></th></tr></thead><tbody><tr><td><span class="ko">덥다</span> → <span class="chg">더워요</span></td><td><span class="ko">입다</span> → 입어요</td></tr><tr><td><span class="ko">듣다</span> → <span class="chg">들어요</span></td><td><span class="ko">받다</span> → 받아요</td></tr><tr><td><span class="ko">낫다</span> → <span class="chg">나아요</span></td><td><span class="ko">웃다</span> → 웃어요</td></tr><tr><td><span class="ko">빨갛다</span> → 빨<span class="chg">개요</span></td><td><span class="ko">좋다</span> → 좋아요</td></tr><tr><td><span class="ko">돕다</span> → <span class="chg">도와요</span></td><td><span class="ko">잡다</span> → 잡아요</td></tr></tbody></table>
+</section>
+
+<section>
+<h2>연습해요</h2><span class="en">Practice</span>
+<div class="quiz" id="quiz-irr"></div>
+<div class="score" id="score-irr" aria-live="polite"></div>
+<div class="learning-action-row" style="border-top:0;margin-top:12px;padding-top:0"><span></span><button type="button" class="btn" id="redo-irr">다시 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg> Redo</button></div>
+</section>
+
+<section>
+<h2>말해 봐요</h2><span class="en">Let's talk</span>
+<ul class="plain"><li><span class="ko">오늘 날씨가 어때요?</span> <span class="tag">덥다, 춥다</span><span class="en">How's the weather today?</span></li><li><span class="ko">요즘 무슨 노래를 들어요?</span> <span class="tag">듣다</span><span class="en">What music do you listen to these days?</span></li><li><span class="ko">한국어 공부가 쉬워요? 어려워요?</span> <span class="tag">쉽다, 어렵다</span><span class="en">Is studying Korean easy or difficult?</span></li><li><span class="ko">요즘 바빠요? 왜요?</span> <span class="tag">바쁘다</span><span class="en">Are you busy these days? Why?</span></li><li><span class="ko">모르는 단어가 있으면 어떻게 해요?</span> <span class="tag">모르다, 묻다</span><span class="en">What do you do when you don't know a word?</span></li><li><span class="ko">하루에 얼마나 걸어요?</span> <span class="tag">걷다</span><span class="en">How much do you walk a day?</span></li></ul>
+</section>
+
+<footer class="learning-action-row"><span>Allbarun Korean · written by Hanim</span><a class="btn btn-primary" href="./learn/index.html" target="_top">자료 목록</a></footer>
+</div>
+</main>
+<script>
+function renderQuiz(items, root, scoreEl){
+  let solvedCount=0, firstTry=0;
+  items.forEach((it,i)=>{
+    const box=document.createElement('div'); box.className='q';
+    const ask=document.createElement('div'); ask.className='ask';
+    ask.innerHTML=(i+1)+'. '+it.q+(it.en?'<span class="en">'+it.en+'</span>':'');
+    const opts=document.createElement('div'); opts.className='opts';
+    const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+    let tried=false, solved=false;
+    it.opts.forEach((o,j)=>{
+      const b=document.createElement('button'); b.type='button'; b.textContent=o; b.setAttribute('aria-pressed','false');
+      b.addEventListener('click',()=>{
+        if(solved) return;
+        opts.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+        if(j===it.a){
+          solved=true; b.classList.add('right');
+          fb.innerHTML='<b>맞아요! Correct!</b> '+it.fb;
+          if(!tried) firstTry++;
+          solvedCount++;
+          if(solvedCount===items.length) scoreEl.textContent='처음에 맞힌 문제: '+firstTry+' / '+items.length+' · Right on the first try';
+        }else{
+          b.classList.add('wrong'); b.disabled=true;
+          fb.innerHTML='<b>다시 해 봐요. Try again.</b> '+(it.hint||'');
+        }
+        tried=true;
+      });
+      opts.appendChild(b);
+    });
+    box.append(ask,opts,fb); root.appendChild(box);
+  });
+}
+function resetQuiz(items, root, scoreEl){ root.innerHTML=''; scoreEl.textContent=''; renderQuiz(items, root, scoreEl); }
+
+
+(()=>{const b=document.getElementById('toggle-en'); if(!b) return;
+ b.addEventListener('click',()=>{const on=document.body.classList.toggle('hide-en'); b.setAttribute('aria-pressed',String(on)); b.textContent=on?'영어 보기 Show English':'영어 숨기기 Hide English';});})();
+
+
+const items_irr=[{"q": "오늘 날씨가 정말 ______. (덥다)", "en": "It's really hot today.", "opts": ["덥어요", "더워요", "더와요"], "a": 1, "hint": "덥다는 ㅂ이 바뀌는 말이에요. ㅂ이 ‘우’가 돼요.", "fb": "덥다 → 더워요. ㅂ이 ‘우’로 바뀌어요."}, {"q": "저는 매일 음악을 ______. (듣다)", "en": "I listen to music every day.", "opts": ["듣어요", "들어요", "들러요"], "a": 1, "hint": "듣다는 ㄷ이 ㄹ로 바뀌어요.", "fb": "듣다 → 들어요. 모음 앞에서 ㄷ이 ㄹ이 돼요."}, {"q": "그 사람 이름을 ______. (모르다)", "en": "I don't know that person's name.", "opts": ["모르어요", "몰러요", "몰라요"], "a": 2, "hint": "‘모’에 ㅗ가 있어요. ㅏ나 ㅗ가 있으면 ‘ㄹ라’예요.", "fb": "모르다 → 몰라요."}, {"q": "감기가 다 ______. (낫다)", "en": "My cold is all better.", "opts": ["나요", "나아요", "낫아요"], "a": 1, "hint": "ㅅ이 빠져요. 그런데 모음은 줄지 않아요.", "fb": "낫다 → 나아요. ‘나요’가 아니에요."}, {"q": "요즘 일이 많아서 ______. (바쁘다)", "en": "I'm busy these days because I have a lot of work.", "opts": ["바뻐요", "바빠요", "바쁘어요"], "a": 1, "hint": "ㅡ가 빠져요. 앞 글자 ‘바’에 ㅏ가 있어요.", "fb": "바쁘다 → 바빠요."}, {"q": "사과가 ______. (빨갛다)", "en": "The apple is red.", "opts": ["빨개요", "빨갛아요", "빨가요"], "a": 0, "hint": "ㅎ이 빠지고 모음이 ㅐ로 바뀌어요.", "fb": "빨갛다 → 빨개요."}, {"q": "추워요. 문을 ______. (닫다)", "en": "It's cold. I close the door.", "opts": ["달아요", "닫아요", "닫어요"], "a": 1, "hint": "닫다는 ㄷ이 바뀌지 않는 말이에요.", "fb": "닫다 → 닫아요. 받침 ㄷ이 있어도 바뀌지 않는 말이에요."}, {"q": "밥 먹기 전에 손을 ______. (씻다)", "en": "I wash my hands before eating.", "opts": ["씨어요", "씻어요", "씻아요"], "a": 1, "hint": "씻다는 ㅅ이 빠지지 않는 말이에요. ‘씻’에는 ㅣ가 있어요.", "fb": "씻다 → 씻어요."}, {"q": "오늘은 코트를 ______. (입다)", "en": "I'm wearing a coat today.", "opts": ["이워요", "입어요", "입아요"], "a": 1, "hint": "입다는 ㅂ이 바뀌지 않는 말이에요.", "fb": "입다 → 입어요."}, {"q": "제가 ______. 같이 해요! (돕다)", "en": "I'll help. Let's do it together!", "opts": ["도워요", "도와요", "돕아요"], "a": 1, "hint": "돕다는 ‘워’가 아니에요.", "fb": "돕다 → 도와요. 돕다는 ‘와’가 돼요."}];
+renderQuiz(items_irr,document.getElementById('quiz-irr'),document.getElementById('score-irr'));
+document.getElementById('redo-irr').addEventListener('click',()=>resetQuiz(items_irr,document.getElementById('quiz-irr'),document.getElementById('score-irr')));
+
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>{const on=x===b;x.setAttribute('aria-selected',on);x.setAttribute('aria-pressed',on);});
+  document.querySelectorAll('.type-panel').forEach(p=>p.hidden=p.id!=='type-'+b.dataset.tab);
+}));
+</script>
+</body>
+</html>
