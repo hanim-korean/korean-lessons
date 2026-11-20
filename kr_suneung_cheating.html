@@ -1,0 +1,2096 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수능 부정행위 뉴스 · Allbarun Korean</title>
+<style>
+    :root {
+      --ecru: #fafbf7;
+      --hippie: #5f8651;
+      --hippie-dark: #46663c;
+      --cream: #fff8e7;
+      --sheet: #ffffff;
+      --ink: #203426;
+      --muted: #607062;
+      --line: #c5d0bd;
+      --sage-strong: #aec3b0;
+      --peach: #d99a79;
+      --danger: #6d3d2d;
+      --danger-bg: #f2dfd1;
+      --correct-bg: #dcebd9;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--ecru);
+      font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    button { color: inherit; font: inherit; }
+    button:focus-visible, a:focus-visible, summary:focus-visible {
+      outline: 3px solid rgba(217, 154, 121, .55);
+      outline-offset: 3px;
+    }
+    [hidden] { display: none !important; }
+
+    .brandbar {
+      color: var(--cream);
+      background: var(--hippie);
+      border-bottom: 1px solid var(--hippie-dark);
+    }
+    .brandbar-inner {
+      width: min(1080px, calc(100% - 36px));
+      min-height: 62px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      color: inherit;
+      text-decoration: none;
+    }
+    .brand strong {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      letter-spacing: -.02em;
+    }
+    .brand span {
+      color: rgba(255, 248, 231, .78);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+    .text-button {
+      min-height: 36px;
+      padding: 6px 12px;
+      border: 1px solid rgba(255, 248, 231, .54);
+      border-radius: 6px;
+      color: var(--cream);
+      background: transparent;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 750;
+    }
+    .text-button[aria-pressed="true"] { color: var(--hippie-dark); background: var(--cream); }
+
+    .page {
+      width: min(1080px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 42px 0 64px;
+    }
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-items: end;
+      gap: 34px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow, .section-number {
+      margin: 0 0 8px;
+      color: var(--hippie-dark);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .08em;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(34px, 5vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -.045em;
+    }
+    .intro-copy {
+      max-width: 600px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .lesson-index {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 247, .5);
+    }
+    .lesson-index a {
+      position: relative;
+      min-width: 0;
+      padding: 14px 12px;
+      color: var(--muted);
+      border-right: 1px solid var(--line);
+      text-align: center;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 750;
+    }
+    .lesson-index a:last-child { border-right: 0; }
+    .lesson-index a.active { color: var(--hippie-dark); background: var(--sheet); }
+    .lesson-index a.active::after {
+      position: absolute;
+      right: 12px;
+      bottom: -1px;
+      left: 12px;
+      height: 3px;
+      background: var(--hippie);
+      content: "";
+    }
+
+    .lesson-section {
+      scroll-margin-top: 20px;
+      padding: 54px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, 390px);
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 26px;
+    }
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(27px, 3.5vw, 36px);
+      line-height: 1.2;
+      letter-spacing: -.035em;
+    }
+    .section-copy { margin-bottom: 2px; color: var(--muted); font-size: 15px; }
+
+    .study-layout {
+      display: grid;
+      grid-template-columns: minmax(300px, .88fr) minmax(0, 1.12fr);
+      min-height: 390px;
+      border: 1px solid var(--line);
+      background: var(--sheet);
+    }
+    .focus-panel {
+      display: grid;
+      grid-template-rows: minmax(250px, 1fr) auto;
+      min-width: 0;
+      border-right: 1px solid var(--line);
+    }
+    .focus-swatch {
+      min-height: 235px;
+      border-bottom: 1px solid rgba(32, 52, 38, .12);
+      transition: background-color 180ms ease;
+    }
+    .focus-swatch, .practice-swatch, .quiz-swatch, .mini-swatch {
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .color-visual.has-object-image { background: #fbfbf8 !important; }
+    .color-object {
+      display: block;
+      max-width: 78%;
+      max-height: 78%;
+      object-fit: contain;
+    }
+    .focus-swatch .color-object, .practice-swatch .color-object {
+      max-width: 68%;
+      max-height: 88%;
+      filter: drop-shadow(0 10px 18px rgba(32, 52, 38, .1));
+    }
+    .quiz-swatch .color-object {
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      max-height: none;
+      padding: 8px;
+      object-fit: contain;
+    }
+    .focus-copy { min-height: 160px; padding: 24px 26px; background: var(--sheet); }
+    .focus-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+    .english-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .primary-button, .secondary-button {
+      min-height: 44px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+    .focus-word {
+      margin-bottom: 4px;
+      font-size: clamp(36px, 5vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -.045em;
+    }
+    .alternate-row { min-height: 28px; margin-bottom: 16px; color: var(--muted); font-size: 15px; }
+    .alternate-row[hidden] { display: block !important; visibility: hidden; }
+    .example-line {
+      margin-bottom: 7px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .culture-line { margin-bottom: 0; color: var(--muted); font-size: 13px; }
+
+    .palette-panel { min-width: 0; padding: 22px; }
+    .tab-row { display: flex; gap: 22px; margin-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .tab-button {
+      position: relative;
+      padding: 0 0 10px;
+      border: 0;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .tab-button.active { color: var(--hippie-dark); }
+    .tab-button.active::after {
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+      height: 3px;
+      background: var(--hippie);
+      content: "";
+    }
+    .palette-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+    .palette-button {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+      min-height: 56px;
+      padding: 6px 10px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+    }
+    .palette-button:hover { background: #f4f6ed; }
+    .palette-button.active { border-color: var(--sage-strong); background: #eef3e9; }
+    .mini-swatch {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(32, 52, 38, .22);
+      border-radius: 50%;
+    }
+    .mini-swatch .color-object {
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      max-height: none;
+      object-fit: contain;
+    }
+    .palette-name {
+      overflow: hidden;
+      font-size: 13px;
+      font-weight: 800;
+      text-overflow: ellipsis;
+      white-space: normal;
+    }
+
+    .language-note { margin-top: 14px; border: 1px solid var(--line); background: rgba(255, 253, 247, .62); }
+    .language-note summary {
+      padding: 15px 18px;
+      cursor: pointer;
+      color: var(--hippie-dark);
+      font-size: 14px;
+      font-weight: 850;
+    }
+    .note-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      padding: 2px 18px 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .note-content p { margin-bottom: 0; }
+    .note-content strong { color: var(--ink); }
+
+    .practice-stage, .quiz-stage { border: 1px solid var(--line); background: var(--sheet); }
+    .practice-stage {
+      display: grid;
+      grid-template-columns: minmax(290px, .92fr) minmax(0, 1.08fr);
+      min-height: 340px;
+    }
+    .practice-swatch { min-height: 340px; border-right: 1px solid rgba(32, 52, 38, .14); }
+    .practice-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(28px, 5vw, 52px);
+    }
+    .progress-label { margin-bottom: 24px; color: var(--muted); font-size: 13px; font-weight: 750; }
+    .practice-question {
+      margin-bottom: 8px;
+      font-size: clamp(29px, 4vw, 42px);
+      line-height: 1.2;
+      letter-spacing: -.04em;
+      white-space: nowrap;
+    }
+    .practice-help { min-height: 25px; margin-bottom: 28px; color: var(--muted); font-size: 15px; }
+    .practice-answer {
+      min-height: 74px;
+      margin-bottom: 22px;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .practice-answer[hidden] { display: block !important; visibility: hidden; }
+    .practice-answer strong { display: block; font-size: 25px; }
+    .practice-answer span { color: var(--muted); font-size: 14px; }
+    .button-row { display: flex; flex-wrap: wrap; gap: 9px; }
+    .primary-button, .secondary-button { padding: 10px 17px; }
+    .primary-button { border: 1px solid var(--hippie-dark); color: var(--cream); background: var(--hippie-dark); }
+    .primary-button:hover { background: var(--hippie); }
+    .secondary-button { border: 1px solid var(--line); background: var(--sheet); }
+    .secondary-button:hover { background: #eef3e9; }
+
+    .sentence-board { border: 1px solid var(--line); background: var(--sheet); }
+    .sentence-comparison { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
+    .sentence-mode { min-height: 150px; padding: 25px; }
+    .sentence-mode + .sentence-mode { border-left: 1px solid var(--line); }
+    .sentence-mode small {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .sentence-mode p {
+      margin-bottom: 0;
+      font-size: clamp(21px, 3vw, 28px);
+      font-weight: 800;
+      letter-spacing: -.025em;
+    }
+    .word-change-list { display: grid; grid-template-columns: 1fr 1fr; }
+    .word-change {
+      display: grid;
+      grid-template-columns: minmax(0, .72fr) 26px minmax(0, 1.28fr);
+      align-items: center;
+      min-height: 74px;
+      padding: 13px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .word-change:nth-child(odd) { border-right: 1px solid var(--line); }
+    .word-change:nth-last-child(-n + 2) { border-bottom: 0; }
+    .word-change .before { color: var(--muted); }
+    .word-change .arrow { color: var(--peach); text-align: center; }
+    .word-change .after { font-weight: 850; }
+
+    .quiz-stage { max-width: 780px; margin: 0 auto; }
+    .quiz-status {
+      display: grid;
+      grid-template-columns: auto minmax(120px, 1fr) auto;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+    .progress-track { height: 4px; overflow: hidden; background: #dfe6da; }
+    .progress-fill { width: 12.5%; height: 100%; background: var(--hippie); transition: width 180ms ease; }
+    .quiz-body { padding: clamp(24px, 5vw, 44px); }
+    .quiz-question {
+      margin-bottom: 20px;
+      font-size: clamp(27px, 4vw, 38px);
+      line-height: 1.22;
+      text-align: center;
+      letter-spacing: -.04em;
+      white-space: nowrap;
+    }
+    .quiz-swatch {
+      width: min(100%, 288px);
+      height: auto;
+      aspect-ratio: 1;
+      margin: 0 auto 24px;
+      border: 1px solid rgba(32, 52, 38, .2);
+    }
+    .options { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .option-button {
+      min-height: 56px;
+      padding: 10px 15px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--sheet);
+      cursor: pointer;
+      font-weight: 800;
+    }
+    .option-button:hover:not(:disabled) { border-color: var(--hippie); background: #eef3e9; }
+    .option-button.correct { border-color: #7ca17a; background: var(--correct-bg); }
+    .option-button.wrong { border-color: var(--peach); color: var(--danger); background: var(--danger-bg); }
+    .quiz-footer {
+      display: flex;
+      min-height: 74px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 20px;
+      border-top: 1px solid var(--line);
+    }
+    .feedback { margin-bottom: 0; color: var(--muted); font-size: 14px; font-weight: 750; }
+    .result { min-height: 350px; padding: 64px 24px; text-align: center; }
+    .result strong { display: block; margin-bottom: 12px; font-size: clamp(42px, 7vw, 66px); line-height: 1; }
+    .result p { margin-bottom: 24px; color: var(--muted); }
+
+    .personal-board {
+      display: grid;
+      grid-template-columns: minmax(220px, .72fr) minmax(0, 1.28fr);
+      border: 1px solid var(--line);
+      background: var(--sheet);
+    }
+    .personal-palette {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-content: start;
+      gap: 8px;
+      padding: 24px;
+      border-right: 1px solid var(--line);
+    }
+    .personal-color {
+      aspect-ratio: 1;
+      border: 2px solid var(--sheet);
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 0 1px rgba(32, 52, 38, .22);
+    }
+    .personal-color.active { box-shadow: 0 0 0 3px var(--hippie-dark); }
+    .personal-copy {
+      display: flex;
+      min-height: 260px;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(28px, 5vw, 54px);
+    }
+    .personal-task { padding: 18px 0; }
+    .personal-task + .personal-task { border-top: 1px solid var(--line); }
+    .personal-label { margin: 0 0 10px; color: var(--muted); font-size: 15px; font-weight: 750; }
+    .personal-sentence {
+      margin: 0;
+      font-size: clamp(27px, 4vw, 40px);
+      font-weight: 850;
+      line-height: 1.35;
+      letter-spacing: -.035em;
+    }
+    .page-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 86px;
+      color: var(--muted);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 15px;
+    }
+    .learning-material.learning-news.hide-english :is(.english-label, .english-copy) { display: none !important; }
+
+    @media (max-width: 800px) {
+      .page { padding-top: 30px; }
+      .intro { grid-template-columns: 1fr; gap: 18px; }
+      .lesson-index { grid-template-columns: repeat(5, auto); overflow-x: auto; }
+      .lesson-index a { min-width: 112px; }
+      .section-heading { grid-template-columns: 1fr; gap: 10px; }
+      .study-layout, .practice-stage, .personal-board { grid-template-columns: 1fr; }
+      .focus-panel, .practice-swatch, .personal-palette { border-right: 0; border-bottom: 1px solid var(--line); }
+      .focus-swatch { min-height: 220px; }
+      .practice-swatch { min-height: 245px; }
+      .personal-palette { grid-template-columns: repeat(8, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .brandbar-inner, .page { width: min(100% - 22px, 1080px); }
+      .brand span { font-size: 10px; }
+      .page { padding-top: 24px; }
+      .lesson-section { padding: 42px 0; }
+      .note-content, .sentence-comparison, .word-change-list { grid-template-columns: 1fr; }
+      .palette-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sentence-mode + .sentence-mode { border-top: 1px solid var(--line); border-left: 0; }
+      .word-change:nth-child(odd) { border-right: 0; }
+      .word-change:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+      .practice-question, .quiz-question { white-space: normal; }
+      .quiz-footer { align-items: stretch; flex-direction: column; }
+      .quiz-footer .primary-button { width: 100%; }
+      .personal-palette { grid-template-columns: repeat(4, 1fr); }
+      .personal-sentence { font-size: 27px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+    }
+  </style>
+<style>/* Shared learning surface, extracted from the approved Tiger and Gotgam lesson. */
+.learning-material {
+  --learning-title-size:30px;
+  --learning-section-size:22px;
+  --learning-body-size:16px;
+  --page-heading-size:var(--learning-title-size);
+  --learning-ink: #263c30;
+  --learning-muted: #52634f;
+  --learning-accent: #526c3d;
+  --learning-line: #dfe6db;
+  --learning-control-line: #c5d0bd;
+  --learning-paper: #fdfefd;
+  --learning-sheet: #fff;
+  --learning-tint: #edf3e3;
+  --learning-warm: #f3f7ed;
+  --learning-selected: #e4edcf;
+  --learning-radius: 14px;
+  --learning-radius-control: 8px;
+  --learning-radius-small: 4px;
+  --learning-shadow: 0 3px 8px rgb(38 60 48 / 7%);
+  --learning-font: Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  --ink: var(--learning-ink);
+  --muted: var(--learning-muted);
+  --line: var(--learning-line);
+  --blue: var(--learning-accent);
+  --pale: var(--learning-tint);
+  --paper: var(--learning-paper);
+  --warm: var(--learning-warm);
+  --radius: var(--learning-radius);
+  margin: 0;
+  color: var(--learning-ink);
+  background: var(--learning-paper);
+  font-family: var(--learning-font);
+  font-size:var(--learning-body-size);
+  line-height: 1.65;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  -webkit-text-size-adjust: 100%;
+}
+.learning-material *, .learning-material *::before, .learning-material *::after { box-sizing: border-box; }
+.learning-material [hidden] { display: none !important; }
+.learning-material :is(button, input, select, textarea) { font-family: inherit; }
+.learning-material :is(button, select, summary) { cursor: pointer; }
+.learning-material :is(button, select, summary, input:not([type=checkbox]):not([type=radio])) { min-height: 44px; }
+.learning-material :is(button, input, select, textarea, summary, a, [tabindex]):focus-visible {
+  outline: 2px solid var(--learning-accent);
+  outline-offset: 3px;
+}
+.learning-material :is(input, textarea) { caret-color: var(--learning-accent); }
+.learning-material :is(input, textarea)::placeholder { color: var(--learning-muted); opacity: 1; }
+.learning-material ::selection { background: var(--learning-selected); color: var(--learning-ink); }
+.learning-material { scrollbar-color: var(--learning-control-line) var(--learning-paper); }
+.learning-material ::-webkit-scrollbar { width: 9px; height: 9px; }
+.learning-material ::-webkit-scrollbar-thumb { background: var(--learning-control-line); border: 2px solid var(--learning-paper); border-radius: 9px; }
+.learning-material a { text-underline-offset: 4px; }
+.learning-material .learning-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px 28px;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto 28px;
+  padding: 0 0 24px;
+  border: 0;
+  border-bottom: 1px solid var(--learning-line);
+  background: transparent;
+  text-align: left;
+}
+.learning-material .learning-heading { flex: 1 1 360px; min-width: 0; }
+.learning-material .learning-heading h1 {
+  margin: 0;
+  color: var(--learning-ink);
+  font-family: var(--learning-font);
+  font-weight: 600;
+  line-height: 1.4;
+  font-size:var(--learning-title-size);
+  letter-spacing: -.025em;
+  white-space: normal;
+  text-wrap: balance;
+}
+.learning-material .learning-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: -10px 0 6px;
+  color: var(--learning-muted);
+  font-size: 15px;
+  text-decoration: none;
+}
+.learning-material .learning-back:hover { text-decoration: underline; }
+.learning-material .learning-heading .learning-subtitle {
+  max-width: 70ch;
+  margin: 2px 0 0;
+  color: var(--learning-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.learning-material .learning-tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px 12px; }
+.learning-material .learning-tools label { display: grid; gap: 6px; color: var(--learning-muted); font-size: 14px; }
+.learning-material .learning-tools select {
+  min-width: 128px;
+  max-width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--learning-control-line);
+  border-radius: 6px;
+  background: var(--learning-sheet);
+  color: var(--learning-ink);
+  font-size: 16px;
+}
+.learning-material .learning-body { width: 100%; max-width: 1120px; min-width: 0; margin-inline: auto; }
+.learning-material .learning-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--learning-control-line);
+  border-radius: 6px;
+  background: var(--learning-sheet);
+  color: var(--learning-ink);
+  font: 500 15px/1.5 var(--learning-font);
+  text-decoration: none;
+}
+.learning-material .learning-button:hover { background: var(--learning-tint); border-color: var(--learning-accent); }
+.learning-material .learning-button[aria-pressed=true], .learning-material .learning-button-primary {
+  border-color: var(--learning-accent);
+  background: var(--learning-selected);
+  color: var(--learning-ink);
+}
+.learning-material button:disabled { opacity: .5; cursor: default; }
+body.learning-material { padding: 32px 24px 56px; }
+body.learning-material.learning-embedded { padding: 0 0 24px; min-height: 0; }
+.learning-material .learning-note { margin: 12px 0; color: var(--learning-muted); font-size: 15px; }
+.learning-material .learning-example { border: 1px solid var(--learning-line); border-radius: 12px; padding: 14px 16px; background: var(--learning-warm); }
+.learning-material .learning-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin: 0 0 28px; }
+.learning-material .learning-steps button {
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid var(--learning-line);
+  border-radius: 8px;
+  background: var(--learning-sheet);
+  color: var(--learning-muted);
+  font-size: 15px;
+  text-align: left;
+}
+.learning-material .learning-steps button[aria-current=step] { border-color: var(--learning-ink); background: var(--learning-ink); color: #fff; }
+/* A compact scene picker retains direct navigation on narrow screens. */
+.learning-material .learning-mobile-scene-picker { display: none; }
+@media (max-width: 720px) {
+  .learning-material .learning-mobile-scene-picker { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--learning-muted); }
+  .learning-material .learning-mobile-scene-picker select { flex: 1; min-width: 0; min-height: 44px; border: 1px solid var(--learning-control-line); border-radius: 6px; padding: 8px 12px; color: var(--learning-ink); background: #fff; font: inherit; }
+  .learning-story :is(#chapters, .chapter-label) { display: none; }
+
+  body.learning-material { padding: 24px 20px 40px; }
+  body.learning-material.learning-embedded { padding: 0 0 20px; }
+  .learning-material .learning-header { margin-bottom: 24px; padding-bottom: 20px; gap: 16px; }
+  .learning-material .learning-heading { flex-basis: 100%; }
+  .learning-material .learning-tools { width: 100%; }
+  .learning-material .learning-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .learning-material *, .learning-material *::before, .learning-material *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
+@media print {
+  body.learning-material { padding: 0; background: #fff; }
+  .learning-material .learning-header { margin-bottom: 20px; padding-bottom: 12px; }
+  .learning-material :is(.learning-back, .learning-tools, .learning-steps) { display: none !important; }
+}
+
+/* Five learning formats: shared geometry, selection, and terminal actions. */
+.learning-material .learning-action-row {
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  gap:16px; width:100%; margin-top:28px; padding-top:20px;
+  border-top:1px solid var(--learning-line);
+}
+.learning-material .learning-action-row > :last-child { margin-inline-start:auto; }
+.learning-material .learning-action-row .learning-button { min-width:160px; border-radius:var(--learning-radius-control); }
+.learning-material .learning-action-row .learning-button-primary {
+  background:var(--learning-ink); border-color:var(--learning-ink); color:#fff;
+}
+.learning-material .learning-action-row .learning-button-primary:hover { background:#354a30; }
+.learning-material.learning-story :is(button,select,.btn) { border-radius:var(--learning-radius-control); }
+.learning-material.learning-story :is(.bubble,.resource,.practice,.after,.overview,.note) { border-radius:var(--learning-radius); }
+.learning-material.learning-story :is(.story-scene-image,.scene-img) { border-radius:var(--learning-radius); }
+.learning-material.learning-story .ch-nav { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:stretch; width:100%; }
+.learning-material.learning-story .ch-nav button { width:100%; min-height:48px; }
+.learning-material.learning-story .ch-nav button:last-child { background:var(--learning-ink); border-color:var(--learning-ink); color:#fff; }
+.learning-material.learning-story .scene-button[aria-pressed=true] { border-color:var(--learning-ink); background:var(--learning-ink); color:#fff; font-weight:600; }
+.learning-material.learning-story .scene-button[aria-pressed=true] small { color:inherit; }
+.learning-material.learning-story .after-activities label:has(input:checked) { background:var(--learning-selected); outline:1px solid var(--learning-accent); outline-offset:-1px; border-radius:var(--learning-radius-control); }
+.learning-material.learning-story .after-activities label { padding:10px 12px; }
+.learning-material.learning-story .after .reveal { display:block; margin-inline-start:auto; min-width:160px; }
+.learning-material.learning-grammar :is(.learning-header,.learning-body) { max-width:740px; }
+.learning-material.learning-grammar :is(.box,.note,.photo) { border-radius:var(--learning-radius); }
+.learning-material.learning-grammar :is(.checker input,.opts button,.learning-button) { border-radius:var(--learning-radius-control); }
+.learning-material.learning-grammar .opts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); width:100%; }
+.learning-material.learning-grammar .opts button { width:100%; min-width:0; }
+.learning-material.learning-grammar .opts button[aria-pressed=true] { box-shadow:inset 0 0 0 1px currentColor; font-weight:600; }
+.learning-material.learning-grammar .tag { border-radius:var(--learning-radius-small); }
+.learning-material.learning-numbers :is(.learning-header,.learning-body) { max-width:640px; }
+.learning-material.learning-numbers :is(.mode-toggle,.cats,.progress-wrap,.card-scene,.nav) { width:100%; max-width:640px; margin-inline:auto; }
+.learning-material.learning-numbers :is(.mode-toggle,.card-face,.card-scene) { border-radius:var(--learning-radius); }
+.learning-material.learning-numbers :is(.mode-btn,.cat-btn,.nav-btn,.flip-btn,.learning-button) { border-radius:var(--learning-radius-control); }
+.learning-material.learning-numbers :is(.mode-btn,.cat-btn)[aria-pressed=true] { background:var(--learning-ink); border-color:var(--learning-ink); color:#fff; box-shadow:inset 0 0 0 1px var(--learning-ink); font-weight:600; }
+.learning-material.learning-numbers .nav { display:grid; grid-template-columns:48px minmax(0,1fr) minmax(0,1fr); align-items:stretch; }
+.learning-material.learning-numbers .nav > button { width:100%; min-width:0; min-height:54px; }
+.learning-material.learning-numbers .nav .nav-next { height:auto; font:inherit; font-size:15px; padding:7px 10px; }
+.learning-material.learning-numbers .card-tag { border-radius:var(--learning-radius-small); }
+.learning-material.learning-pronunciation :is(.learning-header,.learning-body) { max-width:1120px; }
+.learning-material.learning-pronunciation :is(.contrast-card,.why-shell,.test-card,.step,.sequence) { border-radius:var(--learning-radius); }
+.learning-material.learning-pronunciation :is(.feature-board,.ear-box,.pair,.air,.sound-circle,.learning-button) { border-radius:var(--learning-radius-control); }
+@media(max-width:620px) {
+  .learning-material .learning-action-row .learning-button-primary { width:100%; }
+  .learning-material.learning-grammar .opts { grid-template-columns:minmax(0,1fr); }
+  .learning-material.learning-story .ch-nav { gap:10px; }
+  .learning-material.learning-numbers .nav { gap:8px; }
+}
+
+.learning-material.learning-numbers .mode-toggle { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); padding:4px; }
+.learning-material.learning-numbers .mode-btn { width:100%; min-width:0; }
+
+/* Match the visible text and chevron insets while retaining the native select. */
+.learning-material select:not([multiple]):not([size]),
+.learning-material.learning-kpop select:not([multiple]):not([size]) {
+  --learning-select-inset:16px;
+  appearance:none;
+  -webkit-appearance:none;
+  padding-inline-start:var(--learning-select-inset);
+  padding-inline-end:44px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='m1 1.5 5 5 5-5' stroke='%23263c30' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right var(--learning-select-inset) center;
+  background-size:12px 8px;
+}
+@media(forced-colors:active) {
+  .learning-material select:not([multiple]):not([size]),
+  .learning-material.learning-kpop select:not([multiple]):not([size]) {
+    appearance:auto;
+    -webkit-appearance:auto;
+    background-image:none;
+    padding-inline-end:var(--learning-select-inset);
+  }
+}
+
+/* Compact phones retain the same title, section and body hierarchy. */
+@media(max-width:620px) {
+ .learning-material { --learning-title-size:26px; --learning-section-size:20px; }
+}
+
+/* Keep bilingual headings together across public learning materials. */
+.learning-material:is(.learning-grammar,.learning-numbers,.learning-pronunciation,.learning-word-order,.learning-colors,.learning-story,.learning-kpop) .learning-heading h1 { line-height:1.3; }
+.learning-material:is(.learning-grammar,.learning-numbers,.learning-pronunciation,.learning-word-order,.learning-colors,.learning-story,.learning-kpop) .learning-heading .learning-subtitle { margin-top:0; line-height:1.4; }
+.learning-material.learning-grammar h2:has(+ .en) { margin-bottom:0; line-height:1.3; }
+.learning-material.learning-grammar h2 + .en { margin-top:0; line-height:1.4; }
+.learning-material.learning-story .scene-head h2 { margin-bottom:0; line-height:1.3; }
+.learning-material.learning-story .scene-head h2 + p { margin-top:0; line-height:1.4; }
+
+/* Explanatory notes are plain text, without decorative rounded callouts. */
+.learning-material.learning-linking .note,
+.learning-material.learning-grammar .note,
+.learning-material.learning-story .note,
+.learning-material.learning-pronunciation :is(.ear-box,.variation-note,.tutor-note) {
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  padding:0;
+}
+
+/* Unified material title header. Body content and activity widths remain independent. */
+.learning-material.learning-material .learning-header {
+ display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:end; gap:16px 24px;
+ width:100%; margin:0 auto 28px; padding:0 0 24px; border:0; border-bottom:1px solid var(--learning-line,#dfe6db); text-align:left; background:transparent;
+}
+.learning-material.learning-material .learning-header .learning-heading { min-width:0; }
+.learning-material.learning-material .learning-header .learning-back { display:flex; align-items:center; width:fit-content; min-height:44px; margin:0 0 8px; padding:0; font-size:15px; font-weight:400; color:var(--learning-muted,#52634f); }
+.learning-material.learning-material .learning-header h1 { margin:0; padding:0; font:600 30px/1.3 var(--learning-font,Pretendard,sans-serif); letter-spacing:-.025em; color:var(--learning-ink,#263c30); text-align:left; }
+.learning-material.learning-material .learning-header .learning-subtitle { display:block; margin:0; padding:0; font:400 15px/1.4 var(--learning-font,Pretendard,sans-serif); color:var(--learning-muted,#52634f); }
+.learning-material.learning-material .learning-header .learning-tools { display:flex; flex-wrap:wrap; align-items:end; justify-content:flex-end; gap:8px; margin:0; }
+.learning-material.learning-material .learning-header .learning-tools:empty { display:none; }
+.learning-material.learning-material .learning-header .learning-tools :is(button,select,a) { min-height:44px; border-radius:8px; font-size:15px; }
+.learning-material.learning-material .learning-header .learning-tools button { display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:10px 14px; border:1px solid var(--learning-control-line,#c5d0bd); background:#fff; color:var(--learning-ink,#263c30); }
+.learning-material.learning-material .learning-header .learning-tools button:hover { background:var(--learning-warm,#f3f7ed); }
+@media(max-width:620px) {
+ .learning-material.learning-material .learning-header { grid-template-columns:minmax(0,1fr); gap:16px; margin-bottom:24px; padding-bottom:20px; }
+ .learning-material.learning-material .learning-header h1 { font-size:26px; }
+ .learning-material.learning-material .learning-header .learning-tools { justify-content:flex-end; width:100%; }
+}
+</style>
+<style>.learning-material.learning-word-order,
+.learning-material.learning-colors {
+  background:var(--learning-paper);
+  color:var(--learning-ink);
+  font-family:var(--learning-font);
+  font-size:var(--learning-body-size);
+  line-height:1.6;
+  background-image:none;
+}
+.learning-word-order .wrap { max-width:800px; padding:32px 20px 48px; }
+.learning-word-order .learning-header { margin-bottom:24px; }
+.learning-word-order :is(.en,.eng,.flag,.oslot h2,.practice h2,.sec h2,.rule .big) { font-family:var(--learning-font); font-style:normal; }
+.learning-word-order :is(.rule,.compare,.exrow,.oslot,.practice) { box-shadow:none; border:1px solid var(--learning-line); border-radius:14px; }
+.learning-word-order .rule { background:var(--learning-tint); border:0; padding:20px; margin:0 0 24px; text-align:left; }
+.learning-word-order .rule .big { font-size:16px; line-height:1.4; }
+.learning-word-order .rule .en { margin-top:2px; font-size:15px; line-height:1.4; }
+.learning-word-order .compare { padding:20px; background:var(--learning-sheet); }
+.learning-word-order h2 { font-size:var(--learning-section-size); font-weight:600; line-height:1.4; }
+.learning-word-order :is(.sec h2,.oslot h2,.practice h2) { font-size:var(--learning-section-size); }
+.learning-word-order :is(.compare,.exrow) .line { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+.learning-word-order .blk { min-width:0; text-align:center; padding:10px; border-radius:8px; font-size:20px; overflow-wrap:anywhere; }
+.learning-word-order .blk small { margin-bottom:2px; }
+.learning-word-order .divider { padding:12px 0; font-size:14px; }
+.learning-word-order .exrow .eng { margin-top:2px; line-height:1.4; }
+.learning-word-order details.q summary { min-height:44px; }
+.learning-word-order details.q summary .eng { font-family:var(--learning-font); font-style:normal; }
+.learning-colors { --ecru:var(--learning-paper); --ink:var(--learning-ink); --muted:var(--learning-muted); --line:var(--learning-line); --hippie:var(--learning-accent); --hippie-dark:var(--learning-ink); }
+.learning-colors .brandbar { background:#304027; position:static; border-bottom:0; }
+.learning-colors :is(.page,.brandbar) { max-width:960px; margin-inline:auto; }
+.learning-colors .intro { padding-block:20px 24px; }
+.learning-colors .intro h1 { margin-bottom:0; font-family:var(--learning-font); font-size:var(--learning-title-size); font-weight:600; line-height:1.35; }
+.learning-colors .intro-copy { margin-top:2px; font-size:15px; line-height:1.4; }
+.learning-colors h2 { font-size:var(--learning-section-size); line-height:1.4; }
+.learning-colors :is(.focus-panel,.practice-stage,.quiz-stage,.personal-board) { border-radius:14px; box-shadow:none; }
+.learning-colors button { font-family:var(--learning-font); min-height:44px; border-radius:8px; }
+.learning-colors .options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+.learning-colors .option-button { width:100%; text-align:center; }
+.learning-colors .feedback:empty { display:none; }
+.learning-colors .primary-button { display:inline-flex; justify-content:center; align-items:center; gap:8px; }
+.learning-colors .quiz-footer { justify-content:space-between; }
+.learning-colors #nextQuestion { margin-left:auto; }
+@media(max-width:620px) {
+  .learning-word-order .wrap { padding:24px 16px 40px; }
+  .learning-word-order .blk { font-size:16px; padding:8px 4px; }
+  .learning-word-order .compare { padding:16px; }
+}
+
+@media(max-width:620px) {
+  .learning-colors .brandbar-inner { gap:10px; }
+  .learning-colors .brand { display:block; }
+  .learning-colors .brand strong { font-size:18px; white-space:nowrap; }
+  .learning-colors .brand span { display:block; }
+  .learning-colors #englishToggle { flex-shrink:0; white-space:nowrap; padding-inline:8px; }
+}
+
+/* Match the shared material header used by the word-order lesson. */
+.learning-colors .page { width:100%; max-width:960px; padding:32px 20px 48px; }
+.learning-colors .learning-header { margin-bottom:24px; }
+.learning-colors .learning-tools .text-button { color:var(--learning-ink); background:var(--learning-sheet); border:1px solid var(--learning-control-line); }
+.learning-colors .learning-tools .text-button[aria-pressed="true"] { background:var(--learning-selected); }
+@media(max-width:620px) {
+  .learning-colors .page { padding:24px 16px 40px; }
+  .learning-colors .learning-heading { flex:1 1 190px; }
+  .learning-colors .learning-header { gap:12px; }
+}
+</style>
+<style>/* Unified material title header. Body content and activity widths remain independent. */
+.learning-material.learning-material .learning-header {
+ display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:end; gap:16px 24px;
+ width:100%; margin:0 auto 28px; padding:0 0 24px; border:0; border-bottom:1px solid var(--learning-line,#dfe6db); text-align:left; background:transparent;
+}
+.learning-material.learning-material .learning-header .learning-heading { min-width:0; }
+.learning-material.learning-material .learning-header .learning-back { display:flex; align-items:center; width:fit-content; min-height:44px; margin:0 0 8px; padding:0; font-size:15px; font-weight:400; color:var(--learning-muted,#52634f); }
+.learning-material.learning-material .learning-header h1 { margin:0; padding:0; font:600 30px/1.3 var(--learning-font,Pretendard,sans-serif); letter-spacing:-.025em; color:var(--learning-ink,#263c30); text-align:left; }
+.learning-material.learning-material .learning-header .learning-subtitle { display:block; margin:0; padding:0; font:400 15px/1.4 var(--learning-font,Pretendard,sans-serif); color:var(--learning-muted,#52634f); }
+.learning-material.learning-material .learning-header .learning-tools { display:flex; flex-wrap:wrap; align-items:end; justify-content:flex-end; gap:8px; margin:0; }
+.learning-material.learning-material .learning-header .learning-tools:empty { display:none; }
+.learning-material.learning-material .learning-header .learning-tools :is(button,select,a) { min-height:44px; border-radius:8px; font-size:15px; }
+.learning-material.learning-material .learning-header .learning-tools button { display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:10px 14px; border:1px solid var(--learning-control-line,#c5d0bd); background:#fff; color:var(--learning-ink,#263c30); }
+.learning-material.learning-material .learning-header .learning-tools button:hover { background:var(--learning-warm,#f3f7ed); }
+@media(max-width:620px) {
+ .learning-material.learning-material .learning-header { grid-template-columns:minmax(0,1fr); gap:16px; margin-bottom:24px; padding-bottom:20px; }
+ .learning-material.learning-material .learning-header h1 { font-size:26px; }
+ .learning-material.learning-material .learning-header .learning-tools { justify-content:flex-end; width:100%; }
+}
+</style>
+<style>
+/* 수능 뉴스 자료 전용 (공통 디자인 위에 추가) */
+.learning-news .learning-tools label { display:flex; align-items:center; gap:8px; }
+.learning-news .learning-tools select { min-width:120px; }
+.learning-news .level-copy { margin:0; color:var(--learning-muted); font-size:15px; }
+
+.learning-news .fact-strip {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  margin-bottom:18px; border:1px solid var(--line); border-radius:14px; background:var(--learning-sheet); overflow:hidden;
+}
+.learning-news .fact { padding:16px 18px; border-right:1px solid var(--line); }
+.learning-news .fact:last-child { border-right:0; }
+.learning-news .fact-num { display:block; color:var(--learning-ink); font-size:28px; font-weight:800; line-height:1.15; letter-spacing:-.03em; }
+.learning-news .fact-label { display:block; margin-top:4px; color:var(--muted); font-size:14px; font-weight:700; }
+
+.learning-news .reading-board { border:1px solid var(--line); border-radius:14px; background:var(--learning-sheet); }
+.learning-news .reading-head { padding:22px 26px 18px; border-bottom:1px solid var(--line); }
+.learning-news .reading-date { margin:0 0 6px; color:var(--muted); font-size:13px; font-weight:800; letter-spacing:.06em; }
+.learning-news .reading-title { margin:0; font-size:24px; font-weight:800; line-height:1.35; letter-spacing:-.03em; }
+.learning-news .reading-para { padding:18px 26px; border-bottom:1px solid var(--line); }
+.learning-news .reading-para:last-child { border-bottom:0; }
+.learning-news .reading-para .ko { margin:0; font-size:18px; line-height:1.8; }
+.learning-news .reading-para .english-copy { margin:6px 0 0; color:var(--muted); font-size:15px; line-height:1.6; }
+.learning-news .kw { padding:0 3px; border-radius:4px; background:var(--learning-selected); font-weight:700; }
+.learning-news .source-note { margin:12px 0 0; color:var(--muted); font-size:13px; }
+
+.learning-news .vocab-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+.learning-news .palette-button { grid-template-columns:42px minmax(0,1fr); }
+.learning-news .mini-swatch { background:var(--learning-tint); font-size:21px; }
+.learning-news .focus-swatch { background:var(--learning-tint); }
+.learning-news .focus-emoji { font-size:92px; line-height:1; }
+.learning-news .vocab-count { margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--line); color:var(--muted); font-size:14px; font-weight:800; }
+.learning-news .focus-word { font-size:clamp(32px,4.5vw,46px); }
+.learning-news .example-line .english-copy { display:block; margin-top:2px; color:var(--muted); font-size:14px; font-weight:500; }
+
+.learning-news .sentence-mode p { font-size:clamp(19px,2.6vw,24px); }
+.learning-news .sentence-mode .english-copy { display:block; margin-top:6px; color:var(--muted); font-size:14px; font-weight:500; letter-spacing:0; }
+.learning-news .grammar-tip { margin:0; padding:16px 20px; border-top:1px solid var(--line); color:var(--muted); font-size:15px; }
+.learning-news .grammar-tip strong { color:var(--ink); }
+.learning-news .word-change .after { font-size:16px; }
+
+.learning-news .quiz-question { white-space:normal; font-size:clamp(22px,3vw,28px); line-height:1.4; }
+.learning-news .quiz-en { margin:-10px 0 22px; color:var(--muted); font-size:15px; text-align:center; }
+.learning-news .feedback { line-height:1.5; }
+
+.learning-news .talk-board { border:1px solid var(--line); border-radius:14px; background:var(--learning-sheet); }
+.learning-news .talk-item { padding:24px 28px; border-bottom:1px solid var(--line); }
+.learning-news .talk-item:last-child { border-bottom:0; }
+.learning-news .talk-q { margin:0; font-size:clamp(21px,3vw,26px); font-weight:800; line-height:1.4; letter-spacing:-.025em; }
+.learning-news .talk-item .english-copy { margin:4px 0 0; color:var(--muted); font-size:15px; }
+.learning-news .talk-starter { display:inline-block; margin:14px 0 0; padding:9px 14px; border-radius:8px; background:var(--learning-tint); font-size:16px; }
+.learning-news .talk-starter small { margin-right:8px; color:var(--muted); font-size:13px; font-weight:800; }
+
+@media (max-width:560px) {
+  .learning-news .fact-num { font-size:22px; white-space:nowrap; }
+  .learning-news .focus-swatch { min-height:170px; }
+  .learning-news .focus-emoji { font-size:72px; }
+  .learning-news .reading-head, .learning-news .reading-para, .learning-news .talk-item { padding-inline:18px; }
+  .learning-news .fact { border-right:0; border-bottom:1px solid var(--line); }
+  .learning-news .fact:last-child { border-bottom:0; }
+}
+
+.learning-news .source-links { padding:0 18px 18px; font-size:15px; }
+.learning-news .source-links a { color:var(--learning-accent); text-underline-offset:3px; }
+.learning-news .quiz-help, .learning-news .quiz-reset { padding:14px 20px; margin:0; border-top:1px solid var(--line); font-size:14px; }
+.learning-news .focus-swatch { min-height:160px; }
+.learning-news .focus-panel { grid-template-rows:minmax(160px,.6fr) auto; }
+@media(max-width:620px) { body.learning-news { padding-inline:0; } .learning-news .options { grid-template-columns:1fr; } .learning-news .quiz-status { grid-template-columns:1fr auto; } .learning-news .progress-track { grid-column:1 / -1; grid-row:2; } }
+</style>
+</head>
+<body class="learning-material learning-colors learning-news">
+  <main class="page">
+    <header class="learning-header">
+      <div class="learning-heading">
+        <a class="learning-back" href="./learn/index.html" target="_top">자료 목록</a>
+        <h1>수능 부정행위 뉴스</h1>
+        <p class="learning-subtitle english-copy" lang="en">Cheating on Korea's College Entrance Exam</p>
+      </div>
+      <div class="learning-tools">
+        <label>단계
+          <select id="levelSelect" aria-label="단계 고르기">
+            <option value="1">초급</option>
+            <option value="2">초중급</option>
+            <option value="3">중급</option>
+          </select>
+        </label>
+        <button class="text-button" id="englishToggle" type="button" aria-pressed="false">영어 숨기기</button>
+      </div>
+    </header>
+
+    <nav class="lesson-index" aria-label="학습 순서">
+      <a class="active" href="#read">01 기사 읽기</a>
+      <a href="#words">02 단어</a>
+      <a href="#grammar">03 표현</a>
+      <a href="#check">04 확인하기</a>
+      <a href="#talk">05 이야기해요</a>
+    </nav>
+
+    <section class="lesson-section" id="read" aria-labelledby="read-title">
+      <div class="section-heading">
+        <div><p class="section-number">01 · 기사 읽기</p><h2 id="read-title">무슨 일이 있었어요?</h2></div>
+        <p class="section-copy" id="levelCopy"></p>
+      </div>
+      <div class="fact-strip" id="factStrip"></div>
+      <article class="reading-board">
+        <div class="reading-head">
+          <p class="reading-date">2026. 11. 19. · 뉴스</p>
+          <h3 class="reading-title" id="readingTitle"></h3>
+        </div>
+        <div id="readingBody"></div>
+      </article>
+      <p class="source-note" id="sourceNote"></p><details class="language-note"><summary>기사 출처를 확인해요.</summary><div class="source-links"><p>기사를 학생 수준에 맞게 다시 쓴 글이에요. 98명은 4교시가 끝났을 때 스마트기기 관련 부정행위로 적발된 사람 수예요. 최종 숫자는 달라질 수 있어요.</p><ul><li><a href="https://www.bbc.com/korean/articles/cqdj1ywpk9d2o" target="_blank" rel="noopener noreferrer">BBC · 4교시 종료 기준 98명, 재난문자로 49명</a></li><li><a href="https://www.voakorea.com/amp/8225633.html" target="_blank" rel="noopener noreferrer">VOA · 11월 19일 수능 관련 보도</a></li><li><a href="https://www.joongang.co.kr/article/25480074" target="_blank" rel="noopener noreferrer">중앙일보 · 오전 문자 발송 후 당시까지 스마트폰 22개</a></li></ul><p>기사가 나온 시간이 달라서 숫자도 달라요.</p></div></details>
+
+      <details class="language-note" id="cultureNote">
+        <summary>수능 날 한국은 어때요? <span class="english-copy" lang="en">What is Korea like on Suneung day?</span></summary>
+        <div class="note-content">
+          <p>영어 듣기 시간에는 비행기가 뜨거나 내리지 않아요. 시험장 근처에서는 자동차 경적도 조심해요. <span class="english-copy" lang="en">During the English listening section, planes do not take off or land. Drivers near test sites try not to honk.</span></p>
+          <p>수능 전에는 <strong>엿</strong>이나 <strong>찹쌀떡</strong>을 선물해요. 끈적끈적한 음식처럼 시험에 착 <strong>붙으라</strong>는 뜻이에요. <span class="english-copy" lang="en">Before the Suneung, people give yeot (taffy) or chapssal-tteok (sticky rice cakes). Sticky food means "stick to (= pass) the exam."</span></p>
+        </div>
+      </details>
+    </section>
+
+    <section class="lesson-section" id="words" aria-labelledby="words-title">
+      <div class="section-heading">
+        <div><p class="section-number">02 · 단어</p><h2 id="words-title">기사에 나온 단어</h2></div>
+        <p class="section-copy">단어를 누르면 뜻과 예문이 나와요.</p>
+      </div>
+      <div class="study-layout">
+        <article class="focus-panel" aria-live="polite">
+          <div class="focus-swatch"><span class="focus-emoji" id="focusEmoji" aria-hidden="true"></span></div>
+          <div class="focus-copy">
+            <div class="focus-topline"><span class="english-label" id="focusEnglish" lang="en"></span></div>
+            <h3 class="focus-word" id="focusWord"></h3>
+            <p class="alternate-row" id="focusAlternate"></p>
+            <p class="example-line" id="focusExample"></p>
+            <p class="culture-line" id="focusNote"></p>
+          </div>
+        </article>
+        <div class="palette-panel">
+          <p class="vocab-count" id="vocabCount"></p>
+          <div class="vocab-grid" id="vocabGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="grammar" aria-labelledby="grammar-title">
+      <div class="section-heading">
+        <div><p class="section-number">03 · 표현</p><h2 id="grammar-title"></h2></div>
+        <p class="section-copy" id="grammarCopy"></p>
+      </div>
+      <div class="sentence-board">
+        <div class="sentence-comparison" id="grammarCompare"></div>
+        <div class="word-change-list" id="grammarList"></div>
+        <p class="grammar-tip" id="grammarTip"></p>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="check" aria-labelledby="check-title">
+      <div class="section-heading">
+        <div><p class="section-number">04 · 확인하기</p><h2 id="check-title">기사 내용 확인하기</h2></div>
+      </div>
+      <div class="quiz-stage" id="quizStage">
+        <div class="quiz-status">
+          <span id="quizProgress"></span>
+          <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+          <span>처음에 맞힌 수 <strong id="score">0</strong></span>
+        </div>
+        <p class="quiz-help">처음에 맞히면 1점이에요. 틀리면 다시 고를 수 있어요. 단계마다 푼 내용을 이 탭에 기억해요.</p><div id="quizContent"></div><div class="quiz-reset"><button class="secondary-button" id="resetQuiz" type="button">이 단계 처음부터 풀기</button></div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="talk" aria-labelledby="talk-title">
+      <div class="section-heading">
+        <div><p class="section-number">05 · 이야기해요</p><h2 id="talk-title">내 생각을 말해요</h2></div>
+      </div>
+      <div class="talk-board" id="talkBoard"></div>
+    </section>
+  </main>
+  <footer class="page-footer">Allbarun Korean · with Hanim</footer>
+
+  <script>
+    const LEVELS = {
+  "1": {
+    "copy": "아주 쉬운 문장으로 읽어요.",
+    "facts": [
+      [
+        "11월 19일",
+        "시험을 본 날"
+      ],
+      [
+        "3번",
+        "재난문자를 보낸 횟수"
+      ]
+    ],
+    "title": "수능 날, 휴대폰이 '삐-' 울렸어요",
+    "paras": [
+      [
+        "11월 19일에 한국에서 큰 [[시험]]이 있었어요. 이름은 [[수능]]이에요.",
+        "On November 19, there was a big exam in Korea. It is called the Suneung."
+      ],
+      [
+        "수능은 대학교에 가려고 보는 시험이에요.",
+        "The Suneung is an exam students take to enter university."
+      ],
+      [
+        "학생들은 시험 전에 [[휴대폰]]을 선생님에게 내야 해요.",
+        "Students must hand their phones to the teacher before the exam."
+      ],
+      [
+        "그런데 휴대폰을 내지 않은 학생들이 있었어요.",
+        "But some students did not hand in their phones."
+      ],
+      [
+        "정부는 전국에 재난[[문자]]를 세 번 보냈어요.",
+        "The government sent emergency alerts nationwide three times."
+      ],
+      [
+        "휴대폰에서 [[소리]]가 났어요. 선생님은 그 소리를 듣고 휴대폰을 찾았어요.",
+        "Phones made a sound. Teachers heard the sound and found the phones."
+      ],
+      [
+        "휴대폰을 쓰지 않아도 선생님에게 내지 않으면 안 돼요.",
+        "Even if students do not use their phones, they must hand them in."
+      ]
+    ],
+    "vocab": [
+      {
+        "w": "수능",
+        "e": "Korea's college entrance exam",
+        "i": "📝",
+        "ex": [
+          "수능은 11월에 있어요.",
+          "The Suneung is in November."
+        ]
+      },
+      {
+        "w": "시험",
+        "e": "test, exam",
+        "i": "✏️",
+        "ex": [
+          "내일 한국어 시험이 있어요.",
+          "I have a Korean test tomorrow."
+        ],
+        "n": "시험을 봐요."
+      },
+      {
+        "w": "휴대폰",
+        "e": "cell phone",
+        "i": "📱",
+        "ex": [
+          "시험 시간에 휴대폰은 안 돼요.",
+          "No phones during the test."
+        ],
+        "alt": "핸드폰"
+      },
+      {
+        "w": "문자",
+        "e": "text message",
+        "i": "💬",
+        "ex": [
+          "친구에게 문자를 보내요.",
+          "I send a text to my friend."
+        ],
+        "n": "재난문자는 위험한 일이 있을 때 정부가 보내는 문자예요. 이번에는 휴대폰을 찾으려고 보냈어요."
+      },
+      {
+        "w": "소리",
+        "e": "sound",
+        "i": "🔔",
+        "ex": [
+          "휴대폰에서 소리가 났어요.",
+          "A sound came from the phone."
+        ],
+        "n": "휴대폰에서 소리가 나요."
+      }
+    ],
+    "grammar": {
+      "title": "-(으)면 안 돼요",
+      "copy": "하면 안 되는 일을 말해요.",
+      "compare": [
+        [
+          "돼요 ⭕",
+          "연필은 돼요.",
+          "Pencils are OK."
+        ],
+        [
+          "안 돼요 ❌",
+          "휴대폰은 안 돼요.",
+          "Phones are not OK."
+        ]
+      ],
+      "list": [
+        [
+          "휴대폰을 쓰다",
+          "시험 중에 휴대폰을 쓰면 안 돼요."
+        ],
+        [
+          "친구와 말하다",
+          "시험 중에 친구와 말하면 안 돼요."
+        ],
+        [
+          "사진을 찍다",
+          "시험 중에 사진을 찍으면 안 돼요."
+        ],
+        [
+          "휴대폰을 가지고 있다",
+          "휴대폰을 내지 않고 가지고 있으면 안 돼요."
+        ]
+      ],
+      "tip": "<strong>받침이 없으면 -면</strong>을 붙여요. 쓰다 → 쓰면 안 돼요. <strong>받침이 있으면 -으면</strong>을 붙여요. 찍다 → 찍으면 안 돼요. <strong>ㄹ 받침 뒤에는 -면</strong>을 붙여요. 놀다 → 놀면 안 돼요."
+    },
+    "quiz": [
+      {
+        "q": "수능은 뭐예요?",
+        "en": "What is the Suneung?",
+        "a": "대학교에 가려고 보는 시험",
+        "o": [
+          "음식",
+          "노래",
+          "운동"
+        ],
+        "x": "수능은 대학교에 가려고 보는 시험이에요."
+      },
+      {
+        "q": "시험 전에 휴대폰을 누구에게 내야 해요?",
+        "en": "Who must students hand their phones to before the exam?",
+        "a": "선생님",
+        "o": [
+          "친구",
+          "동생",
+          "의사"
+        ],
+        "x": "시험 전에 선생님에게 휴대폰을 내야 해요."
+      },
+      {
+        "q": "정부는 재난문자를 몇 번 보냈어요?",
+        "en": "How many times did the government send an emergency alert?",
+        "a": "세 번",
+        "o": [
+          "한 번",
+          "두 번",
+          "다섯 번"
+        ],
+        "x": "정부는 재난문자를 세 번 보냈어요."
+      },
+      {
+        "q": "선생님은 무엇을 듣고 휴대폰을 찾았어요?",
+        "en": "What did teachers hear that helped them find phones?",
+        "a": "휴대폰 소리",
+        "o": [
+          "노래",
+          "친구 이름",
+          "비 소리"
+        ],
+        "x": "선생님은 휴대폰 소리를 듣고 찾았어요."
+      },
+      {
+        "q": "휴대폰을 쓰지 않으면 내지 않아도 돼요?",
+        "en": "Can students keep their phones if they do not use them?",
+        "a": "아니요. 내야 해요.",
+        "o": [
+          "네. 안 내도 돼요.",
+          "가방에 넣으면 돼요.",
+          "책상 밑에 두면 돼요."
+        ],
+        "x": "휴대폰을 쓰지 않아도 선생님에게 내야 해요."
+      }
+    ],
+    "talk": [
+      [
+        "여러분 나라에도 큰 시험이 있어요?",
+        "Is there a big exam in your country too?",
+        "네, 있어요. / 아니요, 없어요."
+      ],
+      [
+        "수능 전에 휴대폰을 누구에게 내야 해요?",
+        "Who must students hand their phones to before the Suneung?",
+        "선생님에게 내야 해요."
+      ],
+      [
+        "시험 중에 무엇을 하면 안 돼요?",
+        "What must you not do during an exam?",
+        "친구와 말하면 안 돼요."
+      ]
+    ]
+  },
+  "2": {
+    "copy": "누가 했는지, 누구에게 일이 생겼는지 읽어요.",
+    "facts": [
+      [
+        "49명",
+        "재난문자로 찾은 사람"
+      ],
+      [
+        "98명",
+        "스마트기기 관련 잠정 집계"
+      ]
+    ],
+    "title": "재난문자가 찾아낸 휴대폰",
+    "paras": [
+      [
+        "11월 19일 목요일, 한국에서 2027학년도 [[수능]]이 있었어요. 수능은 학생들이 대학교에 가려고 보는 아주 중요한 시험이에요.",
+        "On Thursday, November 19, Korea held the Suneung for the 2027 school year. The Suneung is a very important exam that students take to get into university."
+      ],
+      [
+        "올해는 AI로 [[커닝]]할 수 있다는 걱정이 컸어요. 다른 시험에서 작은 카메라와 AI를 이용한 부정행위가 문제가 됐기 때문이에요.",
+        "This year, there were concerns about cheating with AI. Cheating using a tiny camera and AI on another exam had become an issue."
+      ],
+      [
+        "[[감독관]]들은 시험 전에 학생들의 안경과 옷을 [[검사했어요]]. 옷 단추에는 스티커를 붙였어요.",
+        "Proctors checked students’ glasses and clothing before the exam. They put stickers on clothing buttons."
+      ],
+      [
+        "정부는 전국에 [[재난문자]]를 세 번 보냈어요. 내지 않은 휴대폰에서 경보음이 [[울려서]] 휴대폰을 찾을 수 있었어요.",
+        "The government sent emergency alerts nationwide three times. Alarm sounds helped proctors find phones that had not been handed in."
+      ],
+      [
+        "재난문자로 49명이 [[적발됐어요]]. 휴대폰을 쓰지 않아도 감독관에게 내지 않으면 [[부정행위]]예요.",
+        "Emergency alerts helped identify 49 test-takers. Failing to hand a phone to a proctor counts as misconduct even if it is not used."
+      ],
+      [
+        "4교시가 끝난 뒤 스마트기기 관련 부정행위로 98명이 적발됐다고 발표했어요. 아직 최종 숫자는 아니에요. 스마트 안경을 가지고 있거나 휴대폰으로 문제지를 [[찍은]] 사례도 있었어요.",
+        "After the fourth period, 98 test-takers were reported for smart-device-related misconduct. This was not the final count. Cases included possessing smart glasses and photographing exam papers with a phone."
+      ]
+    ],
+    "vocab": [
+      {
+        "w": "수능",
+        "e": "Korea's college entrance exam",
+        "i": "📝",
+        "ex": [
+          "수능은 1년에 한 번 있어요.",
+          "The Suneung is held once a year."
+        ],
+        "alt": "대학수학능력시험의 줄임말"
+      },
+      {
+        "w": "커닝",
+        "e": "cheating (casual)",
+        "i": "🙈",
+        "ex": [
+          "친구 시험지를 보면 커닝이에요.",
+          "Looking at a friend's test paper is cheating."
+        ],
+        "alt": "시험에서 답을 몰래 보거나 도움을 받아요."
+      },
+      {
+        "w": "부정행위",
+        "e": "exam misconduct (formal)",
+        "i": "⚠️",
+        "ex": [
+          "뉴스에서는 '부정행위'라고 말해요.",
+          "The news uses the word '부정행위'."
+        ],
+        "n": "부정행위는 시험 규칙을 어기는 일이에요. 휴대폰을 내지 않는 일도 포함해요. 커닝보다 뜻이 넓어요."
+      },
+      {
+        "w": "감독관",
+        "e": "exam proctor",
+        "i": "🧑‍🏫",
+        "ex": [
+          "감독관이 교실을 돌아다녀요.",
+          "The proctor walks around the classroom."
+        ]
+      },
+      {
+        "w": "검사하다",
+        "e": "to inspect, to check",
+        "i": "🔍",
+        "ex": [
+          "감독관이 안경을 검사했어요.",
+          "The proctor checked the glasses."
+        ]
+      },
+      {
+        "w": "재난문자",
+        "e": "emergency alert text",
+        "i": "📢",
+        "ex": [
+          "어제 재난문자가 왔어요.",
+          "I got an emergency alert yesterday."
+        ],
+        "n": "재난은 지진이나 큰 비처럼 사람들에게 피해를 주는 일이에요. 재난문자는 보통 이런 일이 있을 때 와요."
+      },
+      {
+        "w": "울리다",
+        "e": "to ring, to go off",
+        "i": "🔔",
+        "ex": [
+          "수업 시간에 휴대폰이 울렸어요.",
+          "A phone went off during class."
+        ]
+      },
+      {
+        "w": "적발되다",
+        "e": "to be caught",
+        "i": "🚨",
+        "ex": [
+          "부정행위로 적발됐어요.",
+          "They were caught breaking exam rules."
+        ],
+        "alt": "말할 때 · 걸리다"
+      },
+      {
+        "w": "찍다",
+        "e": "to take (a photo)",
+        "i": "📷",
+        "ex": [
+          "휴대폰으로 사진을 찍었어요.",
+          "I took a photo with my phone."
+        ]
+      }
+    ],
+    "grammar": {
+      "title": "적발했어요 / 적발됐어요",
+      "copy": "일을 한 사람과 그 일을 겪은 사람을 나누어 말해요.",
+      "compare": [
+        [
+          "감독관이 한 일",
+          "감독관이 학생을 적발했어요.",
+          "The proctor caught the student."
+        ],
+        [
+          "학생에게 생긴 일",
+          "학생이 적발됐어요.",
+          "The student was caught."
+        ]
+      ],
+      "list": [
+        [
+          "감독관이 학생을 적발했어요.",
+          "학생이 적발됐어요."
+        ],
+        [
+          "정부가 문자를 발송했어요.",
+          "문자가 발송됐어요."
+        ],
+        [
+          "감독관이 기기를 확인했어요.",
+          "기기가 확인됐어요."
+        ]
+      ],
+      "tip": "<strong>적발하다 → 적발되다</strong>, <strong>발송하다 → 발송되다</strong>를 함께 익혀요. 모든 하다 동사를 되다로 바꿀 수 있는 것은 아니에요."
+    },
+    "quiz": [
+      {
+        "q": "수능은 언제 있었어요?",
+        "en": "When was the Suneung?",
+        "a": "11월 19일 목요일",
+        "o": [
+          "11월 15일 일요일",
+          "12월 11일 금요일",
+          "11월 9일 월요일"
+        ],
+        "x": "수능은 11월 19일 목요일에 있었어요."
+      },
+      {
+        "q": "올해 수능에서 무엇이 큰 걱정이었어요?",
+        "en": "What was the big worry this year?",
+        "a": "AI 커닝",
+        "o": [
+          "날씨",
+          "시험 날짜",
+          "학교 버스"
+        ],
+        "x": "다른 시험에서 카메라와 AI를 이용한 부정행위가 문제가 됐어요."
+      },
+      {
+        "q": "감독관은 시험 전에 무엇을 검사했어요?",
+        "en": "What did the proctors check before the test?",
+        "a": "안경",
+        "o": [
+          "신발",
+          "도시락",
+          "머리"
+        ],
+        "x": "감독관은 안경과 옷을 검사했어요."
+      },
+      {
+        "q": "재난문자로 몇 명이 적발됐어요?",
+        "en": "How many were caught by the alert text?",
+        "a": "49명",
+        "o": [
+          "98명",
+          "44명",
+          "5명"
+        ],
+        "x": "재난문자로 49명이 적발됐어요."
+      },
+      {
+        "q": "감독관이 학생을 적발했어요. → 학생이 ___.",
+        "en": "Change it: the student was caught.",
+        "a": "적발됐어요",
+        "o": [
+          "적발했어요",
+          "적발해요",
+          "적발하세요"
+        ],
+        "x": "하다 → 되다. 학생이 적발됐어요."
+      },
+      {
+        "q": "휴대폰을 쓰지 않고 내지 않은 것도 부정행위예요?",
+        "en": "Is keeping a phone without handing it in misconduct even if it is not used?",
+        "a": "네. 시험 규칙을 어긴 거예요.",
+        "o": [
+          "아니요. 쓰지 않으면 괜찮아요.",
+          "가방에 넣으면 괜찮아요.",
+          "전원을 끄면 내지 않아도 돼요."
+        ],
+        "x": "휴대폰을 쓰지 않아도 감독관에게 내야 해요."
+      }
+    ],
+    "talk": [
+      [
+        "여러분 나라의 대학교 입학 시험은 어때요?",
+        "What is the university entrance exam like in your country?",
+        "___에서는 ___ 시험을 봐요."
+      ],
+      [
+        "재난문자로 휴대폰을 찾는 방법, 어떻게 생각해요?",
+        "What do you think about finding phones with an alert text?",
+        "좋은 방법인 것 같아요. 휴대폰을 찾을 수 있기 때문이에요."
+      ],
+      [
+        "시험 전에 감독관이 내 안경을 검사하면 기분이 어떨 것 같아요?",
+        "How would you feel if a proctor checked your glasses?",
+        "조금 불편할 것 같아요. / 괜찮을 것 같아요."
+      ]
+    ]
+  },
+  "3": {
+    "copy": "뉴스 문장(기사체)으로 읽어요. 문장 끝이 -다로 끝나요.",
+    "facts": [
+      [
+        "98명",
+        "스마트기기 관련 잠정 집계"
+      ],
+      [
+        "49명",
+        "재난문자로 적발"
+      ],
+      [
+        "44명",
+        "그 밖의 기기 소지"
+      ],
+      [
+        "5건",
+        "시험 도중 관련 사례"
+      ]
+    ],
+    "title": "수능 스마트기기 관련 부정행위 98명 잠정 집계",
+    "paras": [
+      [
+        "2027학년도 대학수학능력시험(수능)이 [[치러진]] 11월 19일, 교육부는 4교시 종료 기준 스마트기기 관련 부정행위자 98명이 [[적발됐다]]고 밝혔다. 이는 [[잠정 집계]]이며, 모든 유형의 부정행위를 합친 최종 숫자는 아니다.",
+        "On November 19, the day of the 2027 Suneung, the Ministry of Education reported 98 test-takers for smart-device-related misconduct as of the end of the fourth period. This provisional count was not the final total for all types of misconduct."
+      ],
+      [
+        "이번 수능은 시작 전부터 AI 부정행위에 대한 우려가 컸다. 다른 시험에서 초소형 카메라와 AI를 이용한 부정행위가 문제가 됐기 때문이다.",
+        "There were concerns about AI cheating before this Suneung because cheating involving a micro camera and AI on another exam had become an issue."
+      ],
+      [
+        "정부는 스마트기기 전담 인력 등 8,400여 명을 추가로 [[배치했다]]. 감독관들은 [[수험생]]의 안경과 옷깃, 소매 등 카메라를 숨길 수 있는 부분을 검사했다. 옷 단추에는 스티커를 붙였다.",
+        "The government deployed about 8,400 additional staff, including personnel dedicated to smart devices. Proctors checked test-takers’ glasses, collars and sleeves for concealed cameras. Stickers were attached to clothing buttons."
+      ],
+      [
+        "정부는 오전 8시 30분부터 오후 2시 57분까지 세 차례 위급재난문자를 발송했다. 제출하지 않은 휴대전화에서 [[경보음]]이 울려 49명이 적발됐다.",
+        "The government sent emergency alerts three times between 8:30 a.m. and 2:57 p.m. Alarm sounds from phones that had not been handed in led to 49 test-takers being caught."
+      ],
+      [
+        "이와 별도로 전자기기를 [[소지하다]] 적발된 수험생은 44명이었다. 시험 도중 스마트기기 관련 [[사례]]도 5건 확인됐다. 여기에는 스마트 안경이나 초소형 카메라 소지, 스마트폰으로 문제지를 촬영한 사례 등이 포함됐다. 소지와 실제 사용은 구분해야 한다.",
+        "Another 44 test-takers were caught possessing electronic devices. Five smart-device-related cases during the exam were also confirmed, including possession of smart glasses or a micro camera and photographing exam papers with a phone. Possession must be distinguished from actual use."
+      ],
+      [
+        "교육부는 적발된 98명을 모두 부정행위자로 처리했다. 최종 [[징계]] 수위는 12월 11일 성적 발표 전에 결정할 계획이다.",
+        "The Ministry of Education classified all 98 as cheaters. It plans to decide the final level of discipline before scores are released on December 11."
+      ]
+    ],
+    "vocab": [
+      {
+        "w": "치르다",
+        "e": "to take / hold (an exam)",
+        "i": "📝",
+        "ex": [
+          "시험을 치르다 → 시험이 치러지다",
+          "take an exam → an exam is held"
+        ],
+        "n": "'치러진'은 '치러지다'에서 왔어요. 시험을 '봤다'보다 격식 있는 말이에요."
+      },
+      {
+        "w": "적발되다",
+        "e": "to be caught, detected",
+        "i": "🚨",
+        "alt": "摘發 · 말할 때는 걸리다",
+        "ex": [
+          "스마트기기 관련 부정행위로 98명이 적발됐다.",
+          "98 test-takers were caught for smart-device-related misconduct."
+        ]
+      },
+      {
+        "w": "잠정 집계",
+        "e": "provisional count",
+        "i": "🔢",
+        "alt": "暫定 集計",
+        "ex": [
+          "잠정 집계라서 숫자가 바뀔 수 있어요.",
+          "It's a provisional count, so the number may change."
+        ],
+        "n": "잠정은 아직 최종 결과가 아니라는 뜻이에요. 집계는 숫자를 모아서 세는 일이에요."
+      },
+      {
+        "w": "초소형",
+        "e": "ultra-small, micro",
+        "i": "📷",
+        "alt": "超小型",
+        "ex": [
+          "초소형 카메라는 단추만큼 작다.",
+          "A micro camera is as small as a button."
+        ]
+      },
+      {
+        "w": "배치하다",
+        "e": "to station, deploy",
+        "i": "🧑‍🏫",
+        "alt": "配置",
+        "ex": [
+          "시험장마다 감독관을 배치했다.",
+          "Proctors were stationed at every test site."
+        ]
+      },
+      {
+        "w": "수험생",
+        "e": "test-taker, exam candidate",
+        "i": "🎒",
+        "alt": "受驗生",
+        "ex": [
+          "수험생들은 8시 10분까지 입실해야 한다.",
+          "Test-takers must enter by 8:10."
+        ]
+      },
+      {
+        "w": "경보음",
+        "e": "alarm sound",
+        "i": "🔔",
+        "alt": "警報音",
+        "ex": [
+          "휴대전화에서 경보음이 울렸다.",
+          "An alarm went off on the phone."
+        ]
+      },
+      {
+        "w": "소지하다",
+        "e": "to carry, possess",
+        "i": "👜",
+        "alt": "所持",
+        "ex": [
+          "휴대전화를 제출하지 않고 소지하면 부정행위다.",
+          "Keeping a phone without handing it in counts as misconduct."
+        ],
+        "n": "'소지하다 적발된'은 '소지하다가 적발된'을 줄인 말이에요."
+      },
+      {
+        "w": "사례",
+        "e": "case, instance",
+        "i": "📋",
+        "alt": "事例",
+        "ex": [
+          "비슷한 사례가 5건 확인됐다.",
+          "Five similar cases were confirmed."
+        ]
+      },
+      {
+        "w": "징계",
+        "e": "disciplinary action",
+        "i": "⚖️",
+        "alt": "懲戒",
+        "ex": [
+          "징계 수위는 다음 달에 정해진다.",
+          "The level of discipline will be set next month."
+        ]
+      }
+    ],
+    "grammar": {
+      "title": "기사체와 해요체, 들은 이야기",
+      "copy": "말투를 바꾸는 것과 들은 이야기를 전하는 것은 달라요.",
+      "compare": [
+        [
+          "기사체 → 해요체",
+          "98명이 적발됐다. → 98명이 적발됐어요.",
+          "A change in speech style: 98 test-takers were caught."
+        ],
+        [
+          "들은 이야기로 전해요",
+          "98명이 적발됐대요.",
+          "I heard that 98 test-takers were caught."
+        ]
+      ],
+      "list": [
+        [
+          "적발됐다",
+          "적발됐어요"
+        ],
+        [
+          "발표했다",
+          "발표했어요"
+        ],
+        [
+          "결정할 계획이다",
+          "결정할 계획이에요"
+        ],
+        [
+          "적발됐어요",
+          "적발됐대요"
+        ],
+        [
+          "좋아요",
+          "좋대요"
+        ],
+        [
+          "처음이에요",
+          "처음이래요"
+        ]
+      ],
+      "tip": "<strong>해요체</strong>는 말투예요. <strong>-대요</strong>는 들은 이야기를 전해요. 동사와 형용사는 -다고 해요를 줄여요. 과거는 -았/었다고 해요 → -았/었대요예요. 명사는 -(이)라고 해요 → -(이)래요예요. 처음이라고 해요 → 처음이래요."
+    },
+    "quiz": [
+      {
+        "q": "위급재난문자로 적발된 수험생은 몇 명이에요?",
+        "en": "How many were caught by the emergency alert?",
+        "a": "49명",
+        "o": [
+          "98명",
+          "44명",
+          "31명"
+        ],
+        "x": "세 차례의 재난문자로 49명이 적발됐어요."
+      },
+      {
+        "q": "시험 도중 스마트기기 관련 사례는 몇 건이에요?",
+        "en": "How many smart-device-related cases were reported during the exam?",
+        "a": "5건",
+        "o": [
+          "44건",
+          "49건",
+          "98건"
+        ],
+        "x": "관련 사례는 5건이에요. 소지 사례도 있어서 모두 실제 사용 사례라고 할 수는 없어요."
+      },
+      {
+        "q": "감독관이 옷 단추에 한 일은 뭐예요?",
+        "en": "What was done to clothing buttons?",
+        "a": "스티커를 붙였다",
+        "o": [
+          "단추를 떼었다",
+          "사진을 찍었다",
+          "색을 칠했다"
+        ],
+        "x": "카메라를 숨길 수 없게 단추에 스티커를 붙였어요."
+      },
+      {
+        "q": "'적발됐다'를 해요체로 바꾸면?",
+        "en": "'적발됐다' in 해요체?",
+        "a": "적발됐어요",
+        "o": [
+          "적발했어요",
+          "적발하세요",
+          "적발되겠어요"
+        ],
+        "x": "-다 → -어요. 적발됐다 → 적발됐어요."
+      },
+      {
+        "q": "'잠정 집계'는 어떤 숫자예요?",
+        "en": "What kind of number is a 잠정 집계?",
+        "a": "아직 최종이 아닌 숫자",
+        "o": [
+          "최종 확정된 숫자",
+          "틀린 숫자",
+          "비밀 숫자"
+        ],
+        "x": "잠정 집계는 나중에 바뀔 수 있는 숫자예요."
+      },
+      {
+        "q": "\"수능에서 98명이 ___.\" 들은 이야기를 친구에게 전해요.",
+        "en": "Pass on news you heard to a friend.",
+        "a": "걸렸대요",
+        "o": [
+          "걸렸어요?",
+          "걸릴래요",
+          "걸리세요"
+        ],
+        "x": "들은 이야기는 -대요. 걸렸대요."
+      },
+      {
+        "q": "98명은 무엇을 집계한 숫자예요?",
+        "en": "What does the figure of 98 count?",
+        "a": "스마트기기 관련 부정행위 잠정 집계",
+        "o": [
+          "모든 부정행위의 최종 집계",
+          "재난문자로만 적발된 사람 수",
+          "AI를 실제로 사용한 사람 수"
+        ],
+        "x": "98명은 4교시 종료 기준 스마트기기 관련 잠정 집계예요."
+      }
+    ],
+    "talk": [
+      [
+        "수능 날 전국에 재난문자를 보낸 것은 좋은 방법이었을까요?",
+        "Was sending a nationwide alert on Suneung day a good idea?",
+        "저는 ___다고 생각해요. 왜냐하면 ___기 때문이에요."
+      ],
+      [
+        "AI 기술이 발전하면 시험 방식도 바뀌어야 할까요?",
+        "As AI develops, should the way we test also change?",
+        "AI 시대에는 ___ 시험이 필요한 것 같아요."
+      ],
+      [
+        "여러분 나라에서는 시험 부정행위를 어떻게 막아요?",
+        "How does your country prevent cheating on exams?",
+        "___에서는 ___."
+      ],
+      [
+        "기사 내용을 해요체로 1분 동안 친구에게 이야기해 보세요.",
+        "Retell the article to a friend in 해요체 for one minute.",
+        "11월 19일 수능에서 스마트기기 관련 부정행위로 98명이 적발됐대요."
+      ]
+    ]
+  }
+};
+
+    let level = "1";
+    let activeWord = 0;
+    let quizItems = [];
+    let quizIndex = 0;
+    let quizScore = 0;
+    let quizAnswered = false;
+    let quizHadWrongAttempt = false;
+    const quizStates = {};
+    let answerHistory = [];
+
+    function shuffle(items) {
+      const copy = [...items];
+      for (let index = copy.length - 1; index > 0; index -= 1) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [copy[index], copy[randomIndex]] = [copy[randomIndex], copy[index]];
+      }
+      return copy;
+    }
+    function escapeHtml(text) {
+      return text.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]));
+    }
+    function markWords(text) {
+      return escapeHtml(text).replace(/\[\[(.+?)\]\]/g, '<b class="kw">$1</b>');
+    }
+    function el(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text !== undefined) node.textContent = text;
+      return node;
+    }
+    function en(tag, text) {
+      const node = el(tag, "english-copy", text);
+      node.lang = "en";
+      return node;
+    }
+
+    function renderReading() {
+      const data = LEVELS[level];
+      document.querySelector("#sourceNote").textContent = level === "1" ? "뉴스를 쉽게 다시 쓴 글이에요." : "98명은 스마트기기 관련 잠정 집계예요. 모든 부정행위의 최종 숫자는 아니에요.";
+      document.querySelector("#cultureNote").hidden = level === "1";
+      document.querySelector("#levelCopy").textContent = data.copy;
+      document.querySelector("#readingTitle").textContent = data.title;
+      const strip = document.querySelector("#factStrip");
+      strip.replaceChildren();
+      data.facts.forEach(([num, label]) => {
+        const fact = el("div", "fact");
+        fact.append(el("strong", "fact-num", num), el("span", "fact-label", label));
+        strip.append(fact);
+      });
+      const body = document.querySelector("#readingBody");
+      body.replaceChildren();
+      data.paras.forEach(([ko, english]) => {
+        const para = el("div", "reading-para");
+        const p = el("p", "ko");
+        p.innerHTML = markWords(ko);
+        para.append(p, en("p", english));
+        body.append(para);
+      });
+    }
+
+    function renderVocab() {
+      const data = LEVELS[level];
+      document.querySelector("#vocabCount").textContent = `단어 ${data.vocab.length}개`;
+      const grid = document.querySelector("#vocabGrid");
+      grid.replaceChildren();
+      data.vocab.forEach((item, index) => {
+        const button = el("button", `palette-button${index === activeWord ? " active" : ""}`);
+        button.type = "button";
+        button.setAttribute("aria-pressed", String(index === activeWord));
+        const swatch = el("span", "mini-swatch", item.i);
+        swatch.setAttribute("aria-hidden", "true");
+        button.append(swatch, el("span", "palette-name", item.w));
+        button.addEventListener("click", () => { activeWord = index; renderVocab(); document.querySelectorAll("#vocabGrid button")[index].focus({ preventScroll: true }); });
+        grid.append(button);
+      });
+      const word = data.vocab[activeWord];
+      document.querySelector("#focusEmoji").textContent = word.i;
+      document.querySelector("#focusEnglish").textContent = word.e;
+      document.querySelector("#focusWord").textContent = word.w;
+      const alternate = document.querySelector("#focusAlternate");
+      alternate.textContent = word.alt || "";
+      const example = document.querySelector("#focusExample");
+      example.replaceChildren(document.createTextNode(`예문 · ${word.ex[0]}`), en("span", word.ex[1]));
+      const note = document.querySelector("#focusNote");
+      note.textContent = word.n || "";
+      note.hidden = !word.n;
+    }
+
+    function renderGrammar() {
+      const g = LEVELS[level].grammar;
+      document.querySelector("#grammar-title").textContent = g.title;
+      document.querySelector("#grammarCopy").textContent = g.copy;
+      const compare = document.querySelector("#grammarCompare");
+      compare.replaceChildren();
+      g.compare.forEach(([label, ko, english]) => {
+        const mode = el("div", "sentence-mode");
+        const p = el("p", "", ko);
+        p.append(en("span", english));
+        mode.append(el("small", "", label), p);
+        compare.append(mode);
+      });
+      const list = document.querySelector("#grammarList");
+      list.replaceChildren();
+      g.list.forEach(([before, after]) => {
+        const row = el("div", "word-change");
+        row.append(el("span", "before", before), el("span", "arrow", "→"), el("span", "after", after));
+        list.append(row);
+      });
+      document.querySelector("#grammarTip").innerHTML = g.tip;
+    }
+
+    function buildQuiz(reset = false) {
+      quizItems = LEVELS[level].quiz;
+      const candidate = reset ? null : quizStates[level];
+      const saved = candidate && Number.isInteger(candidate.index) && candidate.index >= 0 && candidate.index <= quizItems.length && Number.isInteger(candidate.score) && candidate.score >= 0 && candidate.score <= quizItems.length && Array.isArray(candidate.answers) && candidate.answers.every(a => a && Array.isArray(a.order) && Array.isArray(a.wrong) && typeof a.answered === 'boolean') ? candidate : null;
+      quizIndex = saved?.index || 0;
+      quizScore = saved?.score || 0;
+      answerHistory = saved?.answers || [];
+      document.querySelector("#score").textContent = quizScore;
+      renderQuiz();
+    }
+    function renderQuiz() {
+      const content = document.querySelector("#quizContent");
+      if (quizIndex >= quizItems.length) {
+        document.querySelector("#quizProgress").textContent = "완료";
+        document.querySelector("#progressFill").style.width = "100%";
+        content.innerHTML = `<div class="result"><strong>${quizScore} / ${quizItems.length}</strong><p>틀려도 괜찮아요. 다시 해 봐요.</p><button class="primary-button" id="restartQuiz" type="button">다시 풀기 <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10a9 9 0 1 1 2 8M3 4v6h6"/></svg></button></div>`;
+        document.querySelector("#restartQuiz").addEventListener("click", () => { buildQuiz(true); saveQuiz(); focusQuiz(); });
+        return;
+      }
+      quizAnswered = false;
+      quizHadWrongAttempt = false;
+      const item = quizItems[quizIndex];
+      content.innerHTML = `<div class="quiz-body"><h3 class="quiz-question"></h3><p class="quiz-en english-copy" lang="en"></p><div class="options" id="quizOptions"></div></div><div class="quiz-footer"><p class="feedback" id="feedback" aria-live="polite"></p><button class="primary-button" id="nextQuestion" type="button" hidden>다음 문제</button></div>`;
+      content.querySelector(".quiz-question").textContent = item.q;
+      content.querySelector(".quiz-en").textContent = item.en;
+      document.querySelector("#nextQuestion").addEventListener("click", () => { quizIndex += 1; renderQuiz(); saveQuiz(); focusQuiz(); });
+      document.querySelector("#quizProgress").textContent = `${quizIndex + 1} / ${quizItems.length}`;
+      document.querySelector("#progressFill").style.width = `${((quizIndex + 1) / quizItems.length) * 100}%`;
+      const options = document.querySelector("#quizOptions");
+      const previous = answerHistory[quizIndex];
+      const ordered = previous?.order || shuffle([item.a, ...item.o]);
+      answerHistory[quizIndex] = previous || { order: ordered, wrong: [], answered: false };
+      ordered.forEach((text) => {
+        const button = el("button", "option-button", text);
+        button.type = "button";
+        button.addEventListener("click", () => checkAnswer(button, text, item));
+        options.append(button);
+      });
+      const state = answerHistory[quizIndex];
+      quizHadWrongAttempt = state.wrong.length > 0;
+      state.wrong.forEach((text) => { const b = [...options.children].find(x => x.textContent === text); b.disabled = true; b.classList.add("wrong"); });
+      if (state.answered) { quizAnswered = true; [...options.children].forEach(b => { b.disabled = true; if (b.textContent === item.a) b.classList.add("correct"); }); document.querySelector("#feedback").textContent = `맞아요. ${item.x}`; const next = document.querySelector("#nextQuestion"); next.hidden = false; next.textContent = quizIndex === quizItems.length - 1 ? "결과 보기" : "다음 문제"; }
+    }
+    function checkAnswer(button, text, item) {
+      if (quizAnswered) return;
+      const feedback = document.querySelector("#feedback");
+      if (text !== item.a) {
+        quizHadWrongAttempt = true;
+        answerHistory[quizIndex].wrong.push(text);
+        button.disabled = true;
+        button.classList.add("wrong");
+        feedback.textContent = "아니에요. 다시 골라 보세요.";
+        saveQuiz();
+        document.querySelector("#quizOptions button:not(:disabled)")?.focus({ preventScroll: true });
+        return;
+      }
+      quizAnswered = true;
+      answerHistory[quizIndex].answered = true;
+      document.querySelectorAll(".option-button").forEach((option) => {
+        option.disabled = true;
+        if (option.textContent === item.a) option.classList.add("correct");
+      });
+      if (!quizHadWrongAttempt) {
+        quizScore += 1;
+        document.querySelector("#score").textContent = quizScore;
+      }
+      feedback.textContent = `맞아요. ${item.x}`;
+      const next = document.querySelector("#nextQuestion");
+      next.textContent = quizIndex === quizItems.length - 1 ? "결과 보기" : "다음 문제";
+      next.hidden = false;
+      saveQuiz();
+      next.focus({ preventScroll: true });
+    }
+
+    function saveQuiz() {
+      quizStates[level] = { index: quizIndex, score: quizScore, answers: answerHistory };
+      try { sessionStorage.setItem('suneung-quiz-v2', JSON.stringify(quizStates)); } catch {}
+    }
+    function focusQuiz() {
+      const target = document.querySelector('#quizContent .quiz-question, #quizContent .result strong');
+      if (target) { target.tabIndex = -1; target.focus({ preventScroll: true }); }
+    }
+    try { Object.assign(quizStates, JSON.parse(sessionStorage.getItem('suneung-quiz-v2') || '{}')); } catch {}
+    function renderTalk() {
+      const board = document.querySelector("#talkBoard");
+      board.replaceChildren();
+      LEVELS[level].talk.forEach(([ko, english, starter]) => {
+        const item = el("div", "talk-item");
+        const start = el("p", "talk-starter");
+        start.append(el("small", "", "이렇게 시작해요"), document.createTextNode(starter));
+        item.append(el("p", "talk-q", ko), en("p", english), start);
+        board.append(item);
+      });
+    }
+
+    function setLevel(next) {
+      level = LEVELS[next] ? next : "1";
+      activeWord = 0;
+      document.querySelector("#levelSelect").value = level;
+      document.body.dataset.level = level;
+      renderReading();
+      renderVocab();
+      renderGrammar();
+      buildQuiz();
+      renderTalk();
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set("level", level);
+        window.history.replaceState(null, "", url);
+      } catch (error) { /* 미리보기 환경에서는 주소를 바꾸지 않아요 */ }
+    }
+
+    document.querySelector("#resetQuiz").addEventListener("click", () => { buildQuiz(true); saveQuiz(); focusQuiz(); });
+    document.querySelector("#levelSelect").addEventListener("change", (event) => setLevel(event.target.value));
+    document.querySelector("#englishToggle").addEventListener("click", (event) => {
+      const hidden = document.body.classList.toggle("hide-english");
+      event.currentTarget.setAttribute("aria-pressed", String(hidden));
+      event.currentTarget.textContent = hidden ? "영어 보기" : "영어 숨기기";
+    });
+
+    const indexLinks = [...document.querySelectorAll(".lesson-index a")];
+    const sections = indexLinks.map((link) => document.querySelector(link.getAttribute("href")));
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        indexLinks.forEach((link) => link.classList.toggle("active", link.getAttribute("href") === `#${visible.target.id}`));
+      }, { rootMargin: "-20% 0px -60%", threshold: [0, .2, .5] });
+      sections.forEach((section) => observer.observe(section));
+    }
+
+    let startLevel = "1";
+    try { startLevel = new URLSearchParams(window.location.search).get("level") || "1"; } catch (error) { startLevel = "1"; }
+    setLevel(startLevel);
+  </script>
+</body>
+</html>
