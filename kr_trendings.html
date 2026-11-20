@@ -1,293 +1,46 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>요즘 한국 · Korean Trends & New Words · 하님 씀</title>
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#304027"><title>요즘 한국 · Allbarun Korean</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Black+Han+Sans&family=Nanum+Myeongjo:wght@400;700;800&display=swap');
-
-  :root{
-    --bg:#fdf6ee;
-    --ink:#241f1a;
-    --soft:#736658;
-    --line:#ecdfcb;
-    --card:#fffdf9;
-    --coral:#e8623b;     /* hot accent */
-    --coral-bg:#fce0d5;
-    --teal:#1f8f86;
-    --teal-bg:#d3ece9;
-    --grape:#7a5bb0;
-    --grape-bg:#e7ddf3;
-    --mustard:#cf9a1e;
-    --mustard-bg:#f7ecca;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Gowun Dodum',sans-serif;
-    font-size:17px;line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-    background-image:radial-gradient(#f0e2cc 0.7px, transparent 0.7px);
-    background-size:20px 20px;
-  }
-  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 80px;}
-
-  /* HERO */
-  header.hero{text-align:center;padding:58px 0 26px;}
-  .kicker{display:inline-block;background:var(--coral);color:#fff;font-weight:700;font-size:14px;letter-spacing:1px;padding:5px 16px;border-radius:20px;transform:rotate(-2deg);}
-  .hero .kr{font-family:'Black Han Sans',sans-serif;font-size:clamp(46px,9vw,76px);line-height:1;letter-spacing:-1px;margin-top:18px;color:var(--ink);}
-  .hero .kr b{color:var(--coral);}
-  .hero .en{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(18px,3vw,22px);color:var(--soft);margin-top:8px;}
-  .hero .lead{max-width:800px;margin:18px auto 0;font-size:18px;color:var(--soft);}
-  .en-sub{color:var(--soft);font-size:15px;}
-
-  h2.sec{font-family:'Gowun Dodum',sans-serif;font-size:32px;margin:54px 0 6px;letter-spacing:-.5px;}
-  h2.sec .en{display:block;font-family:'Fraunces',serif;font-style:italic;font-size:16px;color:var(--soft);font-weight:400;margin-top:2px;}
-
-  .card{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:26px 28px;margin:22px 0;box-shadow:6px 6px 0 #f0e3cf;}
-  .card h3{font-family:'Nanum Myeongjo',serif;font-size:22px;margin-bottom:10px;}
-  .card p{margin-bottom:10px;}
-
-  /* NEWS */
-  .news{background:var(--coral-bg);border:1.5px solid #f0c8b9;border-left:6px solid var(--coral);border-radius:14px;padding:22px 26px;margin:24px 0;}
-  .news .date{font-family:'Fraunces',serif;font-style:italic;color:var(--coral);font-size:15px;letter-spacing:.4px;}
-  .news h3{font-family:'Gowun Dodum',sans-serif;font-size:26px;margin:6px 0 10px;letter-spacing:-.5px;}
-
-  /* SLANG CARDS */
-  .slang{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px;}
-  .scard{border-radius:16px;padding:20px 22px;border:1.5px solid var(--line);background:var(--card);position:relative;}
-  .scard .big{font-family:'Black Han Sans',sans-serif;font-size:34px;line-height:1;letter-spacing:-1px;}
-  .scard .eq{font-size:16px;margin-top:8px;font-weight:700;}
-  .scard .mean{color:var(--soft);font-size:14.5px;margin-top:6px;}
-  .s-coral .big{color:var(--coral);}    .s-coral{background:var(--coral-bg);border-color:#f0c8b9;}
-  .s-teal .big{color:var(--teal);}      .s-teal{background:var(--teal-bg);border-color:#bfe0db;}
-  .s-grape .big{color:var(--grape);}    .s-grape{background:var(--grape-bg);border-color:#d6c6ec;}
-  .s-mustard .big{color:var(--mustard);}.s-mustard{background:var(--mustard-bg);border-color:#ecdba6;}
-
-  .callout{background:var(--teal-bg);border:1.5px dashed #a9d4ce;border-radius:14px;padding:18px 22px;margin:20px 0;font-size:16px;}
-  .callout b{color:var(--teal);}
-  .callout.grape{background:var(--grape-bg);border-color:#c9b6e6;}
-  .callout.grape b{color:var(--grape);}
-
-  /* recipe-style formula */
-  .formula{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:18px 0;font-family:'Nanum Myeongjo',serif;}
-  .formula .term{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;font-size:17px;font-weight:700;}
-  .formula .op{font-size:22px;color:var(--coral);font-weight:800;}
-
-  /* NETWORK */
-  .net-wrap{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:18px;margin:22px 0;box-shadow:6px 6px 0 #f0e3cf;overflow-x:auto;}
-  svg{display:block;margin:0 auto;max-width:100%;height:auto;}
-
-  .vocab{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:14px;}
-  .chip{border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;background:var(--card);}
-  .chip .w{font-family:'Nanum Myeongjo',serif;font-weight:700;font-size:17px;}
-  .chip .m{color:var(--soft);font-size:14px;}
-
-  .talk{background:var(--mustard-bg);border:1.5px solid #ecdba6;border-radius:16px;padding:22px 26px;margin:22px 0;}
-  .talk h3{font-family:'Gowun Dodum',sans-serif;font-size:23px;color:#a87b14;margin-bottom:10px;letter-spacing:-.5px;}
-  .talk ul{list-style:none;}
-  .talk li{padding:7px 0 7px 26px;position:relative;}
-  .talk li::before{content:"🗣";position:absolute;left:0;}
-  .talk li .en{color:var(--soft);font-size:14.5px;}
-
-  .quiz{background:var(--coral-bg);border:1.5px solid #f0c8b9;border-radius:16px;padding:22px 26px;margin:22px 0;}
-  .quiz h3{font-family:'Gowun Dodum',sans-serif;font-size:23px;color:var(--coral);margin-bottom:12px;letter-spacing:-.5px;}
-  .q{margin:14px 0;}
-  .q .ask{font-weight:700;}
-  details{margin-top:6px;background:#fff;border:1px solid #f0c8b9;border-radius:10px;padding:8px 14px;}
-  details summary{cursor:pointer;color:var(--coral);font-size:15px;font-weight:700;}
-  details p{margin-top:8px;font-size:15.5px;}
-
-  footer{text-align:center;color:var(--soft);font-size:14px;margin-top:50px;padding-top:20px;border-top:1px solid var(--line);}
-
-  @media (max-width:680px){
-    body{font-size:16px;}
-    .slang{grid-template-columns:1fr;}
-    .wrap{padding:0 16px 60px;}
-    h2.sec{font-size:27px;}
-  }
-  @media print{
-    body{background:#fff;}
-    .card,.net-wrap{box-shadow:none;}
-    details{display:block;}
-    details summary{display:none;}
-  }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <header class="hero">
-    <span class="kicker">요즘 한국 · TRENDING NOW</span>
-    <div class="kr">신조어 <b>&</b> 트렌드</div>
-    <div class="en">New Words &amp; What's Hot in Korea</div>
-    <p class="lead">한국 뉴스에 나온 따끈따끈한 신조어! "삼쏘", "깐부", "인증샷"… 요즘 한국 사람들이 진짜 쓰는 말.<br>
-    <span class="en-sub">Fresh slang from Korean headlines — words Koreans actually use right now.</span></p>
-  </header>
-
-  <!-- 뉴스 -->
-  <div class="news">
-    <div class="date">2026. 6. 5.</div>
-    <h3>젠슨 황의 "삼쏘 회동"</h3>
-    <p>엔비디아(NVIDIA) CEO <b>젠슨 황</b>이 한국에 왔어요. 한국 대기업 회장들과 <b>삼겹살에 소주</b>를 먹는 "<b>삼쏘 회동</b>"을 했어요. 작년에는 치킨집에서 만난 "<b>깐부 회동</b>"이 화제였는데, 이번엔 삼겹살집이에요!</p>
-    <p class="en-sub">NVIDIA CEO Jensen Huang visited Korea and met top company chairmen over pork belly and soju — a "삼쏘 회동." Last year's chicken-restaurant "깐부 회동" went viral; this time it's a pork-belly place.</p>
-  </div>
-
-  <!-- 줄임말 문화 -->
-  <h2 class="sec">① 한국의 줄임말 문화 <span class="en">Korea loves abbreviations</span></h2>
-  <p>한국 사람들은 긴 말을 <b>줄여서</b> 말하는 걸 좋아해요. 특히 <b>음식 + 술</b> 조합은 거의 다 줄임말이 있어요!<br>
-  <span class="en-sub">Koreans love shortening long phrases — especially food + drink combos.</span></p>
-
-  <div class="slang">
-    <div class="scard s-coral">
-      <div class="big">삼쏘</div>
-      <div class="eq">삼겹살 + 소주</div>
-      <div class="mean">pork belly + soju · "삼소"라고도 써요</div>
-    </div>
-    <div class="scard s-teal">
-      <div class="big">소맥</div>
-      <div class="eq">소주 + 맥주</div>
-      <div class="mean">soju + beer (mixed together)</div>
-    </div>
-    <div class="scard s-mustard">
-      <div class="big">치맥</div>
-      <div class="eq">치킨 + 맥주</div>
-      <div class="mean">fried chicken + beer</div>
-    </div>
-    <div class="scard s-grape">
-      <div class="big">인증샷</div>
-      <div class="eq">인증 + 샷(shot)</div>
-      <div class="mean">a photo to "prove" you were there</div>
-    </div>
-  </div>
-
-  <div class="callout">💡 <b>패턴 발견!</b> — 음식 한 글자 + 술 한 글자 = 줄임말. 삼겹살의 "<b>삼</b>" + 소주의 "<b>쏘</b>" = <b>삼쏘</b>. 치킨의 "<b>치</b>" + 맥주의 "<b>맥</b>" = <b>치맥</b>!<br>
-  <span class="en-sub">Pattern: first syllable of the food + first syllable of the drink. Try making your own!</span></div>
-
-  <!-- 깐부 -->
-  <h2 class="sec">② 깐부 — 드라마에서 나온 신조어 <span class="en">"Kkanbu" — slang from a drama</span></h2>
-  <div class="card">
-    <h3>깐부 = 아주 친한 친구, 한 편 <span class="en-sub">a close buddy / teammate who shares everything</span></h3>
-    <p><b>깐부</b>는 넷플릭스 드라마 <b>〈오징어 게임〉</b>에서 유명해진 말이에요. 어렸을 때 구슬치기 같은 놀이를 같이 하는 <b>"단짝"</b>을 뜻해요. 깐부끼리는 가진 걸 나눠요.</p>
-    <p class="en-sub">"Kkanbu" became famous from Netflix's <i>Squid Game</i>. It means a childhood partner you share everything with.</p>
-    <div class="callout grape">🎬 그래서 젠슨 황이 한국 회장들과 친하게 만난 걸 "<b>깐부 회동</b>"이라고 불렀어요 — "절친 모임" 같은 느낌!<br>
-    <span class="en-sub">So Jensen Huang's friendly meeting with Korean chairmen was nicknamed "깐부 회동" — like a "best-buddy gathering."</span></div>
-  </div>
-
-  <!-- 회동 -->
-  <h2 class="sec">③ 회동 (會同) — 뉴스에 자주 나오는 단어 <span class="en">"Hoedong" — a news word</span></h2>
-  <div class="card">
-    <p><b>회동</b>은 중요한 사람들이 <b>만나는 것</b>을 말해요. 뉴스에서 정치인, 기업 회장들이 만날 때 써요.<br>
-    <span class="en-sub">회동 means an important meeting/gathering — used in news for politicians and executives.</span></p>
-    <div class="formula">
-      <span class="term">삼쏘</span><span class="op">+</span><span class="term">회동</span><span class="op">=</span><span class="term" style="background:var(--coral-bg);border-color:var(--coral);color:var(--coral)">삼쏘 회동</span>
-    </div>
-    <div class="formula">
-      <span class="term">깐부</span><span class="op">+</span><span class="term">회동</span><span class="op">=</span><span class="term" style="background:var(--grape-bg);border-color:var(--grape);color:var(--grape)">깐부 회동</span>
-    </div>
-  </div>
-
-  <!-- 의미망 -->
-  <h2 class="sec">④ 의미망: 신조어 단어 지도 <span class="en">Semantic network: connecting the words</span></h2>
-  <p>새 단어는 따로 외우면 금방 잊어요. <b>연결</b>해서 기억하면 오래 남아요.<br>
-  <span class="en-sub">Connect new words into a web — you'll remember them far longer.</span></p>
-
-  <div class="net-wrap">
-    <svg viewBox="0 0 760 540" role="img" aria-label="신조어 의미망">
-      <defs>
-        <style>
-          .edge{stroke:#e2d3bd;stroke-width:2;}
-          .hub{font-family:'Gowun Dodum',sans-serif;}
-          .lbl{font-family:'Gowun Dodum',sans-serif;}
-          .en{font-family:'Fraunces',serif;font-style:italic;fill:#9a8d7c;}
-        </style>
-      </defs>
-
-      <!-- edges from center -->
-      <line class="edge" x1="380" y1="270" x2="380" y2="95"/>
-      <line class="edge" x1="380" y1="270" x2="150" y2="180"/>
-      <line class="edge" x1="380" y1="270" x2="150" y2="395"/>
-      <line class="edge" x1="380" y1="270" x2="610" y2="180"/>
-      <line class="edge" x1="380" y1="270" x2="610" y2="395"/>
-
-      <!-- center -->
-      <circle cx="380" cy="270" r="62" fill="#fce0d5" stroke="#e8623b" stroke-width="2.5"/>
-      <text class="hub" x="380" y="266" text-anchor="middle" font-size="24" fill="#e8623b">줄임말</text>
-      <text class="en" x="380" y="290" text-anchor="middle" font-size="12">abbreviations</text>
-
-      <!-- top: 음식+술 -->
-      <rect x="296" y="44" width="168" height="60" rx="14" fill="#f7ecca" stroke="#cf9a1e" stroke-width="1.5"/>
-      <text class="hub" x="380" y="70" text-anchor="middle" font-size="17" fill="#a87b14">음식 + 술</text>
-      <text class="en" x="380" y="90" text-anchor="middle" font-size="11">food + drink</text>
-
-      <!-- left top: 삼쏘 -->
-      <rect x="60" y="150" width="150" height="60" rx="14" fill="#fce0d5" stroke="#e8623b" stroke-width="1.5"/>
-      <text class="hub" x="135" y="176" text-anchor="middle" font-size="18" fill="#e8623b">삼쏘 · 소맥</text>
-      <text class="en" x="135" y="195" text-anchor="middle" font-size="11">pork belly+soju</text>
-
-      <!-- left bottom: 치맥 -->
-      <rect x="60" y="365" width="150" height="60" rx="14" fill="#d3ece9" stroke="#1f8f86" stroke-width="1.5"/>
-      <text class="hub" x="135" y="391" text-anchor="middle" font-size="18" fill="#1f8f86">치맥</text>
-      <text class="en" x="135" y="410" text-anchor="middle" font-size="11">chicken + beer</text>
-
-      <!-- right top: 깐부 -->
-      <rect x="552" y="150" width="156" height="60" rx="14" fill="#e7ddf3" stroke="#7a5bb0" stroke-width="1.5"/>
-      <text class="hub" x="630" y="176" text-anchor="middle" font-size="18" fill="#7a5bb0">깐부</text>
-      <text class="en" x="630" y="195" text-anchor="middle" font-size="11">close buddy (드라마)</text>
-
-      <!-- right bottom: 회동/인증샷 -->
-      <rect x="552" y="365" width="156" height="60" rx="14" fill="#f7ecca" stroke="#cf9a1e" stroke-width="1.5"/>
-      <text class="hub" x="630" y="391" text-anchor="middle" font-size="16" fill="#a87b14">회동 · 인증샷</text>
-      <text class="en" x="630" y="410" text-anchor="middle" font-size="11">meeting · proof shot</text>
-
-      <!-- bottom leaf -->
-      <text class="lbl" x="380" y="490" text-anchor="middle" font-size="14" fill="#736658">삼겹살 · 소주 · 맥주 · 치킨 · 회식</text>
-      <text class="en" x="380" y="512" text-anchor="middle" font-size="12">pork belly · soju · beer · chicken · company dinner</text>
-    </svg>
-  </div>
-
-  <div class="vocab">
-    <div class="chip"><div class="w">삼겹살</div><div class="m">pork belly (Korean BBQ)</div></div>
-    <div class="chip"><div class="w">소주 (燒酒)</div><div class="m">soju (clear liquor)</div></div>
-    <div class="chip"><div class="w">맥주 (麥酒)</div><div class="m">beer</div></div>
-    <div class="chip"><div class="w">회식 (會食)</div><div class="m">company/team dinner</div></div>
-    <div class="chip"><div class="w">회동 (會同)</div><div class="m">important meeting</div></div>
-    <div class="chip"><div class="w">깐부</div><div class="m">close buddy / teammate</div></div>
-    <div class="chip"><div class="w">인증샷</div><div class="m">proof photo</div></div>
-    <div class="chip"><div class="w">대기업 (大企業)</div><div class="m">big conglomerate</div></div>
-    <div class="chip"><div class="w">화제 (話題)</div><div class="m">hot topic / talk of the town</div></div>
-  </div>
-
-  <!-- 퀴즈 -->
-  <div class="quiz">
-    <h3>🅾️ 미니 퀴즈 · Mini Quiz</h3>
-    <div class="q">
-      <div class="ask">1. "삼쏘"는 무엇과 무엇의 줄임말일까요? <span class="en-sub">What two words make 삼쏘?</span></div>
-      <details><summary>정답 보기</summary><p>삼겹살 + 소주! (음식 한 글자 + 술 한 글자)</p></details>
-    </div>
-    <div class="q">
-      <div class="ask">2. "깐부"는 어느 드라마에서 유명해졌어요? <span class="en-sub">Which drama made 깐부 famous?</span></div>
-      <details><summary>정답 보기</summary><p>〈오징어 게임〉(Squid Game) — "아주 친한 친구, 단짝"이라는 뜻이에요.</p></details>
-    </div>
-    <div class="q">
-      <div class="ask">3. "치킨 + 맥주"는 줄여서 뭐라고 할까요? <span class="en-sub">How do you shorten chicken + beer?</span></div>
-      <details><summary>정답 보기</summary><p>치맥! 그럼 "피자 + 맥주"는? → 피맥 😎</p></details>
-    </div>
-  </div>
-
-  <!-- 이야기해 봐요 -->
-  <div class="talk">
-    <h3>🎤 이야기해 봐요 · Let's talk</h3>
-    <ul>
-      <li>여러분 나라에도 음식 + 음료 줄임말이 있어요?<span class="en"> Does your country have food+drink abbreviations?</span></li>
-      <li>여러분의 "깐부"는 누구예요?<span class="en"> Who is your "kkanbu" (best buddy)?</span></li>
-      <li>좋아하는 한국 음식 + 음료 조합으로 새 줄임말을 만들어 보세요!<span class="en"> Invent your own abbreviation from a Korean food + drink combo!</span></li>
-    </ul>
-  </div>
-
-  <footer>한국어 수업 자료 · Korean Lesson Material<br>참고: 젠슨 황 방한 "삼쏘 회동" 보도 (2026.6) · 〈오징어 게임〉</footer>
-</div>
-</body>
-</html>
+:root{--ink:#263c30;--muted:#52634f;--green:#526c3d;--line:#dfe6db;--tint:#edf3e3;--selected:#e4edcf;--paper:#fdfefd;--clay:#935538;--warm:#f7eee8;--lav:#f0eef7;--purple:#62537b;--font:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--font);word-break:keep-all;overflow-wrap:anywhere}button,select{font:inherit;color:inherit}button{cursor:pointer;min-height:44px;border:1px solid #c5d0bd;border-radius:8px;background:white;padding:10px 16px}button:hover:not(:disabled){background:var(--tint)}button:disabled{cursor:default}a{color:inherit;text-underline-offset:4px}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--green);outline-offset:4px}::selection{background:var(--selected)}[hidden]{display:none!important}.hide-english .en{display:none!important}p,h1,h2,h3{margin:0}h1{font-size:30px;line-height:1.3;font-weight:600;letter-spacing:-.025em}h2{font-size:24px;line-height:1.4;font-weight:600;letter-spacing:-.02em}h3{font-size:20px;line-height:1.4}.en{color:var(--muted);font-size:15px}.page{max-width:1000px;padding:32px 24px 64px;margin:auto}.header{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;padding-bottom:24px;border-bottom:1px solid var(--line)}.back{display:flex;align-items:center;min-height:44px;font-size:15px;color:var(--muted);width:fit-content;margin-bottom:8px;text-decoration:none}.header .en{margin-top:2px}.header button{white-space:nowrap}
+nav{display:flex;gap:0;margin:28px 0 0;border:1px solid var(--line);overflow-x:auto;scrollbar-color:#c5d0bd white}nav a{flex:1 0 130px;padding:14px 16px;text-align:center;text-decoration:none;font-size:14px;font-weight:600;border-right:1px solid var(--line)}nav a:last-child{border:0}nav a:hover{background:var(--tint)}section{padding:48px 0;border-bottom:1px solid var(--line);scroll-margin-top:24px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:24px}.section-head>p{max-width:400px;color:var(--muted)}.intro{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;padding:32px 0 0}.intro h2{font-size:clamp(24px,4vw,32px);max-width:15em}.intro p{margin-top:12px;color:var(--muted)}.intro-example{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0}.intro-example strong{font-size:23px;font-weight:600}.intro-example p{margin-top:8px}.sample-word{background:var(--selected);padding:2px 5px;border-radius:4px}.note{font-size:14px;color:var(--muted);margin-top:20px}.study{display:grid;grid-template-columns:250px minmax(0,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden}.word-menu{padding:12px;border-right:1px solid var(--line);background:#f7f9f4}.word-button{display:block;width:100%;border:1px solid transparent;border-radius:8px;text-align:left;background:transparent;padding:14px 12px;position:relative}.word-button+.word-button{margin-top:4px}.word-button strong{display:block;font-size:20px;font-weight:600}.word-button small{font-size:13px;color:var(--muted);display:block;margin-top:2px}.word-button[aria-pressed=true]{border-color:#a8b993;background:var(--selected)}.word-button[aria-pressed=true]:after{content:'✓';position:absolute;right:12px;top:15px;font-size:18px}.word-content{padding:32px;min-width:0;background:white}.word-kind{color:var(--green);font-size:14px;font-weight:600}.word-title{font-size:clamp(40px,6vw,60px);font-weight:600;line-height:1.15;letter-spacing:-.035em;margin:12px 0}.meaning{font-size:20px;line-height:1.6;margin:20px 0 12px}.origin{font-size:15px;color:var(--muted)}.dialogue{background:var(--tint);border-radius:14px;padding:22px 24px;margin-top:26px}.dialogue .label{font-size:13px;color:var(--green);margin-bottom:8px;font-weight:600}.dialogue .quote{font-size:21px;font-weight:500;line-height:1.6}.dialogue .en{margin-top:8px}.plain{margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}.plain small{display:block;color:var(--muted);font-size:14px;margin-bottom:5px}.usage{margin-top:16px;font-size:15px;color:var(--muted)}.usage strong{color:var(--clay);font-weight:600}.study-bottom{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:20px;color:var(--muted);font-size:14px}.study-bottom a{color:var(--green)}.word-picks{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}.word-picks button{min-width:84px}.word-picks button[aria-pressed=true]{background:var(--selected);border-color:var(--green)}.map{display:grid;grid-template-columns:180px 1fr;align-items:center;gap:0;border:1px solid var(--line);border-radius:14px;background:white;padding:32px}.map-root{position:relative;padding:24px 16px;background:var(--ink);color:white;border-radius:14px;text-align:center}.map-root:after{content:"";position:absolute;right:-23px;top:50%;width:23px;height:1px;background:#b9c9b0}.map-root strong{display:block;font-size:30px;line-height:1.3}.map-root small{display:block;font-size:14px;color:#e4edcf;margin-bottom:6px}.branches{display:grid;gap:16px;position:relative;padding-left:44px}.branches:before{content:'';position:absolute;left:22px;top:43px;bottom:43px;width:1px;background:#b9c9b0}.branch{position:relative;border:1px solid var(--line);border-radius:8px;padding:16px 20px;min-height:86px}.branch:before{content:'';position:absolute;top:50%;left:-23px;width:22px;height:1px;background:#b9c9b0}.branch:first-child{background:var(--tint)}.branch:nth-child(2){background:var(--warm)}.branch:last-child{background:var(--lav)}.relation{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}.branch p{font-size:18px;font-weight:500}.map-help{margin:18px 0 0;color:var(--muted)}.map-help strong{color:var(--ink)}.compare-board{border:1px solid var(--line);border-radius:14px;overflow:hidden}.compare-row{display:grid;grid-template-columns:1fr 1fr}.compare-row>div{padding:24px}.compare-row>div+div{border-left:1px solid var(--line);background:var(--tint)}.compare-row small{display:block;color:var(--muted);font-size:14px;margin-bottom:10px}.compare-row p{font-size:21px}.register-note{padding:18px 24px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}.quiz{border:1px solid var(--line);border-radius:14px;overflow:hidden;max-width:780px;margin:auto;background:white}.quiz-status{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding:16px 24px;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}.quiz-body{padding:32px}.quiz-body h3{scroll-margin-top:24px}.quiz-context{color:var(--muted);margin-bottom:10px;font-size:14px}.options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}.options button{min-height:58px;font-size:18px}.options .wrong{background:var(--warm);border-color:var(--clay)}.options .correct{background:var(--selected);border-color:var(--green)}.quiz-footer{padding:20px 24px;border-top:1px solid var(--line);display:flex;flex-direction:column;align-items:stretch;gap:16px}.quiz-footer button{align-self:flex-end}.primary{background:var(--ink);color:white;border-color:var(--ink)}button.primary:hover{background:var(--green)}#feedback{font-size:15px}.result{text-align:center;padding:40px 24px}.result strong{display:block;font-size:48px}.result p{margin:12px 0 24px;color:var(--muted)}.talk{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}.talk>div{border-top:1px solid var(--line);padding-top:22px}.talk p{margin:12px 0;color:var(--muted)}.starter{padding:18px 20px;border-radius:8px;background:var(--tint);color:var(--ink)!important}.sources{margin-top:28px;font-size:14px;color:var(--muted)}summary{cursor:pointer;min-height:44px;display:list-item;padding:10px 0}.sources li{margin:10px 0}.sources p{margin-top:12px}.footer{text-align:center;color:var(--muted);padding-top:36px;font-size:15px}
+@media(max-width:720px){.page{padding:24px 16px 40px}.header{gap:16px;grid-template-columns:1fr}.header button{justify-self:end}h1{font-size:26px}.intro{grid-template-columns:1fr;gap:24px}.section-head{display:block}.section-head>p{margin-top:10px}.study{grid-template-columns:1fr}.word-menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;border:0;border-bottom:1px solid var(--line)}.word-button+.word-button{margin:0}.word-button{padding:12px}.word-button strong{font-size:18px}.word-button small{font-size:12px}.word-button[aria-pressed=true]:after{right:8px;top:10px;font-size:16px}.word-content{padding:24px 20px}.study-bottom{align-items:start}.map{grid-template-columns:1fr;padding:20px}.map-root{max-width:none}.map-root:after{display:none}.branches{padding:24px 0 0 22px}.branches:before{left:0;top:0;bottom:44px}.branch:before{left:-23px}.compare-row{grid-template-columns:1fr}.compare-row>div+div{border-left:0;border-top:1px solid var(--line)}.talk{grid-template-columns:1fr}.options{grid-template-columns:1fr}.quiz-body{padding:24px 20px}.quiz-status{padding:16px 20px}.dialogue{padding:18px}.dialogue .quote{font-size:19px}section{padding:36px 0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body><main class="page"><header class="header"><div><a class="back" href="./learn/index.html" target="_top">자료 목록</a><h1>요즘 한국</h1><p class="en" lang="en">Words, moods & everyday culture</p></div><button id="englishToggle" aria-pressed="false" type="button">영어 숨기기</button></header>
+<nav aria-label="학습 순서"><a href="#words">표현 알아보기</a><a href="#connections">말 연결하기</a><a href="#register">상황에 맞게 말하기</a><a href="#quiz">확인하기</a><a href="#talk">내 이야기</a></nav>
+<div class="intro"><div><h2>같은 마음도<br>여러 가지 말로 표현해요.</h2><p>좋아하는 것을 말하고, 기분을 나누고,<br>인터넷에서 본 이야기도 해 봐요.</p></div><div class="intro-example"><strong>“이 노래, 완전 내 <span class="sample-word">취향 저격</span>이야.”</strong><p>“이 노래가 정말 마음에 들어요.”와 비슷해요.</p><p class="en" lang="en">“This song is exactly my taste.”</p></div></div>
+<p class="note">이 표현들이 모두 올해 새로 생긴 말은 아니에요. 일상과 인터넷 문화를 이해하는 데 도움이 되는 말을 모았어요.</p>
+<section id="words"><div class="section-head"><h2>표현을 하나씩 알아봐요.</h2><p>말을 누르면 쉬운 뜻과 대화 예문이 나와요.</p></div><div class="study"><div class="word-menu" id="wordMenu" role="group" aria-label="배울 표현"></div><article class="word-content" id="wordContent" aria-live="polite"></article></div><div class="study-bottom"><p>친구끼리 쓰는 예문과 일반적인 표현을 함께 봐요.</p><a href="#connections">이 표현과 연결된 말 보기</a></div></section>
+<section id="connections"><div class="section-head"><h2>뜻과 쓰임으로 연결해요.</h2><p>선은 말 사이의 관계를 보여 줘요.<br>표현을 바꾸며 연결되는 말을 살펴보세요.</p></div><div class="word-picks" id="mapPicks" role="group" aria-label="연결할 표현"></div><div class="map" id="wordMap" aria-live="polite"></div><p class="map-help">서로 연결된 말이 모두 같은 뜻은 아니에요. <strong>쉬운 뜻 · 함께 쓰는 말 · 같은 주제</strong>를 나누어 봐요.</p></section>
+<section id="register"><div class="section-head"><h2>누구에게 말하나요?</h2><p>뜻을 아는 것만큼 상황에 맞게 쓰는 것도 중요해요.</p></div><div class="compare-board"><div class="compare-row"><div><small>친한 친구와 이야기해요.</small><p id="casual"></p></div><div><small>일반적인 표현으로 말해요.</small><p id="polite"></p></div></div><p class="register-note" id="registerNote"></p></div><p class="note">‘요’를 붙여도 거친 느낌이 없어지는 것은 아니에요. 특히 ‘킹받다’는 상대와 상황을 먼저 생각해요.</p></section>
+<section id="quiz"><div class="section-head"><h2>어떤 표현이 어울릴까요?</h2><p>상황을 읽고 골라 보세요.<br>처음에 맞힌 문제 수를 보여 줘요.</p></div><div class="quiz"><div class="quiz-status"><span id="quizProgress"></span><span>처음에 맞힌 수 <strong id="score">0</strong></span></div><div id="quizContent"></div></div></section>
+<section id="talk"><div class="section-head"><h2>내 이야기로 바꿔 말해요.</h2></div><div class="talk"><div><h3 id="talkTitle"></h3><p id="talkPrompt"></p><p class="starter" id="talkStarter"></p></div><div><h3>여러분 나라에서는 어떻게 말해요?</h3><p>비슷한 표현이 있어요? 친구에게 쓰는 말이에요? 누구에게나 쓸 수 있어요?</p><p class="starter">우리나라에서는 “___”라고 해요.<br>친구에게 쓸 수 있어요.</p></div></div></section>
+<details class="sources"><summary>뜻을 확인한 자료와 수업 안내</summary><p>뜻과 쓰임을 확인한 자료예요. 대화와 퀴즈 문장은 수업을 위해 새로 썼어요. 최신 유행 순위는 아니에요. 사람과 상황에 따라 쓰는 말이 달라요.</p><ul>
+<li id="source-mix"><a href="https://www.korea.kr/news/reporterView.do?newsId=148934699" target="_blank" rel="noopener noreferrer">대한민국 정책브리핑 · 갓생과 킹받다 (2024)</a></li>
+<li id="source-small"><a href="https://www.culture.go.kr/portal/cltLife/cltVideo/viewPortal.do?category=&idx=5923&menuNo=200048&pageIndex=1" target="_blank" rel="noopener noreferrer">문화포털 · 소확행 (2018)</a></li>
+<li id="source-meaning"><a href="https://www.korean.go.kr/common/download.do?c_file_name=6f27cab6-f8c7-4b25-b610-88f92b1e6912.pdf&amp;file_path=reportData&amp;o_file_name=2025%EB%85%84%20%EA%B5%AD%EC%96%B4%20%EC%82%AC%EC%9A%A9%20%EC%8B%A4%ED%83%9C%20%EC%A1%B0%EC%82%AC%28%EC%9D%98%EB%AF%B8%29_%EA%B2%B0%EA%B3%BC%20%EB%B3%B4%EA%B3%A0%EC%84%9C%28F%29.pdf" target="_blank" rel="noopener noreferrer" id="meaningSource">국립국어원 · 2025년 국어 사용 실태 조사(의미)</a></li>
+<li id="source-meme"><a href="https://mediahub.seoul.go.kr/archives/1302730?tr_code=new01" target="_blank" rel="noopener noreferrer">내 손안에 서울 · 인터넷 문화와 밈 (2020)</a></li>
+</ul><p>자료를 고친 날: 2026년 11월 20일</p></details><footer class="footer">Allbarun Korean · with Hanim</footer></main>
+<script>
+const WORDS=[{"w": "갓생", "kind": "말을 섞어서 만들어요", "en": "a productive, disciplined life", "meaning": "할 일을 꾸준히 하며 부지런하게 사는 생활이에요.", "origin": "영어 God의 갓과 인생의 생을 합친 말이에요.", "example": "오늘은 운동도 하고 공부도 했어. 나 갓생 살았어!", "translation": "I worked out and studied today. What a productive day!", "plain": "오늘은 부지런하게 보냈어요.", "context": "친구에게 오늘 한 일을 자랑해요.", "note": "매일 완벽해야 한다는 뜻은 아니에요. 나를 가볍게 칭찬할 때도 써요.", "easy": ["부지런하다", "꾸준히 하다"], "pair": ["갓생을 살다", "갓생에 도전하다"], "topic": ["습관", "운동", "공부"], "talk": "오늘 저는 ___을/를 했어요. 부지런하게 보냈어요.", "q": "아침에 운동하고 한국어도 공부했어요. 부지런하게 보낸 하루를 어떻게 말할까요?", "wrong": ["역주행", "밈"], "source": "mix"}, {"w": "소확행", "kind": "긴 말을 줄여요", "en": "small, everyday happiness", "meaning": "일상에서 느끼는 작지만 분명한 행복이에요.", "origin": "작을 소(小), 확실할 확(確), 행복할 행(幸)을 모은 말이에요.", "example": "산책하고 좋아하는 빵을 먹는 게 내 소확행이야.", "translation": "Taking a walk and eating my favorite bread is my little happiness.", "plain": "산책하고 빵을 먹으면 행복해요.", "context": "나를 기쁘게 하는 작은 일을 말해요.", "note": "큰돈을 쓰는 일만 말하는 것은 아니에요. 쉬는 시간도 소확행이 될 수 있어요.", "easy": ["작은 행복", "소소한 즐거움"], "pair": ["나의 소확행", "소확행을 즐기다"], "topic": ["산책", "휴식", "행복"], "talk": "저는 ___을/를 할 때 행복해요.", "q": "집에서 따뜻한 차를 마시는 작은 행복을 말하고 싶어요. 어떤 표현이 어울릴까요?", "wrong": ["킹받다", "역주행"], "source": "small"}, {"w": "취향 저격", "kind": "원래 말의 뜻을 넓혀요", "en": "exactly my taste", "meaning": "내가 좋아하는 것과 아주 잘 맞는다는 뜻이에요.", "origin": "취향은 좋아하는 것이에요. 여기서 저격은 내 마음에 꼭 맞는다는 뜻으로 써요.", "example": "이 카페 음악, 완전 내 취향 저격이야.", "translation": "The music in this cafe is exactly my taste.", "plain": "이 카페 음악이 정말 마음에 들어요.", "context": "마음에 드는 음악이나 옷을 보고 말해요.", "note": "진짜로 누군가를 공격한다는 뜻이 아니에요. 무엇이 마음에 드는지 함께 말해 보세요.", "easy": ["마음에 들다", "내가 좋아하는 것과 맞다"], "pair": ["취향을 저격하다", "내 취향 저격이다"], "topic": ["음악", "옷", "취향"], "talk": "저는 ___을/를 좋아해요. 제 취향에 잘 맞아요.", "q": "친구가 내 스타일에 꼭 맞는 노래를 골랐어요. 이 노래는 내 ___이에요.", "wrong": ["밈", "소확행"], "source": "meaning"}, {"w": "역주행", "kind": "다른 상황에서도 써요", "en": "an older song climbing the charts again", "meaning": "예전에 나온 노래가 나중에 다시 인기를 얻을 때도 쓰는 말이에요.", "origin": "길에서는 반대 방향으로 달린다는 뜻이에요. 음악에서는 노래 순위가 다시 올라가는 모습을 말해요.", "example": "몇 년 전에 나온 노래가 요즘 역주행하고 있어.", "translation": "A song released years ago is climbing the charts again.", "plain": "예전에 나온 노래가 다시 인기를 얻고 있어요.", "context": "오래된 노래가 다시 인기를 얻는 소식을 전해요.", "note": "새 노래가 처음부터 인기 있는 것과는 달라요. 이 수업에서는 음악에서 쓰는 뜻을 배워요.", "easy": ["다시 인기를 얻다", "순위가 올라가다"], "pair": ["음원 차트 역주행", "역주행하다"], "topic": ["노래", "인기", "음원 차트"], "talk": "저는 예전에 나온 ___을/를 요즘 자주 들어요.", "q": "몇 년 전 노래가 다시 알려져서 음원 순위가 올라갔어요. 어떤 표현이 어울릴까요?", "wrong": ["갓생", "취향 저격"], "source": "meaning"}, {"w": "킹받다", "kind": "느낌을 더 강하게 말해요", "en": "so annoying; often said jokingly", "meaning": "화가 나거나 짜증이 난다는 느낌을 강하게 말해요.", "origin": "열받다의 열 자리에 영어 King의 킹을 넣은 장난스러운 말이에요.", "example": "게임에서 또 졌어. 아, 킹받네!", "translation": "I lost the game again. Ugh, so annoying!", "plain": "게임에서 또 져서 짜증이 나요.", "context": "친한 친구에게 짜증 나는 마음을 말해요.", "note": "장난으로도 쓰지만 거칠게 들릴 수 있어요. 처음 만난 사람이나 선생님에게는 일반적인 표현을 쓰는 편이 좋아요.", "easy": ["짜증이 나다", "화가 나다"], "pair": ["킹받네", "킹받는 상황"], "topic": ["감정", "게임", "장난"], "talk": "저는 ___ 때 조금 짜증이 나요.", "q": "친구와 게임을 하다가 또 졌어요. 장난스럽게 짜증을 말하는 표현은 무엇일까요?", "wrong": ["소확행", "갓생"], "source": "mix"}, {"w": "밈", "kind": "다른 언어에서 온 말이에요", "en": "an internet meme", "meaning": "인터넷에서 사람들이 따라 하거나 바꾸며 퍼뜨리는 말, 사진, 영상 등이에요.", "origin": "영어 meme에서 온 말이에요. 유행하는 말 한마디뿐 아니라 사진이나 춤도 밈이 될 수 있어요.", "example": "이 영상으로 만든 밈을 친구가 보내 줬어.", "translation": "My friend sent me a meme made from this video.", "plain": "친구가 인터넷에서 유행하는 재미있는 영상을 보내 줬어요.", "context": "인터넷에서 본 사진이나 영상을 친구와 나눠요.", "note": "모든 짧은 영상이 밈은 아니에요. 사람들이 따라 하거나 바꿔 쓰는 점을 함께 봐요.", "easy": ["인터넷 유행 콘텐츠", "따라 하고 바꿔 쓰는 것"], "pair": ["밈이 퍼지다", "밈을 따라 하다"], "topic": ["영상", "사진", "유행"], "talk": "우리나라에서는 ___이/가 인터넷에서 유행해요.", "q": "사람들이 같은 영상에 다른 자막을 붙여서 나눠요. 이런 인터넷 문화 표현은 무엇일까요?", "wrong": ["역주행", "갓생"], "source": "meme"}];
+let current=0,quizIndex=0,score=0,answered=false,hadWrong=false;
+const $=s=>document.querySelector(s);
+function text(tag,value,cls){const n=document.createElement(tag);n.textContent=value;if(cls)n.className=cls;return n;}
+function english(value){const p=text('p',value,'en');p.lang='en';return p;}
+function choose(index){current=index;const d=WORDS[index];document.querySelectorAll('[data-word]').forEach(b=>{b.setAttribute('aria-pressed',String(Number(b.dataset.word)===index));if(b.dataset.map==='true')b.textContent=(Number(b.dataset.word)===index?'✓ ':'')+WORDS[Number(b.dataset.word)].w;});
+const box=$('#wordContent');box.replaceChildren(text('p',d.kind,'word-kind'),text('h3',d.w,'word-title'),english(d.en),text('p',d.meaning,'meaning'),text('p',d.origin,'origin'));
+const dialog=document.createElement('div');dialog.className='dialogue';dialog.append(text('p',d.context,'label'),text('p',d.example,'quote'),english(d.translation));box.append(dialog);const plain=document.createElement('div');plain.className='plain';plain.append(text('small','일반적인 표현으로 말해요.'),text('p',d.plain));box.append(plain);const usage=text('p',d.note,'usage');box.append(usage);
+const map=$('#wordMap');map.replaceChildren();const main=document.createElement('div');main.className='map-root';main.append(text('small','지금 연결하는 말'),text('strong',d.w));const branches=document.createElement('div');branches.className='branches';for(const [label,items] of [['쉬운 뜻',d.easy],['함께 쓰는 말',d.pair],['같은 주제',d.topic]]){const b=document.createElement('div');b.className='branch';b.append(text('span',label,'relation'),text('p',items.join(' · ')));branches.append(b);}map.append(main,branches);
+$('#casual').textContent=d.example;$('#polite').textContent=d.plain;$('#registerNote').textContent=d.note;$('#talkTitle').textContent='“'+d.w+'” 표현을 써 봐요.';$('#talkPrompt').textContent=d.context;$('#talkStarter').textContent=d.talk;
+}
+WORDS.forEach((d,i)=>{const b=document.createElement('button');b.type='button';b.className='word-button';b.dataset.word=i;b.append(text('strong',d.w),text('small',d.kind));b.addEventListener('click',()=>choose(i));$('#wordMenu').append(b);const m=text('button',d.w);m.type='button';m.dataset.word=i;m.dataset.map='true';m.addEventListener('click',()=>choose(i));$('#mapPicks').append(m);});
+$('#englishToggle').addEventListener('click',e=>{const hidden=document.body.classList.toggle('hide-english');e.currentTarget.setAttribute('aria-pressed',String(hidden));e.currentTarget.textContent=hidden?'영어 보기':'영어 숨기기';});
+const QUIZ=WORDS.map(d=>({q:d.q,a:d.w,options:[d.w,...d.wrong],why:d.meaning}));QUIZ.push({q:'처음 만난 선생님에게 불편한 마음을 말하려고 해요. 어떤 표현이 더 알맞을까요?',a:'조금 불편해요.',options:['킹받네요.','조금 불편해요.','완전 킹받아.'],why:'킹받다는 거칠게 들릴 수 있어요. 일반적인 표현을 쓰는 편이 좋아요.'});
+function focusQuestion(){const q=$('#quizContent h3');if(q){q.tabIndex=-1;q.focus({preventScroll:true});q.scrollIntoView({block:'start',behavior:'instant'});}}
+function renderQuiz(){const box=$('#quizContent');box.replaceChildren();$('#score').textContent=score;if(quizIndex===QUIZ.length){$('#quizProgress').textContent='완료';const result=document.createElement('div');result.className='result';result.append(text('h3','확인하기를 마쳤어요.'),text('strong',score+' / '+QUIZ.length),text('p','틀린 표현은 다시 살펴봐도 좋아요.'));const redo=text('button','다시 풀기','primary');redo.type='button';redo.addEventListener('click',()=>{quizIndex=0;score=0;renderQuiz();focusQuestion();});result.append(redo);box.append(result);return;}
+answered=false;hadWrong=false;$('#quizProgress').textContent=(quizIndex+1)+' / '+QUIZ.length;const item=QUIZ[quizIndex];const body=document.createElement('div');body.className='quiz-body';body.append(text('p','상황에 맞는 표현을 골라요.','quiz-context'),text('h3',item.q));const options=document.createElement('div');options.className='options';const order=[...item.options];for(let j=order.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[order[j],order[k]]=[order[k],order[j]];}const footer=document.createElement('div');footer.className='quiz-footer';const feedback=text('p','','feedback');feedback.id='feedback';feedback.setAttribute('aria-live','polite');const next=text('button',quizIndex===QUIZ.length-1?'결과 보기':'다음 문제','primary');next.type='button';next.hidden=true;next.addEventListener('click',()=>{quizIndex++;renderQuiz();focusQuestion();});
+order.forEach(value=>{const b=text('button',value);b.type='button';b.addEventListener('click',()=>{if(answered)return;if(value!==item.a){hadWrong=true;b.disabled=true;b.classList.add('wrong');b.textContent='다시 생각해요 · '+value;feedback.textContent='다시 골라 보세요.';options.querySelector('button:not(:disabled)')?.focus({preventScroll:true});return;}answered=true;if(!hadWrong)score++;$('#score').textContent=score;options.querySelectorAll('button').forEach(n=>n.disabled=true);b.classList.add('correct');b.textContent='정답 · '+value;feedback.textContent='맞아요. '+item.why;next.hidden=false;next.focus({preventScroll:true});});options.append(b);});body.append(options);footer.append(feedback,next);box.append(body,footer);}
+choose(0);renderQuiz();
+</script></body></html>
