@@ -224,6 +224,8 @@ body.hide-en .en { display: none !important; }
   .hh-section, .hh-story-card, .hh-sound-grid article { break-inside: avoid; box-shadow: none; }
 }
 :focus-visible { outline: #173cff solid 3px; outline-offset: 4px; }
+.hh-meaning-answer small + p { margin-top: 12px !important; }
+.hh-meaning-answer b { color: var(--hh-blue); margin-right: 6px; }
 </style>
 </head>
 <body>
@@ -563,19 +565,50 @@ if (YOUTUBE_URL) $('#ytLink').href = YOUTUBE_URL;
   });
 })();
 
+/* 4번 줄별 낱말·문법 (LINES 순서와 같아요) */
+const NOTES = [
+  [['떠나가다', '떠나서 멀리 가요.', 'to leave, to go away'], ['그녀', '그 여자예요. 노래나 글에서 자주 써요.', 'she, her']],
+  [['아무것도 + 안/못/없다', '아무것도는 뒤에 부정하는 말과 같이 써요.', 'nothing, not anything'], ['-(으)ㄹ 수 없어요', '할 수 없어요. 못 해요.', 'cannot']],
+  [['사랑', '좋아하고 아끼는 마음이에요.', 'love'], ['떠나가다', '첫 줄과 같은 말이에요.', 'to leave, to go away']],
+  [['바보처럼', '바보 + -처럼. 바보 같아요.', 'like a fool'], ['멍하니', '아무 생각 없이 가만히 있어요.', 'blankly, absent-mindedly'], ['서 있다 + -네요', '지금 서 있어요. -네요는 지금 보고 느낀 것을 말할 때 써요.', 'to be standing (noticing it now)']],
+  [['멀어지다', '점점 멀리 가요.', 'to get farther away'], ['뒷모습', '뒤에서 본 사람의 모습이에요.', 'someone seen from behind'], ['-만', '그것 하나만이에요.', 'only'], ['바라보다', '오래 쳐다봐요. 이 노래에서는 바라보다가처럼 읽을 수 있어요.', 'to gaze at (and then...)']],
+  [['점', '아주 작은 동그라미예요.', 'dot'], ['-이/가 되다', '모양이나 상태가 바뀌어요.', 'to become'], ['사라지다', '보이지 않게 돼요. 사라진다는 노래나 글에서 쓰는 말투예요.', 'to disappear']],
+  [['시간이 지나다', '시간이 흘러가요.', 'time passes'], ['-(으)면', '3번에서 배운 말이에요.', 'if, when'], ['무뎌지다', '날카롭던 것이 무뎌져요. 여기서는 아픈 마음이 덜해지는 것이에요.', 'to become dull, numb'], ['-(으)ㄹ까', '혼자 물어보는 말이에요.', 'I wonder if...']],
+  [['옛', '지난, 오래된.', 'old, past'], ['생각이 나다', '어떤 일이나 사람이 머리에 떠올라요.', 'to come to mind, to remember'], ['니', '말할 때 네(너의)를 [니]처럼 말하기도 해요.', 'your (spoken form)']],
+  [['if you', '영어예요. 한국어로는 만약 네가 ~(으)면과 비슷해요. 다음 줄로 이어져요.', 'if you'] ],
+  [['아직', '지금까지도요.', 'still, yet'], ['늦다', '시간이 지나서 때를 놓쳐요.', 'to be late'], ['-지 않았다면', '-지 않았으면과 비슷해요. 만약 그렇지 않다면이에요.', 'if it has not (been)...']],
+  [['돌아가다', '전에 있던 곳이나 때로 다시 가요.', 'to go back'], ['-(으)ㄹ 수는 없을까', '-(으)ㄹ 수 없을까에 는이 붙어 뜻을 세게 해요. 그러기를 바라면서 물어요.', "can't we...? (hoping)"]],
+  [['나와 같이', '여기서는 나처럼과 비슷한 뜻이에요.', 'like me'], ['힘들다', '하기 어렵고 마음이 아파요.', 'hard, difficult'], ['-다면', '만약 그렇다면이에요.', 'if']],
+  [['조금', '많지 않게요.', 'a little'], ['쉽게', '쉽다 + -게. 어렵지 않게요.', 'easily'], ['-(으)ㄹ 수는 없을까', '11번 줄과 같은 말이에요.', "can't we...? (hoping)"]],
+  [['있을 때', '있다 + -(으)ㄹ 때. 옆에 있었을 때예요.', 'when (you) were there'], ['잘하다', '여기서는 사람에게 잘 대해 주다라는 뜻이에요.', 'to treat someone well'], ['-(으)ㄹ 걸 그랬어', '하지 않은 일을 후회할 때 써요.', 'I should have...']],
+  [['그대', '너를 부드럽고 다정하게 부르는 말이에요. 노래나 시에서 써요.', 'you (poetic)'], ['어떤가요', '어때요?를 부드럽게 묻는 말이에요.', 'how are you? / how is it?']],
+  [['정말', '진짜요.', 'really'], ['아무렇지 않다', '아무 일도 없는 것처럼 괜찮아요.', 'to be fine, unaffected'], ['-(으)ㄴ 건가요', '-(으)ㄴ 거예요?를 부드럽게 묻는 말이에요.', 'is it that...?']],
+  [['이별', '사랑하던 사람과 헤어지는 것이에요.', 'parting, breakup'], ['지나다', '어떤 때가 흘러가요.', 'to pass'], ['-나 봐요', '보고 짐작해서 말할 때 써요.', 'it seems...']],
+  [['그댈', '그대를을 줄인 말이에요.', 'you (object)'], ['잊다 + -어야 하다', '잊어야 해요. 꼭 잊어야 해요.', 'must forget'], ['-지만', '앞과 뒤가 반대일 때 써요.', 'but'], ['쉽지가 않네요', '쉽지 않아요. 가가 붙어서 뜻이 더 세져요.', "it's not easy"]],
+  [['누군갈', '누군가를을 줄인 말이에요.', 'someone (object)'], ['위로가 되다', '마음이 조금 편해지게 해 줘요.', 'to be a comfort'], ['-(으)ㄹ까', '7번 줄과 같아요. 혼자 물어봐요.', 'I wonder if...']],
+  [['생각이 나다', '8번 줄과 같은 말이에요.', 'to come to mind'], ['yeah', '영어예요. 노래에서 넣는 소리예요.', 'yeah']],
+  [['오늘같이', '오늘처럼이에요.', 'like today'], ['가녀리다', '가늘고 약해요.', 'slender, delicate'], ['비가 내리다', '비가 와요.', 'it rains'], ['-는 날이면', '그런 날에는이에요.', 'on days when...']],
+  [['그림자', '빛이 막혀서 생기는 어두운 모양이에요.', 'shadow'], ['떠오르다', '여기서는 생각이나 모습이 머리에 나타나는 것이에요.', 'to come to mind'], ['-고', '앞 일과 뒤 일을 이어요.', 'and']],
+  [['서랍', '책상이나 장에 있는, 밀고 당기는 칸이에요.', 'drawer'], ['몰래', '다른 사람이 모르게요.', 'secretly'], ['넣어 두다', '넣어서 그대로 놓아 둬요.', 'to put away and keep'], ['추억', '좋았던 지난 일을 생각하는 것이에요.', 'memory, memories']],
+  [['꺼내다', '안에 있는 것을 밖으로 내요.', 'to take out'], ['홀로', '혼자예요.', 'alone'], ['회상하다', '지난 일을 다시 떠올려요.', 'to recall, look back on']],
+  [['헤어짐', '헤어지다를 명사로 바꾼 말이에요.', 'parting'], ['-이란', '~라는 것은이에요.', 'what is called...'], ['슬픔', '슬프다를 명사로 바꾼 말이에요.', 'sadness'], ['무게', '얼마나 무거운지예요.', 'weight']],
+  [['난', '나는을 줄인 말이에요.', 'I (topic)'], ['몰랐을까', '모르다 → 몰랐다 + -(으)ㄹ까. 모르다는 몰라요, 몰랐어요처럼 모양이 바뀌어요.', "why didn't I know?"]]
+];
 /* 4 줄별 뜻 */
 const lineRows = LINES.length ? LINES : Array.from({ length: EMPTY.lines }, () => null);
 (function () {
   $('#meaningList').innerHTML = lineRows.map((l, i) => {
     const n = String(i + 1).padStart(2, '0');
     const m = MEANINGS[i];
-    const ans = m ? `<p>${esc(m.ko)}</p>${m.en ? `<small class="en">${esc(m.en)}</small>` : ''}` : (l ? `<p>이 줄의 뜻은 수업에서 같이 말해요.</p><small class="en">We will talk about this line together.</small>` : `<p><span class="slot" data-line="${i + 1}">${i + 1}줄 뜻을 여기에 써 주세요</span></p>`);
-    return `<article><span>${n}</span><div class="hh-meaning-lyric">${l ? `<strong>${bold(l)}</strong>` : slot(i + 1, '가사')}</div><button type="button" aria-expanded="false">뜻 보기</button><div class="hh-meaning-answer" hidden>${ans}</div></article>`;
+    const nt = NOTES[i] || [];
+    const noteHtml = nt.map(([w, ko, en]) => `<p><b>${esc(w)}</b> ${esc(ko)}</p><small class="en">${esc(en)}</small>`).join('');
+    const ans = (m ? `<p>${esc(m.ko)}</p>${m.en ? `<small class="en">${esc(m.en)}</small>` : ''}` : '') + (noteHtml || `<p>이 줄은 수업에서 같이 말해요.</p>`);
+    return `<article><span>${n}</span><div class="hh-meaning-lyric">${l ? `<strong>${bold(l)}</strong>` : slot(i + 1, '가사')}</div><button type="button" aria-expanded="false">낱말 보기</button><div class="hh-meaning-answer" hidden>${ans}</div></article>`;
   }).join('');
   $('#meaningList').addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     const a = b.parentElement.querySelector('.hh-meaning-answer');
-    a.hidden = !a.hidden; b.textContent = a.hidden ? '뜻 보기' : '뜻 닫기'; b.setAttribute('aria-expanded', String(!a.hidden));
+    a.hidden = !a.hidden; b.textContent = a.hidden ? '낱말 보기' : '닫기'; b.setAttribute('aria-expanded', String(!a.hidden));
   });
 })();
 
